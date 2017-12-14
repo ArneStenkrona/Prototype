@@ -151,13 +151,17 @@
   <ItemGroup>
     <ClInclude Include="src\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\graphics\lTexture.h" />
+    <ClInclude Include="src\IO\inputManager.h" />
     <ClInclude Include="src\main\Prototype.h" />
+    <ClInclude Include="src\math\lTimer.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\graphics\lTexture.cpp" />
+    <ClCompile Include="src\IO\inputManager.cpp" />
     <ClCompile Include="src\main\Prototype.cpp" />
+    <ClCompile Include="src\math\lTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

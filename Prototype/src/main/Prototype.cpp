@@ -7,8 +7,12 @@
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
+#include <sstream>
+#include <stdio.h>
 #include "Prototype.h"
+#include "../math/lTimer.h"
 #include "../graphics/global_graphical_variables.h"
+#include "../IO/inputManager.h"
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.
@@ -72,5 +76,50 @@ void close()
 
 int main()
 {
+    if (!init()) {
+        printf("Failed to initialize!\n");
+    }
+    else {
+    }
+    //Main loop flag
+    bool quit = false;
+    //Event handler
+    SDL_Event e;
+    //The frames per second timer
+    LTimer fpsTimer;
+    //The frames per second cap timer
+    LTimer capTimer;
+    //In memory text stream
+    std::stringstream timeText;
+    //Start counting frames per second
+    long countedFrames = 0;
+    fpsTimer.start();
+
+    //While application is running
+    while (!quit) {
+        pollExit(e, quit); //check if user exits window
+        capTimer.start();
+        //Calculate and correct fps
+        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
+        if (avgFPS > 2000000)
+        {
+            avgFPS = 0;
+        }
+        //Set text to be rendered
+        timeText.str("");
+        timeText << "Average Frames Per Second (With Cap)" << avgFPS;
+        //If frame finished early
+        int frameTicks = capTimer.getTicks();
+        if (frameTicks < SCREEN_TICK_PER_FRAME) {
+            //Wait remaining time
+            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+
+        }
+        else {
+
+        }
+        countedFrames++;
+    }
+
     return 0;
 }
