@@ -1,0 +1,7 @@
+This translates tile names to numbers.
+
+0		DEFAULT_TEXTURE, //If 0 is entered in a room file, no tile will be created
+1		FLOOR,
+2		WALL,
+3		WALL_BASE,
+4		TOTAL_TEXTURES
