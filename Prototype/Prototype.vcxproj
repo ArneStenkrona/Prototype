@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\SDL;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\imgui;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\SDL;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -206,6 +206,9 @@
     <ClCompile Include="src\tools\stringTools.cpp" />
     <ClCompile Include="src\World\room.cpp" />
     <ClCompile Include="src\World\worldBuilder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\Downloads\imgui-master\imgui-master\TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
