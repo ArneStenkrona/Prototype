@@ -158,9 +158,11 @@
     <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
     <ClInclude Include="src\GameObject\Component\graphics\sprite.h" />
     <ClInclude Include="src\GameObject\gameObject.h" />
+    <ClInclude Include="src\GameObject\Component\gameplay\movement.h" />
     <ClInclude Include="src\math\point.h" />
     <ClInclude Include="src\math\polygon.h" />
     <ClInclude Include="src\math\rectangle.h" />
+    <ClInclude Include="src\math\triangle.h" />
     <ClInclude Include="src\System\gameLogic.h" />
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
@@ -169,6 +171,9 @@
     <ClInclude Include="src\main\Prototype.h" />
     <ClInclude Include="src\math\lTimer.h" />
     <ClInclude Include="src\System\Physics\physicsEngine.h" />
+    <ClInclude Include="src\tools\stringTools.h" />
+    <ClInclude Include="src\World\room.h" />
+    <ClInclude Include="src\World\worldBuilder.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +186,11 @@
     <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\sprite.cpp" />
     <ClCompile Include="src\GameObject\gameObject.cpp" />
+    <ClCompile Include="src\GameObject\Component\gameplay\movement.cpp" />
     <ClCompile Include="src\math\point.cpp" />
     <ClCompile Include="src\math\polygon.cpp" />
     <ClCompile Include="src\math\rectangle.cpp" />
+    <ClCompile Include="src\math\triangle.cpp" />
     <ClCompile Include="src\System\gameLogic.cpp" />
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
@@ -192,6 +199,9 @@
     <ClCompile Include="src\main\Prototype.cpp" />
     <ClCompile Include="src\math\lTimer.cpp" />
     <ClCompile Include="src\System\Physics\physicsEngine.cpp" />
+    <ClCompile Include="src\tools\stringTools.cpp" />
+    <ClCompile Include="src\World\room.cpp" />
+    <ClCompile Include="src\World\worldBuilder.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
