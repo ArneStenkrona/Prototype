@@ -20,5 +20,5 @@ protected:
     //The Gameobject this is attached to
     GameObject *object;
 
-
 };
+

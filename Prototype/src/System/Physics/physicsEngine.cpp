@@ -44,10 +44,8 @@ void performHitdetection() {
             vector<PolygonCollider*> returnBoxes;
             quad.retrieve(&returnBoxes, b);
 
-
             for each (PolygonCollider *bb in returnBoxes)
             {
-
                 //I should not have to check this
                 //Fix quadtree so it doesn't insert b in returnboxes
                 if (b != bb) {

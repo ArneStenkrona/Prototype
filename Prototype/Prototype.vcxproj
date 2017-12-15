@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\data_structures\quadTree.h" />
+    <ClInclude Include="src\experiments\experiment.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
     <ClInclude Include="src\GameObject\Component\geometry\polygonCollider.h" />
     <ClInclude Include="src\GameObject\Component\geometry\position.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\GameObject\Component\graphics\camera.h" />
     <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
     <ClInclude Include="src\GameObject\Component\graphics\sprite.h" />
+    <ClInclude Include="src\GameObject\Factories\basicObjectFactory.h" />
     <ClInclude Include="src\GameObject\gameObject.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\movement.h" />
     <ClInclude Include="src\math\point.h" />
@@ -178,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\data_structures\quadTree.cpp" />
+    <ClCompile Include="src\experiments\experiment.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\polygonCollider.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\position.cpp" />
@@ -185,6 +188,7 @@
     <ClCompile Include="src\GameObject\Component\graphics\camera.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\sprite.cpp" />
+    <ClCompile Include="src\GameObject\Factories\basicObjectFactory.cpp" />
     <ClCompile Include="src\GameObject\gameObject.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\movement.cpp" />
     <ClCompile Include="src\math\point.cpp" />

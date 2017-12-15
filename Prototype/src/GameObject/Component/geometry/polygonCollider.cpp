@@ -20,9 +20,7 @@ PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isS
     }
 
     //Default shape
-    //polygon = Triangle(Point(0.0, 32.0), Point(32.0, 0), Point(32.0, 32.0));
     polygon = Rectangular(Point::empty, 32.0, 32.0);
-    //polygon = Triangle(Point::empty, Point(32.0, 32.0), Point(32.0, 0));
 
     //Add to physics engine list of all hitboxes
     ALL_HITBOXES.push_back(this);
