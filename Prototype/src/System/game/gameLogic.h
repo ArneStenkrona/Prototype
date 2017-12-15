@@ -1,7 +1,7 @@
 #pragma once
-#include "../GameObject/gameObject.h"
+#include "GameObject/gameObject.h"
 #include <list>
-#include "graphics/global_graphical_variables.h"
+#include "../graphics/global_graphical_variables.h"
 #include "World/room.h"
 
 //List of all gameObjects

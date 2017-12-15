@@ -3,7 +3,7 @@
 #include "math/polygon.h"
 #include "math/rectangle.h"
 #include "velocity.h"
-#include "System/gameLogic.h"
+#include "System/game/gameLogic.h"
 #include <vector>
 
 //Polygon collider uses a convex polygon for hit detection

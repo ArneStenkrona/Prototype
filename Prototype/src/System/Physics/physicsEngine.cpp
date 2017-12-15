@@ -1,6 +1,6 @@
 #include "physicsEngine.h"
 #include "GameObject/gameObject.h"
-#include "System/gameLogic.h"
+#include "System/game/gameLogic.h"
 #include "data_structures/quadTree.h"
 #include "System/graphics/global_graphical_variables.h"
 #include <vector>

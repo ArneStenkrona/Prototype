@@ -1,5 +1,5 @@
 #include "gameObject.h"
-#include "../System/gameLogic.h"
+#include "../System/game/gameLogic.h"
 
 //getComponent() is in header file, due to being a template function
 //setComponent() is in header file, due to being a template function

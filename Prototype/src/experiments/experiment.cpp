@@ -4,5 +4,5 @@
 #include "GameObject/Factories/basicObjectFactory.h"
 #include "GameObject/Component/graphics/renderer.h"
 #include "World/room.h"
-#include "System/gameLogic.h"
+#include "System/game/gameLogic.h"
 

@@ -165,7 +165,7 @@
     <ClInclude Include="src\math\polygon.h" />
     <ClInclude Include="src\math\rectangle.h" />
     <ClInclude Include="src\math\triangle.h" />
-    <ClInclude Include="src\System\gameLogic.h" />
+    <ClInclude Include="src\System\game\gameLogic.h" />
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
@@ -195,7 +195,7 @@
     <ClCompile Include="src\math\polygon.cpp" />
     <ClCompile Include="src\math\rectangle.cpp" />
     <ClCompile Include="src\math\triangle.cpp" />
-    <ClCompile Include="src\System\gameLogic.cpp" />
+    <ClCompile Include="src\System\game\gameLogic.cpp" />
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />

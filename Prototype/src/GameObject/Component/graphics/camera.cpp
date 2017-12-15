@@ -2,7 +2,7 @@
 #include <iostream>
 #include "System/graphics/global_graphical_variables.h"
 #include "World/room.h"
-#include "System/gameLogic.h"
+#include "System/game/gameLogic.h"
 #include "GameObject/Component/geometry/polygonCollider.h"
 
 const Point Camera::screenOffset = Point(SCREEN_WIDTH / SCALE_X, SCREEN_HEIGHT / SCALE_Y) * 0.5;
