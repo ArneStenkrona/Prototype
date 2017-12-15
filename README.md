@@ -8,4 +8,4 @@ to refactor the project to make it more comprehensible. This project
 is solely developed as a hobby and learning experience.
 //Arne
 
-Prototype utilizes the SDL library.
+Prototype utilizes the SDL library for multimedia purposes and imgui for GUI purposes.
