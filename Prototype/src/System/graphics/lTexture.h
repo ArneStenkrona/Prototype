@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-#include "graphics/global_graphical_variables.h"
+#include "global_graphical_variables.h"
 
 class LTexture
 {

@@ -18,19 +18,28 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\lTexture.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\global_graphical_variables.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\main\Prototype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\math\lTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\IO\inputManager.h">
+    <ClInclude Include="src\GameObject\gameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\IO\inputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\graphics\global_graphical_variables.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\graphics\lTexture.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\gameLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Component\component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,16 +47,25 @@
     <ClCompile Include="src\main\Prototype.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\lTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\global_graphical_variables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\math\lTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\IO\inputManager.cpp">
+    <ClCompile Include="src\GameObject\gameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\IO\inputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\graphics\global_graphical_variables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\graphics\lTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\gameLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Component\component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include "Prototype.h"
 #include "../math/lTimer.h"
-#include "../graphics/global_graphical_variables.h"
-#include "../IO/inputManager.h"
+#include "../System/graphics/global_graphical_variables.h"
+#include "../System/IO/inputManager.h"
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.
