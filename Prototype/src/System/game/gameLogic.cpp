@@ -94,7 +94,7 @@ void gameLoop() {
 
     //While games is running
     while (!gameWindow->getExit()) {
-        gameWindow->update();
+        LWindow::update();
         capTimer.start();
         //Calculate and correct fps
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);

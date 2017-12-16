@@ -13,6 +13,7 @@
 #include "../System/IO/inputManager.h"
 #include "../System/Physics/physicsEngine.h"
 #include "System\game\gameLogic.h"
+#include "System/GUI/Window/lwindow.h"
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.

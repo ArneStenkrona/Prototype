@@ -10,6 +10,9 @@ Wrapperclass for SDL windows
 #include <stdio.h>
 #include <string>
 #include <sstream>
+#include <list>
+
+using namespace::std;
 
 class LWindow {
 public:
@@ -17,8 +20,8 @@ public:
            float _scale_x, float _scale_y);
     ~LWindow();
 
-    //Has to be called in order for the window to be active
-    void update();
+    //Updates all windows
+    static void update();
 
     SDL_Renderer *getRenderer();
 
@@ -32,6 +35,9 @@ private:
 
     SDL_Renderer* windowRenderer;
 
+    static list<LWindow*> all_windows;
+
+
     //Screen dimension constants
     const int screen_width;
     const int screen_height;
@@ -41,11 +47,12 @@ private:
     SDL_Event e; 
     bool exit;
     //checks if user exists the window
-    void pollExit();
+    void pollEvent();
 
     bool init();
     void close();
 
+    
 
 
 

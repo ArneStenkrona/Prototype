@@ -8,16 +8,23 @@ LWindow::LWindow(int _screen_width, int _screen_height,
     if (!init()) {
         printf("Failed to initialize!\n");
     }
+
+    all_windows.push_back(this);
 }
 
 LWindow::~LWindow()
 {
     close();
+    all_windows.remove(this);
 }
+
+list<LWindow*> LWindow::all_windows = list<LWindow*>();
 
 void LWindow::update()
 {
-    pollExit();
+    for each (LWindow *w in all_windows) {
+        w->pollEvent();
+    }
 }
 
 SDL_Renderer * LWindow::getRenderer()
@@ -30,7 +37,7 @@ bool LWindow::getExit()
     return exit;
 }
 
-void LWindow::pollExit()
+void LWindow::pollEvent()
 {
     while (SDL_PollEvent(&e) != 0) {
             //User requests quit
