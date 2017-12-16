@@ -19,17 +19,19 @@ for swapping theme.
 
 class Scene {
 public:
+    Scene();
+    ~Scene();
 
     //initialize scene
     virtual void setUpScene();
+
+    //Gets the current room in scene
+    Room *getRoom();
 
 protected:
     //The room the player is currently in
     Room *CURRENT_ROOM;
     //Sets the current room in scene
     void setRoom(Room *room);
-    //Gets the current room in scene
-    Room *getRoom();
-
 
 };

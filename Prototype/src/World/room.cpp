@@ -19,6 +19,12 @@ Room::Room(string _file_path) : file_path(_file_path), _width(-1), _height(-1)
 {
 }
 
+Room::~Room()
+{
+    unload();
+    background = NULL;
+}
+
 void Room::readFromFile()
 {
     string roomData;

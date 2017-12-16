@@ -16,6 +16,7 @@
 #include "../GameObject/Component/graphics/camera.h"
 #include "../GameObject/Component/graphics/renderer.h"
 #include "../GameObject/Component/gameplay/movement.h"
+#include "System\game\gameLogic.h"
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.
@@ -83,82 +84,7 @@ int main()
     }
     else {
     }
-    //Main loop flag
-    bool quit = false;
-    //Event handler
-    SDL_Event e;
-    //The frames per second timer
-    LTimer fpsTimer;
-    //The frames per second cap timer
-    LTimer capTimer;
-    //In memory text stream
-    std::stringstream timeText;
-    //Start counting frames per second
-    long countedFrames = 0;
-    fpsTimer.start();
-
-    //Initalize input Manager
-    initializeInputManager();
-    //Initalize texture manager
-    TextureManager::initalizeTextureManager();
-
-    GameObject character = GameObject();
-
-    character.addComponent<Renderer>();
-    character.addComponent<Movement>();
-
-    character.addComponent<PolygonCollider>()->setStatic(false);
-    character.getComponent<Position>()->position = Point(50, 50);
-
-    GameObject camera = GameObject();
-    camera.addComponent<Camera>()->setTarget(&character);
-    Renderer::setCamera(&camera);
-
-    //Test room
-    Room myRoom = Room("Assets/Rooms/room1.txt");
-    setRoom(&myRoom);
-    myRoom.saveToFile();
-
-    //While application is running
-    while (!quit) {
-        pollExit(e, quit); //check if user exits window
-        capTimer.start();
-        //Calculate and correct fps
-        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-        if (avgFPS > 2000000)
-        {
-            avgFPS = 0;
-        }
-        //Set text to be rendered
-        timeText.str("");
-        timeText << "Average Frames Per Second (With Cap)" << avgFPS;
-
-        //Clear screen
-        SDL_SetRenderDrawColor(MAIN_GAME_RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(MAIN_GAME_RENDERER);
-
-        updatePhysics();
-
-        updateGameLogic();
-
-        //Update screen
-        SDL_RenderPresent(MAIN_GAME_RENDERER);
-
-        updateInputManager();
-
-        //If frame finished early
-        int frameTicks = capTimer.getTicks();
-        if (frameTicks < SCREEN_TICK_PER_FRAME) {
-            //Wait remaining time
-            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
-        }
-        else {
-
-        }
-        countedFrames++;
-    }
-
+    gameLoop();
     close();
-
     return 0;
 }

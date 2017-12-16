@@ -105,6 +105,8 @@ void * GameObject::removeComponent()
 
     Component *comp = NULL;
 
+
+
     for each  (Component *t in components)
     {
         if (dynamic_cast<T*>(t)) {

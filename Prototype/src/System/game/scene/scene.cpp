@@ -1,5 +1,15 @@
 #include "scene.h"
 
+Scene::Scene() : CURRENT_ROOM(NULL)
+{
+}
+
+Scene::~Scene()
+{
+    delete(CURRENT_ROOM);
+    CURRENT_ROOM = NULL;
+}
+
 void Scene::setUpScene() {
 }
 

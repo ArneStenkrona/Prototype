@@ -11,6 +11,7 @@ class Room {
 public:
 
     Room(string _file_path);
+    ~Room();
 
     //loads the matrix from .txt file
     //Very important that the grid in the .txt file is rectangular

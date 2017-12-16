@@ -26,9 +26,6 @@ void startGameObjects();
 //Calls update foreach gameObject in gameObjects
 void updateGameObjects();
 
-//Updates all active hitboxes
-void  updateHitBoxes();
-
 void setRoom(Room *room)
 {
     if (CURRENT_ROOM != NULL) {
@@ -43,7 +40,8 @@ void setRoom(Room *room)
 
 Room * getRoom()
 {
-    return CURRENT_ROOM;
+    //return CURRENT_ROOM;
+    return CURRENT_SCENE->getRoom();
 }
 
 
@@ -56,8 +54,8 @@ void updateGameLogic()
 
 void drawBackground()
 {
-    if (CURRENT_ROOM != NULL) {
-        CURRENT_ROOM->background->render(0, 0);
+    if (CURRENT_SCENE != NULL) {
+        CURRENT_SCENE->getRoom()->background->render(0, 0);
     }
 }
 
@@ -79,25 +77,21 @@ void updateGameObjects() {
     }
 }
 
-//I think this is moved to the physics engine. Probably want to delete this method
-void updateHitBoxes()
-{
-}
-
 void closeGameLogic() {
     CURRENT_ROOM->unload();
 }
 
 void setScene()
 {
-    CURRENT_SCENE = &Debug_scene0();
+    CURRENT_SCENE = new Debug_scene0();
+    CURRENT_SCENE->setUpScene();
 }
 
 void closeScene()
 {
     ALL_GAMEOBJECTS.clear();
     JUST_ACTIVATED_GAMEOBJECTS.clear();
-    delete(CURRENT_SCENE);
+    CURRENT_SCENE = NULL;
 }
 
 void gameLoop() {
