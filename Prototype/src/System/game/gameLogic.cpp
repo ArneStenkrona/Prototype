@@ -9,18 +9,18 @@
 #include "scene\debug_scenes\debug_scene0.h"
 
 //The current scene in game
-Scene *CURRENT_SCENE;
+Scene *currentScene;
 
 //Draws the background
 void drawBackground();
 
 //Main window for the game
-LWindow *game_window;
+LWindow *gameWindow;
 
 SDL_Renderer * getRenderer()
 {
-    if (game_window != NULL) {
-        return game_window->getRenderer();
+    if (gameWindow != NULL) {
+        return gameWindow->getRenderer();
     }
     else {
         return nullptr;
@@ -30,7 +30,7 @@ SDL_Renderer * getRenderer()
 Room * getRoom()
 {
     //return CURRENT_ROOM;
-    return CURRENT_SCENE->getRoom();
+    return currentScene->getRoom();
 }
 
 
@@ -42,32 +42,33 @@ void updateGameLogic()
 
 void drawBackground()
 {
-    if (CURRENT_SCENE != NULL) {
-        CURRENT_SCENE->getRoom()->background->render(0, 0);
+    if (currentScene != NULL) {
+        currentScene->getRoom()->background->render(0, 0);
     }
 }
 
 
 void closeGameLogic() {
     closeScene();
-    delete(game_window);
-    game_window = NULL;
+    delete(gameWindow);
+    gameWindow = NULL;
 }
 
 void setScene()
 {
-    CURRENT_SCENE = new Debug_scene0();
-    CURRENT_SCENE->setUpScene();
+    currentScene = new Debug_scene0();
+    currentScene->setUpScene();
 }
 
 void closeScene()
 {
-    CURRENT_SCENE = NULL;
+    delete(currentScene);
+    currentScene = NULL;
 }
 
 void gameLoop() {
 
-    game_window = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
+    gameWindow = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
     ACTIVE_RENDERER = getRenderer();
 
     //Main loop flag
@@ -92,8 +93,8 @@ void gameLoop() {
     setScene();
 
     //While games is running
-    while (!game_window->getExit()) {
-        game_window->update();
+    while (!gameWindow->getExit()) {
+        gameWindow->update();
         capTimer.start();
         //Calculate and correct fps
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
