@@ -8,20 +8,11 @@
 #include "System\IO\inputManager.h"
 #include "scene\debug_scenes\debug_scene0.h"
 
-list<GameObject*> ALL_GAMEOBJECTS = list<GameObject*>();
-list<GameObject*> JUST_ACTIVATED_GAMEOBJECTS = list<GameObject*>();
-
 //The current scene in game
 Scene *CURRENT_SCENE;
 
 //Draws the background
 void drawBackground();
-
-//Calls start foreach gameObject that turned active this frame
-void startGameObjects();
-
-//Calls update foreach gameObject in gameObjects
-void updateGameObjects();
 
 //Main window for the game
 LWindow *game_window;
@@ -46,8 +37,7 @@ Room * getRoom()
 void updateGameLogic()
 {
     drawBackground();
-    startGameObjects();
-    updateGameObjects();
+    GameObject::updateAll();
 }
 
 void drawBackground()
@@ -57,23 +47,6 @@ void drawBackground()
     }
 }
 
-void startGameObjects()
-{
-    for each (GameObject *obj in JUST_ACTIVATED_GAMEOBJECTS)
-    {
-        obj->start();
-    }
-
-    //Empty list after all objects has called start method
-    JUST_ACTIVATED_GAMEOBJECTS.empty();
-}
-
-void updateGameObjects() {
-    for each (GameObject *obj in ALL_GAMEOBJECTS)
-    {
-        obj->update();
-    }
-}
 
 void closeGameLogic() {
     closeScene();
@@ -89,8 +62,6 @@ void setScene()
 
 void closeScene()
 {
-    ALL_GAMEOBJECTS.clear();
-    JUST_ACTIVATED_GAMEOBJECTS.clear();
     CURRENT_SCENE = NULL;
 }
 

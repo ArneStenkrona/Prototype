@@ -6,8 +6,11 @@
 
 GameObject::GameObject() : components(list<Component*>()), active(true)
 {
-    ALL_GAMEOBJECTS.push_back(this);
+    all_gameObjects.push_back(this);
 }
+
+list<GameObject*> GameObject::all_gameObjects = list<GameObject*>();
+list<GameObject*> GameObject::just_activated_gameObjects = list<GameObject*>();
 
 GameObject::~GameObject()
 {
@@ -19,7 +22,23 @@ GameObject::~GameObject()
 
     components.clear();
 
-    ALL_GAMEOBJECTS.remove(this);
+    all_gameObjects.remove(this);
+}
+
+void GameObject::updateAll()
+{
+    for each (GameObject *obj in just_activated_gameObjects)
+    {
+        obj->start();
+    }
+
+    //Empty list after all objects has called start method
+    just_activated_gameObjects.empty();
+
+    for each (GameObject *obj in all_gameObjects)
+    {
+        obj->update();
+    }
 }
 
 bool GameObject::getActive()
@@ -31,7 +50,7 @@ void GameObject::setActive(bool b)
 {
     active = b;
     //This will be sent to gameLogics list of objects activated this frame, which will call this objects start method;
-    JUST_ACTIVATED_GAMEOBJECTS.push_back(this);
+    just_activated_gameObjects.push_back(this);
 }
 
 void GameObject::updateComponents()

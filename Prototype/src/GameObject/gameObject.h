@@ -16,10 +16,9 @@ public:
     //Destructor deletes all components
     ~GameObject();
 
-    //Call start() in every component
-    void start();
-    //Call update() in every component
-    void update();
+    //Call start() for all objects in just_activated_gameobjects
+    //and update() for all objects in all_gameObjects
+    static void updateAll();
 
     //Gets component of specified type. Returns null if no such component exists
     //Returns null if T is not a component
@@ -49,6 +48,11 @@ public:
 
 private:
 
+    //Call start() in every component
+    void start();
+    //Call update() in every component
+    void update();
+
     //Updates all components references
     void updateComponents();
 
@@ -57,6 +61,11 @@ private:
 
     //If active, this gameObject will be updates each frame
     bool active;
+
+    //List of all gameObjects
+    static list<GameObject*> all_gameObjects;
+    //List of all gameObjects that turned active this frame
+    static list<GameObject*> just_activated_gameObjects;
 };
 
 
