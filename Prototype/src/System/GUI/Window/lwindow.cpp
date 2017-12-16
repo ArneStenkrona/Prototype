@@ -45,14 +45,6 @@ bool LWindow::init()
 {
     //Initializiation flag
     bool success = true;
-    //Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        printf("SDL could not initialize! SDL_Error; %s\n", SDL_GetError());
-        success = false;
-    }
-    else
-    {
         //Create window
         gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN);
         if (gWindow == NULL) {
@@ -82,7 +74,6 @@ bool LWindow::init()
                 }
             }
         }
-    }
     return success;
 }
 
