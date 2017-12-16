@@ -1,7 +1,6 @@
 // Prototype.cpp : Defines the entry point for the console application.
 //
 #include <SDL.h>
-#undef main
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
@@ -37,7 +36,7 @@ void close()
     SDL_Quit();
 }
 
-int main()
+int main(int argc, char *args[])
 {
     if (!init()) {
         printf("Failed to initialize!\n");

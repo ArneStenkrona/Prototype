@@ -4,7 +4,6 @@ Wrapperclass for SDL_Window
 
 #pragma once
 #include <SDL.h>
-#undef main
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
@@ -26,14 +25,14 @@ public:
     SDL_Renderer *getRenderer();
 
     //Returns true if window should be closed
-    bool getExit();
+    bool hasExited();
 
 private:
     int windowID;
 
-    SDL_Window* gWindow = NULL;
+    SDL_Window* gWindow;
     //The surface contained by the window
-    SDL_Surface* gScreenSurface = NULL;
+    SDL_Surface* gScreenSurface;
 
     SDL_Renderer* windowRenderer;
 
@@ -47,7 +46,7 @@ private:
 
     bool exit;
     //checks if user exists the window
-    void pollEvent();
+    void pollEvent(SDL_Event e);
 
     bool init();
     void close();

@@ -1,7 +1,7 @@
 #include "lwindow.h"
-
+#include <iostream>
 LWindow::LWindow(int _screen_width, int _screen_height, 
-               float _scale_x, float _scale_y): windowRenderer(NULL),
+               float _scale_x, float _scale_y): gWindow(NULL), windowRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
                                         scale_x(_scale_x), scale_y(_scale_y)
 {
@@ -22,8 +22,11 @@ list<LWindow*> LWindow::all_windows = list<LWindow*>();
 
 void LWindow::update()
 {
-    for each (LWindow *w in all_windows) {
-        w->pollEvent();
+    SDL_Event e;
+    while (SDL_PollEvent(&e) != 0) {
+        for each (LWindow *w in all_windows) {
+            w->pollEvent(e);
+        }
     }
 }
 
@@ -32,15 +35,13 @@ SDL_Renderer * LWindow::getRenderer()
     return windowRenderer;
 }
 
-bool LWindow::getExit()
+bool LWindow::hasExited()
 {
     return exit;
 }
 
-void LWindow::pollEvent()
+void LWindow::pollEvent(SDL_Event e)
 {
-    SDL_Event e;
-    while (SDL_PollEvent(&e) != 0) {
         if (e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
         {
             switch (e.window.event)
@@ -48,10 +49,8 @@ void LWindow::pollEvent()
             case SDL_WINDOWEVENT_CLOSE:
                 exit = true;
                 break;
-
             }
         }
-    }
 }
 
 bool LWindow::init()
@@ -66,7 +65,6 @@ bool LWindow::init()
         }
         else
         {
-            windowID = SDL_GetWindowID(gWindow);
             //Create renderer for window
             windowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
             if (windowRenderer == NULL) {
@@ -75,6 +73,7 @@ bool LWindow::init()
             }
             else
             {
+                windowID = SDL_GetWindowID(gWindow);
                 //Initialize renderer color
                 SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
                 //Set render scale

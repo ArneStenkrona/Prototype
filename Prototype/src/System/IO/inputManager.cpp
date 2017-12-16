@@ -41,20 +41,6 @@ bool getKey(INPUT_KEYS key) {
 
 }
 
-void pollExit(SDL_Event & e, bool &exit)
-{
-    while (SDL_PollEvent(&e) != 0) {
-
-        //User requests quit
-        if (e.type == SDL_QUIT)
-        {
-            exit = true;
-        }
-
-    }
-
-}
-
 void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_SPACE] = KeyboardState[SDL_SCANCODE_SPACE];
     currentKeyStates[INPUT_KEY_W] = KeyboardState[SDL_SCANCODE_W];
