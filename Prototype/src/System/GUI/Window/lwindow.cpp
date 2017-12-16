@@ -34,7 +34,7 @@ SDL_Renderer * LWindow::getRenderer()
 {
     return windowRenderer;
 }
-
+ 
 bool LWindow::hasExited()
 {
     return exit;
