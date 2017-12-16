@@ -69,6 +69,7 @@ void closeScene()
 void gameLoop() {
 
     gameWindow = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
+
     ACTIVE_RENDERER = getRenderer();
 
     //Main loop flag
@@ -94,7 +95,6 @@ void gameLoop() {
 
     //While games is running
     while (!gameWindow->getExit()) {
-        LWindow::update();
         capTimer.start();
         //Calculate and correct fps
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
@@ -125,10 +125,8 @@ void gameLoop() {
             //Wait remaining time
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
-        else {
-
-        }
         countedFrames++;
+        LWindow::update();
     }
 
     closeGameLogic();

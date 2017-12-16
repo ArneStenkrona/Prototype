@@ -1,5 +1,5 @@
 /*
-Wrapperclass for SDL windows
+Wrapperclass for SDL_Window
 */
 
 #pragma once
@@ -29,6 +29,8 @@ public:
     bool getExit();
 
 private:
+    int windowID;
+
     SDL_Window* gWindow = NULL;
     //The surface contained by the window
     SDL_Surface* gScreenSurface = NULL;
@@ -37,21 +39,18 @@ private:
 
     static list<LWindow*> all_windows;
 
-
     //Screen dimension constants
     const int screen_width;
     const int screen_height;
     const float scale_x;
     const float scale_y;
 
-    SDL_Event e; 
     bool exit;
     //checks if user exists the window
     void pollEvent();
 
     bool init();
     void close();
-
     
 
 

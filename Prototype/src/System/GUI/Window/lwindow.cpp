@@ -1,7 +1,7 @@
 #include "lwindow.h"
 
 LWindow::LWindow(int _screen_width, int _screen_height, 
-               float _scale_x, float _scale_y): windowRenderer(NULL), 
+               float _scale_x, float _scale_y): windowRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
                                         scale_x(_scale_x), scale_y(_scale_y)
 {
@@ -39,13 +39,19 @@ bool LWindow::getExit()
 
 void LWindow::pollEvent()
 {
+    SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
-            //User requests quit
-            if (e.type == SDL_QUIT)
+        if (e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
+        {
+            switch (e.window.event)
             {
+            case SDL_WINDOWEVENT_CLOSE:
                 exit = true;
+                break;
+
             }
         }
+    }
 }
 
 bool LWindow::init()
@@ -60,6 +66,7 @@ bool LWindow::init()
         }
         else
         {
+            windowID = SDL_GetWindowID(gWindow);
             //Create renderer for window
             windowRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
             if (windowRenderer == NULL) {
