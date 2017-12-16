@@ -12,5 +12,5 @@ const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 
 //The window renderer
-SDL_Renderer* MAIN_GAME_RENDERER = NULL;
+SDL_Renderer* ACTIVE_RENDERER = NULL;
 

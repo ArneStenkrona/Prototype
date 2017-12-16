@@ -37,17 +37,17 @@ bool init()
         else
         {
             //Create renderer for window
-            MAIN_GAME_RENDERER = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-            if (MAIN_GAME_RENDERER == NULL) {
+            ACTIVE_RENDERER = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+            if (ACTIVE_RENDERER == NULL) {
                 printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
                 success = false;
             }
             else
             {
                 //Initialize renderer color
-                SDL_SetRenderDrawColor(MAIN_GAME_RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
+                SDL_SetRenderDrawColor(ACTIVE_RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
                 //Set render scale
-                SDL_RenderSetScale(MAIN_GAME_RENDERER, SCALE_X, SCALE_Y);
+                SDL_RenderSetScale(ACTIVE_RENDERER, SCALE_X, SCALE_Y);
                 //Initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags))
@@ -64,10 +64,10 @@ bool init()
 void close()
 {
     //Destroy window
-    SDL_DestroyRenderer(MAIN_GAME_RENDERER);
+    SDL_DestroyRenderer(ACTIVE_RENDERER);
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
-    MAIN_GAME_RENDERER = NULL;
+    ACTIVE_RENDERER = NULL;
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
@@ -75,11 +75,11 @@ void close()
 
 int main()
 {
-    if (!init()) {
+    /*if (!init()) {
         printf("Failed to initialize!\n");
     }
     else {
-    }
+    }*/
     gameLoop();
     close();
     return 0;

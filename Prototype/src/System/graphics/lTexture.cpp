@@ -34,7 +34,7 @@ bool LTexture::loadFromFile(std::string path)
         SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 
         //Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface(MAIN_GAME_RENDERER, loadedSurface);
+        newTexture = SDL_CreateTextureFromSurface(ACTIVE_RENDERER, loadedSurface);
         if (newTexture == NULL)
         {
             printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
@@ -71,7 +71,7 @@ void LTexture::render(int x, int y)
 {
     //Set rendering space and render to screen
     SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-    SDL_RenderCopy(MAIN_GAME_RENDERER, mTexture, NULL, &renderQuad);
+    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, NULL, &renderQuad);
 }
 
 void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip)
@@ -86,13 +86,13 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
     }
 
     //Render to screen
-    SDL_RenderCopyEx(MAIN_GAME_RENDERER, mTexture, clip, &renderQuad, angle, center, flip);
+    SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, clip, &renderQuad, angle, center, flip);
 
 }
 
 void LTexture::renderTile(int x, int y, SDL_Rect * tileQuad)
 {
-    SDL_RenderCopy(MAIN_GAME_RENDERER, mTexture, NULL, tileQuad);
+    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, NULL, tileQuad);
 }
 
 void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip, SDL_Rect * tileQuad)
@@ -108,14 +108,14 @@ void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Poi
     }
 
     //Render to screen
-    SDL_RenderCopyEx(MAIN_GAME_RENDERER, mTexture, tileQuad, &renderQuad, angle, center, flip);
+    SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, tileQuad, &renderQuad, angle, center, flip);
 }
 
 void LTexture::renderCenter(int x, int y)
 {
     //Set rendering space and render to screen
     SDL_Rect renderQuad = { x - mWidth / 2, y - mHeight / 2, mWidth, mHeight };
-    SDL_RenderCopy(MAIN_GAME_RENDERER, mTexture, NULL, &renderQuad);
+    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, NULL, &renderQuad);
 }
 
 int LTexture::getWidth()

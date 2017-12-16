@@ -1,12 +1,12 @@
 #include "renderer.h"
-#include "System/graphics/global_graphical_variables.h"
+#include "System/game/gameLogic.h"
 #include "Gameobject/gameObject.h"
 #include <iostream>
 
 GameObject* Renderer::mainCamera = nullptr;
 Position* Renderer::cameraPosition = nullptr;
 
-Renderer::Renderer(GameObject *_object) : renderer(MAIN_GAME_RENDERER), Component(_object), tileQuad(NULL)
+Renderer::Renderer(GameObject *_object) : renderer(getRenderer()), Component(_object), tileQuad(NULL)
 {
 
     //Required

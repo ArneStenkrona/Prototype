@@ -3,7 +3,7 @@
 //Global graphical variables. Might wanna rethink this design choice. Or not. I don't know yet
 
 //Main renderer in game. 
-extern SDL_Renderer* MAIN_GAME_RENDERER;
+extern SDL_Renderer* ACTIVE_RENDERER;
 
 //Screen dimension constants
 extern const int SCREEN_WIDTH;

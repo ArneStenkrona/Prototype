@@ -1,5 +1,5 @@
 /*
-Baseclass for windows
+Wrapperclass for SDL windows
 */
 
 #pragma once
@@ -11,31 +11,32 @@ Baseclass for windows
 #include <string>
 #include <sstream>
 
-class Window {
+class LWindow {
 public:
-    Window(int screen_width, int screen_height, 
-           float scale_x, float scale_y, 
-           int fps, int fps_ticks);
-    ~Window();
+    LWindow(int _screen_width, int _screen_height, 
+           float _scale_x, float _scale_y);
+    ~LWindow();
 
     //Has to be called in order for the window to be active
     void update();
+
+    SDL_Renderer *getRenderer();
+
+    //Returns true if window should be closed
+    bool getExit();
+
 private:
     SDL_Window* gWindow = NULL;
     //The surface contained by the window
     SDL_Surface* gScreenSurface = NULL;
 
-    SDL_Renderer* RENDERER;
+    SDL_Renderer* windowRenderer;
 
     //Screen dimension constants
-    const int SCREEN_WIDTH;
-    const int SCREEN_HEIGHT;
-    const float SCALE_X;
-    const float SCALE_Y;
-
-    //Frame rate related
-    const int SCREEN_FPS;
-    const int SCREEN_TICK_PER_FRAME;
+    const int screen_width;
+    const int screen_height;
+    const float scale_x;
+    const float scale_y;
 
     SDL_Event e; 
     bool exit;

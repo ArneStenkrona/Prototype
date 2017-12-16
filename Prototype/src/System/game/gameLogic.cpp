@@ -23,6 +23,18 @@ void startGameObjects();
 //Calls update foreach gameObject in gameObjects
 void updateGameObjects();
 
+//Main window for the game
+LWindow *game_window;
+
+SDL_Renderer * getRenderer()
+{
+    if (game_window != NULL) {
+        return game_window->getRenderer();
+    }
+    else {
+        return nullptr;
+    }
+}
 
 Room * getRoom()
 {
@@ -64,6 +76,9 @@ void updateGameObjects() {
 }
 
 void closeGameLogic() {
+    closeScene();
+    delete(game_window);
+    game_window = NULL;
 }
 
 void setScene()
@@ -80,6 +95,10 @@ void closeScene()
 }
 
 void gameLoop() {
+
+    game_window = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
+    ACTIVE_RENDERER = getRenderer();
+
     //Main loop flag
     bool quit = false;
     //Event handler
@@ -102,8 +121,8 @@ void gameLoop() {
     setScene();
 
     //While games is running
-    while (!quit) {
-        pollExit(e, quit); //check if user exits window
+    while (!game_window->getExit()) {
+        game_window->update();
         capTimer.start();
         //Calculate and correct fps
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
@@ -116,15 +135,15 @@ void gameLoop() {
         timeText << "Average Frames Per Second (With Cap)" << avgFPS;
 
         //Clear screen
-        SDL_SetRenderDrawColor(MAIN_GAME_RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(MAIN_GAME_RENDERER);
+        SDL_SetRenderDrawColor(getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(getRenderer());
 
         updatePhysics();
 
         updateGameLogic();
 
         //Update screen
-        SDL_RenderPresent(MAIN_GAME_RENDERER);
+        SDL_RenderPresent(getRenderer());
 
         updateInputManager();
 
@@ -140,5 +159,5 @@ void gameLoop() {
         countedFrames++;
     }
 
-    closeScene();
+    closeGameLogic();
 }
