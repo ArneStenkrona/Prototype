@@ -1,22 +1,40 @@
-// Prototype.cpp : Defines the entry point for the console application.
-//
-#include <SDL.h>
-#undef main
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <stdio.h>
-#include <string>
-#include <sstream>
-#include "Prototype.h"
-#include "../math/lTimer.h"
-#include "../System/graphics/global_graphical_variables.h"
-#include "../System/IO/inputManager.h"
-#include "../System/Physics/physicsEngine.h"
-#include "System\game\gameLogic.h"
+#include "window.h"
 
-//Right now this only initializes SDL stuff. 
-//Ideally, resource managers should also be initalized here too.
-bool init()
+Window::Window(int screen_width, int screen_height, 
+               float scale_x, float scale_y, 
+               int fps, int fps_ticks): RENDERER(NULL), 
+                                        SCREEN_WIDTH(screen_width), SCREEN_HEIGHT(screen_height),
+                                        SCALE_X(scale_x), SCALE_Y(scale_y),
+                                        SCREEN_FPS(fps), SCREEN_TICK_PER_FRAME(fps_ticks)
+{
+    init();
+}
+
+Window::~Window()
+{
+    close();
+}
+
+void Window::update()
+{
+    pollExit();
+}
+
+void Window::pollExit()
+{
+    while (SDL_PollEvent(&e) != 0) {
+
+        //User requests quit
+        if (e.type == SDL_QUIT)
+        {
+            exit = true;
+        }
+
+    }
+
+}
+
+bool Window::init()
 {
     //Initializiation flag
     bool success = true;
@@ -37,17 +55,17 @@ bool init()
         else
         {
             //Create renderer for window
-            MAIN_GAME_RENDERER = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-            if (MAIN_GAME_RENDERER == NULL) {
+            RENDERER = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+            if (RENDERER == NULL) {
                 printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
                 success = false;
             }
             else
             {
                 //Initialize renderer color
-                SDL_SetRenderDrawColor(MAIN_GAME_RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
+                SDL_SetRenderDrawColor(RENDERER, 0xFF, 0xFF, 0xFF, 0xFF);
                 //Set render scale
-                SDL_RenderSetScale(MAIN_GAME_RENDERER, SCALE_X, SCALE_Y);
+                SDL_RenderSetScale(RENDERER, SCALE_X, SCALE_Y);
                 //Initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags))
@@ -61,26 +79,14 @@ bool init()
     return success;
 }
 
-void close()
+void Window::close()
 {
     //Destroy window
-    SDL_DestroyRenderer(MAIN_GAME_RENDERER);
+    SDL_DestroyRenderer(RENDERER);
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
-    MAIN_GAME_RENDERER = NULL;
+    RENDERER = NULL;
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
-}
-
-int main()
-{
-    if (!init()) {
-        printf("Failed to initialize!\n");
-    }
-    else {
-    }
-    gameLoop();
-    close();
-    return 0;
 }

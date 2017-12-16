@@ -102,6 +102,12 @@
     <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\GUI\modeSelection\modeSelection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\Window\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main\Prototype.cpp">
@@ -186,6 +192,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\modeSelection\modeSelection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\Window\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
