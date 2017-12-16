@@ -150,7 +150,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\data_structures\quadTree.h" />
-    <ClInclude Include="src\experiments\experiment.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
     <ClInclude Include="src\GameObject\Component\geometry\polygonCollider.h" />
     <ClInclude Include="src\GameObject\Component\geometry\position.h" />
@@ -166,6 +165,8 @@
     <ClInclude Include="src\math\rectangle.h" />
     <ClInclude Include="src\math\triangle.h" />
     <ClInclude Include="src\System\game\gameLogic.h" />
+    <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h" />
+    <ClInclude Include="src\System\game\scene\scene.h" />
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
@@ -180,7 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\data_structures\quadTree.cpp" />
-    <ClCompile Include="src\experiments\experiment.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\polygonCollider.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\position.cpp" />
@@ -196,6 +196,8 @@
     <ClCompile Include="src\math\rectangle.cpp" />
     <ClCompile Include="src\math\triangle.cpp" />
     <ClCompile Include="src\System\game\gameLogic.cpp" />
+    <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp" />
+    <ClCompile Include="src\System\game\scene\scene.cpp" />
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />

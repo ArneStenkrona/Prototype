@@ -93,10 +93,13 @@
     <ClInclude Include="src\GameObject\Factories\basicObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\experiments\experiment.h">
+    <ClInclude Include="src\System\game\gameLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\game\gameLogic.h">
+    <ClInclude Include="src\System\game\scene\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -176,10 +179,13 @@
     <ClCompile Include="src\GameObject\Factories\basicObjectFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\experiments\experiment.cpp">
+    <ClCompile Include="src\System\game\gameLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\game\gameLogic.cpp">
+    <ClCompile Include="src\System\game\scene\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

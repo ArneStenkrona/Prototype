@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <string>
 #include <sstream>
-#include <stdio.h>
 #include "Prototype.h"
 #include "../math/lTimer.h"
 #include "../System/graphics/global_graphical_variables.h"
@@ -67,7 +66,6 @@ bool init()
 
 void close()
 {
-    //closeGameLogic();
     //Destroy window
     SDL_DestroyRenderer(MAIN_GAME_RENDERER);
     SDL_DestroyWindow(gWindow);
@@ -159,6 +157,8 @@ int main()
         }
         countedFrames++;
     }
+
+    close();
 
     return 0;
 }

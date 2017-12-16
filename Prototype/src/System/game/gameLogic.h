@@ -14,6 +14,12 @@ void setRoom(Room *room);
 //Gets the current room in game
 Room *getRoom();
 
+//Sets the current scene in the game
+void setScene();
+//Closes the current scene by removing all gameObjects
+void closeScene();
+
+void gameLoop();
 
 void updateGameLogic();
 
