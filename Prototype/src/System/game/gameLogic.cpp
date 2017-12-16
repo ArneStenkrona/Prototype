@@ -11,9 +11,6 @@
 list<GameObject*> ALL_GAMEOBJECTS = list<GameObject*>();
 list<GameObject*> JUST_ACTIVATED_GAMEOBJECTS = list<GameObject*>();
 
-//The room the player is currently in
-Room *CURRENT_ROOM;
-
 //The current scene in game
 Scene *CURRENT_SCENE;
 
@@ -26,17 +23,6 @@ void startGameObjects();
 //Calls update foreach gameObject in gameObjects
 void updateGameObjects();
 
-void setRoom(Room *room)
-{
-    if (CURRENT_ROOM != NULL) {
-        CURRENT_ROOM->unload();
-    }
-    CURRENT_ROOM = room;
-    room->readFromFile();
-
-    //Sets the bounds of the collider quadTree to room dimensions
-    setQuadBounds(room->getDimensions());
-}
 
 Room * getRoom()
 {
@@ -78,7 +64,6 @@ void updateGameObjects() {
 }
 
 void closeGameLogic() {
-    CURRENT_ROOM->unload();
 }
 
 void setScene()
