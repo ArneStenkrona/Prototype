@@ -3,7 +3,8 @@
 LWindow::LWindow(int _screen_width, int _screen_height, 
                int _scale_x, int _scale_y): gWindow(NULL), windowRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
-                                        scale_x(_scale_x), scale_y(_scale_y)
+                                        scale_x(_scale_x), scale_y(_scale_y),
+                                        mouseOver(false), clickQueue(list<bool>())
 {
     if (!init()) {
         printf("Failed to initialize!\n");
@@ -47,6 +48,11 @@ bool LWindow::hasExited()
     return exit;
 }
 
+bool LWindow::getMouseOver()
+{
+    return mouseOver;
+}
+
 void LWindow::getPos(int *x, int *y)
 {
     SDL_GetWindowPosition(gWindow, x, y);
@@ -57,6 +63,22 @@ void LWindow::getDimensions(int * x, int * y)
     SDL_GetWindowSize(gWindow, x, y);
 }
 
+bool LWindow::popClickQueue()
+{
+
+    bool res;
+
+    if (clickQueue.size() != 0) {
+        res = clickQueue.front();
+        clickQueue.pop_front();
+    }
+    else {
+        res = false;
+    }
+
+    return res;
+}
+
 void LWindow::pollEvent(SDL_Event e)
 {
         if (e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
@@ -65,6 +87,23 @@ void LWindow::pollEvent(SDL_Event e)
             {
             case SDL_WINDOWEVENT_CLOSE:
                 exit = true;
+                break;
+                //Mouse entered window
+            case SDL_WINDOWEVENT_ENTER:
+                mouseOver = true;
+                break;
+
+                //Mouse left window
+            case SDL_WINDOWEVENT_LEAVE:
+                mouseOver = false;
+                break;
+            }
+        }
+        else {
+            switch (e.type)
+            {
+            case SDL_MOUSEBUTTONDOWN:
+                clickQueue.push_back(true);
                 break;
             }
         }

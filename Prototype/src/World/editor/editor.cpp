@@ -3,6 +3,7 @@
 #include "windows.h"
 #include <sstream>
 #include <algorithm>
+#include "math\rectangle.h"
 
 Editor::Editor()
 {
@@ -24,11 +25,48 @@ void Editor::run()
     if (path.size() > 0) {
         loadFile(path);
         while (!editorWindow->hasExited()) {
+            updateInput();
+
+            if (editorWindow->popClickQueue()) {
+                setTile();
+            }
+
             LWindow::updateAll();
             //updateInputManager();
         }
         activeRoom->saveToFile();
     }
+}
+
+void Editor::setTile()
+{
+    int x = 0;
+    int y = 0;
+
+    editorWindow->getActiveTileCoordinates(x,y);
+
+    Tile tile = Tile(1, Rectangular(Point(0.0, 0.0), 32, 32));
+    activeRoom->setTile(x, y, tile);
+}
+
+void Editor::updateInput()
+{
+    int dX = 0;
+    int dY = 0;
+
+    if (getKeyDown(INPUT_KEY_W)) {
+        dY -= 1;
+    }
+    if (getKeyDown(INPUT_KEY_S)) {
+        dY += 1;
+    }
+    if (getKeyDown(INPUT_KEY_A)) {
+        dX -= 1;
+    }
+    if (getKeyDown(INPUT_KEY_D)) {
+        dX += 1;
+    }
+    editorWindow->updatePosition(dX,dY);
 }
 
 string Editor::getFilePath()

@@ -12,12 +12,14 @@ EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, 
 
 void EditorWindow::update()
 {
-
-    updateInput();
+    setActiveTileCoordinates();
 
     //Clear screen
     SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(windowRenderer);
+    //Render the background
+    activeRoom->background->render(0,0);
+
     //Render the tiles of the room
     renderTiles();
     //X and Y will be passed as referense to get coordinates for the grid and selected grid
@@ -31,7 +33,7 @@ void EditorWindow::update()
     }
     //Will refactor this for readability. Essentialy I'm translating coordinates so that the grid makes sense
     getMouseCoordinates(&x, &y);
-    drawSquare(snapToGrid(x + (scale_x * (posX % gridSize))) - (posX % gridSize), snapToGrid(y + (scale_y * (posY % gridSize))) - (posY % gridSize), 0xFF,0x00,0x00,0x00);
+    drawSquare(activeX, activeY, 0xFF,0x00,0x00,0x00);
     SDL_RenderPresent(windowRenderer);
 }
 
@@ -47,22 +49,6 @@ void EditorWindow::drawSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uin
     SDL_RenderDrawRect(windowRenderer, &outlineRect);
 }
 
-void EditorWindow::updateInput()
-{
-    if (getKeyDown(INPUT_KEY_W)) {
-        posY -= 1;
-    }
-    if (getKeyDown(INPUT_KEY_S)) {
-        posY += 1;
-    }
-    if (getKeyDown(INPUT_KEY_A)) {
-        posX -= 1;
-    }
-    if (getKeyDown(INPUT_KEY_D)) {
-        posX += 1;
-    }
-}
-
 //This function assumes that scale_x = scale_y
 int EditorWindow::snapToGrid(int i)
 {
@@ -74,6 +60,18 @@ void EditorWindow::getClosestVertex(int &x, int &y)
     //TODO: 
 }
 
+
+//This function does not work atm!!!
+void EditorWindow::setActiveTileCoordinates()
+{
+    int x = 0;
+    int y = 0;
+    getMouseCoordinates(&x, &y);
+    activeX = ((((x + (scale_x * (posX % gridSize))) / (gridSize * scale_x)) % gridSize) * gridSize) - (posX % gridSize);
+    activeY = ((((y + (scale_y * (posY % gridSize))) / (gridSize * scale_y)) % gridSize) * gridSize) - (posY % gridSize);
+
+}
+
 void EditorWindow::renderTiles()
 {
     for (int x = 0; x < activeRoom->tileMatrix.size(); x++) {
@@ -83,4 +81,16 @@ void EditorWindow::renderTiles()
             }
         }
     }
+}
+
+void EditorWindow::getActiveTileCoordinates(int & x, int & y)
+{
+    x = activeX;
+    y = activeY;
+}
+
+void EditorWindow::updatePosition(int deltaX, int deltaY)
+{
+    posX += deltaX;
+    posY += deltaY;
 }

@@ -29,6 +29,10 @@ public:
     //Returns true if window should be closed
     bool hasExited();
 
+    bool getMouseOver();
+
+    bool popClickQueue();
+
 protected:
     int windowID;
 
@@ -50,7 +54,10 @@ protected:
     void getDimensions(int *x, int *y);
 
     static list<LWindow*> all_windows;
+
 private:
+    //mouse is over window
+    bool mouseOver;
 
     bool exit;
     //checks if user exists the window
@@ -58,6 +65,8 @@ private:
 
     bool init();
     void close();
+    //queue for mouse clicks. Might expand this to other events
+    list<bool> clickQueue;
     
 
 

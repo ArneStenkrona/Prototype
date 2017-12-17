@@ -18,22 +18,31 @@ public:
     void setRoom(Room *room);
 
     void renderTiles();
+
+    void getActiveTileCoordinates(int &x, int &y);
+
+    //updates the position relative to origin
+    void updatePosition(int deltaX, int deltaY);
+
 private:
     static const int gridSize;
     void drawSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
     //Room in the editor
     Room *activeRoom;
+    //The active tile coordinates
+    int activeX;
+    int activeY;
 
     //position relative to origin
     int posX;
     int posY;
-    //updates relevant input for editor window
-    void updateInput();
 
     //Snaps coordinate to nearest vertex
     int snapToGrid(int i);
 
     //Sets input to closest vertex
     void getClosestVertex(int &x, int &y);
+    //Updates activeX and activeY
+    void setActiveTileCoordinates();
 };

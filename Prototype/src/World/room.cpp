@@ -270,6 +270,28 @@ void Room::deInstantiate()
     gameObjectMatrix.resize(0);
 }
 
+Tile * Room::getTile(int x, int y)
+{
+    if (x > 0 && x < tileMatrix.size() && y > 0 && y < tileMatrix[x].size()) {
+        return tileMatrix[x][y];
+    }
+    else {
+        std::cout << "Position not defined in tile matrix" << endl;
+        std::cout << x << " : " << y << endl;
+    }
+}
+
+void Room::setTile(int x, int y, Tile tile)
+{
+
+    if(x > 0 && x < tileMatrix.size() && y > 0 && y < tileMatrix[x].size()) {
+       tileMatrix[x][y] = &tile;
+    } else {
+        std::cout << "Position not defined in tile matrix" << endl;
+        std::cout << x << " : " << y << endl;
+    }
+}
+
 
 void Room::setFlags(int x, int y)
 {

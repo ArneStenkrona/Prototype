@@ -19,6 +19,13 @@ private:
     //The room currently being edited;
     Room *activeRoom;
 
+    //The selected tile type
+    int selectedTileType;
+
+    void setTile();
+
+    void updateInput();
+
     string getFilePath();
     void loadFile(std::string path);
 };
