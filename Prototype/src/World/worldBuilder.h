@@ -5,8 +5,6 @@
 
 //Stores Tile information. Helps with saving
 struct Tile {
-    //Does a tile exist
-    bool isTile;
     //Position in the room
     int x, y;
     //Defines texture within the tileset

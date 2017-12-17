@@ -1,3 +1,8 @@
+/*
+    Right now this file is an awful mess.
+    Refactoring should be done.
+*/
+
 #include "room.h"
 #include <iostream>
 #include <fstream>
@@ -105,15 +110,16 @@ void Room::readFromFile()
                 vector<string> dataPoints = stringSplitter(tileBuffer[j], '|');
 
                 //Assign variables
-                isTile = dataPoints[0][1] == 'T';
-                tileIndex = std::stoi(dataPoints[1]);
-                hasCollider = dataPoints[2][0] == 'T';
+                if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
+                tileIndex = std::stoi(dataPoints[0]);
+                std::cout << dataPoints[0] << std::endl;
+                hasCollider = dataPoints[1][0] == 'T';
 
                 if (hasCollider) {
-                    dataPoints[3].erase(0, 1);
-                    dataPoints[3].pop_back();
+                    dataPoints[2].erase(0, 1);
+                    dataPoints[2].pop_back();
                     //separate by points
-                    vector<string> pointStrings = stringSplitter(dataPoints[3], ')');
+                    vector<string> pointStrings = stringSplitter(dataPoints[2], ')');
                     pointStrings.pop_back();
 
                     vector<Point> points;
@@ -135,7 +141,6 @@ void Room::readFromFile()
                     polygon = Rectangular(Point::empty, 0, 0);
                 }
                 tileMatrix[x][y] = new Tile;
-                tileMatrix[x][y]->isTile = isTile;
                 tileMatrix[x][y]->x = x; tileMatrix[x][y]->y = y;
                 tileMatrix[x][y]->tileIndex = tileIndex;
                 tileMatrix[x][y]->hasCollider = hasCollider;
@@ -208,8 +213,8 @@ void Room::saveToFile()
 
             if (tileMatrix[x][y] != NULL) {
                 buffer += "[";
-                buffer += BOOL_STR(tileMatrix[x][y]->isTile); //isTile
-                buffer += "| ";
+                //buffer += BOOL_STR(tileMatrix[x][y]->isTile); //isTile
+                //buffer += "| ";
 
                 buffer += std::to_string(tileMatrix[x][y]->tileIndex) + "| "; //Tile texture index
 

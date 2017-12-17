@@ -179,6 +179,7 @@
     <ClInclude Include="src\tools\stringTools.h" />
     <ClInclude Include="src\World\editor\editor.h" />
     <ClInclude Include="src\World\room.h" />
+    <ClInclude Include="src\World\Tile.h" />
     <ClInclude Include="src\World\worldBuilder.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -213,6 +214,7 @@
     <ClCompile Include="src\tools\stringTools.cpp" />
     <ClCompile Include="src\World\editor\editor.cpp" />
     <ClCompile Include="src\World\room.cpp" />
+    <ClCompile Include="src\World\Tile.cpp" />
     <ClCompile Include="src\World\worldBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
