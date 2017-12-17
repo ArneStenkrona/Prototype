@@ -13,6 +13,7 @@
 #include "../System/Physics/physicsEngine.h"
 #include "System\game\gameLogic.h"
 #include "System/GUI/Window/lwindow.h"
+#include <Windows.h>
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.
@@ -38,12 +39,19 @@ void close()
 
 int main(int argc, char *args[])
 {
+   
+
+
     if (!init()) {
         printf("Failed to initialize!\n");
     }
     else {
     }
-    gameLoop();
+    if (MessageBoxA(NULL, "Open editor?", "Choose mode", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDNO) {
+        gameLoop();
+    }
+    else {
+    }
     close();
     return 0;
 }

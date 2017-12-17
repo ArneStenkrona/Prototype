@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\imgui;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\SDL;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\msvc;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\SDL;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -170,7 +170,6 @@
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
-    <ClInclude Include="src\System\GUI\modeSelection\modeSelection.h" />
     <ClInclude Include="src\System\GUI\Window\lwindow.h" />
     <ClInclude Include="src\System\IO\inputManager.h" />
     <ClInclude Include="src\main\Prototype.h" />
@@ -203,7 +202,6 @@
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
-    <ClCompile Include="src\System\GUI\modeSelection\modeSelection.cpp" />
     <ClCompile Include="src\System\GUI\Window\lwindow.cpp" />
     <ClCompile Include="src\System\IO\inputManager.cpp" />
     <ClCompile Include="src\main\Prototype.cpp" />
