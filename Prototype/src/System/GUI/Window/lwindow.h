@@ -16,18 +16,20 @@ using namespace::std;
 class LWindow {
 public:
     LWindow(int _screen_width, int _screen_height, 
-           float _scale_x, float _scale_y);
+           int _scale_x, int _scale_y);
     ~LWindow();
 
     //Updates all windows
-    static void update();
+    static void updateAll();
+
+    virtual void update();
 
     SDL_Renderer *getRenderer();
 
     //Returns true if window should be closed
     bool hasExited();
 
-private:
+protected:
     int windowID;
 
     SDL_Window* gWindow;
@@ -36,13 +38,19 @@ private:
 
     SDL_Renderer* windowRenderer;
 
-    static list<LWindow*> all_windows;
-
-    //Screen dimension constants
+    //Screen dimension constants, though I might remove this if I set window to resizable
     const int screen_width;
     const int screen_height;
-    const float scale_x;
-    const float scale_y;
+    const int scale_x;
+    const int scale_y;
+
+    //Sets referenced variables to window coordinates
+    void getPos(int *x, int *y);
+    //Sets referenced variables to window dimensions
+    void getDimensions(int *x, int *y);
+
+    static list<LWindow*> all_windows;
+private:
 
     bool exit;
     //checks if user exists the window

@@ -114,6 +114,8 @@ void gameLoop() {
 
         updateGameLogic();
 
+        updateInputManager();
+
         //Update screen
         SDL_RenderPresent(getRenderer());
 
@@ -125,7 +127,7 @@ void gameLoop() {
         }
         countedFrames++;
 
-        LWindow::update();
+        LWindow::updateAll();
     }
 
     closeGameLogic();

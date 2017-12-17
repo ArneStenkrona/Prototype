@@ -24,7 +24,7 @@ bool getKeyDown(INPUT_KEYS key);
 bool getKeyUp(INPUT_KEYS key);
 //Returns true if key is currently pressed
 bool getKey(INPUT_KEYS key);
-//Polls exit application action
-void pollExit(SDL_Event &e, bool & exit);
+//Sets the referenced variables to mouse coordinates
+void getMouseCoordinates(int *x, int *y);
 
 #pragma once

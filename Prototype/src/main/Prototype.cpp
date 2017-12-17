@@ -12,8 +12,8 @@
 #include "../System/IO/inputManager.h"
 #include "../System/Physics/physicsEngine.h"
 #include "System\game\gameLogic.h"
-#include "System/GUI/Window/lwindow.h"
 #include <Windows.h>
+#include "World\editor\editor.h"
 
 //Right now this only initializes SDL stuff. 
 //Ideally, resource managers should also be initalized here too.
@@ -51,6 +51,7 @@ int main(int argc, char *args[])
         gameLoop();
     }
     else {
+        Editor().run();
     }
     close();
     return 0;

@@ -1,7 +1,7 @@
 #include "lwindow.h"
 #include <iostream>
 LWindow::LWindow(int _screen_width, int _screen_height, 
-               float _scale_x, float _scale_y): gWindow(NULL), windowRenderer(NULL),
+               int _scale_x, int _scale_y): gWindow(NULL), windowRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
                                         scale_x(_scale_x), scale_y(_scale_y)
 {
@@ -20,7 +20,7 @@ LWindow::~LWindow()
 
 list<LWindow*> LWindow::all_windows = list<LWindow*>();
 
-void LWindow::update()
+void LWindow::updateAll()
 {
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
@@ -28,6 +28,13 @@ void LWindow::update()
             w->pollEvent(e);
         }
     }
+    for each (LWindow *w in all_windows) {
+        w->update();
+    }
+}
+
+void LWindow::update()
+{
 }
 
 SDL_Renderer * LWindow::getRenderer()
@@ -38,6 +45,16 @@ SDL_Renderer * LWindow::getRenderer()
 bool LWindow::hasExited()
 {
     return exit;
+}
+
+void LWindow::getPos(int *x, int *y)
+{
+    SDL_GetWindowPosition(gWindow, x, y);
+}
+
+void LWindow::getDimensions(int * x, int * y)
+{
+    SDL_GetWindowSize(gWindow, x, y);
 }
 
 void LWindow::pollEvent(SDL_Event e)
