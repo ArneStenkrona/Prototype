@@ -17,6 +17,9 @@ public:
 
     GameObject* gameObjectFromTile(int x, int y);
 
+    //Renders tile at coordinates (x, y)
+    void renderTile(int x, int y);
+
 private:
     //Defines texture within the tileset
     int tileIndex;

@@ -5,8 +5,8 @@
 
 const int EditorWindow::gridSize = 32;
 
-EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, int _scale_y): LWindow(_screen_width, _screen_height,
-    _scale_x, _scale_y)
+EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
+    _scale_x, _scale_y), activeRoom(_activeRoom)
 {
 }
 
@@ -18,18 +18,26 @@ void EditorWindow::update()
     //Clear screen
     SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(windowRenderer);
+    //Render the tiles of the room
+    renderTiles();
+    //X and Y will be passed as referense to get coordinates for the grid and selected grid
     int x = 0;
     int y = 0;
     getDimensions(&x, &y);
     for (int i = 0; i < x / gridSize; i++) {
         for (int j = 0; j < y / gridSize; j++) {
-            drawSquare(snapToGrid(i * gridSize) - posX, snapToGrid(j * gridSize) - posY, 0x00, 0x00, 0x00, 0x00);
+            drawSquare((i * gridSize) - posX, (j * gridSize) - posY, 0x00, 0x00, 0x00, 0x00);
         }
     }
     //Will refactor this for readability. Essentialy I'm translating coordinates so that the grid makes sense
     getMouseCoordinates(&x, &y);
     drawSquare(snapToGrid(x + (scale_x * (posX % gridSize))) - (posX % gridSize), snapToGrid(y + (scale_y * (posY % gridSize))) - (posY % gridSize), 0xFF,0x00,0x00,0x00);
     SDL_RenderPresent(windowRenderer);
+}
+
+void EditorWindow::setRoom(Room * room)
+{
+    activeRoom = room;
 }
 
 
@@ -64,4 +72,15 @@ int EditorWindow::snapToGrid(int i)
 void EditorWindow::getClosestVertex(int &x, int &y)
 {
     //TODO: 
+}
+
+void EditorWindow::renderTiles()
+{
+    for (int x = 0; x < activeRoom->tileMatrix.size(); x++) {
+        for (int y = 0; y < activeRoom->tileMatrix[x].size(); y++) {
+            if (activeRoom->tileMatrix[x][y] != NULL) {
+                activeRoom->tileMatrix[x][y]->renderTile((x * gridSize) - posX,(y * gridSize) - posY);
+            }
+        }
+    }
 }

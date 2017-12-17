@@ -11,6 +11,11 @@ Scene::~Scene()
 }
 
 void Scene::setUpScene() {
+    //Test room
+    Room *myRoom = new Room("Assets/Rooms/room1.txttest");
+    setRoom(myRoom);
+    myRoom->instantiate();
+    //myRoom->saveToFile();
 }
 
 void Scene::setRoom(Room *room)

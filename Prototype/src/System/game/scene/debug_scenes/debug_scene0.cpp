@@ -11,6 +11,8 @@ Debug_scene0::~Debug_scene0()
 
 void Debug_scene0::setUpScene()
 {
+    Scene::setUpScene();
+
     GameObject *character = new GameObject();
 
     character->addComponent<Renderer>();
@@ -22,10 +24,5 @@ void Debug_scene0::setUpScene()
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(character);
     Renderer::setCamera(camera);
-
-    //Test room
-    Room *myRoom = new Room("Assets/Rooms/room1.txt");
-    setRoom(myRoom);
-    myRoom->saveToFile();
 }
 

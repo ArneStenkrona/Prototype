@@ -34,6 +34,10 @@ public:
     //Tile info matrix
     vector<vector<Tile*>> tileMatrix;
 
+    //Instantiates room by creating gameObjects
+    void instantiate();
+    //Removes gameObjects
+    void deInstantiate();
 private:
     //File path of the room data
     string file_path;

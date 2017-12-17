@@ -14,9 +14,6 @@ The list of responsibilites is a bit convoluted as of now, I will work to correc
 #include "SDL_image.h"
 #include "System/GUI/Window/lwindow.h"
 
-//Gets the render of the window
-SDL_Renderer *getRenderer();
-
 //Gets the current room in game
 Room *getRoom();
 

@@ -43,3 +43,8 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
 
     return obj;
 }
+
+void Tile::renderTile(int x, int y)
+{
+    TextureManager::tile_textures[tileIndex].render(x, y);
+}

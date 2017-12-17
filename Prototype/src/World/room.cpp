@@ -34,7 +34,7 @@ void Room::readFromFile()
 {
     string roomData;
     ifstream infile;
-    infile.open(file_path + "test");
+    infile.open(file_path);
     //reads texture and position data
     if (infile.is_open())
     {
@@ -140,8 +140,6 @@ void Room::readFromFile()
                     polygon = Rectangular(Point::empty, 0,  0);
                 }
                 tileMatrix[x][y] = new  Tile(tileIndex, polygon);
-
-                gameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
             }
             x++;
 
@@ -152,31 +150,20 @@ void Room::readFromFile()
 
     }
 
-    //Set collision flags
-    for (int x = 0; x < gameObjectMatrix.size(); x++) {
-        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
-            if (gameObjectMatrix[x][y] != NULL) {
-                setFlags(x, y);
-            }
-        }
-    }
-
     _width = sizeX * 32.0;
     _height = sizeY * 32.0;
 }
 
 void Room::unload()
 {
-    for (int x = 0; x < gameObjectMatrix.size(); x++) {
-        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
-            delete gameObjectMatrix[x][y];
-            gameObjectMatrix[x][y] = nullptr;
+    deInstantiate();
+
+    for (int x = 0; x < tileMatrix.size(); x++) {
+        for (int y = 0; y < tileMatrix[x].size(); y++) {
             delete tileMatrix[x][y];
             tileMatrix[x][y] = nullptr;
         }
     }
-    //Shrink vector
-    gameObjectMatrix.resize(0);
     tileMatrix.resize(0);
     _width = -1;
     _height = -1;
@@ -188,7 +175,7 @@ void Room::saveToFile()
     //opens filestream
     ofstream outFile;
 
-    outFile.open(file_path + "test");
+    outFile.open(file_path);
     //Declares output buffer
     string buffer;
 
@@ -249,6 +236,38 @@ Point Room::getDimensions()
 Point Room::getPosition()
 {
     return position;
+}
+
+void Room::instantiate()
+{
+    for (int x = 0; x < tileMatrix.size(); x++) {
+        for (int y = 0; y < tileMatrix[x].size(); y++) {
+            if (tileMatrix[x][y] != NULL) {
+                gameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
+            }
+        }
+    }
+
+    //Set collision flags
+    for (int x = 0; x < gameObjectMatrix.size(); x++) {
+        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
+            if (gameObjectMatrix[x][y] != NULL) {
+                setFlags(x, y);
+            }
+        }
+    }
+}
+
+void Room::deInstantiate()
+{
+    for (int x = 0; x < gameObjectMatrix.size(); x++) {
+        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
+            delete gameObjectMatrix[x][y];
+            gameObjectMatrix[x][y] = nullptr;
+        }
+    }
+    //Shrink vector
+    gameObjectMatrix.resize(0);
 }
 
 

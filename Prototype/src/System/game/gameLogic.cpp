@@ -17,16 +17,6 @@ void drawBackground();
 //Main window for the game
 LWindow *gameWindow;
 
-SDL_Renderer * getRenderer()
-{
-    if (gameWindow != NULL) {
-        return gameWindow->getRenderer();
-    }
-    else {
-        return nullptr;
-    }
-}
-
 Room * getRoom()
 {
     //return CURRENT_ROOM;
@@ -69,8 +59,6 @@ void closeScene()
 void gameLoop() {
 
     gameWindow = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
-    
-    ACTIVE_RENDERER = getRenderer();
 
     //Main loop flag
     bool quit = false;
@@ -107,8 +95,8 @@ void gameLoop() {
         timeText << "Average Frames Per Second (With Cap)" << avgFPS;
 
         //Clear screen
-        SDL_SetRenderDrawColor(getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(getRenderer());
+        SDL_SetRenderDrawColor(gameWindow->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gameWindow->getRenderer());
 
         updatePhysics();
 
@@ -117,7 +105,7 @@ void gameLoop() {
         updateInputManager();
 
         //Update screen
-        SDL_RenderPresent(getRenderer());
+        SDL_RenderPresent(gameWindow->getRenderer());
 
         //If frame finished early
         int frameTicks = capTimer.getTicks();

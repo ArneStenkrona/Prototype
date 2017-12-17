@@ -15,10 +15,10 @@
 #include <Windows.h>
 #include "World\editor\editor.h"
 
-//Right now this only initializes SDL stuff. 
-//Ideally, resource managers should also be initalized here too.
+
 bool init()
 {
+
     //Initializiation flag
     bool success = true;
     //Initialize SDL
@@ -27,6 +27,7 @@ bool init()
         printf("SDL could not initialize! SDL_Error; %s\n", SDL_GetError());
         success = false;
     }
+
     return success;
 }
 
