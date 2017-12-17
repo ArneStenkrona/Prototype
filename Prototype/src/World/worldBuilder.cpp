@@ -5,10 +5,10 @@
 #include <iostream>
 
 
-GameObject *createTile(Tile tile)
+GameObject *createTile(Tile tile, int x, int y)
 {
     GameObject *obj = new GameObject();
-    obj->addComponent<Position>()->position = Point(tile.x * 32, tile.y * 32);
+    obj->addComponent<Position>()->position = Point(x * 32, y * 32);
     obj->addComponent<Renderer>();
     if (tile.hasCollider) {
         obj->addComponent<PolygonCollider>()->setPolygon(tile.polygon);

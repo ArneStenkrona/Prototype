@@ -5,8 +5,6 @@
 
 //Stores Tile information. Helps with saving
 struct Tile {
-    //Position in the room
-    int x, y;
     //Defines texture within the tileset
     int tileIndex;
     bool hasCollider;
@@ -18,6 +16,6 @@ struct Tile {
 //This means that a single tile is a 32x32 pixel image.
 //This tile size dictates positions of objects
 
-//Creates a gameObject as defined by the tile
-GameObject *createTile(Tile tile);
+//Creates a gameObject as defined by the tile, at tile coordinates (x, y)
+GameObject *createTile(Tile tile, int x, int y);
 

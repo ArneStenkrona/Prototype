@@ -112,7 +112,6 @@ void Room::readFromFile()
                 //Assign variables
                 if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
                 tileIndex = std::stoi(dataPoints[0]);
-                std::cout << dataPoints[0] << std::endl;
                 hasCollider = dataPoints[1][0] == 'T';
 
                 if (hasCollider) {
@@ -141,12 +140,11 @@ void Room::readFromFile()
                     polygon = Rectangular(Point::empty, 0, 0);
                 }
                 tileMatrix[x][y] = new Tile;
-                tileMatrix[x][y]->x = x; tileMatrix[x][y]->y = y;
                 tileMatrix[x][y]->tileIndex = tileIndex;
                 tileMatrix[x][y]->hasCollider = hasCollider;
                 tileMatrix[x][y]->polygon = polygon;
 
-                gameObjectMatrix[x][y] = createTile(*tileMatrix[x][y]);
+                gameObjectMatrix[x][y] = createTile(*tileMatrix[x][y], x, y);
             }
             x++;
 
