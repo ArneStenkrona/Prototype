@@ -137,14 +137,11 @@ void Room::readFromFile()
 
                 }
                 else {
-                    polygon = Rectangular(Point::empty, 0, 0);
+                    polygon = Rectangular(Point::empty, 0,  0);
                 }
-                tileMatrix[x][y] = new Tile;
-                tileMatrix[x][y]->tileIndex = tileIndex;
-                tileMatrix[x][y]->hasCollider = hasCollider;
-                tileMatrix[x][y]->polygon = polygon;
+                tileMatrix[x][y] = new  Tile(tileIndex, polygon);
 
-                gameObjectMatrix[x][y] = createTile(*tileMatrix[x][y], x, y);
+                gameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
             }
             x++;
 
@@ -155,6 +152,7 @@ void Room::readFromFile()
 
     }
 
+    //Set collision flags
     for (int x = 0; x < gameObjectMatrix.size(); x++) {
         for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
             if (gameObjectMatrix[x][y] != NULL) {
@@ -211,20 +209,18 @@ void Room::saveToFile()
 
             if (tileMatrix[x][y] != NULL) {
                 buffer += "[";
-                //buffer += BOOL_STR(tileMatrix[x][y]->isTile); //isTile
-                //buffer += "| ";
 
-                buffer += std::to_string(tileMatrix[x][y]->tileIndex) + "| "; //Tile texture index
+                buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "| "; //Tile texture index
 
-                buffer += BOOL_STR(tileMatrix[x][y]->hasCollider); //is collider present
+                buffer += BOOL_STR(tileMatrix[x][y]->hasCollider()); //is collider present
                 buffer += "| ";
 
                 //Gets all the points of collider if one is present
-                if (tileMatrix[x][y]->hasCollider) {
+                if (tileMatrix[x][y]->hasCollider()) {
                     buffer += "<";
-                    for (int i = 0; i < tileMatrix[x][y]->polygon.numberOfVertices; i++) {
-                        buffer += "(" + std::to_string(tileMatrix[x][y]->polygon.vertices[i].x) + ", ";
-                        buffer += std::to_string(tileMatrix[x][y]->polygon.vertices[i].y) + ")";
+                    for (int i = 0; i < tileMatrix[x][y]->getPolygon()->numberOfVertices; i++) {
+                        buffer += "(" + std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].x) + ", ";
+                        buffer += std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].y) + ")";
                     }
                     buffer += ">";
                 }

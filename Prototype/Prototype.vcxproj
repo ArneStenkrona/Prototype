@@ -180,7 +180,6 @@
     <ClInclude Include="src\World\editor\editor.h" />
     <ClInclude Include="src\World\room.h" />
     <ClInclude Include="src\World\Tile.h" />
-    <ClInclude Include="src\World\worldBuilder.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +214,6 @@
     <ClCompile Include="src\World\editor\editor.cpp" />
     <ClCompile Include="src\World\room.cpp" />
     <ClCompile Include="src\World\Tile.cpp" />
-    <ClCompile Include="src\World\worldBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\Downloads\imgui-master\imgui-master\TODO.txt" />

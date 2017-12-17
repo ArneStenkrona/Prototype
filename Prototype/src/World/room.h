@@ -5,7 +5,7 @@
 #include "System/graphics/lTexture.h"
 #include "math/point.h"
 #include "System/graphics/textureManager.h"
-#include "Worldbuilder.h"
+#include "World/Tile.h"
 
 class Room {
 public:
