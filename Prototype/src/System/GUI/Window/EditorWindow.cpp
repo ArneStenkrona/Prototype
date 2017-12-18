@@ -33,7 +33,7 @@ void EditorWindow::update()
     }
     //Will refactor this for readability. Essentialy I'm translating coordinates so that the grid makes sense
     getMouseCoordinates(&x, &y);
-    drawSquare(activeX, activeY, 0xFF,0x00,0x00,0x00);
+    drawSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF,0x00,0x00,0x00);
     SDL_RenderPresent(windowRenderer);
 }
 
@@ -49,27 +49,19 @@ void EditorWindow::drawSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uin
     SDL_RenderDrawRect(windowRenderer, &outlineRect);
 }
 
-//This function assumes that scale_x = scale_y
-int EditorWindow::snapToGrid(int i)
-{
-    return ((i / (gridSize * scale_x)) % gridSize) * gridSize;
-}
-
-void EditorWindow::getClosestVertex(int &x, int &y)
-{
-    //TODO: 
-}
-
-
 //This function does not work atm!!!
 void EditorWindow::setActiveTileCoordinates()
 {
     int x = 0;
     int y = 0;
     getMouseCoordinates(&x, &y);
-    activeX = ((((x + (scale_x * (posX % gridSize))) / (gridSize * scale_x)) % gridSize) * gridSize) - (posX % gridSize);
-    activeY = ((((y + (scale_y * (posY % gridSize))) / (gridSize * scale_y)) % gridSize) * gridSize) - (posY % gridSize);
-
+    x /= scale_x;
+    y /= scale_y;
+    activeX = (x + posX) / (gridSize);
+    activeY = (y + posY) / (gridSize);
+    //Fix negative integer division off by one error
+    if (x + posX < 0) activeX--;
+    if (y + posY < 0) activeY--;
 }
 
 void EditorWindow::renderTiles()

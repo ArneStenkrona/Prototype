@@ -38,11 +38,6 @@ private:
     int posX;
     int posY;
 
-    //Snaps coordinate to nearest vertex
-    int snapToGrid(int i);
-
-    //Sets input to closest vertex
-    void getClosestVertex(int &x, int &y);
     //Updates activeX and activeY
     void setActiveTileCoordinates();
 };

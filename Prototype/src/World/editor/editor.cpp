@@ -34,7 +34,7 @@ void Editor::run()
             LWindow::updateAll();
             //updateInputManager();
         }
-        activeRoom->saveToFile();
+        //activeRoom->saveToFile();
     }
 }
 
@@ -45,7 +45,7 @@ void Editor::setTile()
 
     editorWindow->getActiveTileCoordinates(x,y);
 
-    Tile tile = Tile(1, Rectangular(Point(0.0, 0.0), 32, 32));
+    Tile *tile = new Tile(1, Rectangular(Point(0.0, 0.0), 32, 32));
     activeRoom->setTile(x, y, tile);
 }
 

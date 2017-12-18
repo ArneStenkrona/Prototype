@@ -40,7 +40,7 @@ public:
     void deInstantiate();
 
     Tile *getTile(int x, int y);
-    void setTile(int x, int y, Tile tile);
+    void setTile(int x, int y, Tile *tile);
 private:
     //File path of the room data
     string file_path;
