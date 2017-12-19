@@ -292,6 +292,12 @@ void Room::setTile(int x, int y, Tile *tile)
     }
 }
 
+void Room::getDimensions(int & x, int & y)
+{
+    x = static_cast<int>(tileMatrix.size());
+    y = static_cast<int>(tileMatrix[0].size());
+}
+
 
 void Room::setFlags(int x, int y)
 {

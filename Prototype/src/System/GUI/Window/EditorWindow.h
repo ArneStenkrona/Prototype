@@ -24,9 +24,16 @@ public:
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
 
+    //Is the mouse within the select tile area?
+    bool withinSelector();
+
+    void setSelectedTile();
+    int getSelectedTile();
+
 private:
     static const int gridSize;
-    void drawSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
     //Room in the editor
     Room *activeRoom;
@@ -38,6 +45,12 @@ private:
     int posX;
     int posY;
 
+    //This tileindex will be used when creating tiles in the editor
+    //It might be appropriate to move this responsibility to the editor class
+    int selectedTile;
+
     //Updates activeX and activeY
     void setActiveTileCoordinates();
+
+    void renderTileSelector();
 };

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include "math\rectangle.h"
+#include "math\lTimer.h"
 
 Editor::Editor()
 {
@@ -21,20 +22,57 @@ Editor::~Editor()
 
 void Editor::run()
 {
+    //Main loop flag
+    bool quit = false;
+    //Event handler
+    SDL_Event e;
+    //The frames per second timer
+    LTimer fpsTimer;
+    //The frames per second cap timer
+    LTimer capTimer;
+    //In memory text stream
+    std::stringstream timeText;
+    //Start counting frames per second
+    long countedFrames = 0;
+    fpsTimer.start();
+
+
     string path = getFilePath();
     if (path.size() > 0) {
         loadFile(path);
         while (!editorWindow->hasExited()) {
+            capTimer.start();
+            //Calculate and correct fps
+            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
+            if (avgFPS > 2000000)
+            {
+                avgFPS = 0;
+            }
+
+
             updateInput();
 
             if (editorWindow->popClickQueue()) {
-                setTile();
+                if (editorWindow->withinSelector()) {
+                    editorWindow->setSelectedTile();
+                }
+                else {
+                    setTile();
+                }
             }
+
+            //If frame finished early
+            int frameTicks = capTimer.getTicks();
+            if (frameTicks < SCREEN_TICK_PER_FRAME) {
+                //Wait remaining time
+                SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+            }
+            countedFrames++;
 
             LWindow::updateAll();
             //updateInputManager();
         }
-        //activeRoom->saveToFile();
+        activeRoom->saveToFile();
     }
 }
 
@@ -43,9 +81,14 @@ void Editor::setTile()
     int x = 0;
     int y = 0;
 
+    Tile *tile;
     editorWindow->getActiveTileCoordinates(x,y);
-
-    Tile *tile = new Tile(1, Rectangular(Point(0.0, 0.0), 32, 32));
+    if (editorWindow->getSelectedTile() >= TextureManager::TOTAL_TILE_TEXTURES) {
+        tile = NULL;
+    }
+    else {
+        tile = new Tile(editorWindow->getSelectedTile(), Rectangular(Point(0.0, 0.0), 32, 32));
+    }
     activeRoom->setTile(x, y, tile);
 }
 
@@ -55,16 +98,16 @@ void Editor::updateInput()
     int dY = 0;
 
     if (getKeyDown(INPUT_KEY_W)) {
-        dY -= 1;
+        dY -= 7;
     }
     if (getKeyDown(INPUT_KEY_S)) {
-        dY += 1;
+        dY += 7;
     }
     if (getKeyDown(INPUT_KEY_A)) {
-        dX -= 1;
+        dX -= 7;
     }
     if (getKeyDown(INPUT_KEY_D)) {
-        dX += 1;
+        dX += 7;
     }
     editorWindow->updatePosition(dX,dY);
 }

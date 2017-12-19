@@ -41,6 +41,10 @@ public:
 
     Tile *getTile(int x, int y);
     void setTile(int x, int y, Tile *tile);
+
+    //Sets x and y to the length of the tile vectors
+    void getDimensions(int &x, int &y);
+
 private:
     //File path of the room data
     string file_path;

@@ -1,5 +1,7 @@
 #include "lwindow.h"
 #include "System\graphics\global_graphical_variables.h"
+#include "System\IO\inputManager.h"
+
 LWindow::LWindow(int _screen_width, int _screen_height, 
                int _scale_x, int _scale_y): gWindow(NULL), windowRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),

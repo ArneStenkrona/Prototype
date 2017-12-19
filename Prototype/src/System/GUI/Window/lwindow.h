@@ -67,8 +67,4 @@ private:
     void close();
     //queue for mouse clicks. Might expand this to other events
     list<bool> clickQueue;
-    
-
-
-
 };
