@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\msvc;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\SDL;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\include\msvc;$(ProjectDir)\src;$(ProjectDir)\include\SDL;$(ProjectDir)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
