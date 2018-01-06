@@ -7,6 +7,7 @@
 #include <sstream>
 #include "System\IO\inputManager.h"
 #include "scene\debug_scenes\debug_scene0.h"
+#include <iostream>
 
 //The current scene in game
 Scene *currentScene;
@@ -104,6 +105,8 @@ void gameLoop() {
 
         updateInputManager();
 
+        //drawQuadTree();
+
         //Update screen
         SDL_RenderPresent(gameWindow->getRenderer());
 
@@ -112,6 +115,10 @@ void gameLoop() {
         if (frameTicks < SCREEN_TICK_PER_FRAME) {
             //Wait remaining time
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+        }
+        else {
+            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
+            std::cout << "FPS LOW: " << avgFPS << ". Expected: " << SCREEN_FPS << std::endl;
         }
         countedFrames++;
 

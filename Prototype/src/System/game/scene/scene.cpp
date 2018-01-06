@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "System\Physics\physicsEngine.h"
 
 Scene::Scene() : CURRENT_ROOM(NULL)
 {

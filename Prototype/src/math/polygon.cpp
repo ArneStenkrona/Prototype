@@ -1,4 +1,5 @@
 #include "polygon.h"
+#include <cmath>
 
 
 Polygon::~Polygon()
@@ -15,20 +16,20 @@ void Polygon::setDimensions()
         if (vertices[i].x < minX) {
             minX = vertices[i].x;
         }
-        else if (vertices[i].x > maxX) {
+        if (vertices[i].x > maxX) {
             maxX = vertices[i].x;
         }
 
         if (vertices[i].y < minY) {
             minY = vertices[i].y;
         }
-        else if (vertices[i].y > maxY) {
+        if (vertices[i].y > maxY) {
             maxY = vertices[i].y;
         }
     }
 
-    _width = maxX - minX;
-    _height = maxY - minY;
+    _width = std::abs(maxX - minX);
+    _height = std::abs(maxY - minY);
 
 
 }

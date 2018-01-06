@@ -228,7 +228,7 @@ bool PolygonCollider::collide(const Point * a, int aNum, const Point * b, int bN
 
     xAxis[iNumAxes] = Point(-xVel.y, xVel.x);
     double fVel2 = xVel.x * xVel.x + xVel.y * xVel.y;
-    if (fVel2 > 0.00001) //I think we are fine if we change this to (fVel2 > 0.0)
+    if (fVel2 > 0.0) //Used to be (fVel2 >  0.00001)
     {
         if (!intervalIntersect(a, aNum, b, bNum, xAxis[iNumAxes], xOffset, xVel, tAxis[iNumAxes], _collisionTime)) {
             return false;

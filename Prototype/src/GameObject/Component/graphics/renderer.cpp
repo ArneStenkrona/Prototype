@@ -50,6 +50,11 @@ void Renderer::setCamera(GameObject *_camera)
     }
 }
 
+Point Renderer::getCameraPosition()
+{
+    return mainCamera->getComponent<Position>()->position;
+}
+
 void Renderer::setTileQuad(SDL_Rect * _quad)
 {
     tileQuad = _quad;

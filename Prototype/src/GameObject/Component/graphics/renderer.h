@@ -18,6 +18,8 @@ public:
 
     static GameObject *mainCamera;
 
+    static Point getCameraPosition();
+
     //Sets quad to render from tilesheet
     void setTileQuad(SDL_Rect *_quad);
 

@@ -5,7 +5,8 @@
 #include <memory>
 
 
-//A quadtree splits into 4 nodes each level. This was originally implemented to aid hitBox pair calculations
+//A quadtree splits into 4 nodes each level. The purpose is to optimize collision detection by only
+//performing calculations for collisions on nodes covered by the dynamic collider
 class QuadTree {
 
 public:
@@ -27,16 +28,19 @@ public:
     //Sets the quadtrees bounds
     void setBounds(Point _bounds);
 
+    void draw();
+
+
 private:
     //Max objects per node level
     int Max_Objects = 10;
     //Max number of levels
-    int Max_Levels = 4;
+    int Max_Levels = 5;
 
     //int recompile;
 
     int level;
-    vector<PolygonCollider*> hitBoxes;
+    vector<PolygonCollider*> colliders;
     //position is the position of this node, bounds are the dimensions
     Point position, bounds;
     QuadTree *nodes[4];

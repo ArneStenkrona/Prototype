@@ -1,5 +1,7 @@
 #include "quadTree.h"
 #include <iostream>
+#include "System\graphics\global_graphical_variables.h"
+#include "GameObject\Component\graphics\renderer.h"
 
 QuadTree::QuadTree(int pLevel, Point _position, Point _bounds) : level(pLevel), position(_position), bounds(_bounds)
 {
@@ -12,10 +14,9 @@ QuadTree::~QuadTree()
 
 void QuadTree::clear()
 {
-    hitBoxes.clear();
+    colliders.clear();
 
-    //sizeof(nodes) gave iterator depth level so changed it to 4. Mysterious
-    for (int i = 0; i < 4/*sizeof(nodes)*/; i++) {
+    for (int i = 0; i < sizeof(nodes)/sizeof(*nodes); i++) {
         if (nodes[i] != nullptr) {
             nodes[i]->clear();
             delete nodes[i];
@@ -50,13 +51,42 @@ vector<PolygonCollider*>* QuadTree::retrieve(vector<PolygonCollider*> *returnCol
     }
     else if (nodes[0] != nullptr)//If collider does not fit into the node, get all of the children 
     {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < sizeof(nodes) / sizeof(*nodes); i++) {
             nodes[i]->retrieve(returnColliders, collider);
         }
     }
+    //Position of the box
+    Point colliderPos = collider->getPosition();
+    //dimensions of the box
+    Point colliderDimensions;
 
-    returnColliders->reserve(returnColliders->size() + hitBoxes.size());
-    returnColliders->insert(returnColliders->end(), hitBoxes.begin(), hitBoxes.end());
+    //if the collider is nonstatic, account for velocity
+    if (collider->getStatic()) {
+        colliderDimensions = Point(collider->getWidth(), collider->getHeight());
+    }
+    else {
+        Point vel = collider->getVelocity();
+        colliderDimensions = Point(collider->getWidth() + fabs(vel.x), collider->getHeight() + fabs(vel.y));
+
+        //Account for the direction of the velocity
+        if (vel.x < 0.0) {
+            colliderPos = colliderPos + Point(vel.x, 0.0);
+        }
+
+        if (vel.y < 0.0) {
+            colliderPos = colliderPos + Point(0.0, vel.y);
+        }
+
+    }
+
+    bool overlap = colliderPos.x + colliderDimensions.x >= position.x && colliderPos.x < position.x + bounds.x
+         && colliderPos.y + colliderDimensions.y >= position.y && colliderPos.y < position.y + bounds.y;
+
+
+    if (overlap) {
+        returnColliders->reserve(returnColliders->size() + colliders.size());
+        returnColliders->insert(returnColliders->end(), colliders.begin(), colliders.end());
+    }
 
     return returnColliders;
 
@@ -74,38 +104,46 @@ void QuadTree::insert(PolygonCollider * collider)
         }
     }
 
-    hitBoxes.push_back(collider);
+    colliders.push_back(collider);
 
-    if (hitBoxes.size() > Max_Objects && level < Max_Levels) {
+    if (colliders.size() > Max_Objects && level < Max_Levels) {
         if (nodes[0] == nullptr) {
             split();
         }
         int i = 0;
-        while (i < hitBoxes.size()) {
-            int index = getIndex(hitBoxes[i]);
+        while (i < colliders.size()) {
+            int index = getIndex(colliders[i]);
             if (index != -1) {
-
-                PolygonCollider* temp = hitBoxes[i];
-                hitBoxes.erase(hitBoxes.begin() + i);
-                nodes[index]->insert(temp);
-            }
-            else
-            {
+                nodes[index]->insert(colliders[i]);
+                colliders.erase(colliders.begin() + i);
+            } else {
                 i++;
             }
-
         }
-
     }
 }
 
 void QuadTree::setBounds(Point _bounds)
 {
-
-    //x and y appear to be swapped in quadTree class
-    //Algorithms should perhaps be rewritten to avoid future bugs
-    bounds = Point(_bounds.y, _bounds.x);
+    bounds = Point(_bounds.x, _bounds.y);
 }
+
+void QuadTree::draw()
+{
+    Point camPos = Renderer::getCameraPosition();
+    
+    SDL_Rect outlineRect = { position.x - camPos.x, position.y - camPos.y, bounds.x, bounds.y };
+
+    SDL_SetRenderDrawColor(ACTIVE_RENDERER, 0x00, 0x00, 0xFF, 0x00);
+    SDL_RenderDrawRect(ACTIVE_RENDERER, &outlineRect);
+    if (nodes[0] != nullptr) {
+        for (int i = 0; i < 4; i++) {
+            nodes[i]->draw();
+        }
+    }
+
+}
+
 
 int QuadTree::getIndex(PolygonCollider * collider)
 {
@@ -115,36 +153,36 @@ int QuadTree::getIndex(PolygonCollider * collider)
     double horizontalMidpoint = position.y + (bounds.y / 2);
 
     //Position of the box
-    Point pos = collider->getPosition();
+    Point colliderPos = collider->getPosition();
     //dimensions of the box
-    Point dimensions;
+    Point colliderDimensions;
 
     //if the collider is nonstatic, account for velocity
     if (collider->getStatic()) {
-        dimensions = Point(collider->getWidth(), collider->getHeight());
+        colliderDimensions = Point(collider->getWidth(), collider->getHeight());
     }
     else {
         Point vel = collider->getVelocity();
-        dimensions = Point(collider->getWidth() + fabs(vel.x), collider->getHeight() + fabs(vel.y));
+        colliderDimensions = Point(collider->getWidth() + fabs(vel.x), collider->getHeight() + fabs(vel.y));
 
         //Account for the direction of the velocity
         if (vel.x < 0.0) {
-            pos = pos + Point(vel.x, 0.0);
+            colliderPos = colliderPos + Point(vel.x, 0.0);
         }
 
         if (vel.y < 0.0) {
-            pos = pos + Point(0.0, vel.y);
+            colliderPos = colliderPos + Point(0.0, vel.y);
         }
 
     }
 
     //Object can completely fit within the top quadrants
-    bool topQuadrant = (pos.y < horizontalMidpoint && pos.y + dimensions.y < horizontalMidpoint);
+    bool topQuadrant = (colliderPos.y + colliderDimensions.y < horizontalMidpoint);
     //Object can completely fit within the bottom quadrants
-    bool bottomQuadrant = (pos.y > horizontalMidpoint);
+    bool bottomQuadrant = (colliderPos.y > horizontalMidpoint);
 
     //Object can completely fit within the left quadrants
-    if (pos.x < verticalMidpoint && pos.x + dimensions.x < verticalMidpoint) {
+    if (colliderPos.x + colliderDimensions.x < verticalMidpoint) {
         if (topQuadrant) {
             index = 1;
         }
@@ -153,7 +191,7 @@ int QuadTree::getIndex(PolygonCollider * collider)
         }
     }
     //Object can completely fit within the right quadrands
-    else if (pos.x > verticalMidpoint) {
+    else if (colliderPos.x > verticalMidpoint) {
         if (topQuadrant) {
             index = 0;
         }

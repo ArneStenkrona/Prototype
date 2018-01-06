@@ -10,3 +10,5 @@ void updatePhysics();
 void performHitdetection();
 //Sets the bounds of the quadTree
 void setQuadBounds(Point _bounds);
+
+void drawQuadTree();
