@@ -247,15 +247,6 @@ void Room::instantiate()
             }
         }
     }
-
-    //Set collision flags
-    for (int x = 0; x < gameObjectMatrix.size(); x++) {
-        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
-            if (gameObjectMatrix[x][y] != NULL) {
-                setFlags(x, y);
-            }
-        }
-    }
 }
 
 void Room::deInstantiate()
@@ -297,57 +288,3 @@ void Room::getDimensions(int & x, int & y)
     x = static_cast<int>(tileMatrix.size());
     y = static_cast<int>(tileMatrix[0].size());
 }
-
-
-void Room::setFlags(int x, int y)
-{
-
-    bool up = false;
-    bool right = false;
-    bool left = false;
-    bool down = false;
-
-    int indexX = x;
-    int indexY = y - 1;
-
-    //Check up
-    if (indexX >= 0 && indexX < gameObjectMatrix.size() && indexY >= 0 && indexY < gameObjectMatrix[indexX].size()) {
-
-        if (gameObjectMatrix[indexX][indexY] != NULL) {
-            up = true;
-        }
-    }
-
-    indexX++;
-    indexY++;
-
-    //Check right
-    if (indexX >= 0 && indexX < gameObjectMatrix.size() && indexY >= 0 && indexY < gameObjectMatrix[indexX].size()) {
-
-        if (gameObjectMatrix[indexX][indexY] != NULL) {
-            right = true;
-        }
-    }
-
-    indexX -= 2;
-
-    //Check left
-    if (indexX >= 0 && indexX < gameObjectMatrix.size() && indexY >= 0 && indexY < gameObjectMatrix[indexX].size()) {
-
-        if (gameObjectMatrix[indexX][indexY] != NULL) {
-            left = true;
-        }
-    }
-    indexX++;
-    indexY++;
-    //Check down
-    if (indexX >= 0 && indexX < gameObjectMatrix.size() && indexY >= 0 && indexY < gameObjectMatrix[indexX].size()) {
-
-        if (gameObjectMatrix[indexX][indexY] != NULL) {
-            down = true;
-        }
-    }
-    gameObjectMatrix[x][y]->getComponent<PolygonCollider>()->setFlags(up, right, left, down);
-}
-
-

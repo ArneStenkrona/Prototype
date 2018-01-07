@@ -41,13 +41,8 @@ public:
     void setPolygon(Polygon _polygon);
     Polygon getPolygon();
 
-    //Sets the flags for this tile
-    void setFlags(bool _up, bool _right, bool _left, bool _down);
-
     //Checks collision between nonstatic collider a and every collider in b
     static bool calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
-
-    static bool calculateCollision(PolygonCollider a, PolygonCollider b);
 
 private:
 
@@ -79,12 +74,6 @@ private:
         double& taxis, double tmax);
 
     Polygon polygon;
-
-    //Tile flags. Tells us wether this tile is connected to another tile in either of the four directions
-    bool up;
-    bool right;
-    bool left;
-    bool down;
 
     //Determines wether the hitbox is active
     bool isActive;

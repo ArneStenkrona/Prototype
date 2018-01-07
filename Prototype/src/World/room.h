@@ -59,6 +59,4 @@ private:
     double _width;
     double _height;
 
-    void setFlags(int x, int y);
-
 };
