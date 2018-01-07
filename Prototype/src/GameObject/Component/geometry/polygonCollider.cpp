@@ -1,6 +1,8 @@
 #include "polygonCollider.h"
 #include <iostream>
 #include "System/Physics/physicsEngine.h"
+#include <tuple>
+#include <algorithm>
 
 PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isStatic(true), isActive(true)
 {
@@ -88,6 +90,74 @@ void PolygonCollider::setFlags(bool _up, bool _right, bool _left, bool _down)
     right = _right;
     left = _left;
     down = _down;
+}
+
+bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
+{
+
+    //Tuple containing time of collision, where 0.0 is the beginning of the frame and 1.0 is the end,
+    //And the corresponding collider
+    vector<tuple<double, PolygonCollider*>> possibleCollisions = vector<tuple<double, PolygonCollider*>>();
+
+    bool collided = false;
+
+    int collisions = 0;
+
+    for each (PolygonCollider *b in *B) {
+        if (a != b) {
+            Point colNorm;
+            double colTime = 1.0;
+            Point relVel;
+
+            //Avoids null ptr exception if b is static and doesnt contain velocity component
+            if (b->isStatic) {
+                relVel = a->velocity->velocity;
+            }
+            else {
+                relVel = a->velocity->velocity - b->velocity->velocity;
+            }
+            if (collide(&a->polygon.vertices[0], a->polygon.numberOfVertices,
+                &b->polygon.vertices[0], b->polygon.numberOfVertices,
+                a->position->position - b->position->position,
+                relVel, colNorm, colTime)) {
+
+                possibleCollisions.push_back({ colTime, b });
+                collisions++;
+                collided = true;
+            }
+        }
+    }
+    if (collided) {
+
+        //Sort tuples after earliest collision
+        std::sort(begin(possibleCollisions), end(possibleCollisions), [](auto const &t1, auto const &t2) {
+            return get<0>(t1) < get<0>(t2);
+        });
+
+        for each (tuple<double, PolygonCollider*> col in possibleCollisions) {
+
+            //Normal of the plan of b that a collides with
+            Point collisionNormal;
+            //Time of collision, where 0.0 is the beginning of the frame and 1.0 is the end
+            double collisionTime = 1.0;
+
+            //Relative velocity of a and b
+            Point relativeVelocity;
+
+            if (collide(&a->polygon.vertices[0], a->polygon.numberOfVertices,
+                &get<1>(col)->polygon.vertices[0], get<1>(col)->polygon.numberOfVertices,
+                a->position->position - get<1>(col)->position->position,
+                relativeVelocity, collisionNormal, collisionTime)) {
+
+                a->position->position -= collisionNormal * collisionTime;
+
+                a->velocity->velocity -= collisionNormal * (collisionTime);
+            }
+        }
+
+            return true;
+    }
+    return false;
 }
 
 bool PolygonCollider::calculateCollision(PolygonCollider a, PolygonCollider b)

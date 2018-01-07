@@ -43,16 +43,9 @@ void performHitdetection() {
         if (!b->getStatic() && b->getActive()) {
             vector<PolygonCollider*> returnColliders;
             quad.retrieve(&returnColliders, b);
-            //std::cout << returnColliders.size() << std::endl;
 
-            for each (PolygonCollider *bb in returnColliders)
-            {
-                //I should not have to check this
-                //Fix quadtree so it doesn't insert b in returnboxes
-                if (b != bb) {
-                    PolygonCollider::calculateCollision(*b, *bb);
-                }
-            }
+            PolygonCollider::calculateCollision(b, &returnColliders);
+
 
         }
 
