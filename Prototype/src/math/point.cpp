@@ -50,9 +50,8 @@ Point Point::operator*(const Point &other)
 
 Point& Point::operator*=(const Point &other)
 {
-    x = (x * other.x - y * other.y);
-    y = (x * other.y + y * other.x);
-
+        x = (x * other.x - y * other.y);
+        y = (x * other.y + y * other.x);
     return *this;
 }
 
@@ -91,6 +90,16 @@ Point Point::normalized() const
     else {
         return Point(0, 0);
     }
+}
+
+double Point::distanceTo(const Point &other)
+{
+    return (*this - other).magnitude();
+}
+
+double Point::dot(const Point & other)
+{
+    return x * other.x + y * other.y;
 }
 
 const Point Point::empty = Point(0, 0);

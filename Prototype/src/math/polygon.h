@@ -14,6 +14,8 @@ public:
     //Dimensions of the shape
     double _width;
     double _height;
+    //Returns the distance between this polygon and a point
+    double distanceTo(Point p);
 
 protected:
     //This sets the dimensions of the shape

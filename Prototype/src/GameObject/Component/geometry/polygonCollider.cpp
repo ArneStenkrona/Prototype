@@ -3,6 +3,7 @@
 #include "System/Physics/physicsEngine.h"
 #include <tuple>
 #include <algorithm>
+#include <cmath>
 
 PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isStatic(true), isActive(true)
 {
@@ -101,7 +102,7 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
             double colTime = 1.0;
             Point relVel;
 
-            //Avoids null ptr exception if b is static and doesnt contain velocity component
+            //Set relative velocity
             if (b->isStatic) {
                 relVel = a->velocity->velocity;
             }
@@ -126,6 +127,7 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
             return get<0>(t1) < get<0>(t2);
         });
 
+        int i = 0;
         for each (tuple<double, PolygonCollider*> col in possibleCollisions) {
 
             //Normal of the plan of b that a collides with
@@ -135,15 +137,58 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
 
             //Relative velocity of a and b
             Point relativeVelocity;
-
+            //Set relative velocity
+            if (get<1>(col)->isStatic) {
+                relativeVelocity = a->velocity->velocity;
+            }
+            else {
+                relativeVelocity = a->velocity->velocity - get<1>(col)->velocity->velocity;
+            }
             if (collide(&a->polygon.vertices[0], a->polygon.numberOfVertices,
                 &get<1>(col)->polygon.vertices[0], get<1>(col)->polygon.numberOfVertices,
                 a->position->position - get<1>(col)->position->position,
                 relativeVelocity, collisionNormal, collisionTime)) {
 
-                a->position->position -= collisionNormal * collisionTime;
+                    if (relativeVelocity.x * collisionNormal.x + relativeVelocity.y * collisionNormal.y < 0.0) {
+                    //Velocity required to reach collision
+                    Point velC = a->velocity->velocity * collisionTime;
+                    //Overlapping velocity
+                    Point overVel = a->velocity->velocity - velC;
 
-                a->velocity->velocity -= collisionNormal * (collisionTime);
+                    Point correctedVelocity = a->velocity->velocity - collisionNormal * ((overVel.x * collisionNormal.x + overVel.y * collisionNormal.y) / pow(collisionNormal.magnitude(), 2));
+
+                    //Is it a vertex to vertex collision?
+                    bool vToV = false;
+                    for (int i = 0; i < a->polygon.numberOfVertices; i++) {
+                        Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
+                        for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
+                            Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
+                            if ((aVertex).distanceTo(bVertex) < 0.000001) {
+                                for (int k = 0; k < a->polygon.numberOfVertices; k++) {
+                                    if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) < 0.000001) {
+                                        vToV = false;
+                                    }
+                                    else {
+                                        vToV = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (vToV) {
+                    }
+                    else {
+                        if (collisionTime < 0.0) {
+                            Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
+                            a->position->position -= collisionNormal * collisionTime;
+                            a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
+                        }
+                        else {
+                            a->velocity->velocity = correctedVelocity;
+                        }
+                    }
+                }            
             }
         }
 
@@ -151,7 +196,8 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
     }
     return false;
 }
-
+//Algorithm courtesy of PollyColly
+//A tutorial can be found here: https://github.com/kirbysayshi/oli-demos/blob/master/Polycolly/docs/html/2D%20polygon.htm
 bool PolygonCollider::collide(const Point * a, int aNum, const Point * b, int bNum, const Point & xOffset, const Point & xVel, Point & _collisionNormal, double & _collisionTime)
 {
     if (!a || !b) {
@@ -213,7 +259,7 @@ bool PolygonCollider::collide(const Point * a, int aNum, const Point * b, int bN
 
     return true;
 }
-
+//Find minimum translation distance
 bool PolygonCollider::findMTD(Point* xAxis, double* tAxis, int iNumAxes, Point& N, double& t)
 {
     //Find collision first

@@ -41,4 +41,19 @@ public:
 
     //Returns a point with distance 1 from origin
     Point normalized() const;
+
+    //Returns distance between this and other
+    double distanceTo(const Point &other);
+
+    //Returns the dot product of this and other
+    double dot(const Point &other);
 };
+
+
+//marked inline to prevent a multiple definition
+inline Point operator*(double d, const Point& p)
+{
+    Point result = p;
+    result *= d;
+    return result;
+}
