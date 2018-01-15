@@ -75,10 +75,10 @@ void Renderer::update() {
         pos = position->position - cameraPos;
         if (sprite != nullptr) {
             if (tileQuad == NULL) {
-                sprite->texture->render(pos.x, pos.y);
+                sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
             }
             else {
-                sprite->texture->renderTile(pos.x, pos.y, tileQuad);
+                sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y), tileQuad);
             }
         }
     }

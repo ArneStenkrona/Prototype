@@ -57,6 +57,7 @@ void Camera::update()
 
     if (targetPosition != nullptr) {
         position->position = Point(posX, posY);
+        cout << targetPos << endl;
     }
 }
 

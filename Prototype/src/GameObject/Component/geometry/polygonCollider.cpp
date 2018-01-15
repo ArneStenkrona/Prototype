@@ -121,15 +121,15 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
         }
     }
     if (collided) {
-
         //Sort tuples after earliest collision
         std::sort(begin(possibleCollisions), end(possibleCollisions), [](auto const &t1, auto const &t2) {
             return get<0>(t1) < get<0>(t2);
         });
 
         int i = 0;
+        int abc = 0;
         for each (tuple<double, PolygonCollider*> col in possibleCollisions) {
-
+            abc++;
             //Normal of the plan of b that a collides with
             Point collisionNormal;
             //Time of collision, where 0.0 is the beginning of the frame and 1.0 is the end
@@ -149,13 +149,13 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
                 a->position->position - get<1>(col)->position->position,
                 relativeVelocity, collisionNormal, collisionTime)) {
 
-                    if (relativeVelocity.x * collisionNormal.x + relativeVelocity.y * collisionNormal.y < 0.0) {
+                    if (relativeVelocity.x * collisionNormal.x + relativeVelocity.y * collisionNormal.y < 0.0 || relativeVelocity.dot(collisionNormal) < 0.000001) {
                     //Velocity required to reach collision
                     Point velC = a->velocity->velocity * collisionTime;
                     //Overlapping velocity
                     Point overVel = a->velocity->velocity - velC;
 
-                    Point correctedVelocity = a->velocity->velocity - collisionNormal * ((overVel.x * collisionNormal.x + overVel.y * collisionNormal.y) / pow(collisionNormal.magnitude(), 2));
+                    Point correctedVelocity = a->velocity->velocity - collisionNormal * overVel.dot(collisionNormal);
 
                     //Is it a vertex to vertex collision?
                     bool vToV = false;
@@ -165,10 +165,7 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
                             Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
                             if ((aVertex).distanceTo(bVertex) < 0.000001) {
                                 for (int k = 0; k < a->polygon.numberOfVertices; k++) {
-                                    if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) < 0.000001) {
-                                        vToV = false;
-                                    }
-                                    else {
+                                    if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
                                         vToV = true;
                                     }
                                 }
@@ -180,13 +177,14 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
                     }
                     else {
                         if (collisionTime < 0.0) {
+                            a->position->position -= collisionNormal * collisionTime - 0.001 * a->velocity->velocity;
                             Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
-                            a->position->position -= collisionNormal * collisionTime;
                             a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
                         }
                         else {
                             a->velocity->velocity = correctedVelocity;
                         }
+
                     }
                 }            
             }
