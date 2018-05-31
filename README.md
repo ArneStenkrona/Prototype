@@ -2,9 +2,12 @@
 2D game engine.
 
 Prototype is a simple 2D game engine. As of yet it is in a very 
-rudimentary stage. This project
-is solely developed as a hobby and learning experience.
+rudimentary stage. This project is solely developed as a hobby 
+and learning experience.
 
+This repository is based on a visual studio project. While
+you could get it to run without VS studio, using it will
+save a lot of headache.
 Prototype utilizes the SDL library.
 
 
@@ -12,11 +15,11 @@ Structure:
 /Assets:
 This folder containst all assets for the project. Textures, roomfiles, etc.
 
-/src:
+/src
 This folder contains all source code. Header and corresponding source
 files are placed in the same folder.
 
-  /data_structures:
+  /data_structures
   As the name entails, sources for data-structures are stored here.
   Currently the only example is the quadTree class, which stores
   colliders in a quadTree in order to quickly find nearby colliders
@@ -31,7 +34,44 @@ files are placed in the same folder.
   etc.
   
   /main
-  Home of "Prototype.cpp"
+  Home of "Prototype.cpp", which contains the main method.
+  
+  /math
+  Source code relating to more general, mathematical entities.
+  Examples include a timer "lTimer", or geometric objects. One can
+  question whether or not a timer and a polygon belongs in the same
+  folder.
+  
+  /System
+  This folder contains more basic, necessary code to make the
+  program run. Home of subfolders "/game", which contains things
+  relating to the game aspects of the engine, "/graphics", "/GUI",
+  "/IO", all of which are self-explanatory, and "/physics", which
+  is the home of the physics engine. The physics engine works
+  in tandem with the game. As such it is natural to wonder if
+  the folder structure should be changed to better reflect their
+  relationship.
+  
+  /Tools
+  This folder is used for any general tools that might come in
+  handy in development. For example, "stringTools.cpp" which has
+  some parsing implemented.
+  
+  /World
+  This folder contains code relating to the representation of the
+  game world. It is home to entities such as "room.cpp" and "Tile.cpp"
+  which make the building blocks of the game world. The editor is
+  also stored here. Separating these from the "/game"-folder might
+  seem questionable to some. 
+  
+ 
+ 
+Editor:
+The editor is in a very rudimentary stage. It is dependent on a
+custom file format to load rooms into memory from files which 
+can then be edited and saved. Here follows a specification
+of the file format:
+  
     
 
 //Arne
