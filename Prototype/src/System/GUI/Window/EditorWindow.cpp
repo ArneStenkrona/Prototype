@@ -68,6 +68,12 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
     SDL_RenderFillRect(windowRenderer, &fillRect);
 }
 
+void EditorWindow::updateTileSelector(int deltaX, int deltaY)
+{
+    if (tileSelector.posX + tileSelector.dimX + deltaX <= 16 && tileSelector.posX + deltaX >= 0) tileSelector.posX += deltaX;
+    if (tileSelector.posY + tileSelector.dimY + deltaY <= 16 && tileSelector.posY + deltaY >= 0) tileSelector.posY += deltaY;
+}
+
 //This function does not work atm!!!
 void EditorWindow::setActiveTileCoordinates()
 {
@@ -85,13 +91,17 @@ void EditorWindow::setActiveTileCoordinates()
 
 void EditorWindow::renderTileSelector()
 {
-    //Render tile selector
-    for (int i = 0; i < TextureManager::TOTAL_TILE_TEXTURES; i++) {
-        //TextureManager::tile_textures[i].render((i % 2) * gridSize, (i / 2) * gridSize);
-        TextureManager::active_tileset.renderTile((i % 2) * gridSize, (i / 2) * gridSize,i);
+    //Render available tiles
+    for (int i = tileSelector.posX; i < tileSelector.posX + tileSelector.dimX; i++) {
+        for (int j = tileSelector.posY; j < tileSelector.posY + tileSelector.dimY; j++) {
+            TextureManager::active_tileset.renderTile((i - tileSelector.posX) * gridSize,(j - tileSelector.posY) * gridSize, i + j * 16);
+        }
     }
-    drawSolidSquare((TextureManager::TOTAL_TILE_TEXTURES % 2) * gridSize, (TextureManager::TOTAL_TILE_TEXTURES / 2) * gridSize, 0x00, 0x00, 0x00, 0x00);
-    drawOutlineSquare((selectedTile % 2) * gridSize, (selectedTile / 2) * gridSize, 0x00, 0xFF, 0x00, 0x00);
+    //Render delete button
+    TextureManager::miscallenous[0].render(0, tileSelector.dimX * gridSize);
+    //Render selected outline
+    if (selectedTile == -1) drawOutlineSquare(0, 4 * gridSize, 0x00, 0xFF, 0x00, 0x00);
+    else drawOutlineSquare(((selectedTile % 16) - tileSelector.posX) * gridSize, ((selectedTile / 16) - tileSelector.posY) * gridSize, 0x00, 0xFF, 0x00, 0x00);
 }
 
 void EditorWindow::renderTiles()
@@ -124,8 +134,9 @@ bool EditorWindow::withinSelector()
     getMouseCoordinates(&x, &y);
     //How many tiles
     int tileCount = TextureManager::TOTAL_TILE_TEXTURES;
-    return x < 2 * gridSize * scale_x && y < ((tileCount + 1) / 2) * gridSize * scale_y ||
-            x < gridSize * scale_x && y < ((tileCount + 2) / 2) * gridSize * scale_y;
+    return (x < tileSelector.dimX * gridSize * scale_x && y < tileSelector.dimY * gridSize * scale_y) ||
+        (x < gridSize * scale_x && y < (tileSelector.dimY + 1) * gridSize * scale_y);
+
 }
 
 void EditorWindow::setSelectedTile()
@@ -133,7 +144,11 @@ void EditorWindow::setSelectedTile()
     int x = 0;
     int y = 0;
     getMouseCoordinates(&x, &y);
-    selectedTile = (x / (gridSize * scale_x)) + 2 * (y / (gridSize * scale_y)) ;
+    if ((y / (gridSize * scale_y)) >= tileSelector.dimY) selectedTile = -1; 
+    else {
+        selectedTile = tileSelector.posX + (x / (gridSize * scale_x)) +
+            16 * (tileSelector.posY + (y / (gridSize * scale_y)));
+    }
 }
 
 int EditorWindow::getSelectedTile()

@@ -8,6 +8,7 @@ enum INPUT_KEYS {
     INPUT_KEY_S,
     INPUT_KEY_D,
     INPUT_KEY_SPACE,
+    INPUT_KEY_LSHIFT,
     NMBR
 };
 

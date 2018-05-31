@@ -46,6 +46,9 @@ public:
     //Vector of all background textures
     static std::vector<LTexture> background_textures;
 
+    //Misc textures
+    static std::vector<LTexture> miscallenous;
+
     //Array of textures in currently loaded tileset
     static LTexture active_tileset;
 

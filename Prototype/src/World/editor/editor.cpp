@@ -50,6 +50,8 @@ void Editor::run()
                 avgFPS = 0;
             }
             updateInput();
+            updateInputManager();
+
 
             if (editorWindow->popClickQueue()) {
                 if (editorWindow->withinSelector()) {
@@ -69,7 +71,6 @@ void Editor::run()
             countedFrames++;
 
             LWindow::updateAll();
-            //updateInputManager();
         }
 
         
@@ -84,7 +85,7 @@ void Editor::setTile()
 
     Tile *tile;
     editorWindow->getActiveTileCoordinates(x,y);
-    if (editorWindow->getSelectedTile() >= TextureManager::TOTAL_TILE_TEXTURES) {
+    if (editorWindow->getSelectedTile() == -1) { //TextureManager::TOTAL_TILE_TEXTURES) {
         tile = NULL;
     }
     else {
@@ -98,19 +99,36 @@ void Editor::updateInput()
     int dX = 0;
     int dY = 0;
 
-    if (getKeyDown(INPUT_KEY_W)) {
-        dY -= 7;
+    if (getKey(INPUT_KEY_LSHIFT)) {
+        if (getKeyDown(INPUT_KEY_W)) {
+            dY -= 1;
+        }
+        if (getKeyDown(INPUT_KEY_S)) {
+            dY += 1;
+        }
+        if (getKeyDown(INPUT_KEY_A)) {
+            dX -= 1;
+        }
+        if (getKeyDown(INPUT_KEY_D)) {
+            dX += 1;
+        }
+        editorWindow->updateTileSelector(dX, dY);
     }
-    if (getKeyDown(INPUT_KEY_S)) {
-        dY += 7;
+    else {
+        if (getKey(INPUT_KEY_W)) {
+            dY -= 7;
+        }
+        if (getKey(INPUT_KEY_S)) {
+            dY += 7;
+        }
+        if (getKey(INPUT_KEY_A)) {
+            dX -= 7;
+        }
+        if (getKey(INPUT_KEY_D)) {
+            dX += 7;
+        }
+        editorWindow->updatePosition(dX, dY);
     }
-    if (getKeyDown(INPUT_KEY_A)) {
-        dX -= 7;
-    }
-    if (getKeyDown(INPUT_KEY_D)) {
-        dX += 7;
-    }
-    editorWindow->updatePosition(dX,dY);
 }
 
 string Editor::getFilePath(bool requireExistingFile)

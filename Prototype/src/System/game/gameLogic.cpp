@@ -18,6 +18,9 @@ void drawBackground();
 //Main window for the game
 LWindow *gameWindow;
 
+//Current frame of the game
+long currentFrame;
+
 Room * getRoom()
 {
     //return CURRENT_ROOM;
@@ -121,6 +124,7 @@ void gameLoop() {
             std::cout << "FPS LOW: " << avgFPS << ". Expected: " << SCREEN_FPS << std::endl;
         }
         countedFrames++;
+        currentFrame++;
 
         LWindow::updateAll();
     }

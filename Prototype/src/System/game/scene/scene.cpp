@@ -13,7 +13,7 @@ Scene::~Scene()
 
 void Scene::setUpScene() {
     //Test room
-    Room *myRoom = new Room("Assets/Rooms/room1.txttest");
+    Room *myRoom = new Room("Assets/Rooms/TEST.room");
     setRoom(myRoom);
     myRoom->instantiate();
     //myRoom->saveToFile();

@@ -3,6 +3,7 @@
 
 std::vector<LTexture> TextureManager::tile_textures;
 std::vector<LTexture> TextureManager::background_textures;
+std::vector<LTexture> TextureManager::miscallenous;
 
 LTexture TextureManager::active_tileset;
 
@@ -24,6 +25,9 @@ void TextureManager::initalizeTextureManager()
     tile_textures[WALL_BASE].loadFromFile("Assets/textures/laboratory/wall base.png");
     tile_textures[ROCK_0_075].loadFromFile("Assets/textures/laboratory/rock_0-075.png");
     tile_textures[ROCK_075_1].loadFromFile("Assets/textures/laboratory/rock_075-1.png");
+
+    miscallenous.push_back(LTexture());
+    miscallenous[0].loadFromFile("Assets/textures/Miscallenous/delete.png");
 
 
     background_textures.resize(TOTAL_BACKGROUND_TEXTURES);

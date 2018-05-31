@@ -8,6 +8,13 @@
     It is a mess right now, not unlike a lot of my code.
 */
 
+struct TileSelector {
+    int dimX = 4;
+    int dimY = 4;
+    int posX = 0;
+    int posY = 0;
+};
+
 class EditorWindow : public LWindow {
 public:
     EditorWindow(int _screen_width, int _screen_height,
@@ -23,6 +30,10 @@ public:
 
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
+    //updates position of the tile selector
+    void updateTileSelector(int deltaX, int deltaY);
+
+
 
     //Is the mouse within the select tile area?
     bool withinSelector();
@@ -44,6 +55,9 @@ private:
     //position relative to origin
     int posX;
     int posY;
+
+    
+    TileSelector tileSelector;
 
     //This tileindex will be used when creating tiles in the editor
     //It might be appropriate to move this responsibility to the editor class

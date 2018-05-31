@@ -52,6 +52,7 @@ void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_A] = KeyboardState[SDL_SCANCODE_A];
     currentKeyStates[INPUT_KEY_S] = KeyboardState[SDL_SCANCODE_S];
     currentKeyStates[INPUT_KEY_D] = KeyboardState[SDL_SCANCODE_D];
+    currentKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
 }
 
 void updateInputManager() {
@@ -61,7 +62,8 @@ void updateInputManager() {
     lastKeyStates[INPUT_KEY_A] = KeyboardState[SDL_SCANCODE_A];
     lastKeyStates[INPUT_KEY_S] = KeyboardState[SDL_SCANCODE_S];
     lastKeyStates[INPUT_KEY_D] = KeyboardState[SDL_SCANCODE_D];
-
+    lastKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
+    
     updateCurrentKeys();
 
 }
