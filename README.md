@@ -71,6 +71,24 @@ The editor is in a very rudimentary stage. It is dependent on a
 custom file format to load rooms into memory from files which 
 can then be edited and saved. Here follows a specification
 of the file format:
+  First line contains an integer representing the tileMapIndex
+  of the room. 
+  Second line contains an integer representing the backgroundIndex.
+  
+  Then follows a matrix containing cells, representing tiles, of the form 
+  "[Int| Bool| <(Point),..>]" where 
+  "Int" denotes an integer value specifying the index of the tileTexture, 
+  "Bool" denotes either "T" or "F" specifying wether the tile has a collider, 
+  "T", or not, "F",
+  "<(Point),..>" denotes a vector of points of arbitrary length describing 
+  the polygon used for the collider. 
+  
+  A cell can also be empty which is denoted by "[N]", where "N" stands for
+  "Null".
+  
+  A line represents a row of tiles and linebreak denotes a new row.
+  
+  
   
     
 
