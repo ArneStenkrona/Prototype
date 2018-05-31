@@ -71,6 +71,7 @@ The editor is in a very rudimentary stage. It is dependent on a
 custom file format to load rooms into memory from files which 
 can then be edited and saved. Here follows a specification
 of the file format:
+  Typically, the extension ".room" is used.
   First line contains an integer representing the tileMapIndex
   of the room. 
   Second line contains an integer representing the backgroundIndex.
