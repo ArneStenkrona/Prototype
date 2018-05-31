@@ -90,6 +90,10 @@ of the file format:
   A line represents a row of tiles and linebreak denotes a new row.
   
   
+  The WASD keys moves the room inside the editor around. Holding leftshift
+  while using WASD will instead scroll through the available tiles.
+  
+  
   
     
 
