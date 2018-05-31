@@ -172,10 +172,15 @@ void Room::unload()
 
 void Room::saveToFile()
 {
+    saveToFile(file_path);
+}
+
+void Room::saveToFile(string path)
+{
     //opens filestream
     ofstream outFile;
 
-    outFile.open(file_path);
+    outFile.open(path);
     //Declares output buffer
     string buffer;
 
@@ -269,6 +274,7 @@ Tile * Room::getTile(int x, int y)
     else {
         std::cout << "Position not defined in tile matrix" << endl;
         std::cout << x << " : " << y << endl;
+        return nullptr;
     }
 }
 

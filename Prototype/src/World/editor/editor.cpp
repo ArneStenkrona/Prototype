@@ -8,7 +8,7 @@
 
 Editor::Editor()
 {
-    editorWindow = new EditorWindow(2*512,2*288,2,2, NULL);
+    editorWindow = new EditorWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y, NULL);
     //Initalize input Manager
     initializeInputManager();
     //Initalize texture manager
@@ -36,8 +36,9 @@ void Editor::run()
     long countedFrames = 0;
     fpsTimer.start();
 
+    string path = getFilePath(true);
 
-    string path = getFilePath();
+
     if (path.size() > 0) {
         loadFile(path);
         while (!editorWindow->hasExited()) {
@@ -48,8 +49,6 @@ void Editor::run()
             {
                 avgFPS = 0;
             }
-
-
             updateInput();
 
             if (editorWindow->popClickQueue()) {
@@ -72,7 +71,9 @@ void Editor::run()
             LWindow::updateAll();
             //updateInputManager();
         }
-        activeRoom->saveToFile();
+
+        
+        activeRoom->saveToFile(getFilePath(false));
     }
 }
 
@@ -112,7 +113,7 @@ void Editor::updateInput()
     editorWindow->updatePosition(dX,dY);
 }
 
-string Editor::getFilePath()
+string Editor::getFilePath(bool requireExistingFile)
 {
     OPENFILENAMEA ofn;       // common dialog box structure
     char szFile[260];       // buffer for file name
@@ -131,11 +132,15 @@ string Editor::getFilePath()
     ofn.lpstrFileTitle = NULL;
     ofn.nMaxFileTitle = 0;
     ofn.lpstrInitialDir = NULL;
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+    if (requireExistingFile) ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+    ofn.Flags |= OFN_NOCHANGEDIR;
+
+    
 
     // Display the Open dialog box. 
 
-    GetOpenFileNameA(&ofn);
+    if (requireExistingFile) GetOpenFileNameA(&ofn);
+    else GetSaveFileNameA(&ofn);
 
     string path = ofn.lpstrFile;
     std::replace(path.begin(), path.end(), '\\', '/');

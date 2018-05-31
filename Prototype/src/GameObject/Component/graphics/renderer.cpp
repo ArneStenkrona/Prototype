@@ -6,9 +6,8 @@
 GameObject* Renderer::mainCamera = nullptr;
 Position* Renderer::cameraPosition = nullptr;
 
-Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object), tileQuad(NULL)
+Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object), tileIndex(-1)
 {
-
     //Required
     if (object->hasComponent<Position>()) {
         position = object->getComponent<Position>();
@@ -55,9 +54,9 @@ Point Renderer::getCameraPosition()
     return mainCamera->getComponent<Position>()->position;
 }
 
-void Renderer::setTileQuad(SDL_Rect * _quad)
+void Renderer::setTileIndex(int index)
 {
-    tileQuad = _quad;
+    tileIndex = index;
 }
 
 void Renderer::start() {
@@ -73,14 +72,15 @@ void Renderer::update() {
         Point pos;
         Point cameraPos = cameraPosition->position;
         pos = position->position - cameraPos;
-        if (sprite != nullptr) {
-            if (tileQuad == NULL) {
-                sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
-            }
-            else {
-                sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y), tileQuad);
-            }
+
+        if (tileIndex == -1) {
+            sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
         }
+        else {
+            sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y + 0.5), tileIndex);
+            //sprite->texture->renderSprite((int)(pos.x + 0.5), (int)(pos.y), tileQuad);
+        }
+      
     }
     else {
         std::cout << "No camera has been set for rendering" << std::endl;

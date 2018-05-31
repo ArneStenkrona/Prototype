@@ -26,6 +26,7 @@ private:
 
     void updateInput();
 
-    string getFilePath();
+    //Opens a windows api dialog to find a filepath.
+    string getFilePath(bool requireExistingPath);
     void loadFile(std::string path);
 };

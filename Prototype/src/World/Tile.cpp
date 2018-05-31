@@ -35,16 +35,16 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
 {
     GameObject *obj = new GameObject();
     obj->addComponent<Position>()->position = Point(x * 32, y * 32);
-    obj->addComponent<Renderer>();
+    obj->addComponent<Renderer>()->setTileIndex(tileIndex);
     if (collider) {
         obj->addComponent<PolygonCollider>()->setPolygon(polygon);
     }
-    obj->addComponent<Sprite>()->texture = &TextureManager::tile_textures[tileIndex];
-
+    //obj->addComponent<Sprite>()->texture = &TextureManager::tile_textures[tileIndex];
+    obj->addComponent<Sprite>()->texture = &TextureManager::active_tileset;
     return obj;
 }
 
 void Tile::renderTile(int x, int y)
 {
-    TextureManager::tile_textures[tileIndex].render(x, y);
+    TextureManager::active_tileset.renderTile(x, y, tileIndex);
 }

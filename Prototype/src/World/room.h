@@ -19,7 +19,10 @@ public:
     //unloads the matrix
     void unload();
     //Saves the room
+    void saveToFile(string path);
+    //Saves the room, with default argument being the file_path variable.
     void saveToFile();
+
 
     //Background texture of this room
     LTexture *background;

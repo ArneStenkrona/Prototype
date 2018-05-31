@@ -4,9 +4,9 @@
 std::vector<LTexture> TextureManager::tile_textures;
 std::vector<LTexture> TextureManager::background_textures;
 
-LTexture TextureManager::active_tileset = LTexture();
+LTexture TextureManager::active_tileset;
 
-const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/Textures/Laboratory/TILEMAP_LAB.png" };
+const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.png" };
 
 void TextureManager::initalizeTextureManager()
 {
@@ -41,8 +41,6 @@ void TextureManager::loadTileSet(TILEMAPS map)
     if (map >= TOTAL_MAPS) {
         return;
     }
-
-
     active_tileset.loadFromFile(mapPaths[map]);
 }
 

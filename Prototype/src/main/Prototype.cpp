@@ -40,9 +40,8 @@ void close()
 
 int main(int argc, char *args[])
 {
-   
 
-
+    
     if (!init()) {
         printf("Failed to initialize!\n");
     }

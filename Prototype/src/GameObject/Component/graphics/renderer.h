@@ -20,8 +20,7 @@ public:
 
     static Point getCameraPosition();
 
-    //Sets quad to render from tilesheet
-    void setTileQuad(SDL_Rect *_quad);
+    void setTileIndex(int index);
 
 private:
     static Position *cameraPosition;
@@ -29,7 +28,8 @@ private:
     SDL_Renderer *renderer;
     Sprite *sprite;
     Position *position;
-                    //If the sprite is from a sheet this should be set to the appopriate sprite
-                    //If this is null, the rendered quad will take the whole texture
-    SDL_Rect *tileQuad;
+
+    //Index on the tile sheet of the tile
+    //Set to -1 if no tileIndex
+    int tileIndex;
 };

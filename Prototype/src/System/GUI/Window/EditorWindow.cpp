@@ -87,7 +87,8 @@ void EditorWindow::renderTileSelector()
 {
     //Render tile selector
     for (int i = 0; i < TextureManager::TOTAL_TILE_TEXTURES; i++) {
-        TextureManager::tile_textures[i].render((i % 2) * gridSize, (i / 2) * gridSize);
+        //TextureManager::tile_textures[i].render((i % 2) * gridSize, (i / 2) * gridSize);
+        TextureManager::active_tileset.renderTile((i % 2) * gridSize, (i / 2) * gridSize,i);
     }
     drawSolidSquare((TextureManager::TOTAL_TILE_TEXTURES % 2) * gridSize, (TextureManager::TOTAL_TILE_TEXTURES / 2) * gridSize, 0x00, 0x00, 0x00, 0x00);
     drawOutlineSquare((selectedTile % 2) * gridSize, (selectedTile / 2) * gridSize, 0x00, 0xFF, 0x00, 0x00);
