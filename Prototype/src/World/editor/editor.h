@@ -4,6 +4,7 @@
 #include "World\Tile.h"
 #include <string>
 #include "World/room.h"
+#include "math\polygon.h"
 
 class Editor {
 public:

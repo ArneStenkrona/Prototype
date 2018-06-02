@@ -5,9 +5,10 @@ std::vector<LTexture> TextureManager::tile_textures;
 std::vector<LTexture> TextureManager::background_textures;
 std::vector<LTexture> TextureManager::miscallenous;
 
-LTexture TextureManager::active_tileset;
-
 const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.png" };
+const std::string TextureManager::colliderPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.col" };
+
+TileMap TextureManager::tileMap;
 
 void TextureManager::initalizeTextureManager()
 {
@@ -45,7 +46,7 @@ void TextureManager::loadTileSet(TILEMAPS map)
     if (map >= TOTAL_MAPS) {
         return;
     }
-    active_tileset.loadFromFile(mapPaths[map]);
+    tileMap.loadFromFile(mapPaths[map], colliderPaths[map]);
 }
 
 SDL_Rect TextureManager::generateTileQuad(unsigned int index)
@@ -71,8 +72,5 @@ void TextureManager::closeTextureManager()
     for (int i = 0; i < TOTAL_BACKGROUND_TEXTURES; i++) {
         background_textures[i].free();
     }
-
-    active_tileset.free();
-
 }
 

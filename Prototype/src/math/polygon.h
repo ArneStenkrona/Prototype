@@ -1,6 +1,7 @@
 #pragma once
 #include "point.h"
 #include <vector>
+#include <string>
 
 //Base class for polygons
 //Vertices are point relative to the position of the gameObject which contains this polygon
@@ -16,6 +17,9 @@ public:
     double _height;
     //Returns the distance between this polygon and a point
     double distanceTo(Point p);
+
+    //Parses a string and creates a polygon
+    static Polygon parsePolygon(std::string s);
 
 protected:
     //This sets the dimensions of the shape

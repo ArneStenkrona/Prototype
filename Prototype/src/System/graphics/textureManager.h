@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <vector>
 #include <string>
+#include "math\polygon.h"
+#include "TileMap.h"
 
 //This file takes care of input for controls
 //Might want to make this into a static class
@@ -49,8 +51,8 @@ public:
     //Misc textures
     static std::vector<LTexture> miscallenous;
 
-    //Array of textures in currently loaded tileset
-    static LTexture active_tileset;
+    //Current tilemap
+    static TileMap tileMap;
 
     //Should only be closed when application exits
     static void closeTextureManager();
@@ -58,6 +60,8 @@ public:
 private:
     //Filepaths of all the tilemaps
     static const std::string mapPaths[TOTAL_MAPS];
+    //Filepaths of all the corresponding collider matrices
+    static const std::string colliderPaths[TOTAL_MAPS];
 
     //Generates and returns an SDL_Rect for a tile at the given index (assuming a tilesheet arranged in 16*16)
     static SDL_Rect generateTileQuad(unsigned int index);

@@ -3,6 +3,11 @@
 #include <algorithm>
 #include <iostream>
 #include <limits.h>
+#include "tools\stringTools.h"
+#include <vector>
+#include "triangle.h"
+#include "rectangle.h"
+
 
 Polygon::~Polygon()
 {
@@ -29,6 +34,35 @@ double Polygon::distanceTo(Point p)
         if (distance < d) d = distance;
     }
     return d;
+}
+
+Polygon Polygon::parsePolygon(std::string s)
+{
+    if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0,32.0), Point(32.0, 0.0));
+
+
+    Polygon polygon;
+
+    s.erase(0, 1);
+    s.pop_back();
+    //separate by points
+    std::vector<std::string> pointStrings = brokenStringSplitter(s, ')');
+    pointStrings.pop_back();
+
+    std::vector<Point> points;
+    for (int k = 0; k < pointStrings.size(); k++) {
+        std::vector<std::string> doubles = brokenStringSplitter(pointStrings[k], ',');
+        points.push_back(Point(atof(doubles[0].c_str()), atof(doubles[1].c_str())));
+    }
+
+    if (points.size() == 3) {
+        polygon = Triangle(points[0], points[1], points[2]);
+
+    }
+    else if (points.size() == 4){
+        polygon = Rectangular(points[0], points[1], points[2], points[3]);
+    }
+    return polygon;
 }
 
 void Polygon::setDimensions()

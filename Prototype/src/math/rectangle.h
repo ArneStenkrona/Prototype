@@ -1,7 +1,7 @@
 #pragma once
 #include "polygon.h"
 
-//Rectangle name was taken by piece of shit microsoft fuckface class
+//Rectangle name already in windows namespace
 class Rectangular : public Polygon {
 public:
     Rectangular(Point a, double _width, double _height);

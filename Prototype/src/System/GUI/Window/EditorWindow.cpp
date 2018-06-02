@@ -94,7 +94,7 @@ void EditorWindow::renderTileSelector()
     //Render available tiles
     for (int i = tileSelector.posX; i < tileSelector.posX + tileSelector.dimX; i++) {
         for (int j = tileSelector.posY; j < tileSelector.posY + tileSelector.dimY; j++) {
-            TextureManager::active_tileset.renderTile((i - tileSelector.posX) * gridSize,(j - tileSelector.posY) * gridSize, i + j * 16);
+            TextureManager::tileMap.texture.renderTile((i - tileSelector.posX) * gridSize,(j - tileSelector.posY) * gridSize, i + j * 16);
         }
     }
     //Render delete button

@@ -96,18 +96,18 @@ void Room::readFromFile()
     //buffer to store variable
     vector<string> buffer;
 
-    buffer = stringSplitter(roomData, '\n');
+    buffer = brokenStringSplitter(roomData, '\n');
     buffer.pop_back();
 
     for (int i = 0; i < buffer.size(); i++) {
         //separate by each tile
-        vector<string> tileBuffer = stringSplitter(buffer[i], ']');
+        vector<string> tileBuffer = brokenStringSplitter(buffer[i], ']');
         tileBuffer.pop_back();
         for (int j = 0; j < tileBuffer.size(); j++) {
             if (tileBuffer[j][0] != 'N') {
 
                 //separate each data point
-                vector<string> dataPoints = stringSplitter(tileBuffer[j], '|');
+                vector<string> dataPoints = brokenStringSplitter(tileBuffer[j], '|');
 
                 //Assign variables
                 if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
@@ -115,26 +115,7 @@ void Room::readFromFile()
                 hasCollider = dataPoints[1][0] == 'T';
 
                 if (hasCollider) {
-                    dataPoints[2].erase(0, 1);
-                    dataPoints[2].pop_back();
-                    //separate by points
-                    vector<string> pointStrings = stringSplitter(dataPoints[2], ')');
-                    pointStrings.pop_back();
-
-                    vector<Point> points;
-                    for (int k = 0; k < pointStrings.size(); k++) {
-                        vector<string> doubles = stringSplitter(pointStrings[k], ',');
-                        points.push_back(Point(atof(doubles[0].c_str()), atof(doubles[1].c_str())));
-                    }
-
-                    if (points.size() == 3) {
-                        polygon = Triangle(points[0], points[1], points[2]);
-
-                    }
-                    else {
-                        polygon = Rectangular(points[0], points[1], points[2], points[3]);
-                    }
-
+                    polygon = Polygon::parsePolygon(dataPoints[2]);
                 }
                 else {
                     polygon = Rectangular(Point::empty, 0,  0);
@@ -142,12 +123,9 @@ void Room::readFromFile()
                 tileMatrix[x][y] = new  Tile(tileIndex, polygon);
             }
             x++;
-
         }
-
         y++;
         x = 0;
-
     }
 
     _width = sizeX * 32.0;
@@ -282,7 +260,8 @@ void Room::setTile(int x, int y, Tile *tile)
 {
 
     if(x >= 0 && x < tileMatrix.size() && y >= 0 && y < tileMatrix[x].size()) {
-       tileMatrix[x][y] = tile;
+        delete(tileMatrix[x][y]);
+        tileMatrix[x][y] = tile;
     } else {
         std::cout << "Position not defined in tile matrix" << endl;
         std::cout << x << " : " << y << endl;

@@ -85,11 +85,12 @@ void Editor::setTile()
 
     Tile *tile;
     editorWindow->getActiveTileCoordinates(x,y);
-    if (editorWindow->getSelectedTile() == -1) { //TextureManager::TOTAL_TILE_TEXTURES) {
+    int selectedTile = editorWindow->getSelectedTile();
+    if (selectedTile == -1) {
         tile = NULL;
     }
     else {
-        tile = new Tile(editorWindow->getSelectedTile(), Rectangular(Point(0.0, 0.0), 32, 32));
+        tile = new Tile(selectedTile);
     }
     activeRoom->setTile(x, y, tile);
 }
