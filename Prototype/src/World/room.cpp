@@ -92,7 +92,7 @@ void Room::readFromFile()
     bool isTile;
     int tileIndex;
     bool hasCollider;
-    Polygon polygon;
+    Polyshape polygon;
     //buffer to store variable
     vector<string> buffer;
 
@@ -115,7 +115,7 @@ void Room::readFromFile()
                 hasCollider = dataPoints[1][0] == 'T';
 
                 if (hasCollider) {
-                    polygon = Polygon::parsePolygon(dataPoints[2]);
+                    polygon = Polyshape::parsePolygon(dataPoints[2]);
                 }
                 else {
                     polygon = Rectangular(Point::empty, 0,  0);

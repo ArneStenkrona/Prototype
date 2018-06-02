@@ -4,10 +4,11 @@
 #include <string>
 
 //Base class for polygons
+//I did not want it to be named Polyshape, but windows.h has overzealous definitions
 //Vertices are point relative to the position of the gameObject which contains this polygon
-class Polygon {
+class Polyshape {
 public:
-    ~Polygon();
+    ~Polyshape();
     //These should not be public, or at least not mutable
     std::vector<Point> vertices;
     size_t numberOfVertices;
@@ -19,7 +20,7 @@ public:
     double distanceTo(Point p);
 
     //Parses a string and creates a polygon
-    static Polygon parsePolygon(std::string s);
+    static Polyshape parsePolygon(std::string s);
 
 protected:
     //This sets the dimensions of the shape

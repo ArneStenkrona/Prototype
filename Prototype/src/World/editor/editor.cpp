@@ -1,6 +1,6 @@
+#include "windows.h"
 #include "editor.h"
 #include "System/IO/inputManager.h"
-#include "windows.h"
 #include <sstream>
 #include <algorithm>
 #include "math\rectangle.h"

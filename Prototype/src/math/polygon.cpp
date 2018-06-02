@@ -9,12 +9,12 @@
 #include "rectangle.h"
 
 
-Polygon::~Polygon()
+Polyshape::~Polyshape()
 {
     vertices.clear();
 }
 
-double Polygon::distanceTo(Point p)
+double Polyshape::distanceTo(Point p)
 {
     double d = DBL_MAX;
     for (int i = 0; i < numberOfVertices - 1; i++) {
@@ -36,12 +36,12 @@ double Polygon::distanceTo(Point p)
     return d;
 }
 
-Polygon Polygon::parsePolygon(std::string s)
+Polyshape Polyshape::parsePolygon(std::string s)
 {
     if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0,32.0), Point(32.0, 0.0));
 
 
-    Polygon polygon;
+    Polyshape polygon;
 
     s.erase(0, 1);
     s.pop_back();
@@ -65,7 +65,7 @@ Polygon Polygon::parsePolygon(std::string s)
     return polygon;
 }
 
-void Polygon::setDimensions()
+void Polyshape::setDimensions()
 {
     double minX = vertices[0].x, maxX = vertices[0].x;
     double minY = vertices[0].y, maxY = vertices[0].y;

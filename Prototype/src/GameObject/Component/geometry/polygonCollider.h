@@ -38,8 +38,8 @@ public:
     void setStatic(bool b);
 
     //Set the polygon used for hit detection
-    void setPolygon(Polygon _polygon);
-    Polygon getPolygon();
+    void setPolygon(Polyshape _polygon);
+    Polyshape getPolygon();
 
     //Checks collision between nonstatic collider a and every collider in b
     static bool calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
@@ -73,7 +73,7 @@ private:
         const Point& xOffset, const Point& xVel,
         double& taxis, double tmax);
 
-    Polygon polygon;
+    Polyshape polygon;
 
     //Determines wether the hitbox is active
     bool isActive;

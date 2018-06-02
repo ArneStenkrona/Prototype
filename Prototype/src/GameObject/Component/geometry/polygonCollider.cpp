@@ -75,12 +75,12 @@ Point PolygonCollider::getVelocity()
     return velocity->velocity;
 }
 
-void PolygonCollider::setPolygon(Polygon _polygon)
+void PolygonCollider::setPolygon(Polyshape _polygon)
 {
     polygon = _polygon;
 }
 
-Polygon PolygonCollider::getPolygon()
+Polyshape PolygonCollider::getPolygon()
 {
     return polygon;
 }

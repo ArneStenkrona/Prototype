@@ -9,7 +9,7 @@
 
 using namespace::std;
 
-TileMap::TileMap(): colliderMatrix(vector<vector<Polygon>>())
+TileMap::TileMap(): colliderMatrix(vector<vector<optional<Polyshape>>>())
 {
     colliderMatrix.resize(16);
     for (int i = 0; i < colliderMatrix.size(); i++) {
@@ -17,7 +17,7 @@ TileMap::TileMap(): colliderMatrix(vector<vector<Polygon>>())
     }
     for (int i = 0; i < colliderMatrix.size(); i++) {
         for (int j = 0; j < colliderMatrix[i].size(); j++) {
-            colliderMatrix[i][j] = Rectangular(Point(0,0), Point(0, 0), Point(0, 0), Point(0, 0));
+            colliderMatrix[i][j] = {};
         }
     }
 }
@@ -60,7 +60,7 @@ void TileMap::loadFromFile(string texturePath, string colliderPath)
             vector<string> dataPoints = stringSplitter(buffer[i], '|');
             int row = std::stoi(dataPoints[0]);
             int col = std::stoi(dataPoints[1]);
-            Polygon pol = Polygon::parsePolygon(dataPoints[2]);
+            Polyshape pol = Polyshape::parsePolygon(dataPoints[2]);
             colliderMatrix[col][row] = pol;
         }
     }

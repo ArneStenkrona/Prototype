@@ -1,5 +1,6 @@
 // Prototype.cpp : Defines the entry point for the console application.
 //
+#include <Windows.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -12,7 +13,6 @@
 #include "../System/IO/inputManager.h"
 #include "../System/Physics/physicsEngine.h"
 #include "System\game\gameLogic.h"
-#include <Windows.h>
 #include "World\editor\editor.h"
 
 
