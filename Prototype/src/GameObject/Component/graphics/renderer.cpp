@@ -6,7 +6,7 @@
 GameObject* Renderer::mainCamera = nullptr;
 Position* Renderer::cameraPosition = nullptr;
 
-Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object), tileIndex(-1)
+Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object)//, tileIndex(-1)
 {
     //Required
     if (object->hasComponent<Position>()) {
@@ -56,7 +56,7 @@ Point Renderer::getCameraPosition()
 
 void Renderer::setTileIndex(int index)
 {
-    tileIndex = index;
+    //tileIndex = index;
 }
 
 void Renderer::start() {
@@ -72,13 +72,12 @@ void Renderer::update() {
         Point pos;
         Point cameraPos = cameraPosition->position;
         pos = position->position - cameraPos;
-
+        int tileIndex = sprite->getTileIndex();
         if (tileIndex == -1) {
             sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
         }
         else {
             sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y + 0.5), tileIndex);
-            //sprite->texture->renderSprite((int)(pos.x + 0.5), (int)(pos.y), tileQuad);
         }
       
     }

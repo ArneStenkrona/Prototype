@@ -31,5 +31,5 @@ private:
 
     //Index on the tile sheet of the tile
     //Set to -1 if no tileIndex
-    int tileIndex;
+    //int tileIndex;
 };

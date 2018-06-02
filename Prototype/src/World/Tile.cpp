@@ -41,13 +41,12 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
 {
     GameObject *obj = new GameObject();
     obj->addComponent<Position>()->position = Point(x * 32, y * 32);
-    obj->addComponent<Renderer>()->setTileIndex(tileIndex);
+    obj->addComponent<Renderer>();// ->setTileIndex(tileIndex);
+    obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
+    obj->getComponent<Sprite>()->setTileIndex(tileIndex);
     if (hasCollider()) {
         obj->addComponent<PolygonCollider>()->setPolygon(polygon.value());
-        printf("T\n");
     }
-    else printf("F\n");
-    obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
     return obj;
 }
 
