@@ -28,7 +28,7 @@ void TextureManager::initalizeTextureManager()
     tile_textures[ROCK_075_1].loadFromFile("Assets/textures/laboratory/rock_075-1.png");
 
     miscallenous.push_back(LTexture());
-    miscallenous[0].loadFromFile("Assets/textures/Miscallenous/delete.png");
+    miscallenous[0].loadFromFile("Assets/textures/Miscellaneous/delete.png");
 
 
     background_textures.resize(TOTAL_BACKGROUND_TEXTURES);
