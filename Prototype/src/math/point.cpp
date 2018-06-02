@@ -102,6 +102,11 @@ double Point::dot(const Point & other)
     return x * other.x + y * other.y;
 }
 
+std::string Point::toString()
+{
+    return "Point(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+}
+
 const Point Point::empty = Point(0, 0);
 const Point Point::up = Point(0, 1);
 const Point Point::down = Point(0, -1);

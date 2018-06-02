@@ -58,8 +58,8 @@ void TileMap::loadFromFile(string texturePath, string colliderPath)
 
         for (int i = 0; i < buffer.size(); i++) {
             vector<string> dataPoints = stringSplitter(buffer[i], '|');
-            int row = std::stoi(dataPoints[0]);
-            int col = std::stoi(dataPoints[1]);
+            int col = std::stoi(dataPoints[0]);
+            int row = std::stoi(dataPoints[1]);
             Polyshape pol = Polyshape::parsePolygon(dataPoints[2]);
             colliderMatrix[col][row] = pol;
         }

@@ -11,7 +11,7 @@ Tile::Tile(int _tileIndex): tileIndex(_tileIndex)
     polygon = TextureManager::tileMap.colliderMatrix[colliderCol][colliderRow];
 }
 
-Tile::Tile(int _tileIndex, Polyshape _polygon): tileIndex(_tileIndex), polygon(_polygon)
+Tile::Tile(int _tileIndex, optional<Polyshape> _polygon): tileIndex(_tileIndex), polygon(_polygon)
 {
 }
 
@@ -26,7 +26,10 @@ bool Tile::hasCollider()
 
 Polyshape * Tile::getPolygon()
 {
-    return &polygon.value();
+    if (polygon.has_value())
+        return &polygon.value();
+    else
+        return NULL;
 }
 
 int Tile::getIndex()
@@ -41,7 +44,9 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
     obj->addComponent<Renderer>()->setTileIndex(tileIndex);
     if (hasCollider()) {
         obj->addComponent<PolygonCollider>()->setPolygon(polygon.value());
+        printf("T\n");
     }
+    else printf("F\n");
     obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
     return obj;
 }

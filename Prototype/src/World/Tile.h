@@ -10,7 +10,7 @@
 class Tile {
 public:
     Tile(int _tileIndex);
-    Tile(int _tileIndex, Polyshape _polygon);
+    Tile(int _tileIndex, optional<Polyshape> _polygon);
     ~Tile();
 
     bool hasCollider();

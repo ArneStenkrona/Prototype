@@ -38,20 +38,16 @@ double Polyshape::distanceTo(Point p)
 
 Polyshape Polyshape::parsePolygon(std::string s)
 {
-    if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0,32.0), Point(32.0, 0.0));
-
-
+    if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0, 32.0), Point(32.0, 0.0));
     Polyshape polygon;
 
-    s.erase(0, 1);
+    s.erase(0,1);
     s.pop_back();
-    //separate by points
-    std::vector<std::string> pointStrings = brokenStringSplitter(s, ')');
-    pointStrings.pop_back();
-
     std::vector<Point> points;
-    for (int k = 0; k < pointStrings.size(); k++) {
-        std::vector<std::string> doubles = brokenStringSplitter(pointStrings[k], ',');
+    std::vector<std::string> pointStrings = stringSplitter(s, ')');
+    for (int i = 0; i < pointStrings.size(); i++) {
+        pointStrings[i].erase(0,1);
+        std::vector<std::string> doubles = stringSplitter(pointStrings[i], ',');
         points.push_back(Point(atof(doubles[0].c_str()), atof(doubles[1].c_str())));
     }
 
@@ -59,10 +55,22 @@ Polyshape Polyshape::parsePolygon(std::string s)
         polygon = Triangle(points[0], points[1], points[2]);
 
     }
-    else if (points.size() == 4){
+    else if (points.size() == 4) {
         polygon = Rectangular(points[0], points[1], points[2], points[3]);
     }
     return polygon;
+}
+
+std::string Polyshape::toString()
+{
+    std::string s = "<";
+
+    for (int i = 0; i < vertices.size(); i++) {
+        s += vertices[i].toString() + ",";
+    }
+    s += ">";
+
+    return s;
 }
 
 void Polyshape::setDimensions()

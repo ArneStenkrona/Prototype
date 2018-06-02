@@ -13,6 +13,7 @@
 #include "math/triangle.h"
 #include "tools/stringTools.h"
 #include <algorithm>
+#include <optional>
 
 #define toDigit(c) (c-'0')
 #define BOOL_STR(b) (b?"T":"F")
@@ -92,7 +93,7 @@ void Room::readFromFile()
     bool isTile;
     int tileIndex;
     bool hasCollider;
-    Polyshape polygon;
+    std::optional<Polyshape> polygon;
     //buffer to store variable
     vector<string> buffer;
 
@@ -118,9 +119,9 @@ void Room::readFromFile()
                     polygon = Polyshape::parsePolygon(dataPoints[2]);
                 }
                 else {
-                    polygon = Rectangular(Point::empty, 0,  0);
+                    polygon = {};
                 }
-                tileMatrix[x][y] = new  Tile(tileIndex, polygon);
+                tileMatrix[x][y] = new Tile(tileIndex, polygon);
             }
             x++;
         }

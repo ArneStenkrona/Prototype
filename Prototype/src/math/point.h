@@ -47,6 +47,8 @@ public:
 
     //Returns the dot product of this and other
     double dot(const Point &other);
+
+    std::string toString();
 };
 
 

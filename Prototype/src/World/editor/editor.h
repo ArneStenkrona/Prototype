@@ -15,7 +15,7 @@ public:
 private:
     EditorWindow *editorWindow;
 
-    vector<vector<Tile*>> *tileMatrix;
+    vector<vector<Tile*>> *tileMatrix; //Never used?
 
     //The room currently being edited;
     Room *activeRoom;

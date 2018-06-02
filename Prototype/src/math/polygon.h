@@ -22,6 +22,8 @@ public:
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);
 
+    std::string toString();
+
 protected:
     //This sets the dimensions of the shape
     //Should be called everytime the shape is altered

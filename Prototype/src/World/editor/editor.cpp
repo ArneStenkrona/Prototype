@@ -38,7 +38,6 @@ void Editor::run()
 
     string path = getFilePath(true);
 
-
     if (path.size() > 0) {
         loadFile(path);
         while (!editorWindow->hasExited()) {
@@ -52,7 +51,6 @@ void Editor::run()
             updateInput();
             updateInputManager();
 
-
             if (editorWindow->popClickQueue()) {
                 if (editorWindow->withinSelector()) {
                     editorWindow->setSelectedTile();
@@ -61,7 +59,6 @@ void Editor::run()
                     setTile();
                 }
             }
-
             //If frame finished early
             int frameTicks = capTimer.getTicks();
             if (frameTicks < SCREEN_TICK_PER_FRAME) {
@@ -71,9 +68,7 @@ void Editor::run()
             countedFrames++;
 
             LWindow::updateAll();
-        }
-
-        
+        }   
         activeRoom->saveToFile(getFilePath(false));
     }
 }

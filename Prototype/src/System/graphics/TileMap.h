@@ -5,7 +5,7 @@
 #include <optional>
 #include "math\polygon.h"
 
-
+//Data structure holding the texture of a tile map and the collision data
 class TileMap {
     public:
     TileMap();
