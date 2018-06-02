@@ -35,6 +35,11 @@ public:
         TOTAL_MAPS
     };
 
+    static enum SPRITE_SHEETS {
+        PRT,
+        TOTAL_SPRITE_SHEETS
+    };
+
     static void initalizeTextureManager();
 
     //Loads textures into tileset
@@ -49,7 +54,10 @@ public:
     static std::vector<LTexture> background_textures;
 
     //Misc textures
-    static std::vector<LTexture> miscallenous;
+    static std::vector<LTexture> miscellaneous;
+
+    //Vector of all sprite sheets
+    static std::vector<LTexture> spriteSheets;
 
     //Current tilemap
     static TileMap tileMap;
@@ -62,6 +70,8 @@ private:
     static const std::string mapPaths[TOTAL_MAPS];
     //Filepaths of all the corresponding collider matrices
     static const std::string colliderPaths[TOTAL_MAPS];
+    //Filepaths of all sprite sheets
+    static const std::string sheetPaths[TOTAL_SPRITE_SHEETS];
 
     //Generates and returns an SDL_Rect for a tile at the given index (assuming a tilesheet arranged in 16*16)
     static SDL_Rect generateTileQuad(unsigned int index);

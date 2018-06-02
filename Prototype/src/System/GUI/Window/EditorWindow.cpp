@@ -98,7 +98,7 @@ void EditorWindow::renderTileSelector()
         }
     }
     //Render delete button
-    TextureManager::miscallenous[0].render(0, tileSelector.dimX * gridSize);
+    TextureManager::miscellaneous[0].render(0, tileSelector.dimX * gridSize);
     //Render selected outline
     if (selectedTile == -1) drawOutlineSquare(0, 4 * gridSize, 0x00, 0xFF, 0x00, 0x00);
     else drawOutlineSquare(((selectedTile % 16) - tileSelector.posX) * gridSize, ((selectedTile / 16) - tileSelector.posY) * gridSize, 0x00, 0xFF, 0x00, 0x00);

@@ -42,5 +42,6 @@ void Sprite::setAnimationIndicies(int startInd, int endInd)
 {
     startIndex = startInd;
     endIndex = endInd;
+    tileIndex = startIndex;
 }
 

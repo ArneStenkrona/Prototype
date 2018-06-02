@@ -15,6 +15,8 @@ void Debug_scene0::setUpScene()
 
     GameObject *character = new GameObject();
 
+    character->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
+    character->getComponent<Sprite>()->setAnimationIndicies(16,20);
     character->addComponent<Renderer>();
     character->addComponent<Movement>();
 

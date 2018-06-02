@@ -24,7 +24,7 @@ public:
     void setAnimationIndicies(int start, int end);
 
 private:
-    //boundaries of the animation
+    //boundaries of the animation (both inclusive)
     //startIndex == endIndex or negative values for either implies no animation;
     int startIndex, endIndex;
 
