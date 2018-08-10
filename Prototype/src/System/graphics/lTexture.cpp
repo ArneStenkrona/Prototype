@@ -92,8 +92,13 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 
 void LTexture::renderTile(int x, int y, int tileIndex)
 {
-    SDL_Rect renderQuad = { x, y, 32, 32 };
-    SDL_Rect tileRect = { (tileIndex % 16) * 32, (tileIndex / 16) * 32,32,32 };
+    renderTile(x, y, tileIndex, 1, 1);
+}
+
+void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor)
+{
+    SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor};
+    SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
     SDL_RenderCopy(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad);
 }
 

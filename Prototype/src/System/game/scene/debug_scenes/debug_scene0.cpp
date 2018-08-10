@@ -16,11 +16,14 @@ void Debug_scene0::setUpScene()
     GameObject *character = new GameObject();
 
     character->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
-    character->getComponent<Sprite>()->setAnimationIndicies(16,20);
+    character->getComponent<Sprite>()->setWidthHeight(1,2);
+    character->getComponent<Sprite>()->setAnimationIndicies(0,4);
+    character->getComponent<Sprite>()->setRenderOffset(0,-24);
     character->addComponent<Renderer>();
     character->addComponent<Movement>();
 
     character->addComponent<PolygonCollider>()->setStatic(false);
+    character->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point::empty,32,40));
     character->getComponent<Position>()->position = Point(50, 50);
 
     GameObject *camera = new GameObject();

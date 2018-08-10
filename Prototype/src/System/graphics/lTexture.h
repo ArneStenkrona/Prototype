@@ -26,6 +26,9 @@ public:
     void renderEx(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     //Renders the tile in the texture given by the tileQuad
+    //x and y is the position
+    //widthFactor and heightFactor determine how many tiles to take
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor);
     void renderTile(int x, int y, int tileIndex);
 
     //Renders the tile in the texture given by the tileQuad with roation and flip

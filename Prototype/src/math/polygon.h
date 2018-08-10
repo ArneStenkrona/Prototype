@@ -14,10 +14,21 @@ public:
     size_t numberOfVertices;
 
     //Dimensions of the shape
+    //Really shouldn't be public
     double _width;
     double _height;
     //Returns the distance between this polygon and a point
     double distanceTo(Point p);
+
+    //Geometric centre of the polygon
+    //Arithmetic mean
+    Point geometricCenter();
+
+    //A point where x value is the average of the leftmost vertex x and the rightmost vertex x
+    //and y value is the average of the highest vertex y and the lowest vertex by
+    Point center();
+
+    Point vertexClosestToOrigin();
 
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);

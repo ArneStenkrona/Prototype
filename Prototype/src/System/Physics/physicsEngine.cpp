@@ -45,8 +45,6 @@ void performHitdetection() {
             quad.retrieve(&returnColliders, b);
 
             PolygonCollider::calculateCollision(b, &returnColliders);
-
-
         }
 
     }

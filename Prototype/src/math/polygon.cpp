@@ -36,6 +36,52 @@ double Polyshape::distanceTo(Point p)
     return d;
 }
 
+Point Polyshape::geometricCenter()
+{
+    double sumX = 0.0;
+    double sumY = 0.0;
+    for (int i = 0; i < vertices.size(); i++) {
+        sumX += vertices[i].x;
+        sumY += vertices[i].y;
+    }
+
+    return Point(sumX / numberOfVertices, sumY / numberOfVertices);
+}
+
+Point Polyshape::center()
+{
+    double leftMostX = vertices[0].x;
+    double rightMostX = vertices[0].x;
+    double highestY = vertices[0].y;
+    double lowestY = vertices[0].y;
+
+    for (int i = 0; i < vertices.size(); i++) {
+        leftMostX = std::min(leftMostX, vertices[i].x);
+        rightMostX = std::max(rightMostX, vertices[i].x);
+        highestY = std::min(highestY, vertices[i].y);
+        lowestY = std::max(lowestY, vertices[i].y);
+    }
+
+
+    return Point((leftMostX + rightMostX) / 2, (highestY + lowestY) / 2);
+}
+
+Point Polyshape::vertexClosestToOrigin()
+{
+    Point closest;
+    double min = std::numeric_limits<double>::max();
+
+    for (int i = 0; i < numberOfVertices; i++) {
+        double dist = vertices[i].distanceTo(Point::empty);
+        if (dist < min) {
+            closest = vertices[i];
+            min = dist;
+        }
+    }
+
+    return closest;
+}
+
 Polyshape Polyshape::parsePolygon(std::string s)
 {
     if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0, 32.0), Point(32.0, 0.0));

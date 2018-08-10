@@ -72,13 +72,15 @@ void Renderer::update() {
         Point pos;
         Point cameraPos = cameraPosition->position;
         pos = position->position - cameraPos;
+        sprite->renderSprite(pos.x, pos.y);
+        /*
         int tileIndex = sprite->getTileIndex();
         if (tileIndex == -1) {
             sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
         }
         else {
             sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y + 0.5), tileIndex);
-        }
+        }*/
       
     }
     else {

@@ -20,10 +20,21 @@ public:
     void setTileIndex(int i);
     int getTileIndex();
 
+    //Sets height and width factors
+    void setWidthHeight(int width, int height);
+
     //sets startIndex and endIndex
     void setAnimationIndicies(int start, int end);
 
+    void renderSprite(int x, int y);
+
+    void setRenderOffset(int x, int y);
+
 private:
+    //How many tiles the sprite occupies;
+    //Example: widthFactor = 2 and heightFactor = 3 is a sprite that takes up 2 tiles in width and 3 tiles in height
+    int widthFactor, heightFactor;
+
     //boundaries of the animation (both inclusive)
     //startIndex == endIndex or negative values for either implies no animation;
     int startIndex, endIndex;
@@ -38,4 +49,8 @@ private:
     //Incremented every in-game frame.
     //If equal to frameFactor, set to 0 and increment tileIndex
     int frameFactorCounter;
+
+    //The coordinates for the render offset
+    int renderOffsetX;
+    int renderOffsetY;
 };
