@@ -26,6 +26,9 @@ public:
     //sets startIndex and endIndex
     void setAnimationIndicies(int start, int end);
 
+    void setFrameFactor(int i);
+    int getFrameFactor();
+
     void renderSprite(int x, int y);
 
     void setRenderOffset(int x, int y);

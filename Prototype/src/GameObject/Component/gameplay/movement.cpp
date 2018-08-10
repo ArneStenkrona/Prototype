@@ -69,14 +69,17 @@ void Movement::update()
     switch (state) {
     case idle :
         if (transitionCounter == 0) {
-            sprite->setAnimationIndicies(16, 16);
+            sprite->setAnimationIndicies(16, 21);
+            sprite->setFrameFactor(7);
             transitionCounter--;
         } else if (transitionCounter > 0)
             transitionCounter--;
         break;
     case running :
-        if (prevState != running) 
+        if (prevState != running) {
             sprite->setAnimationIndicies(0, 4);
+            sprite->setFrameFactor(3);
+        }
         if (getKeyDown(INPUT_KEY_A))
             sprite->setMirror(true);
         if (getKeyDown(INPUT_KEY_D))

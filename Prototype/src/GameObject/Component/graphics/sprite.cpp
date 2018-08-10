@@ -54,6 +54,16 @@ void Sprite::setAnimationIndicies(int startInd, int endInd)
     tileIndex = startIndex;
 }
 
+void Sprite::setFrameFactor(int i)
+{
+    frameFactor = i;
+}
+
+int Sprite::getFrameFactor()
+{
+    return frameFactor;
+}
+
 void Sprite::renderSprite(int x, int y)
 {
     if (tileIndex == -1)
