@@ -28,6 +28,7 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror);
     void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor);
     void renderTile(int x, int y, int tileIndex);
 

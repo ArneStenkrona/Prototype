@@ -1,8 +1,9 @@
 #include "sprite.h"
 #include "System/graphics/textureManager.h"
 
-Sprite::Sprite(GameObject * _object) : Component(_object), startIndex(-1), endIndex(-1), 
-frameFactor(3), frameFactorCounter(0), widthFactor(1), heightFactor(1), renderOffsetX(0), renderOffsetY(0)
+Sprite::Sprite(GameObject * _object) : Component(_object), startIndex(-1), endIndex(-1),
+frameFactor(3), frameFactorCounter(0), widthFactor(1), heightFactor(1),
+renderOffsetX(0), renderOffsetY(0), mirror(false)
 {
     texture = &TextureManager::tile_textures[TextureManager::DEFAULT_TILE_TEXTURE];
 }
@@ -55,10 +56,10 @@ void Sprite::setAnimationIndicies(int startInd, int endInd)
 
 void Sprite::renderSprite(int x, int y)
 {
-    if (tileIndex == -1) 
+    if (tileIndex == -1)
         texture->render((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY);
     else
-        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor);
+        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirror);
 
 }
 
@@ -66,5 +67,10 @@ void Sprite::setRenderOffset(int x, int y)
 {
     renderOffsetX = x;
     renderOffsetY = y;
+}
+
+void Sprite::setMirror(bool b)
+{
+    mirror = b;
 }
 

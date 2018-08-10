@@ -30,6 +30,8 @@ public:
 
     void setRenderOffset(int x, int y);
 
+    void setMirror(bool b);
+
 private:
     //How many tiles the sprite occupies;
     //Example: widthFactor = 2 and heightFactor = 3 is a sprite that takes up 2 tiles in width and 3 tiles in height
@@ -53,4 +55,7 @@ private:
     //The coordinates for the render offset
     int renderOffsetX;
     int renderOffsetY;
+
+    //mirrrors the sprite
+    bool mirror;
 };

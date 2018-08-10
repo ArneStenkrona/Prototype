@@ -92,15 +92,23 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 
 void LTexture::renderTile(int x, int y, int tileIndex)
 {
-    renderTile(x, y, tileIndex, 1, 1);
+    renderTile(x, y, tileIndex, 1, 1, false);
 }
 
 void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor)
 {
+    renderTile(x, y, tileIndex, widthFactor, heightFactor, false);
+}
+
+void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror)
+{
     SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor};
     SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
-    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad);
+    if (mirror)
+        SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad, 0, NULL, SDL_FLIP_HORIZONTAL);
+        else SDL_RenderCopy(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad);
 }
+
 
 void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip, SDL_Rect * tileQuad)
 {
