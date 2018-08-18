@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "Component/component.h"
+#include "System\Physics\collision.h"
 
 using namespace::std;
 
@@ -46,6 +47,15 @@ public:
     //sets active
     void setActive(bool b);
 
+    //THESE COLLISION-METHODS SHOULD ONLY BE ACCESSIBLE BY PHYSICSENGINE
+    //THIS NEEDS TO BE FIXED
+    //Calls onCollisionEnter(), if collider is present, on all components
+    virtual void onCollisionEnter(Collision *collision);
+    //Calls onColliding(), if collider is present, on all components
+    virtual void onColliding(Collision *collision);
+    //Calls onCollisionExit(), if collider is present, on all components
+    virtual void onCollisionExit(Collision *collision);
+
 private:
 
     //Call start() in every component
@@ -55,6 +65,8 @@ private:
 
     //Updates all components references
     void updateComponents();
+
+
 
     //Components contained by this gameobject
     list<Component*> components;

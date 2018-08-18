@@ -11,6 +11,9 @@ public:
     void start();
     void update();
     void updateComponents();
+    void onCollisionEnter(Collision *collision);
+    void onColliding(Collision *collision);
+    void onCollisionExit(Collision *collision);
 
     //Maximum speed (compares to velocity.magnitude())
     double speed = 15;
@@ -32,7 +35,10 @@ private:
         nullState,
         idle,
         running,
+        falling,
         states
     };
+
+    bool grounded;
 
 };

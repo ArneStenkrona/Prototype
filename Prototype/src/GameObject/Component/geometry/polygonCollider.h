@@ -41,27 +41,21 @@ public:
     void setPolygon(Polyshape _polygon);
     Polyshape getPolygon();
 
+    //Returns a list of colliders that will possible collide with a this frame, sorted from earliest to latest
+    static vector<PolygonCollider*> getPossibleCollisions(PolygonCollider *a, vector<PolygonCollider*> *B);
+
+    //Collision test
+    static bool checkCollision(PolygonCollider *a, PolygonCollider *b, Point& n, double &t);
+
     //Checks collision between nonstatic collider a and every collider in b
+    //Collision is passed by reference and gives a collision-object with the collision data
     static bool calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
+
+    //Returns relative velocity with a as frame of reference
+    static Point getRelativeVelocity(PolygonCollider *a, PolygonCollider *b);
 
 private:
 
-
-    //Generate the separation axis that needs to be tested
-    //static bool intersect(PolygonCollider a, PolygonCollider b, Point &mtd);
-
-    //Calculates the intervals of each polygon along the seperation plan normal
-    //static void calculateInterval(Point axis, Shape p, double &min, double &max);
-    //Seperates the polygons
-    //static bool axisSeperatePolygons(Point& axis, Shape a, Shape b, Point offset, Point vel, double& t, double tmax);
-
-
-
-    //Collision test
-    static bool collide(const Point *a, int aNum,
-        const Point *b, int bNum,
-        const Point &xOffset, const Point &xVel,
-        Point& n, double &t);
     //Find the minimum translation distance
     static bool findMTD(Point* xAxis, double* taxis, int iNumAxes, Point& n, double& t);
     //calculate the projection range of a polygon along an axis
@@ -74,14 +68,13 @@ private:
         double& taxis, double tmax);
 
     Polyshape polygon;
-
+    
     //Determines wether the hitbox is active
     bool isActive;
-    //Determiens wether the hitbox has velocity, and therefore will be affected by response
+    //Determines if the hitbox has velocity, and therefore will be affected by response
     bool isStatic;
 
     //Position and velocity components
     Position *position;
     Velocity *velocity;
-
 };

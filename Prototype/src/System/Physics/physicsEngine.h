@@ -4,7 +4,7 @@
 #include <list>
 
 //All existing hitboxes. Probably should not be extern.
-extern list<PolygonCollider*> ALL_HITBOXES;
+extern list<PolygonCollider*> ALL_COLLIDERS;
 
 void updatePhysics();
 void performHitdetection();

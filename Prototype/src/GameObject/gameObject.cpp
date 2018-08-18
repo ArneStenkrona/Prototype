@@ -1,5 +1,6 @@
 #include "gameObject.h"
 #include "../System/game/gameLogic.h"
+#include "Component\geometry\polygonCollider.h"
 
 //getComponent() is in header file, due to being a template function
 //setComponent() is in header file, due to being a template function
@@ -58,6 +59,36 @@ void GameObject::updateComponents()
     for each  (Component *t in components)
     {
         t->updateComponents();
+    }
+}
+
+void GameObject::onCollisionEnter(Collision *collision)
+{
+    if (hasComponent<PolygonCollider>()) {
+        for each (Component *comp in components)
+        {
+            comp->onCollisionEnter(collision);
+        }
+    }
+}
+
+void GameObject::onColliding(Collision *collision)
+{
+    if (hasComponent<PolygonCollider>()) {
+        for each (Component *comp in components)
+        {
+            comp->onColliding(collision);
+        }
+    }
+}
+
+void GameObject::onCollisionExit(Collision *collision)
+{
+    if (hasComponent<PolygonCollider>()) {
+        for each (Component *comp in components)
+        {
+            comp->onCollisionExit(collision);
+        }
     }
 }
 

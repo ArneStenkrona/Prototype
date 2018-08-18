@@ -16,3 +16,20 @@ void Component::update()
 void Component::updateComponents()
 {
 }
+
+void Component::onCollisionEnter(Collision *collision)
+{
+}
+
+void Component::onColliding(Collision *collision)
+{
+}
+
+void Component::onCollisionExit(Collision *collision)
+{
+}
+
+GameObject * Component::getGameObject()
+{
+    return object;
+}
