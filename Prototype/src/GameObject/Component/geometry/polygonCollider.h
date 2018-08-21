@@ -49,7 +49,7 @@ public:
 
     //Checks collision between nonstatic collider a and every collider in b
     //Collision is passed by reference and gives a collision-object with the collision data
-    static bool calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
+    static vector<Collision*> calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
 
     //Returns relative velocity with a as frame of reference
     static Point getRelativeVelocity(PolygonCollider *a, PolygonCollider *b);

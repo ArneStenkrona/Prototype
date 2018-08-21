@@ -125,12 +125,13 @@ vector<PolygonCollider*> PolygonCollider::getPossibleCollisions(PolygonCollider 
     return possibleCollisions;
 }
 
-bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
+vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
 {
 
     //Tuple containing time of collision, where 0.0 is the beginning of the frame and 1.0 is the end,
     //And the corresponding collider
     vector<tuple<double, PolygonCollider*>> possibleCollisions = vector<tuple<double, PolygonCollider*>>();
+    vector<Collision*> collisions;
 
     bool collided = false;
 
@@ -223,9 +224,9 @@ bool PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonColl
             }
         }
 
-            return true;
+            return collisions;
     }
-    return false;
+    return vector<Collision*>();
 }
 //Algorithm courtesy of PollyColly
 //A tutorial can be found here: https://github.com/kirbysayshi/oli-demos/blob/master/Polycolly/docs/html/2D%20polygon.htm

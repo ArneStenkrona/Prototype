@@ -48,6 +48,7 @@ void performHitdetection() {
 
             vector<PolygonCollider*> possibleCollisions = PolygonCollider::getPossibleCollisions(b, &returnColliders);
 
+            //This should really be the responsibility of PolygonCollider.cpp
             vector<Collision*> collisions;
             for each (PolygonCollider *col in possibleCollisions) {
                 Point colNormal;

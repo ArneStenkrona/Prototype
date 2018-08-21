@@ -160,6 +160,7 @@
     <ClInclude Include="src\GameObject\Component\geometry\polygonCollider.h" />
     <ClInclude Include="src\GameObject\Component\geometry\position.h" />
     <ClInclude Include="src\GameObject\Component\geometry\velocity.h" />
+    <ClInclude Include="src\GameObject\Component\graphics\animator.h" />
     <ClInclude Include="src\GameObject\Component\graphics\camera.h" />
     <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
     <ClInclude Include="src\GameObject\Component\graphics\sprite.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="src\GameObject\Component\geometry\polygonCollider.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\position.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\velocity.cpp" />
+    <ClCompile Include="src\GameObject\Component\graphics\animator.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\camera.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\sprite.cpp" />
