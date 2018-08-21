@@ -41,9 +41,6 @@ public:
     void setPolygon(Polyshape _polygon);
     Polyshape getPolygon();
 
-    //Returns a list of colliders that will possible collide with a this frame, sorted from earliest to latest
-    static vector<PolygonCollider*> getPossibleCollisions(PolygonCollider *a, vector<PolygonCollider*> *B);
-
     //Collision test
     static bool checkCollision(PolygonCollider *a, PolygonCollider *b, Point& n, double &t);
 
@@ -51,8 +48,8 @@ public:
     //Collision is passed by reference and gives a collision-object with the collision data
     static vector<Collision*> calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
 
-    //Returns relative velocity with a as frame of reference
-    static Point getRelativeVelocity(PolygonCollider *a, PolygonCollider *b);
+    //Returns velocity relative to other
+    Point relativeVelocity(PolygonCollider *other);
 
 private:
 

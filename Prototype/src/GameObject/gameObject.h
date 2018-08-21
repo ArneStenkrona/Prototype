@@ -54,7 +54,7 @@ public:
     //Calls onColliding(), if collider is present, on all components
     virtual void onColliding(Collision *collision);
     //Calls onCollisionExit(), if collider is present, on all components
-    virtual void onCollisionExit(Collision *collision);
+    virtual void onCollisionExit();
 
 private:
 

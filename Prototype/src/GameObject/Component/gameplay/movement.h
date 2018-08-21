@@ -13,7 +13,7 @@ public:
     void updateComponents();
     void onCollisionEnter(Collision *collision);
     void onColliding(Collision *collision);
-    void onCollisionExit(Collision *collision);
+    void onCollisionExit();
 
     //Maximum speed (compares to velocity.magnitude())
     double speed = 15;

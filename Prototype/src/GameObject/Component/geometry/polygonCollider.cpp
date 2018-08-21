@@ -85,45 +85,6 @@ Polyshape PolygonCollider::getPolygon()
     return polygon;
 }
 
-vector<PolygonCollider*> PolygonCollider::getPossibleCollisions(PolygonCollider * a, vector<PolygonCollider*>* B)
-{
-    //Tuple containing time of collision, where 0.0 is the beginning of the frame and 1.0 is the end,
-    //And the corresponding collider
-    vector<tuple<double, PolygonCollider*>> colTuples = vector<tuple<double, PolygonCollider*>>();
-
-    bool collided = false;
-
-    for each (PolygonCollider *b in *B) {
-        if (a != b) {
-            Point colNorm;
-            double colTime = 1.0;
-            Point relVel;
-
-            //Set relative velocity
-            if (b->isStatic) {
-                relVel = a->velocity->velocity;
-            }
-            else {
-                relVel = a->velocity->velocity - b->velocity->velocity;
-            }
-            if (checkCollision(a, b, colNorm, colTime)) {
-                colTuples.push_back({ colTime, b });
-                collided = true;
-            }
-        }
-    }
-    vector<PolygonCollider*> possibleCollisions;
-    if (collided) {
-        //Sort tuples after earliest collision
-        std::sort(begin(colTuples), end(colTuples), [](auto const &t1, auto const &t2) {
-            return get<0>(t1) < get<0>(t2);
-        });
-        for each (tuple<double, PolygonCollider*> col in colTuples) {
-            possibleCollisions.push_back(get<1>(col));
-        }
-    }
-    return possibleCollisions;
-}
 
 vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
 {
@@ -170,19 +131,10 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
             Point collisionNormal;
             //Time of collision, where 0.0 is the beginning of the frame and 1.0 is the end
             double collisionTime = 1.0;
-
-            //Relative velocity of a and b
-            Point relativeVelocity;
-            //Set relative velocity
-            if (get<1>(col)->isStatic) {
-                relativeVelocity = a->velocity->velocity;
-            }
-            else {
-                relativeVelocity = a->velocity->velocity - get<1>(col)->velocity->velocity;
-            }
+                                   
             if (checkCollision(a, get<1>(col), collisionNormal, collisionTime)) {
 
-                    if (relativeVelocity.x * collisionNormal.x + relativeVelocity.y * collisionNormal.y < 0.0 || relativeVelocity.dot(collisionNormal) < 0.000001) {
+                    if (a->relativeVelocity(get<1>(col)).dot(collisionNormal) < 0.000001) {
                     //Velocity required to reach collision
                     Point velC = a->velocity->velocity * collisionTime;
                     //Overlapping velocity
@@ -206,9 +158,9 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
                         }
                     }
 
-                    if (vToV) {
-                    }
-                    else {
+                    if (!vToV) {
+                        Collision *collision = new Collision(a, get<1>(col), collisionNormal, collisionTime);
+                        collisions.push_back(collision);
 
                         if (collisionTime < 0.0) {
                             a->position->position -= collisionNormal * collisionTime - 0.001 * a->velocity->velocity;
@@ -243,7 +195,7 @@ bool PolygonCollider::checkCollision(PolygonCollider *colA, PolygonCollider *col
     const Point * b = &colB->polygon.vertices[0];
     int bNum = colB->polygon.numberOfVertices;
     const Point & xOffset = colA->position->position - colB->position->position;
-    const Point & xVel = getRelativeVelocity(colA, colB);
+    const Point & xVel = colA->relativeVelocity(colB);
 
     if (!a || !b) {
         return false;
@@ -409,14 +361,14 @@ bool PolygonCollider::intervalIntersect(const Point * A, int Anum, const Point *
     }
 }
 
-Point PolygonCollider::getRelativeVelocity(PolygonCollider *a, PolygonCollider *b)
+Point PolygonCollider::relativeVelocity(PolygonCollider *other)
 {
-    if (a->isStatic && b->isStatic) return Point::empty;
+    if (isStatic && other->isStatic) return Point::empty;
 
-    if (b->isStatic) return a->velocity->velocity;
-    if (a->isStatic) return Point(0,0) - b->velocity->velocity;
+    if (other->isStatic) return velocity->velocity;
+    if (isStatic) return Point(0,0) - other->velocity->velocity;
 
-    return a->velocity->velocity - b->velocity->velocity;
+    return velocity->velocity - other->velocity->velocity;
 }
 
 bool PolygonCollider::getActive()

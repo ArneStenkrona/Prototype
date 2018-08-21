@@ -25,7 +25,7 @@ void Component::onColliding(Collision *collision)
 {
 }
 
-void Component::onCollisionExit(Collision *collision)
+void Component::onCollisionExit()
 {
 }
 

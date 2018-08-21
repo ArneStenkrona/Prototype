@@ -4,6 +4,7 @@
 #include "data_structures/quadTree.h"
 #include "System/graphics/global_graphical_variables.h"
 #include <vector>
+#include <tuple>
 #include <iostream>
 #include "System\Physics\collision.h"
 #include <map>
@@ -13,6 +14,11 @@
 list<PolygonCollider*> ALL_COLLIDERS = list<PolygonCollider*>();
 //All active hitboxes
 list<PolygonCollider*> activeColliders = list<PolygonCollider*>();
+
+//Collisions from this frame
+set<tuple<PolygonCollider*, PolygonCollider*>> currentCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
+//Collisions from previous frame
+set<tuple<PolygonCollider*, PolygonCollider*>> previousCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
 
 //QuadTree to reduce unnecessary physics calculations
 QuadTree quad = QuadTree(0, Point(0, 0), Point(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2));
@@ -46,53 +52,26 @@ void performHitdetection() {
             vector<PolygonCollider*> returnColliders;
             quad.retrieve(&returnColliders, b);
 
-            vector<PolygonCollider*> possibleCollisions = PolygonCollider::getPossibleCollisions(b, &returnColliders);
+            vector<Collision*> collisions = PolygonCollider::calculateCollision(b, &returnColliders);
+            for each (Collision *collision in collisions) {
+                
+                if (previousCollisions.find(make_tuple(b, collision->getOtherCollider())) == previousCollisions.end()) {
+                    b->getGameObject()->onCollisionEnter(collision);
+                }
+                b->getGameObject()->onColliding(collision);
 
-            //This should really be the responsibility of PolygonCollider.cpp
-            vector<Collision*> collisions;
-            for each (PolygonCollider *col in possibleCollisions) {
-                Point colNormal;
-                double colTime = 1.0;
-                if (PolygonCollider::checkCollision(b, col, colNormal, colTime)) {
-                    Point relVel = PolygonCollider::getRelativeVelocity(b, col);
-                    bool vToV = false;
-                    if (relVel.dot(colNormal) < 0.000001) {
-                        //Velocity required to reach collision
-                        Point velC = b->getVelocity() * colTime;
-                        //Is it a vertex to vertex collision?
-                        for (int i = 0; i < b->getPolygon().numberOfVertices; i++) {
-                            Point aVertex = b->getPolygon().vertices[i] + b->getPosition() + velC;
-                            for (int j = 0; j < col->getPolygon().numberOfVertices; j++) {
-                                Point bVertex = col->getPolygon().vertices[j] + col->getPosition();
-                                if ((aVertex).distanceTo(bVertex) < 0.000001) {
-                                    for (int k = 0; k < b->getPolygon().numberOfVertices; k++) {
-                                        if (k != i && (col->getPolygon().distanceTo(b->getPolygon().vertices[k] + b->getPosition() + velC - col->getPosition())) >= 0.0001) {
-                                            vToV = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (!vToV) {
-                        bool onEnter = !Collision::getPreviousCollision(b, col);
-                        Collision *collision = new Collision(b, col, colNormal, colTime);
-                        if (onEnter) b->getGameObject()->onCollisionEnter(collision);
-                        b->getGameObject()->onColliding(collision);
-                    }
-                }            
+                currentCollisions.insert(make_tuple(b, collision->getOtherCollider()));
             }
-
-
-
-            /*if (PolygonCollider::calculateCollision(b, &returnColliders)) {
-                //b->getGameObject()->onColliding(nullptr);
-            }*/
+            
         }       
     }
-
-    Collision::clearCollisions();
-    
+    for each (tuple<PolygonCollider*, PolygonCollider*> colPair in previousCollisions) {
+        if (currentCollisions.find(colPair) == currentCollisions.end()) {
+            get<0>(colPair)->getGameObject()->onCollisionExit();
+        }
+    }
+    previousCollisions = currentCollisions;
+    currentCollisions.clear();
 }
 
 void setQuadBounds(Point _bounds)

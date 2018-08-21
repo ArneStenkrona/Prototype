@@ -24,7 +24,7 @@ public:
     //Called if currently colliding with other entity
     virtual void onColliding(Collision *collision);
     //Called if exiting collision with other entity
-    virtual void onCollisionExit(Collision *collision);
+    virtual void onCollisionExit();
 
     //gameObject getter
     GameObject* getGameObject();

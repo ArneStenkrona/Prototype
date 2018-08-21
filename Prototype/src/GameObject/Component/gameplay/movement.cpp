@@ -45,7 +45,7 @@ void Movement::updateComponents()
 
 void Movement::onCollisionEnter(Collision * collision)
 {
-    //printf("ENTER\n");
+    printf("ENTER\n");
 }
 
 void Movement::onColliding(Collision *collision)
@@ -64,10 +64,10 @@ void Movement::onColliding(Collision *collision)
     if (collision->collisionNormal.dot(Point::up) < 0.000001)
         grounded = true;
 
-    //cout << velocity->velocity.y << endl;
+    //printf("COLLIDING\n");
 }
 
-void Movement::onCollisionExit(Collision * collision)
+void Movement::onCollisionExit()
 {
     printf("EXIT\n");
 }

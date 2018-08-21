@@ -21,22 +21,6 @@ public:
     //to hit other within this frame
     Point correctedVelocity();
 
-    //Adds entry to ongoing collisions container
-    //static void addCollision(PolygonCollider *col, PolygonCollider *otherCol, Point colN, double colT);
-    //Deletes entry in ongoing collisions container
-    static void deleteCollision(PolygonCollider *col, PolygonCollider *otherCol);
-    //Gets entry from ongoing collisions container, returns null if not there
-    static Collision * getCollision(PolygonCollider *col, PolygonCollider *otherCol);
-    //Clears ongoing collisions container
-    static void clearCollisions();
-    //Gets entry from previous frame
-    static Collision * getPreviousCollision(PolygonCollider *col, PolygonCollider *otherCol);
-    //Returns ongoing collisions involving col
-    static std::set<Collision*> getOngoingCollisions(PolygonCollider *col);
-    //Returns previous frame collisions involving col
-    static std::set<Collision*> getPreviousFrameCollisions(PolygonCollider *col);
-
-
 private:
     //Our collider
     PolygonCollider * collider;

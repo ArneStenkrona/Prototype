@@ -82,12 +82,12 @@ void GameObject::onColliding(Collision *collision)
     }
 }
 
-void GameObject::onCollisionExit(Collision *collision)
+void GameObject::onCollisionExit()
 {
     if (hasComponent<PolygonCollider>()) {
         for each (Component *comp in components)
         {
-            comp->onCollisionExit(collision);
+            comp->onCollisionExit();
         }
     }
 }
