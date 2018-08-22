@@ -25,6 +25,9 @@ void Debug_scene0::setUpScene()
     character->addComponent<PolygonCollider>()->setStatic(false);
     character->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point(3, 0), 26, 39.7));
     character->getComponent<Position>()->position = Point(50, 50);
+    character->addComponent<Animator>()->addClip(AnimationClip{"idle", 16, 21, 7 });
+    character->getComponent<Animator>()->addClip(AnimationClip{"running", 0, 4, 3 });
+    character->getComponent<Animator>()->addClip(AnimationClip{"falling", 32, 33, 7 });
 
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(character);

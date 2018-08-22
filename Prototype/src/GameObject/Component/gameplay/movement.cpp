@@ -3,6 +3,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "System/IO/inputManager.h"
+#include <algorithm>
 
 Movement::Movement(GameObject *_object) : Component(_object),
 state(nullState), prevState(nullState), transitionCounter(0),
@@ -11,6 +12,7 @@ grounded(false)
     position = requireComponent<Position>();
     velocity = requireComponent<Velocity>();
     sprite = requireComponent<Sprite>();
+    animator = requireComponent<Animator>();
 }
 
 void Movement::updateComponents()
@@ -18,6 +20,7 @@ void Movement::updateComponents()
     position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
     velocity = (object->hasComponent<Velocity>()) ? object->getComponent<Velocity>() : velocity;
     sprite = (object->hasComponent<Sprite>()) ? object->getComponent<Sprite>() : sprite;
+    animator = (object->hasComponent<Animator>()) ? object->getComponent<Animator>() : animator;
 }
 
 void Movement::onCollisionEnter(Collision * collision)
@@ -61,7 +64,8 @@ void Movement::update()
     //Initalize direction vector to 0,0
     Point direction = Point();
 
-    state = idle;
+    if (abs(velocity->velocity.x) < 1)
+        state = idle;
 
     if (getKey(INPUT_KEY_A))
     {
@@ -87,28 +91,22 @@ void Movement::update()
     //DIRTY HACK! SHOULD BE FIXED BY CREATING A PROPER ANIMATION DATA STRUCTURE
     switch (state) {
     case idle :
-        if (transitionCounter == 0) {
-            sprite->setAnimationIndicies(16, 21);
-            sprite->setFrameFactor(7);
-            transitionCounter--;
-        } else if (transitionCounter > 0)
-            transitionCounter--;
+        animator->playClip("idle", prevState == running);
+        animator->setSpeedFactor(1);
         break;
     case running :
+        animator->setSpeedFactor(min(2.4, 5.8 / abs(velocity->velocity.x)));
         if (prevState != running) {
-            sprite->setAnimationIndicies(0, 4);
-            sprite->setFrameFactor(3);
+            animator->playClip("running", false);
         }
         if (getKey(INPUT_KEY_A))
             sprite->setMirror(true);
         if (getKey(INPUT_KEY_D))
             sprite->setMirror(false);
-        transitionCounter = (4 - sprite->getTileIndex()) * 3;
         break;
     case falling :
-        sprite->setAnimationIndicies(32,33);
-        sprite->setFrameFactor(7);
-        transitionCounter = 0;
+        animator->playClip("falling", false);
+        animator->setSpeedFactor(1);
         break;
     }
     prevState = state;

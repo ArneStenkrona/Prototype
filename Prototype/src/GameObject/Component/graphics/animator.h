@@ -1,12 +1,13 @@
 #pragma once
 #include "GameObject\Component\component.h"
 #include "System\graphics\animationClip.h"
+#include "sprite.h"
 #include <map>
 #include <string>
 using namespace::std;
 
 //The animator component is made for easy communication with sprites
-class Animator : Component {
+class Animator : public Component {
 public:
     Animator(GameObject * _object);
 
@@ -14,14 +15,30 @@ public:
     void update();
     void updateComponents();
 
-    void addClip(string name, AnimationClip *clip);
+    void addClip(AnimationClip clip);
     void removeClip(string name);
 
-    void setClip(string clipName);
+    void setSpeedFactor(double factor);
+
+    //Queues a clip
+    //transition determines if current clip should complete before changing to queued clip
+    void playClip(string clipName, bool transition);
 
 private:
     //The clip currently playing
     AnimationClip *currentClip;
+    //The clip about to be played
+    AnimationClip *queuedClip;
+
     //Dictionary that binds a clip name to a clip
-    map<string, AnimationClip*> animationClips;
+    map<string, AnimationClip> animationClips;
+
+    //amount of transition frames, roundest to nearest int when required
+    double transitionFrames;
+    //Determines if we are currently in a transition
+    bool inTransition;
+    //Changes the speed with which animations are played
+    double animationSpeedFactor;
+
+    Sprite *sprite;
 };

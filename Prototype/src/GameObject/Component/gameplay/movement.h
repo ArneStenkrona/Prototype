@@ -3,6 +3,7 @@
 #include "GameObject/Component/geometry/position.h"
 #include "GameObject/Component/geometry/velocity.h"
 #include "GameObject/Component/graphics/sprite.h"
+#include "GameObject\Component\graphics\animator.h"
 
 class GameObject;
 class Movement : public Component {
@@ -26,6 +27,7 @@ private:
     Position *position;
     Velocity *velocity;
     Sprite *sprite;
+    Animator *animator;
     //states for state machine
     //this behaviour should be delegated to an animation data-structure
     int state;
