@@ -4,20 +4,13 @@
 
 Velocity::Velocity(GameObject * _object) : velocity(Point(0, 0)), Component(_object)
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    else {
-        position = object->addComponent<Position>();
-    }
+    position = requireComponent<Position>();
+
 }
 
 void Velocity::updateComponents()
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
 }
 
 void Velocity::start()

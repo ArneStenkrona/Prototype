@@ -8,34 +8,19 @@ Position* Renderer::cameraPosition = nullptr;
 
 Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object)//, tileIndex(-1)
 {
-    //Required
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    else {
-        position = object->addComponent<Position>();
-    }
-    if (object->hasComponent<Sprite>()) {
-        sprite = object->getComponent<Sprite>();
-    }
-    else {
-        sprite = object->addComponent<Sprite>();
-    }
+    position = requireComponent<Position>();
+    sprite = requireComponent<Sprite>();
 }
 
 void Renderer::updateComponents()
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
 
-    if (object->hasComponent<Sprite>()) {
-        sprite = object->getComponent<Sprite>();
-    }
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
+    sprite = (object->hasComponent<Sprite>()) ? object->getComponent<Sprite>() : sprite;
 
-    if (mainCamera != nullptr) {
+    /*if (mainCamera != nullptr) {
         cameraPosition = mainCamera->getComponent<Position>();
-    }
+    }*/
 }
 
 void Renderer::setCamera(GameObject *_camera)

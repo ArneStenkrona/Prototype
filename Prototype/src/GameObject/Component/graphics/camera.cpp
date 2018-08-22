@@ -9,12 +9,7 @@ const Point Camera::screenOffset = Point(SCREEN_WIDTH / SCALE_X, SCREEN_HEIGHT /
 
 Camera::Camera(GameObject * _object) : Component(_object)
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    else {
-        position = object->addComponent<Position>();
-    }
+    position = requireComponent<Position>();
 }
 
 void Camera::start()
@@ -62,12 +57,11 @@ void Camera::update()
 
 void Camera::updateComponents()
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    if (target != nullptr) {
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
+
+    /*if (target != nullptr) {
         targetPosition = target->getComponent<Position>();
-    }
+    }*/
 }
 
 void Camera::setTarget(GameObject *targetObject)

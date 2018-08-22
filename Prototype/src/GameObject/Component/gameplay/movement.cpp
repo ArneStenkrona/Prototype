@@ -8,39 +8,16 @@ Movement::Movement(GameObject *_object) : Component(_object),
 state(nullState), prevState(nullState), transitionCounter(0),
 grounded(false)
 {
-    //Check for position component
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    else {
-        position = object->addComponent<Position>();
-    }
-    //Check for velocity component
-    if (object->hasComponent<Velocity>()) {
-        velocity = object->getComponent<Velocity>();
-    }
-    else {
-        velocity = object->addComponent<Velocity>();
-    }
-
-    //Check for sprite component
-    if (object->hasComponent<Sprite>()) {
-        sprite = object->getComponent<Sprite>();
-    }
+    position = requireComponent<Position>();
+    velocity = requireComponent<Velocity>();
+    sprite = requireComponent<Sprite>();
 }
 
 void Movement::updateComponents()
 {
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    if (object->hasComponent<Velocity>()) {
-        velocity = object->getComponent<Velocity>();
-    }
-
-    if (object->hasComponent<Sprite>()) {
-        sprite = object->getComponent<Sprite>();
-    }
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
+    velocity = (object->hasComponent<Velocity>()) ? object->getComponent<Velocity>() : velocity;
+    sprite = (object->hasComponent<Sprite>()) ? object->getComponent<Sprite>() : sprite;
 }
 
 void Movement::onCollisionEnter(Collision * collision)

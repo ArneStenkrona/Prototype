@@ -33,5 +33,17 @@ protected:
     //The Gameobject this is attached to
     GameObject *object;
 
+    //Call this in constructor if a component is required by another
+    //Returns the component
+    template<class T>
+    T *requireComponent();
 };
 
+template<class T>
+T * Component::requireComponent()
+{
+    if (!is_base_of<Component, T>::value) {
+        throw invalid_argument("Expected Component Type");
+    }
+    return object->hasComponent<T>() ? object->getComponent<T>() : object->addComponent<T>();
+}

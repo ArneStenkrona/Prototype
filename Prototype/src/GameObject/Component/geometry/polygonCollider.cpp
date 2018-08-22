@@ -7,21 +7,9 @@
 
 PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isStatic(true), isActive(true)
 {
-    //Check for position component
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-    else {
-        position = object->addComponent<Position>();
-    }
-    //Check for velocity component. !!!This should only be required if hitbox isnt static. Fix this in the future!!!
-    if (object->hasComponent<Velocity>()) {
-        velocity = object->getComponent<Velocity>();
-    }
-    else {
-        velocity = object->addComponent<Velocity>();
-    }
-
+    position = requireComponent<Position>();
+    velocity = requireComponent<Velocity>();
+     
     //Default shape
     polygon = Rectangular(Point::empty, 32.0, 32.0);
 
@@ -44,15 +32,8 @@ void PolygonCollider::update()
 
 void PolygonCollider::updateComponents()
 {
-    //Check for position component
-    if (object->hasComponent<Position>()) {
-        position = object->getComponent<Position>();
-    }
-
-    //Check for velocity component
-    if (object->hasComponent<Velocity>()) {
-        velocity = object->getComponent<Velocity>();
-    }
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
+    velocity = (object->hasComponent<Velocity>()) ? object->getComponent<Velocity>() : velocity;
 }
 
 double PolygonCollider::getWidth()

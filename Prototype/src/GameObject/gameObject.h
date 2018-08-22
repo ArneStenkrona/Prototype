@@ -85,6 +85,10 @@ private:
 template<class T>
 T * GameObject::getComponent()
 {
+    if (!std::is_base_of<Component, T>::value) {
+        throw invalid_argument("Expected Component Type");
+        return NULL;
+    }
 
     for each  (Component *t in components)
     {
@@ -102,6 +106,7 @@ T * GameObject::addComponent()
 {
 
     if (!std::is_base_of<Component, T>::value) {
+        throw invalid_argument("Expected Component Type");
         return NULL;
     }
 
@@ -121,6 +126,7 @@ void * GameObject::removeComponent()
 {
 
     if (!std::is_base_of<Component, T>::value) {
+        throw invalid_argument("Expected Component Type");
         return 0;
     }
 
@@ -149,6 +155,9 @@ void * GameObject::removeComponent()
 template<class T>
 bool GameObject::hasComponent()
 {
+    if (!is_base_of<Component, T>::value) {
+        throw invalid_argument("Expected Component Type");
+    }
 
     for each  (Component *t in components)
     {
