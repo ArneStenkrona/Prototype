@@ -48,8 +48,6 @@ public:
     //Collision is passed by reference and gives a collision-object with the collision data
     static vector<Collision*> calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
 
-    //Returns velocity relative to other
-    Point relativeVelocity(PolygonCollider *other);
 
 private:
 
@@ -65,6 +63,8 @@ private:
         double& taxis, double tmax);
 
     Polyshape polygon;
+    //Returns velocity relative to other
+    Point relativeVelocity(PolygonCollider *other);
     
     //Determines wether the hitbox is active
     bool isActive;

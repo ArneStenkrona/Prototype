@@ -45,7 +45,7 @@ void Movement::updateComponents()
 
 void Movement::onCollisionEnter(Collision * collision)
 {
-    printf("ENTER\n");
+    //printf("ENTER\n");
 }
 
 void Movement::onColliding(Collision *collision)
@@ -69,7 +69,7 @@ void Movement::onColliding(Collision *collision)
 
 void Movement::onCollisionExit()
 {
-    printf("EXIT\n");
+    //printf("EXIT\n");
 }
 
 

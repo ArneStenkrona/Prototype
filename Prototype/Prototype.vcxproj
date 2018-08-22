@@ -174,6 +174,7 @@
     <ClInclude Include="src\System\game\gameLogic.h" />
     <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h" />
     <ClInclude Include="src\System\game\scene\scene.h" />
+    <ClInclude Include="src\System\graphics\animationClip.h" />
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="src\System\game\gameLogic.cpp" />
     <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp" />
     <ClCompile Include="src\System\game\scene\scene.cpp" />
+    <ClCompile Include="src\System\graphics\animationClip.cpp" />
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />

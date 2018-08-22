@@ -23,7 +23,7 @@ void Debug_scene0::setUpScene()
     character->addComponent<Movement>();
 
     character->addComponent<PolygonCollider>()->setStatic(false);
-    character->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point::empty,32,40));
+    character->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point(3, 0), 26, 39.7));
     character->getComponent<Position>()->position = Point(50, 50);
 
     GameObject *camera = new GameObject();
