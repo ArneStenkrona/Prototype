@@ -1,5 +1,6 @@
 #include "gameLogic.h"
 #include "System/Physics/physicsEngine.h"
+#include "System\graphics\graphicsEngine.h"
 #include "scene\scene.h"
 #include "math/lTimer.h"
 #include <stdio.h>
@@ -52,6 +53,7 @@ void setScene()
 {
     currentScene = new Debug_scene0();
     currentScene->setUpScene();
+    GameObject::startAll();
 }
 
 void closeScene()
@@ -105,6 +107,8 @@ void gameLoop() {
         updatePhysics();
 
         updateGameLogic();
+
+        GraphicsEngine::updateGraphics();
 
         updateInputManager();
 

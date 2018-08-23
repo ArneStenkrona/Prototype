@@ -17,7 +17,9 @@ public:
     //Destructor deletes all components
     ~GameObject();
 
-    //Call start() for all objects in just_activated_gameobjects
+    //Calls start() for all objects in all_gameobjects
+    static void startAll();
+    //Call awake() for all objects in just_activated_gameobjects
     //and update() for all objects in all_gameObjects
     static void updateAll();
 
@@ -57,9 +59,10 @@ public:
     virtual void onCollisionExit();
 
 private:
-
     //Call start() in every component
     void start();
+    //Call awake() in every component
+    void awake();
     //Call update() in every component
     void update();
 

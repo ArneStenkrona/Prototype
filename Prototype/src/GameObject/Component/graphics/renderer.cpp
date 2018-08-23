@@ -2,14 +2,20 @@
 #include "System\graphics\global_graphical_variables.h"
 #include "Gameobject/gameObject.h"
 #include <iostream>
+#include "System\graphics\graphicsEngine.h"
 
 GameObject* Renderer::mainCamera = nullptr;
 Position* Renderer::cameraPosition = nullptr;
 
-Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object)//, tileIndex(-1)
+Renderer::Renderer(GameObject *_object) : renderer(ACTIVE_RENDERER), Component(_object), renderLayer(0)
 {
     position = requireComponent<Position>();
-    sprite = requireComponent<Sprite>();
+    sprite = requireComponent<Sprite>();  
+}
+
+Renderer::~Renderer()
+{
+    GraphicsEngine::removeFromRenderQueue(this, renderLayer);
 }
 
 void Renderer::updateComponents()
@@ -21,6 +27,14 @@ void Renderer::updateComponents()
     /*if (mainCamera != nullptr) {
         cameraPosition = mainCamera->getComponent<Position>();
     }*/
+}
+
+void Renderer::setRenderLayer(int layer)
+{
+    if (layer < 0) throw invalid_argument("Expected positive index");
+    GraphicsEngine::removeFromRenderQueue(this, renderLayer);
+    renderLayer = layer;
+    GraphicsEngine::addToRenderQueue(this, layer);
 }
 
 void Renderer::setCamera(GameObject *_camera)
@@ -39,36 +53,25 @@ Point Renderer::getCameraPosition()
     return mainCamera->getComponent<Position>()->position;
 }
 
-void Renderer::setTileIndex(int index)
+void Renderer::render()
 {
-    //tileIndex = index;
-}
-
-void Renderer::start() {
-
-
-}
-
-void Renderer::update() {
-
-    //Cehck if camera is available
+    //Check if camera is available
     if (cameraPosition != nullptr) {
-
         Point pos;
         Point cameraPos = cameraPosition->position;
         pos = position->position - cameraPos;
         sprite->renderSprite(pos.x, pos.y);
-        /*
-        int tileIndex = sprite->getTileIndex();
-        if (tileIndex == -1) {
-            sprite->texture->render((int)(pos.x + 0.5), (int)(pos.y + 0.5));
-        }
-        else {
-            sprite->texture->renderTile((int)(pos.x + 0.5), (int)(pos.y + 0.5), tileIndex);
-        }*/
-      
     }
     else {
         std::cout << "No camera has been set for rendering" << std::endl;
     }
+}
+
+void Renderer::start() {
+    GraphicsEngine::addToRenderQueue(this, renderLayer);
+}
+
+
+
+void Renderer::update() {
 }

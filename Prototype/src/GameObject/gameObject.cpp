@@ -26,11 +26,19 @@ GameObject::~GameObject()
     all_gameObjects.remove(this);
 }
 
+void GameObject::startAll()
+{
+    for each (GameObject *obj in all_gameObjects)
+    {
+        obj->start();
+    }
+}
+
 void GameObject::updateAll()
 {
     for each (GameObject *obj in just_activated_gameObjects)
     {
-        obj->start();
+        obj->awake();
     }
 
     //Empty list after all objects has called start method
@@ -97,6 +105,14 @@ void GameObject::start()
     for each (Component *comp in components)
     {
         comp->start();
+    }
+}
+
+void GameObject::awake()
+{
+    for each (Component *comp in components)
+    {
+        comp->awake();
     }
 }
 

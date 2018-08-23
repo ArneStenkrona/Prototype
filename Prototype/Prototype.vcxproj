@@ -176,6 +176,7 @@
     <ClInclude Include="src\System\game\scene\scene.h" />
     <ClInclude Include="src\System\graphics\animationClip.h" />
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
+    <ClInclude Include="src\System\graphics\graphicsEngine.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
     <ClInclude Include="src\System\graphics\TileMap.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="src\System\game\scene\scene.cpp" />
     <ClCompile Include="src\System\graphics\animationClip.cpp" />
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
+    <ClCompile Include="src\System\graphics\graphicsEngine.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
     <ClCompile Include="src\System\graphics\TileMap.cpp" />

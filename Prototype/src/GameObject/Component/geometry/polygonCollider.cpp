@@ -114,16 +114,16 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
                     //Is it a vertex to vertex collision?
                     bool vToV = false;
                     for (int i = 0; i < a->polygon.numberOfVertices; i++) {
-                        Point aVertex = a->polygon.vertices[i] + a->position->position + correctedVelocity;
+                        Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
                         for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
                             Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
 
                             if ((aVertex).distanceTo(bVertex) < 0.01) {
-                                //for (int k = 0; k < a->polygon.numberOfVertices; k++) {
-                                    //if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
+                                for (int k = 0; k < a->polygon.numberOfVertices; k++) {
+                                    if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
                                         vToV = true;
-                                    //}
-                                //}
+                                    }
+                                }
                             }
                         }
                     }

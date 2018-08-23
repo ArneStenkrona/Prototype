@@ -10,9 +10,14 @@ class GameObject;
 class Renderer : public Component {
 public:
     Renderer(GameObject *_object);
+
+    ~Renderer();
+
     void start();
     void update();
     void updateComponents();
+
+    void setRenderLayer(int layer);
 
     static void setCamera(GameObject *_camera);
 
@@ -20,16 +25,14 @@ public:
 
     static Point getCameraPosition();
 
-    void setTileIndex(int index);
+    void render();
 
 private:
     static Position *cameraPosition;
 
+    int renderLayer;
+
     SDL_Renderer *renderer;
     Sprite *sprite;
     Position *position;
-
-    //Index on the tile sheet of the tile
-    //Set to -1 if no tileIndex
-    //int tileIndex;
 };

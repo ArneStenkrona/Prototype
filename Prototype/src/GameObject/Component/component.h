@@ -11,6 +11,8 @@ public:
 
     //To be called on initialization in game.
     virtual void start();
+    //To be called on activation of object.
+    virtual void awake();
     //To be called on each frame;
     virtual void update();
 

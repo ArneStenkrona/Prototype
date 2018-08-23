@@ -19,7 +19,7 @@ void Debug_scene0::setUpScene()
     character->getComponent<Sprite>()->setWidthHeight(1,2);
     character->getComponent<Sprite>()->setAnimationIndicies(0,4);
     character->getComponent<Sprite>()->setRenderOffset(0,-24);
-    character->addComponent<Renderer>();
+    character->addComponent<Renderer>()->setRenderLayer(1);
     character->addComponent<Movement>();
 
     character->addComponent<PolygonCollider>()->setStatic(false);
@@ -29,7 +29,6 @@ void Debug_scene0::setUpScene()
     character->getComponent<Animator>()->addClip(AnimationClip{"running", 0, 4, 3 });
     character->getComponent<Animator>()->addClip(AnimationClip{"falling", 32, 33, 7 });
     //character->getComponent<Animator>()->addClip(AnimationClip{ "debug", 127, 127, 7 });
-
 
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(character);

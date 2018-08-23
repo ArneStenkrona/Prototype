@@ -9,6 +9,10 @@ void Component::start()
 {
 }
 
+void Component::awake()
+{
+}
+
 void Component::update()
 {
 }
