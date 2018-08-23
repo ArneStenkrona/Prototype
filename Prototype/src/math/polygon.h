@@ -27,8 +27,11 @@ public:
     //A point where x value is the average of the leftmost vertex x and the rightmost vertex x
     //and y value is the average of the highest vertex y and the lowest vertex by
     Point center();
-
-    Point vertexClosestToOrigin();
+    
+    //gets a point such that a rectangle with dimensions _width*_height
+    //centered at this point would surround the polygon
+    Point getEffectiveOrigin();
+    //Point vertexClosestToOrigin();
 
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);
@@ -39,6 +42,7 @@ protected:
     //This sets the dimensions of the shape
     //Should be called everytime the shape is altered
     void setDimensions();
-
-
+    //Point where x-coordinate is x-coord of leftmost vertex
+    //and y-coordinate is y-coord of topmost vertex
+    Point effectiveOrigin;
 };

@@ -69,33 +69,21 @@ Polyshape PolygonCollider::getPolygon()
 
 vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
 {
-
     //Tuple containing time of collision, where 0.0 is the beginning of the frame and 1.0 is the end,
     //And the corresponding collider
     vector<tuple<double, PolygonCollider*>> possibleCollisions = vector<tuple<double, PolygonCollider*>>();
     vector<Collision*> collisions;
 
     bool collided = false;
-
-    int numOfCol = 0;
-
+ 
     for each (PolygonCollider *b in *B) {
         if (a != b) {
             Point colNorm;
             double colTime = 1.0;
-            Point relVel;
+            Point relVel = a->relativeVelocity(b);
 
-            //Set relative velocity
-            if (b->isStatic) {
-                relVel = a->velocity->velocity;
-            }
-            else {
-                relVel = a->velocity->velocity - b->velocity->velocity;
-            }
             if (checkCollision(a, b, colNorm, colTime)) {
-
                 possibleCollisions.push_back({ colTime, b });
-                numOfCol++;
                 collided = true;
             }
         }
@@ -108,14 +96,14 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
         
         int i = 0;
         for each (tuple<double, PolygonCollider*> col in possibleCollisions) {
-            //Normal of the plan of b that a collides with
+            //Normal of the plane of b that a collides with
             Point collisionNormal;
             //Time of collision, where 0.0 is the beginning of the frame and 1.0 is the end
             double collisionTime = 1.0;
                                    
             if (checkCollision(a, get<1>(col), collisionNormal, collisionTime)) {
-
-                    if (a->relativeVelocity(get<1>(col)).dot(collisionNormal) < 0.000001) {
+                    //Check if A is actually approaching other collider
+                    if (a->relativeVelocity(get<1>(col)).normalized().dot(collisionNormal) < 0.000001) {
                     //Velocity required to reach collision
                     Point velC = a->velocity->velocity * collisionTime;
                     //Overlapping velocity
@@ -126,15 +114,16 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
                     //Is it a vertex to vertex collision?
                     bool vToV = false;
                     for (int i = 0; i < a->polygon.numberOfVertices; i++) {
-                        Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
+                        Point aVertex = a->polygon.vertices[i] + a->position->position + correctedVelocity;
                         for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
                             Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
-                            if ((aVertex).distanceTo(bVertex) < 0.000001) {
-                                for (int k = 0; k < a->polygon.numberOfVertices; k++) {
-                                    if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
+
+                            if ((aVertex).distanceTo(bVertex) < 0.01) {
+                                //for (int k = 0; k < a->polygon.numberOfVertices; k++) {
+                                    //if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
                                         vToV = true;
-                                    }
-                                }
+                                    //}
+                                //}
                             }
                         }
                     }
@@ -151,12 +140,10 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
                         else {
                             a->velocity->velocity = correctedVelocity;
                         }
-
                     }
                 }            
             }
         }
-
             return collisions;
     }
     return vector<Collision*>();

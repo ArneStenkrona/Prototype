@@ -56,7 +56,7 @@ vector<PolygonCollider*>* QuadTree::retrieve(vector<PolygonCollider*> *returnCol
         }
     }
     //Position of the box
-    Point colliderPos = collider->getPosition();
+    Point colliderPos = collider->getPosition() + collider->getPolygon().getEffectiveOrigin();
     //dimensions of the box
     Point colliderDimensions;
 
@@ -153,7 +153,7 @@ int QuadTree::getIndex(PolygonCollider * collider)
     double horizontalMidpoint = position.y + (bounds.y / 2);
 
     //Position of the box
-    Point colliderPos = collider->getPosition();
+    Point colliderPos = collider->getPosition() + collider->getPolygon().getEffectiveOrigin();
     //dimensions of the box
     Point colliderDimensions;
 
@@ -190,7 +190,7 @@ int QuadTree::getIndex(PolygonCollider * collider)
             index = 2;
         }
     }
-    //Object can completely fit within the right quadrands
+    //Object can completely fit within the right quadrants
     else if (colliderPos.x > verticalMidpoint) {
         if (topQuadrant) {
             index = 0;

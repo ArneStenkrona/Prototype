@@ -4,8 +4,6 @@
 Collision::Collision(PolygonCollider * col, PolygonCollider *otherCol, Point colN, double colT) : 
 collider(col), otherCollider(otherCol), collisionNormal(colN), collisionTime(colT)
 {
-    //deleteCollision(col, otherCol);
-    //ongoingCollisions[col].insert(this);
 }
 
 PolygonCollider * Collision::getCollider()

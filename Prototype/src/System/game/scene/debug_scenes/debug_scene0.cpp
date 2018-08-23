@@ -28,6 +28,8 @@ void Debug_scene0::setUpScene()
     character->addComponent<Animator>()->addClip(AnimationClip{"idle", 16, 21, 7 });
     character->getComponent<Animator>()->addClip(AnimationClip{"running", 0, 4, 3 });
     character->getComponent<Animator>()->addClip(AnimationClip{"falling", 32, 33, 7 });
+    //character->getComponent<Animator>()->addClip(AnimationClip{ "debug", 127, 127, 7 });
+
 
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(character);

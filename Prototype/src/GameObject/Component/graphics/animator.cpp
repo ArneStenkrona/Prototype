@@ -55,7 +55,7 @@ void Animator::playClip(string clipName, bool transition)
         transitionFrames = (currentClip->endIndex - sprite->getTileIndex()) * currentClip->frameFactor;
     }
     else {
-        transitionFrames = -1;
+        transitionFrames = INT_MIN;
     }
         inTransition = true;
         queuedClip = &animationClips[clipName];

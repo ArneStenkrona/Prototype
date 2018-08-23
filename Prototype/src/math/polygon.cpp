@@ -66,6 +66,11 @@ Point Polyshape::center()
     return Point((leftMostX + rightMostX) / 2, (highestY + lowestY) / 2);
 }
 
+Point Polyshape::getEffectiveOrigin()
+{
+    return effectiveOrigin;
+}
+/*
 Point Polyshape::vertexClosestToOrigin()
 {
     Point closest;
@@ -80,7 +85,7 @@ Point Polyshape::vertexClosestToOrigin()
     }
 
     return closest;
-}
+}*/
 
 Polyshape Polyshape::parsePolygon(std::string s)
 {
@@ -139,7 +144,7 @@ void Polyshape::setDimensions()
             maxY = vertices[i].y;
         }
     }
-
+    effectiveOrigin = Point(minX,minY);
     _width = std::abs(maxX - minX);
     _height = std::abs(maxY - minY);
 

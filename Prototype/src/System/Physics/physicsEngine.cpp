@@ -21,6 +21,7 @@ set<tuple<PolygonCollider*, PolygonCollider*>> currentCollisions = set<tuple<Pol
 set<tuple<PolygonCollider*, PolygonCollider*>> previousCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
 
 //QuadTree to reduce unnecessary physics calculations
+//Argument for bounds should be dependent on room size
 QuadTree quad = QuadTree(0, Point(0, 0), Point(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2));
 
 //Updates the quad tree with all active hitboxes

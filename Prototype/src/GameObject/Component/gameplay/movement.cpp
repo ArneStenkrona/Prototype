@@ -30,17 +30,7 @@ void Movement::onCollisionEnter(Collision * collision)
 
 void Movement::onColliding(Collision *collision)
 {
-    if (velocity->velocity.dot(collision->collisionNormal) < 0.000001) {
-        if (collision->collisionTime < 0.0) {
-            position->position -= collision->collisionNormal * collision->collisionTime - 0.001 * velocity->velocity;
-            Point perpNormal = Point(-collision->collisionNormal.y, collision->collisionNormal.x);
-            velocity->velocity = velocity->velocity.dot(perpNormal) * perpNormal;
 
-        }
-        else {
-            velocity->velocity = collision->correctedVelocity();
-        }
-    }
     if (collision->collisionNormal.dot(Point::up) < 0.000001)
         grounded = true;
 
@@ -59,8 +49,6 @@ void Movement::start()
 
 void Movement::update()
 {
-
-
     //Initalize direction vector to 0,0
     Point direction = Point();
 
@@ -109,6 +97,7 @@ void Movement::update()
         animator->setSpeedFactor(1);
         break;
     }
+    
     prevState = state;
 
     direction = direction.normalized();

@@ -26,9 +26,4 @@ private:
     PolygonCollider * collider;
     //The collider we hit
     PolygonCollider *otherCollider;
-
-    //All ongoing collisions
-    static std::map<const PolygonCollider*, std::set<Collision*>> ongoingCollisions;
-    //All collisions from previous frame
-    static std::map<const PolygonCollider*, std::set<Collision*>> previousFrameCollisions;
 };
