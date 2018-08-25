@@ -23,12 +23,14 @@
 
 Room::Room(string _file_path) : file_path(_file_path), _width(-1), _height(-1)
 {
+    parallaxBackground = new ParallaxBackground(Point::empty);
 }
 
 Room::~Room()
 {
     unload();
-    background = NULL;
+    delete(parallaxBackground);
+    parallaxBackground = NULL;
 }
 
 void Room::readFromFile()
@@ -47,8 +49,9 @@ void Room::readFromFile()
 
         getline(infile, line);
         backgroundIndex = toDigit(line[0]);
-        background = &TextureManager::background_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))];
-
+        parallaxBackground->addBackground(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][0]);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 2);
+        
         getline(infile, line);
         double posX = atof(line.c_str());
         getline(infile, line);
@@ -210,6 +213,11 @@ void Room::saveToFile(string path)
     }
     outFile << buffer;
     outFile.close();
+}
+
+void Room::renderBackground(Point position)
+{
+    parallaxBackground->renderParallaxLayers(position);
 }
 
 Point Room::getDimensions()

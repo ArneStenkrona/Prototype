@@ -21,7 +21,7 @@ void EditorWindow::update()
     SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(windowRenderer);
     //Render the background
-    activeRoom->background->render(0,0);
+    activeRoom->renderBackground(Point(posX,posY));
 
     //Render the tiles of the room
     renderTiles();

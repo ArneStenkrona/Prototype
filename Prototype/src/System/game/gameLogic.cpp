@@ -38,7 +38,7 @@ void updateGameLogic()
 void drawBackground()
 {
     if (currentScene != NULL) {
-        currentScene->getRoom()->background->render(0, 0);
+        currentScene->getRoom()->renderBackground(Renderer::getCameraPosition());
     }
 }
 

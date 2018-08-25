@@ -2,7 +2,7 @@
 #include <string>
 
 std::vector<LTexture> TextureManager::tile_textures;
-std::vector<LTexture> TextureManager::background_textures;
+std::vector<std::vector<LTexture>> TextureManager::background_layer_textures;
 std::vector<LTexture> TextureManager::miscellaneous;
 std::vector<LTexture> TextureManager::spriteSheets;
 
@@ -33,10 +33,15 @@ void TextureManager::initalizeTextureManager()
     miscellaneous[0].loadFromFile("Assets/textures/Miscellaneous/delete.png");
 
 
-    background_textures.resize(TOTAL_BACKGROUND_TEXTURES);
+    background_layer_textures.resize(TOTAL_BACKGROUND_TEXTURES);
 
     for (int i = 0; i < TOTAL_BACKGROUND_TEXTURES; i++) {
-        background_textures.push_back(LTexture());
+        background_layer_textures.push_back(std::vector<LTexture>());
+        //Right now a background layer is limited to 5 parallax layers because of this for loop
+        //This loop needs to be replaced by something more clever
+        for (int j = 0; j < 5; j++) {
+            background_layer_textures[i].push_back(LTexture());
+        }
     }
 
     for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
@@ -44,7 +49,9 @@ void TextureManager::initalizeTextureManager()
         spriteSheets[i].loadFromFile(sheetPaths[i]);
     }
 
-    background_textures[DEFAULT_BACKGROUND_TEXTURE].loadFromFile("Assets/textures/Backgrounds/purple background.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/parallax1.png");
+
 
 }
 
@@ -77,7 +84,9 @@ void TextureManager::closeTextureManager()
     }
 
     for (int i = 0; i < TOTAL_BACKGROUND_TEXTURES; i++) {
-        background_textures[i].free();
+        for each (LTexture tex in background_layer_textures[i]) {
+            tex.free();
+        }
     }
 }
 

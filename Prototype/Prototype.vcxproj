@@ -178,6 +178,7 @@
     <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\graphicsEngine.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
+    <ClInclude Include="src\System\graphics\parallaxBackground.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
     <ClInclude Include="src\System\graphics\TileMap.h" />
     <ClInclude Include="src\System\GUI\Window\EditorWindow.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\graphicsEngine.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
+    <ClCompile Include="src\System\graphics\parallaxBackground.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
     <ClCompile Include="src\System\GUI\Window\EditorWindow.cpp" />

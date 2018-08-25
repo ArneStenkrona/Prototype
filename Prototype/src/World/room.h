@@ -6,6 +6,7 @@
 #include "math/point.h"
 #include "System/graphics/textureManager.h"
 #include "World/Tile.h"
+#include "System\graphics\parallaxBackground.h"
 
 class Room {
 public:
@@ -24,8 +25,9 @@ public:
     void saveToFile();
 
 
-    //Background texture of this room
-    LTexture *background;
+
+    void renderBackground(Point position);
+
     //Gets a point representing the width and height of this room
     Point getDimensions();
 
@@ -54,6 +56,10 @@ private:
 
     int tileMapIndex;
     int backgroundIndex;
+
+    //Background texture of this room
+    //LTexture *background;
+    ParallaxBackground *parallaxBackground;
 
     //Position of the room in world space
     Point position;

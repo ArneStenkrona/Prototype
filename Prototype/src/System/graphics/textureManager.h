@@ -25,7 +25,7 @@ public:
 
     static enum BACKGROUND_TEXTURE_NAMES
     {
-        DEFAULT_BACKGROUND_TEXTURE,
+        DEFAULT_BACKGROUND_LAYER,
         TOTAL_BACKGROUND_TEXTURES
     };
 
@@ -51,7 +51,7 @@ public:
     //Vector of all tile textures
     static std::vector<LTexture> tile_textures;
     //Vector of all background textures
-    static std::vector<LTexture> background_textures;
+    static std::vector<std::vector<LTexture>> background_layer_textures;
 
     //Misc textures
     static std::vector<LTexture> miscellaneous;
