@@ -18,6 +18,8 @@ public:
 
     void addBackground(LTexture *bg);
 
+    void setOrigin(Point p);
+
 private:
     //The layers are centered at the origin
     Point origin;
@@ -25,7 +27,7 @@ private:
     //Background that will be rendered first and without parallax scrolling
     LTexture *background;
     //Tuple consisting of parallax layers and their respective depths
-    //Sorted in ascending order
+    //Sorted in descending order
     vector<tuple<LTexture*, double>> parallaxLayers;
 
     double depthOfField;

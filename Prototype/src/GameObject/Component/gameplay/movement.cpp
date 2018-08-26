@@ -113,7 +113,7 @@ void Movement::update()
 
     //Add gravity
     if (velocity->velocity.y < 10) {
-        velocity->velocity += Point::up * 0.6;
+        velocity->velocity += Point::up * 0.4;
     }
 
     if (getKeyDown(INPUT_KEY_SPACE)) {

@@ -50,7 +50,9 @@ void Room::readFromFile()
         getline(infile, line);
         backgroundIndex = toDigit(line[0]);
         parallaxBackground->addBackground(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][0]);
-        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 2);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 1);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][2], 4);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][3], 8);
         
         getline(infile, line);
         double posX = atof(line.c_str());
@@ -134,6 +136,7 @@ void Room::readFromFile()
 
     _width = sizeX * 32.0;
     _height = sizeY * 32.0;
+    parallaxBackground->setOrigin(Point(0,0));// _width / 2, _height / 2));
 }
 
 void Room::unload()

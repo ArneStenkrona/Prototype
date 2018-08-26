@@ -49,8 +49,10 @@ void TextureManager::initalizeTextureManager()
         spriteSheets[i].loadFromFile(sheetPaths[i]);
     }
 
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background.png");
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/parallax1.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background2.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/plx0.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][2].loadFromFile("Assets/textures/Backgrounds/plx1.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][3].loadFromFile("Assets/textures/Backgrounds/plx2.png");
 
 
 }
