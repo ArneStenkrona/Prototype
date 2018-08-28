@@ -64,7 +64,7 @@ void closeScene()
 
 void gameLoop() {
 
-    gameWindow = new LWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y);
+    gameWindow = GraphicsEngine::createGameWindow();
 
     //Main loop flag
     bool quit = false;
@@ -92,46 +92,33 @@ void gameLoop() {
         capTimer.start();
         //Calculate and correct fps
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-        if (avgFPS > 2000000)
-        {
-            avgFPS = 0;
-        }
+        if (avgFPS > 2000000) avgFPS = 0;
+
         //Set text to be rendered
         timeText.str("");
         timeText << "Average Frames Per Second (With Cap)" << avgFPS;
 
-        //Clear screen
-        SDL_SetRenderDrawColor(gameWindow->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gameWindow->getRenderer());
-
+        GraphicsEngine::clearWindow();
         updatePhysics();
-
         updateGameLogic();
-
-        GraphicsEngine::updateGraphics();
-
+        GraphicsEngine::renderGraphics();
         updateInputManager();
-
-        //drawQuadTree();
-
-        //Update screen
-        SDL_RenderPresent(gameWindow->getRenderer());
+        //drawQuadTree(); //This will not work until this is put in GraphicsEngine
 
         //If frame finished early
         int frameTicks = capTimer.getTicks();
-        if (frameTicks < SCREEN_TICK_PER_FRAME) {
+        if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
             //Wait remaining time
-            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+            SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
         }
         else {
             float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-            std::cout << "FPS LOW: " << avgFPS << ". Expected: " << SCREEN_FPS << std::endl;
+            std::cout << "FPS LOW: " << avgFPS << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
         }
         countedFrames++;
         currentFrame++;
 
         LWindow::updateAll();
     }
-
     closeGameLogic();
 }

@@ -5,10 +5,11 @@
 #include <algorithm>
 #include "math\rectangle.h"
 #include "math\lTimer.h"
+#include "System\graphics\graphicsEngine.h"
 
 Editor::Editor()
 {
-    editorWindow = new EditorWindow(SCREEN_WIDTH,SCREEN_HEIGHT,SCALE_X,SCALE_Y, NULL);
+    editorWindow = GraphicsEngine::createEditorWindow();
     //Initalize input Manager
     initializeInputManager();
     //Initalize texture manager
@@ -61,9 +62,9 @@ void Editor::run()
             }
             //If frame finished early
             int frameTicks = capTimer.getTicks();
-            if (frameTicks < SCREEN_TICK_PER_FRAME) {
+            if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
                 //Wait remaining time
-                SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+                SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
             }
             countedFrames++;
 

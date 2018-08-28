@@ -1,5 +1,4 @@
 #include "lwindow.h"
-#include "System\graphics\global_graphical_variables.h"
 #include "System\IO\inputManager.h"
 
 LWindow::LWindow(int _screen_width, int _screen_height, 
@@ -116,7 +115,7 @@ bool LWindow::init()
     //Initializiation flag
     bool success = true;
         //Create window
-        gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN);
+        gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
         if (gWindow == NULL) {
             printf("Window could not be created! DSL_Error: %s\n", SDL_GetError());
             success = false;
@@ -145,9 +144,7 @@ bool LWindow::init()
                 }
             }
         }
-
-        ACTIVE_RENDERER = windowRenderer;
-    
+    //ACTIVE_RENDERER = windowRenderer; 
     return success;
 }
 

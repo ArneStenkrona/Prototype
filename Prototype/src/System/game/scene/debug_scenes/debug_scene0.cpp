@@ -30,6 +30,14 @@ void Debug_scene0::setUpScene()
     character->getComponent<Animator>()->addClip(AnimationClip{"falling", 32, 33, 7 });
     //character->getComponent<Animator>()->addClip(AnimationClip{ "debug", 127, 127, 7 });
 
+    GameObject *testRot = new GameObject();
+    testRot->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
+    testRot->getComponent<Sprite>()->setTileIndex(4);
+    testRot->addComponent<Renderer>();
+    testRot->addComponent<Position>();
+    testRot->getComponent<Position>()->position = Point(50,50);
+    testRot->addComponent<Rotation>()->rotation = 45;
+
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(character);
     Renderer::setCamera(camera);

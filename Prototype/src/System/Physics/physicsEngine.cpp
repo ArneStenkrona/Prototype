@@ -2,7 +2,7 @@
 #include "GameObject/gameObject.h"
 #include "System/game/gameLogic.h"
 #include "data_structures/quadTree.h"
-#include "System/graphics/global_graphical_variables.h"
+#include "System/graphics/graphicsEngine.h"
 #include <vector>
 #include <tuple>
 #include <iostream>
@@ -22,7 +22,7 @@ set<tuple<PolygonCollider*, PolygonCollider*>> previousCollisions = set<tuple<Po
 
 //QuadTree to reduce unnecessary physics calculations
 //Argument for bounds should be dependent on room size
-QuadTree quad = QuadTree(0, Point(0, 0), Point(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2));
+QuadTree quad = QuadTree(0, Point(0, 0), Point(GraphicsEngine::SCREEN_WIDTH * 2, GraphicsEngine::SCREEN_HEIGHT * 2));
 
 //Updates the quad tree with all active hitboxes
 void updateQuad() {

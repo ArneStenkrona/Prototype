@@ -4,6 +4,7 @@
 #include "../geometry/position.h"
 #include "sprite.h"
 #include "camera.h"
+#include "GameObject\Component\geometry\rotation.h"
 
 class GameObject;
 
@@ -35,4 +36,5 @@ private:
     SDL_Renderer *renderer;
     Sprite *sprite;
     Position *position;
+    Rotation *rotation;
 };

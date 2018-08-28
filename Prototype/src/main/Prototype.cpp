@@ -9,40 +9,28 @@
 #include <sstream>
 #include "Prototype.h"
 #include "../math/lTimer.h"
-#include "../System/graphics/global_graphical_variables.h"
 #include "../System/IO/inputManager.h"
 #include "../System/Physics/physicsEngine.h"
+#include "System\graphics\graphicsEngine.h"
 #include "System\game\gameLogic.h"
 #include "World\editor\editor.h"
 
 
 bool init()
 {
-
-    //Initializiation flag
-    bool success = true;
-    //Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        printf("SDL could not initialize! SDL_Error; %s\n", SDL_GetError());
-        success = false;
-    }
-
-    return success;
+    return GraphicsEngine::initializeGraphicsEngine();
 }
 
 void close()
 {
-    //Quit SDL subsystems
-    IMG_Quit();
-    SDL_Quit();
+    GraphicsEngine::closeGraphicsEngine();
 }
 
 int main(int argc, char *args[])
 {
 
     
-    if (!init()) {
+    if (!init) {
         printf("Failed to initialize!\n");
     }
     else {

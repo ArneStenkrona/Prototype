@@ -1,18 +1,43 @@
 #pragma once
 #include "GameObject\Component\graphics\renderer.h"
+#include "SDL_image.h"
 #include <vector>
 #include <set>
+#include "System\GUI\Window\lwindow.h"
+#include "System\GUI\Window\EditorWindow.h"
 
 class GraphicsEngine {
 public:
-    //Renderers will render layer by layer
+    static LWindow* createGameWindow();
+    static EditorWindow* createEditorWindow();
 
+    //Renderers will render layer by layer
     static void addToRenderQueue(Renderer *r, int layer);
     static void removeFromRenderQueue(Renderer *r, int layer);
 
+    static SDL_Renderer* getActiveRenderer();
+
+    //Screen dimension constants
+    static const int SCREEN_WIDTH;
+    static const int SCREEN_HEIGHT;
+    static const float SCALE_X;
+    static const float SCALE_Y;
+
+    //Frame rate related
+    static const int SCREEN_FPS;
+    static const int SCREEN_TICK_PER_FRAME;
+    //Clears gameWindow
+    static void clearWindow();
 
     //Renders each layer one by one, 0 is rendered last
-    static void updateGraphics();
+    static void renderGraphics();
+
+    static bool initializeGraphicsEngine();
+    static void closeGraphicsEngine();
 private:
     static vector<set<Renderer*>> renderQueue;
+    //Main renderer in game. 
+    static SDL_Renderer* activeRenderer;
+    //Main window for the game
+    static LWindow* activeWindow;
 };

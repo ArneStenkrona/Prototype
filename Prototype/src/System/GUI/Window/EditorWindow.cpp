@@ -1,7 +1,6 @@
 #include "EditorWindow.h"
 #include "System\IO\inputManager.h"
 #include <iostream>
-#include "System\graphics\global_graphical_variables.h"
 #include "System\graphics\textureManager.h"
 
 const int EditorWindow::gridSize = 32;

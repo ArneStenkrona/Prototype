@@ -2,7 +2,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-#include "global_graphical_variables.h"
 
 class LTexture
 {
@@ -28,6 +27,7 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror, double rotation);
     void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror);
     void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor);
     void renderTile(int x, int y, int tileIndex);

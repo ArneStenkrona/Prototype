@@ -3,7 +3,6 @@
 #include <string>
 #include "../component.h"
 #include "System/graphics/lTexture.h"
-#include "System/graphics/global_graphical_variables.h"
 
 class Sprite : public Component {
 public:
@@ -30,6 +29,7 @@ public:
     int getFrameFactor();
 
     void renderSprite(int x, int y);
+    void renderSprite(int x, int y, double rotation);
 
     void setRenderOffset(int x, int y);
 

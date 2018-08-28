@@ -66,11 +66,16 @@ int Sprite::getFrameFactor()
 
 void Sprite::renderSprite(int x, int y)
 {
+    renderSprite(x, y, 0);
+
+}
+
+void Sprite::renderSprite(int x, int y, double rotation)
+{
     if (tileIndex == -1)
         texture->render((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY);
     else
-        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirror);
-
+        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirror, rotation);
 }
 
 void Sprite::setRenderOffset(int x, int y)

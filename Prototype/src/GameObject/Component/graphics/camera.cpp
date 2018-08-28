@@ -1,11 +1,11 @@
 #include "camera.h"
 #include <iostream>
-#include "System/graphics/global_graphical_variables.h"
+#include "System/graphics/graphicsEngine.h"
 #include "World/room.h"
 #include "System/game/gameLogic.h"
 #include "GameObject/Component/geometry/polygonCollider.h"
 
-const Point Camera::screenOffset = Point(SCREEN_WIDTH / SCALE_X, SCREEN_HEIGHT / SCALE_Y) * 0.5;
+const Point Camera::screenOffset = Point(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y) * 0.5;
 
 Camera::Camera(GameObject * _object) : Component(_object)
 {

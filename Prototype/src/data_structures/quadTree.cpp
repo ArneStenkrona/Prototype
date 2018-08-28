@@ -1,6 +1,6 @@
 #include "quadTree.h"
 #include <iostream>
-#include "System\graphics\global_graphical_variables.h"
+#include "System\graphics\graphicsEngine.h"
 #include "GameObject\Component\graphics\renderer.h"
 
 QuadTree::QuadTree(int pLevel, Point _position, Point _bounds) : level(pLevel), position(_position), bounds(_bounds)
@@ -134,14 +134,13 @@ void QuadTree::draw()
     
     SDL_Rect outlineRect = { position.x - camPos.x, position.y - camPos.y, bounds.x, bounds.y };
 
-    SDL_SetRenderDrawColor(ACTIVE_RENDERER, 0x00, 0x00, 0xFF, 0x00);
-    SDL_RenderDrawRect(ACTIVE_RENDERER, &outlineRect);
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 0x00, 0x00, 0xFF, 0x00);
+    SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);
     if (nodes[0] != nullptr) {
         for (int i = 0; i < 4; i++) {
             nodes[i]->draw();
         }
     }
-
 }
 
 

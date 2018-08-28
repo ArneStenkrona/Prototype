@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\include\msvc;$(ProjectDir)\src;$(ProjectDir)\include\SDL;$(ProjectDir)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\include\msvc;$(ProjectDir)\src;$(ProjectDir)\include\SDL;$(ProjectDir)\include\GL;$(ProjectDir)\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -98,7 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glew32s.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,10 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\SDL2_GFX\SDL2_rotozoom.h" />
     <ClInclude Include="src\data_structures\quadTree.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
     <ClInclude Include="src\GameObject\Component\geometry\polygonCollider.h" />
     <ClInclude Include="src\GameObject\Component\geometry\position.h" />
+    <ClInclude Include="src\GameObject\Component\geometry\rotation.h" />
     <ClInclude Include="src\GameObject\Component\geometry\velocity.h" />
     <ClInclude Include="src\GameObject\Component\graphics\animator.h" />
     <ClInclude Include="src\GameObject\Component\graphics\camera.h" />
@@ -175,7 +177,6 @@
     <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h" />
     <ClInclude Include="src\System\game\scene\scene.h" />
     <ClInclude Include="src\System\graphics\animationClip.h" />
-    <ClInclude Include="src\System\graphics\global_graphical_variables.h" />
     <ClInclude Include="src\System\graphics\graphicsEngine.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
     <ClInclude Include="src\System\graphics\parallaxBackground.h" />
@@ -195,10 +196,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\SDL2_GFX\SDL2_rotozoom.c" />
     <ClCompile Include="src\data_structures\quadTree.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\polygonCollider.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\position.cpp" />
+    <ClCompile Include="src\GameObject\Component\geometry\rotation.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\velocity.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\animator.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\camera.cpp" />
@@ -215,7 +218,6 @@
     <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp" />
     <ClCompile Include="src\System\game\scene\scene.cpp" />
     <ClCompile Include="src\System\graphics\animationClip.cpp" />
-    <ClCompile Include="src\System\graphics\global_graphical_variables.cpp" />
     <ClCompile Include="src\System\graphics\graphicsEngine.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
     <ClCompile Include="src\System\graphics\parallaxBackground.cpp" />

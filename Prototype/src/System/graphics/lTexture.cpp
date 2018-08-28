@@ -1,4 +1,5 @@
 #include "lTexture.h"
+#include "System\graphics\graphicsEngine.h"
 
 LTexture::LTexture()
 {
@@ -34,7 +35,7 @@ bool LTexture::loadFromFile(std::string path)
         SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 
         //Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface(ACTIVE_RENDERER, loadedSurface);
+        newTexture = SDL_CreateTextureFromSurface(GraphicsEngine::getActiveRenderer(), loadedSurface);
         if (newTexture == NULL)
         {
             printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
@@ -71,7 +72,7 @@ void LTexture::render(int x, int y)
 {
     //Set rendering space and render to screen
     SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, NULL, &renderQuad);
+    SDL_RenderCopy(GraphicsEngine::getActiveRenderer(), mTexture, NULL, &renderQuad);
 }
 
 void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip)
@@ -86,7 +87,7 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
     }
 
     //Render to screen
-    SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, clip, &renderQuad, angle, center, flip);
+    SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, clip, &renderQuad, angle, center, flip);
 
 }
 
@@ -100,15 +101,22 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     renderTile(x, y, tileIndex, widthFactor, heightFactor, false);
 }
 
+
 void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror)
 {
-    SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor};
-    SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
-    if (mirror)
-        SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad, 0, NULL, SDL_FLIP_HORIZONTAL);
-        else SDL_RenderCopy(ACTIVE_RENDERER, mTexture, &tileRect, &renderQuad);
+    renderTile(x, y, tileIndex, widthFactor, heightFactor, mirror, 0);
+
 }
 
+void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror, double rotation)
+{
+    SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor };
+    SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
+    if (mirror)
+        
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, NULL, SDL_FLIP_HORIZONTAL);
+    else SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, NULL, SDL_FLIP_NONE);
+}
 
 void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip, SDL_Rect * tileQuad)
 {
@@ -123,14 +131,14 @@ void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Poi
     }
 
     //Render to screen
-    SDL_RenderCopyEx(ACTIVE_RENDERER, mTexture, tileQuad, &renderQuad, angle, center, flip);
+    SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, tileQuad, &renderQuad, angle, center, flip);
 }
 
 void LTexture::renderCenter(int x, int y)
 {
     //Set rendering space and render to screen
     SDL_Rect renderQuad = { x - mWidth / 2, y - mHeight / 2, mWidth, mHeight };
-    SDL_RenderCopy(ACTIVE_RENDERER, mTexture, NULL, &renderQuad);
+    SDL_RenderCopy(GraphicsEngine::getActiveRenderer(), mTexture, NULL, &renderQuad);
 }
 
 int LTexture::getWidth()

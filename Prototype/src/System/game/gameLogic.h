@@ -9,7 +9,6 @@ The list of responsibilites is a bit convoluted as of now, I will work to correc
 #pragma once
 #include "GameObject/gameObject.h"
 #include <list>
-#include "../graphics/global_graphical_variables.h"
 #include "World/room.h"
 #include "SDL_image.h"
 #include "System/GUI/Window/lwindow.h"
