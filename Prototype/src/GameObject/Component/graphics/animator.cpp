@@ -50,9 +50,9 @@ void Animator::setSpeedFactor(double factor)
     animationSpeedFactor = factor;
 }
 
-void Animator::playClip(string clipName, bool transition)
+void Animator::playClip(string clipName, bool transition, bool restart)
 {
-    if (clipName == currentClip->name) return;
+    if (!restart && clipName == currentClip->name) return;
     if (transition) {
         transitionFrames = (currentClip->endIndex - sprite->getTileIndex()) * currentClip->frameFactor;
     }

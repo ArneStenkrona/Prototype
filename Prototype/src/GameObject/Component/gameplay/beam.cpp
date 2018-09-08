@@ -8,6 +8,9 @@ Beam::Beam(GameObject * _object) : Component(_object), counter(-1)
 
 void Beam::start()
 {
+    lineRenderer->setColor(0,0,0,0);
+    lineRenderer->a = Point(0, 0);
+    lineRenderer->b = Point(0,0);
 }
 
 unsigned char colors[] = { 0, 50, 100, 150, 200, 255 };

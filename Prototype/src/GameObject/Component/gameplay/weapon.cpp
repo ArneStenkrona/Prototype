@@ -53,7 +53,7 @@ void Weapon::update()
         }    
         break;
     case shoot:
-        animator->playClip("shoot", false);
+        animator->playClip("shoot", false, true);
         splash->spawn(position->position + (10 *  direction), rotation->rotation, rotation->pivot);
         beam->setPoints(position->position + (13 *  direction) + Point(19,16), position->position + (1000 * direction) + Point(19, 16));
         ownerVelocity->velocity -= direction * 5;

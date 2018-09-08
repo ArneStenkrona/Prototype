@@ -22,7 +22,8 @@ public:
 
     //Queues a clip
     //transition determines if current clip should complete before changing to queued clip
-    void playClip(string clipName, bool transition);
+    //restart determines if clip should be restarted if already playing
+    void playClip(string clipName, bool transition, bool restart = false);
 
 private:
     //The clip currently playing

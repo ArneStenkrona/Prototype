@@ -68,7 +68,7 @@ void Movement::update()
 
     if (getKey(INPUT_KEY_W))
     {
-        direction += Point::down;
+        //direction += Point::down;
     }
     if (getKey(INPUT_KEY_S))
     {
