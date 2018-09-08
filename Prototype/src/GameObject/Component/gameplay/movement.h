@@ -4,7 +4,7 @@
 #include "GameObject/Component/geometry/velocity.h"
 #include "GameObject/Component/graphics/sprite.h"
 #include "GameObject\Component\graphics\animator.h"
-#include "GameObject\Component\graphics\renderer.h"
+#include "GameObject\Component\graphics\spriteRenderer.h"
 #include "weapon.h"
 
 class GameObject;

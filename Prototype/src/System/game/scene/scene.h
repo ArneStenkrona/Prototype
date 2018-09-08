@@ -7,13 +7,6 @@ for swapping theme.
 */
 
 #include "GameObject/gameObject.h"
-#include "GameObject/Component/graphics/camera.h"
-#include "GameObject/Component/graphics/renderer.h"
-#include "GameObject/Component/graphics/sprite.h"
-#include "GameObject/Component/gameplay/movement.h"
-#include "GameObject/Component/geometry/polygonCollider.h"
-#include "GameObject/Component/geometry/position.h"
-#include "GameObject/Component/geometry/velocity.h"
 #include "World/room.h"
 #include "System/Physics/physicsEngine.h"
 

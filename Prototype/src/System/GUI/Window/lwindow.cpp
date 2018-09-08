@@ -162,6 +162,8 @@ bool LWindow::init()
         windowID = SDL_GetWindowID(gWindow);
         //Initialize renderer color
         SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        //Enable alpha in draw mode
+        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
         //Set render scale
         SDL_RenderSetScale(mRenderer, scale_x, scale_y);
         //Initialize PNG loading

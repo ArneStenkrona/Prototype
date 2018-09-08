@@ -1,5 +1,6 @@
 #include "animator.h"
 #include "GameObject/gameObject.h"
+#include <iostream>
 
 AnimationClip nullclip = {"nullclip", 0,0,1 };
 
@@ -15,17 +16,18 @@ void Animator::start()
 
 void Animator::update()
 {
-    if ((int)(transitionFrames * animationSpeedFactor) < 0 && inTransition) {
-        currentClip = queuedClip;
-        queuedClip = nullptr;
-        sprite->setAnimationIndicies(currentClip->startIndex, currentClip->endIndex);
-        transitionFrames = -1;
-        inTransition = false;
-    }
-    else if ((int)(transitionFrames * animationSpeedFactor) > 0 && inTransition) {
+    if (inTransition) {     
         transitionFrames -= 1 / animationSpeedFactor;
+
+        if ((int)(transitionFrames * animationSpeedFactor) < 0) {
+            currentClip = queuedClip;
+            queuedClip = nullptr;
+            sprite->setAnimationIndicies(currentClip->startIndex, currentClip->endIndex);
+            transitionFrames = -1;
+            inTransition = false;
+        }
     }
-        sprite->setFrameFactor((int)(currentClip->frameFactor * animationSpeedFactor));
+    sprite->setFrameFactor((int)(currentClip->frameFactor * animationSpeedFactor));
 }
 
 void Animator::updateComponents()
@@ -55,7 +57,7 @@ void Animator::playClip(string clipName, bool transition)
         transitionFrames = (currentClip->endIndex - sprite->getTileIndex()) * currentClip->frameFactor;
     }
     else {
-        transitionFrames = INT_MIN;
+        transitionFrames = -1;
     }
         inTransition = true;
         queuedClip = &animationClips[clipName];

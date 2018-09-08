@@ -6,7 +6,9 @@
 #include "GameObject\Component\geometry\rotation.h"
 #include "GameObject/Component/graphics/sprite.h"
 #include "GameObject\Component\graphics\animator.h"
-#include "../graphics/renderer.h"
+#include "GameObject\Component\gameplay\splash.h"
+#include "../graphics/spriteRenderer.h"
+#include "beam.h"
 
 class GameObject;
 class Weapon : public Component {
@@ -24,7 +26,22 @@ private:
     Sprite* sprite;
     Animator* animator;
     Rotation* rotation;
-    Renderer* renderer;
+    SpriteRenderer* renderer;
 
     Position* ownerPosition;
+    Velocity* ownerVelocity;
+
+    enum state {
+        idle,
+        shoot,
+        states
+    };
+    //states for state machine
+    //this behaviour should be delegated to an animation data-structure
+    int state;
+    int prevState;
+    int transitionCounter;
+
+    Splash* splash;
+    Beam* beam;
 };

@@ -1,7 +1,6 @@
 #include "quadTree.h"
 #include <iostream>
 #include "System\graphics\graphicsEngine.h"
-#include "GameObject\Component\graphics\renderer.h"
 
 QuadTree::QuadTree(int pLevel, Point _position, Point _bounds) : level(pLevel), position(_position), bounds(_bounds)
 {

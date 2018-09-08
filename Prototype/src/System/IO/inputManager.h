@@ -27,5 +27,7 @@ bool getKeyUp(INPUT_KEYS key);
 bool getKey(INPUT_KEYS key);
 //Sets the referenced variables to mouse coordinates
 void getMouseCoordinates(int *x, int *y);
+//Pops active windows clickqueue
+bool getMouseClick();
 
 #pragma once

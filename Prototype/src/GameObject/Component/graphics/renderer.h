@@ -1,13 +1,8 @@
 #pragma once
-#include "../component.h"
-#include "SDL_image.h"
-#include "../geometry/position.h"
-#include "sprite.h"
-#include "camera.h"
-#include "GameObject\Component\geometry\rotation.h"
+#include "GameObject\Component\component.h"
+#include "GameObject\Component\geometry\position.h"
 
 class GameObject;
-
 class Renderer : public Component {
 public:
     Renderer(GameObject *_object);
@@ -16,7 +11,6 @@ public:
 
     void start();
     void update();
-    void updateComponents();
 
     void setRenderLayer(int layer);
 
@@ -25,15 +19,10 @@ public:
 
     static Point getCameraPosition();
 
-    void render();
+    virtual void render();
 
-private:
+protected:
     static Position *cameraPosition;
 
     int renderLayer;
-
-    SDL_Renderer *renderer;
-    Sprite *sprite;
-    Position *position;
-    Rotation *rotation;
 };

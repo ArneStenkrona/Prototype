@@ -155,7 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObject\Component\gameplay\beam.h" />
+    <ClInclude Include="src\GameObject\Component\gameplay\splash.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\weapon.h" />
+    <ClInclude Include="src\GameObject\Component\graphics\lineRenderer.h" />
+    <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
+    <ClInclude Include="src\GameObject\prefabrications.h" />
     <ClInclude Include="src\SDL2_GFX\SDL2_rotozoom.h" />
     <ClInclude Include="src\data_structures\quadTree.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
@@ -165,7 +170,7 @@
     <ClInclude Include="src\GameObject\Component\geometry\velocity.h" />
     <ClInclude Include="src\GameObject\Component\graphics\animator.h" />
     <ClInclude Include="src\GameObject\Component\graphics\camera.h" />
-    <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
+    <ClInclude Include="src\GameObject\Component\graphics\spriteRenderer.h" />
     <ClInclude Include="src\GameObject\Component\graphics\sprite.h" />
     <ClInclude Include="src\GameObject\Factories\basicObjectFactory.h" />
     <ClInclude Include="src\GameObject\gameObject.h" />
@@ -206,7 +211,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObject\Component\gameplay\beam.cpp" />
+    <ClCompile Include="src\GameObject\Component\gameplay\splash.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\weapon.cpp" />
+    <ClCompile Include="src\GameObject\Component\graphics\lineRenderer.cpp" />
+    <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
+    <ClCompile Include="src\GameObject\prefabrications.cpp" />
     <ClCompile Include="src\SDL2_GFX\SDL2_rotozoom.c" />
     <ClCompile Include="src\data_structures\quadTree.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />
@@ -216,7 +226,7 @@
     <ClCompile Include="src\GameObject\Component\geometry\velocity.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\animator.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\camera.cpp" />
-    <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
+    <ClCompile Include="src\GameObject\Component\graphics\spriteRenderer.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\sprite.cpp" />
     <ClCompile Include="src\GameObject\Factories\basicObjectFactory.cpp" />
     <ClCompile Include="src\GameObject\gameObject.cpp" />

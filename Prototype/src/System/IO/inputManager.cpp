@@ -1,5 +1,6 @@
 #include "inputManager.h"
 #include <iostream>
+#include "System\graphics\graphicsEngine.h"
 
 const Uint8* KeyboardState = SDL_GetKeyboardState(NULL);
 
@@ -7,6 +8,8 @@ const Uint8* KeyboardState = SDL_GetKeyboardState(NULL);
 bool lastKeyStates[NMBR];
 //Keystates updated on keyPress
 bool currentKeyStates[NMBR];
+
+bool mouseClick;
 
 bool initializeInputManager() {
 
@@ -46,6 +49,11 @@ void getMouseCoordinates(int *x, int *y)
     SDL_GetMouseState(x, y);
 }
 
+bool getMouseClick()
+{
+    return mouseClick;
+}
+
 void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_SPACE] = KeyboardState[SDL_SCANCODE_SPACE];
     currentKeyStates[INPUT_KEY_W] = KeyboardState[SDL_SCANCODE_W];
@@ -66,4 +74,5 @@ void updateInputManager() {
     
     updateCurrentKeys();
 
+    mouseClick = GraphicsEngine::getActiveWindow()->popClickQueue();
 }

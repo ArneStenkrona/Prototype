@@ -1,5 +1,13 @@
 #include "debug_scene0.h"
 #include "GameObject\Component\gameplay\weapon.h"
+#include "GameObject/Component/graphics/camera.h"
+#include "GameObject/Component/graphics/spriteRenderer.h"
+#include "GameObject/Component/graphics/sprite.h"
+#include "GameObject/Component/gameplay/movement.h"
+#include "GameObject/Component/geometry/polygonCollider.h"
+#include "GameObject/Component/geometry/position.h"
+#include "GameObject/Component/geometry/velocity.h"
+#include "GameObject\prefabrications.h"
 #include <iostream>
 
 Debug_scene0::Debug_scene0() : Scene()
@@ -14,28 +22,13 @@ void Debug_scene0::setUpScene()
 {
     Scene::setUpScene();
 
-    GameObject *character = new GameObject();
-
-    character->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
-    character->getComponent<Sprite>()->setWidthHeight(1,2);
-    character->getComponent<Sprite>()->setAnimationIndicies(0,4);
-    character->getComponent<Sprite>()->setRenderOffset(0,-24);
-    character->addComponent<Renderer>()->setRenderLayer(1);
-    character->addComponent<Movement>();
-
-    character->addComponent<PolygonCollider>()->setStatic(false);
-    character->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point(3, 0), 26, 39.7));
-    character->getComponent<Position>()->position = Point(50, 50);
-    character->addComponent<Animator>()->addClip(AnimationClip{"idle", 16, 21, 7 });
-    character->getComponent<Animator>()->addClip(AnimationClip{"running", 0, 4, 3 });
-    character->getComponent<Animator>()->addClip(AnimationClip{"falling", 32, 33, 7 });
-    //character->getComponent<Animator>()->addClip(AnimationClip{ "debug", 127, 127, 7 });
+    GameObject *c = character();
 
     GameObject *weapon = new GameObject();
-    weapon->addComponent<Weapon>()->setOwner(character);
+    weapon->addComponent<Weapon>()->setOwner(c);
 
     GameObject *camera = new GameObject();
-    camera->addComponent<Camera>()->setTarget(character);
-    Renderer::setCamera(camera);
+    camera->addComponent<Camera>()->setTarget(c);
+    SpriteRenderer::setCamera(camera);
 }
 
