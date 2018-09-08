@@ -48,6 +48,9 @@ public:
     //Returns the dot product of this and other
     double dot(const Point &other);
 
+    //Returns the angle, in degrees, of the vector
+    double toAngle();
+
     std::string toString();
 };
 

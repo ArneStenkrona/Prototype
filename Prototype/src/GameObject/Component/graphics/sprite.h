@@ -29,11 +29,11 @@ public:
     int getFrameFactor();
 
     void renderSprite(int x, int y);
-    void renderSprite(int x, int y, double rotation);
+    void renderSprite(int x, int y, double rotation, Point pivot);
 
     void setRenderOffset(int x, int y);
 
-    void setMirror(bool b);
+    void setMirror(bool horizontal, bool vertical);
 
 private:
     //How many tiles the sprite occupies;
@@ -60,5 +60,6 @@ private:
     int renderOffsetY;
 
     //mirrrors the sprite
-    bool mirror;
+    bool mirrorH;
+    bool mirrorV;
 };

@@ -88,9 +88,9 @@ void Movement::update()
             animator->playClip("running", false);
         }
         if (getKey(INPUT_KEY_A))
-            sprite->setMirror(true);
+            sprite->setMirror(true, false);
         if (getKey(INPUT_KEY_D))
-            sprite->setMirror(false);
+            sprite->setMirror(false, false);
         break;
     case falling :
         animator->playClip("falling", false);

@@ -13,7 +13,11 @@ public:
     ~LTexture();
 
     //Loads image at specified path
-    bool loadFromFile(std::string path);
+    bool loadFromFile(std::string path, SDL_Renderer* renderer);
+    //Creates blank texture
+    bool createBlank(int width, int height, SDL_Renderer* renderer, SDL_TextureAccess = SDL_TEXTUREACCESS_TARGET);
+    //Set self as render target
+    void setAsRenderTarget(SDL_Renderer* renderer);
 
     //Deallocates texture
     void free();
@@ -27,8 +31,8 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror, double rotation);
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirror);
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV, double rotation, int px, int py);
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV);
     void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor);
     void renderTile(int x, int y, int tileIndex);
 
@@ -39,13 +43,12 @@ public:
     void renderCenter(int x, int y);
 
     //Gets image dimensions
-    int getWidth();
-    int getHeight();
+    inline int getWidth() const { return mWidth; };
+    inline int getHeight() const { return mHeight; };
 
 private:
     //The actual hardware texture
     SDL_Texture* mTexture;
-
     //Image dimensions
     int mWidth;
     int mHeight;

@@ -10,6 +10,7 @@ Wrapperclass for SDL_Window
 #include <string>
 #include <sstream>
 #include <list>
+#include "System\graphics\lTexture.h"
 
 using namespace::std;
 
@@ -33,6 +34,11 @@ public:
 
     bool popClickQueue();
 
+    inline SDL_Window* getSDLWindow() const { return gWindow; };
+
+    void clear();
+    void present();
+
 protected:
     int windowID;
 
@@ -40,7 +46,7 @@ protected:
     //The surface contained by the window
     SDL_Surface* gScreenSurface;
 
-    SDL_Renderer* windowRenderer;
+    SDL_Renderer* mRenderer;
 
     //Screen dimension constants, though I might remove this if I set window to resizable
     const int screen_width;
@@ -67,4 +73,10 @@ private:
     void close();
     //queue for mouse clicks. Might expand this to other events
     list<bool> clickQueue;
+
+    SDL_GLContext context;
+    unsigned int vertexArrayID;
+
+    LTexture frameBuffer;
+
 };

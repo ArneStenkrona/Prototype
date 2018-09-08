@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "math\rectangle.h"
+#include "graphicsEngine.h"
 
 #define toDigit(c) (c-'0')
 
@@ -30,7 +31,7 @@ TileMap::~TileMap()
 
 void TileMap::loadFromFile(string texturePath, string colliderPath)
 {
-    texture.loadFromFile(texturePath);
+    texture.loadFromFile(texturePath, GraphicsEngine::getActiveRenderer());
 
     string roomData;
     ifstream infile;

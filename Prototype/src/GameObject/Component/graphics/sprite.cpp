@@ -3,7 +3,7 @@
 
 Sprite::Sprite(GameObject * _object) : Component(_object), startIndex(-1), endIndex(-1),
 frameFactor(3), frameFactorCounter(0), widthFactor(1), heightFactor(1),
-renderOffsetX(0), renderOffsetY(0), mirror(false)
+renderOffsetX(0), renderOffsetY(0), mirrorH(false), mirrorV(false)
 {
     texture = &TextureManager::tile_textures[TextureManager::DEFAULT_TILE_TEXTURE];
 }
@@ -66,16 +66,16 @@ int Sprite::getFrameFactor()
 
 void Sprite::renderSprite(int x, int y)
 {
-    renderSprite(x, y, 0);
+    renderSprite(x, y, 0, Point(0,0));
 
 }
 
-void Sprite::renderSprite(int x, int y, double rotation)
+void Sprite::renderSprite(int x, int y, double rotation, Point pivot)
 {
     if (tileIndex == -1)
         texture->render((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY);
     else
-        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirror, rotation);
+        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, rotation, pivot.x, pivot.y);
 }
 
 void Sprite::setRenderOffset(int x, int y)
@@ -84,8 +84,9 @@ void Sprite::setRenderOffset(int x, int y)
     renderOffsetY = y;
 }
 
-void Sprite::setMirror(bool b)
+void Sprite::setMirror(bool horizontal, bool vertical)
 {
-    mirror = b;
+    mirrorH = horizontal;
+    mirrorV = vertical;
 }
 

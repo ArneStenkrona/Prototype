@@ -1,5 +1,6 @@
 #include "textureManager.h"
 #include <string>
+#include "graphicsEngine.h"
 
 std::vector<LTexture> TextureManager::tile_textures;
 std::vector<std::vector<LTexture>> TextureManager::background_layer_textures;
@@ -22,15 +23,15 @@ void TextureManager::initalizeTextureManager()
     }
 
     //Load all textures
-    tile_textures[DEFAULT_TILE_TEXTURE].loadFromFile("Assets/textures/Default/default texture.png");
-    tile_textures[FLOOR].loadFromFile("Assets/textures/laboratory/floor.png");
-    tile_textures[WALL].loadFromFile("Assets/textures/laboratory/wall.png");
-    tile_textures[WALL_BASE].loadFromFile("Assets/textures/laboratory/wall base.png");
-    tile_textures[ROCK_0_075].loadFromFile("Assets/textures/laboratory/rock_0-075.png");
-    tile_textures[ROCK_075_1].loadFromFile("Assets/textures/laboratory/rock_075-1.png");
+    tile_textures[DEFAULT_TILE_TEXTURE].loadFromFile("Assets/textures/Default/default texture.png", GraphicsEngine::getActiveRenderer());
+    tile_textures[FLOOR].loadFromFile("Assets/textures/laboratory/floor.png", GraphicsEngine::getActiveRenderer());
+    tile_textures[WALL].loadFromFile("Assets/textures/laboratory/wall.png", GraphicsEngine::getActiveRenderer());
+    tile_textures[WALL_BASE].loadFromFile("Assets/textures/laboratory/wall base.png", GraphicsEngine::getActiveRenderer());
+    tile_textures[ROCK_0_075].loadFromFile("Assets/textures/laboratory/rock_0-075.png", GraphicsEngine::getActiveRenderer());
+    tile_textures[ROCK_075_1].loadFromFile("Assets/textures/laboratory/rock_075-1.png", GraphicsEngine::getActiveRenderer());
 
     miscellaneous.push_back(LTexture());
-    miscellaneous[0].loadFromFile("Assets/textures/Miscellaneous/delete.png");
+    miscellaneous[0].loadFromFile("Assets/textures/Miscellaneous/delete.png", GraphicsEngine::getActiveRenderer());
 
 
     background_layer_textures.resize(TOTAL_BACKGROUND_TEXTURES);
@@ -46,13 +47,13 @@ void TextureManager::initalizeTextureManager()
 
     for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
         spriteSheets.push_back(LTexture());
-        spriteSheets[i].loadFromFile(sheetPaths[i]);
+        spriteSheets[i].loadFromFile(sheetPaths[i], GraphicsEngine::getActiveRenderer());
     }
 
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background2.png");
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/plx0.png");
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][2].loadFromFile("Assets/textures/Backgrounds/plx1.png");
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][3].loadFromFile("Assets/textures/Backgrounds/plx2.png");
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background2.png", GraphicsEngine::getActiveRenderer());
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/plx0.png", GraphicsEngine::getActiveRenderer());
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][2].loadFromFile("Assets/textures/Backgrounds/plx1.png", GraphicsEngine::getActiveRenderer());
+    background_layer_textures[DEFAULT_BACKGROUND_LAYER][3].loadFromFile("Assets/textures/Backgrounds/plx2.png", GraphicsEngine::getActiveRenderer());
 
 
 }

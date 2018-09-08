@@ -8,6 +8,9 @@
 
 class GraphicsEngine {
 public:
+    static bool initializeGraphicsEngine();
+    static void closeGraphicsEngine();
+
     static LWindow* createGameWindow();
     static EditorWindow* createEditorWindow();
 
@@ -32,12 +35,20 @@ public:
     //Renders each layer one by one, 0 is rendered last
     static void renderGraphics();
 
-    static bool initializeGraphicsEngine();
-    static void closeGraphicsEngine();
 private:
     static vector<set<Renderer*>> renderQueue;
     //Main renderer in game. 
     static SDL_Renderer* activeRenderer;
     //Main window for the game
     static LWindow* activeWindow;
+
+    static const bool initSDL();
+    /* Sets version and parameters for openGL
+    OBSERVE: This does not yet call glewInit()
+    as a context may not have yet been created*/
+    static const bool initOpenGL();
+
+    static void experimentGL();
+
+    static LTexture frameBuffer;
 };

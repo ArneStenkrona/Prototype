@@ -21,7 +21,6 @@ public:
     void setRenderLayer(int layer);
 
     static void setCamera(GameObject *_camera);
-
     static GameObject *mainCamera;
 
     static Point getCameraPosition();

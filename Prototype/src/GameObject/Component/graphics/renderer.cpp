@@ -52,7 +52,7 @@ void Renderer::setCamera(GameObject *_camera)
 
 Point Renderer::getCameraPosition()
 {
-    return mainCamera->getComponent<Position>()->position;
+    return cameraPosition->position;
 }
 
 void Renderer::render()
@@ -63,7 +63,7 @@ void Renderer::render()
         Point cameraPos = cameraPosition->position;
         renderPosition = position->position - cameraPos;
         if (rotation)
-            sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation);
+            sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation, rotation->pivot);
         else sprite->renderSprite(renderPosition.x, renderPosition.y);
     }
     else {

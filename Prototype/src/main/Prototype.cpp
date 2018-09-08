@@ -27,10 +27,8 @@ void close()
 }
 
 int main(int argc, char *args[])
-{
-
-    
-    if (!init) {
+{   
+    if (!init()) {
         printf("Failed to initialize!\n");
     }
     else {

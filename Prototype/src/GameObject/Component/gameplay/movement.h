@@ -4,6 +4,8 @@
 #include "GameObject/Component/geometry/velocity.h"
 #include "GameObject/Component/graphics/sprite.h"
 #include "GameObject\Component\graphics\animator.h"
+#include "GameObject\Component\graphics\renderer.h"
+#include "weapon.h"
 
 class GameObject;
 class Movement : public Component {
@@ -28,6 +30,8 @@ private:
     Velocity *velocity;
     Sprite *sprite;
     Animator *animator;
+    Weapon* weapon;
+
     //states for state machine
     //this behaviour should be delegated to an animation data-structure
     int state;

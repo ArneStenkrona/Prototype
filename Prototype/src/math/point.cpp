@@ -1,5 +1,6 @@
 #include "point.h"
 #include <cmath>
+# define M_PI           3.14159265358979323846  /* pi */
 
 Point::Point() : x(0.0), y(0.0)
 {
@@ -100,6 +101,12 @@ double Point::distanceTo(const Point &other)
 double Point::dot(const Point & other)
 {
     return x * other.x + y * other.y;
+}
+
+constexpr int radToDeg(float rad) { return rad * (180 / M_PI); }
+double Point::toAngle()
+{
+    return radToDeg(atan2(y, x));
 }
 
 std::string Point::toString()

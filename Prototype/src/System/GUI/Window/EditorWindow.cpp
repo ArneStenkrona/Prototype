@@ -17,8 +17,7 @@ void EditorWindow::update()
     setActiveTileCoordinates();
 
     //Clear screen
-    SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(windowRenderer);
+    clear();
     //Render the background
     activeRoom->renderBackground(Point(posX,posY));
 
@@ -45,7 +44,7 @@ void EditorWindow::update()
         drawOutlineSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF, 0x00, 0x00, 0x00);
         renderTileSelector();
     }
-    SDL_RenderPresent(windowRenderer);
+    present();
 }
 
 void EditorWindow::setRoom(Room * room)
@@ -56,15 +55,15 @@ void EditorWindow::setRoom(Room * room)
 
 void EditorWindow::drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
     SDL_Rect outlineRect = { x, y, gridSize, gridSize };
-    SDL_SetRenderDrawColor(windowRenderer, r,g,b,a);
-    SDL_RenderDrawRect(windowRenderer, &outlineRect);
+    SDL_SetRenderDrawColor(mRenderer, r,g,b,a);
+    SDL_RenderDrawRect(mRenderer, &outlineRect);
 }
 
 void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Rect fillRect = { x, y, gridSize, gridSize };
-    SDL_SetRenderDrawColor(windowRenderer, r, g, b, a);
-    SDL_RenderFillRect(windowRenderer, &fillRect);
+    SDL_SetRenderDrawColor(mRenderer, r, g, b, a);
+    SDL_RenderFillRect(mRenderer, &fillRect);
 }
 
 void EditorWindow::updateTileSelector(int deltaX, int deltaY)
