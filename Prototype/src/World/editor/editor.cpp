@@ -52,7 +52,7 @@ void Editor::run()
             updateInput();
             updateInputManager();
 
-            if (editorWindow->popClickQueue()) {
+            if (getMouseClick()) {
                 if (editorWindow->withinSelector()) {
                     editorWindow->setSelectedTile();
                 }

@@ -30,7 +30,7 @@ void EditorWindow::update()
     activeRoom->getDimensions(x,y);
     for (int i = 0; i < x; i++) {
         for (int j = 0; j < y ; j++) {
-            drawOutlineSquare((i * gridSize) - posX, (j * gridSize) - posY, 0x00, 0x00, 0x00, 0x00);
+            drawOutlineSquare((i * gridSize) - posX, (j * gridSize) - posY, 0x00, 0x00, 0x00, 0xFF);
         }
     }
 
@@ -38,10 +38,10 @@ void EditorWindow::update()
     if (withinSelector()) {
         renderTileSelector();
         getMouseCoordinates(&x, &y);
-        drawOutlineSquare((x / (gridSize * scale_x)) * gridSize, (y / (gridSize * scale_y)) * gridSize, 0x00, 0xFF, 0xFF, 0x00);
+        drawOutlineSquare((x / (gridSize * scale_x)) * gridSize, (y / (gridSize * scale_y)) * gridSize, 0x00, 0xFF, 0xFF, 0xFF);
     }
     else {
-        drawOutlineSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF, 0x00, 0x00, 0x00);
+        drawOutlineSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF, 0x00, 0x00, 0xFF);
         renderTileSelector();
     }
     present();
@@ -98,8 +98,8 @@ void EditorWindow::renderTileSelector()
     //Render delete button
     TextureManager::miscellaneous[0].render(0, tileSelector.dimX * gridSize);
     //Render selected outline
-    if (selectedTile == -1) drawOutlineSquare(0, 4 * gridSize, 0x00, 0xFF, 0x00, 0x00);
-    else drawOutlineSquare(((selectedTile % 16) - tileSelector.posX) * gridSize, ((selectedTile / 16) - tileSelector.posY) * gridSize, 0x00, 0xFF, 0x00, 0x00);
+    if (selectedTile == -1) drawOutlineSquare(0, 4 * gridSize, 0x00, 0xFF, 0x00, 0xFF);
+    else drawOutlineSquare(((selectedTile % 16) - tileSelector.posX) * gridSize, ((selectedTile / 16) - tileSelector.posY) * gridSize, 0x00, 0xFF, 0x00, 0xFF);
 }
 
 void EditorWindow::renderTiles()
