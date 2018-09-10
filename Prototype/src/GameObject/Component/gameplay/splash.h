@@ -14,6 +14,7 @@ public:
     void update();
     void updateComponents();
 
+    void setClip(AnimationClip clip);
     void spawn(Point pos, double rot, Point pivot);
 private:
     Position * position;
@@ -22,4 +23,6 @@ private:
     Animator* animator;
     Rotation* rotation;
     SpriteRenderer* renderer;
+
+    string clipName;
 };

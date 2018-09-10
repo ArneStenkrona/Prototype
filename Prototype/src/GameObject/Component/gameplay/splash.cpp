@@ -1,7 +1,7 @@
 #include "Gameobject/gameObject.h"
 #include "splash.h"
 
-Splash::Splash(GameObject * _object) : Component(_object)
+Splash::Splash(GameObject * _object) : Component(_object), clipName("flash")
 {
     position = requireComponent<Position>();
     velocity = requireComponent<Velocity>();
@@ -10,7 +10,7 @@ Splash::Splash(GameObject * _object) : Component(_object)
     animator = requireComponent<Animator>();
     renderer = requireComponent<SpriteRenderer>();
 
-    animator->addClip({ "flash", 224, 225, 3 });
+    animator->addClip({ clipName, 224, 225, 3 });
     animator->addClip({ "none", 255, 255, 0 });
 }
 
@@ -28,10 +28,16 @@ void Splash::updateComponents()
 {
 }
 
+void Splash::setClip(AnimationClip clip)
+{
+    animator->addClip(clip);
+    clipName = clip.name;
+}
+
 void Splash::spawn(Point pos, double rot, Point pivot)
 {
     position->position = pos;
     rotation->rotation = rot;
     rotation->pivot = pivot;
-    animator->playClip("flash", false);
+    animator->playClip(clipName, false);
 }

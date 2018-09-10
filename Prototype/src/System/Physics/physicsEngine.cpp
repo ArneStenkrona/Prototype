@@ -13,7 +13,7 @@
 //All existing hitboxes, both active and inactive
 list<PolygonCollider*> ALL_COLLIDERS = list<PolygonCollider*>();
 //All active hitboxes
-list<PolygonCollider*> activeColliders = list<PolygonCollider*>();
+//list<PolygonCollider*> activeColliders = list<PolygonCollider*>();
 
 //Collisions from this frame
 set<tuple<PolygonCollider*, PolygonCollider*>> currentCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
@@ -23,6 +23,8 @@ set<tuple<PolygonCollider*, PolygonCollider*>> previousCollisions = set<tuple<Po
 //QuadTree to reduce unnecessary physics calculations
 //Argument for bounds should be dependent on room size
 QuadTree quad = QuadTree(0, Point(0, 0), Point(GraphicsEngine::SCREEN_WIDTH * 2, GraphicsEngine::SCREEN_HEIGHT * 2));
+
+vector<set<PolygonCollider*>> mask = vector<set<PolygonCollider*>>();
 
 //Updates the quad tree with all active hitboxes
 void updateQuad() {
@@ -50,7 +52,7 @@ void performHitdetection() {
     for each (PolygonCollider *b in ALL_COLLIDERS)
     {
         if (!b->getStatic() && b->getActive()) {
-            vector<PolygonCollider*> returnColliders;
+            set<PolygonCollider*> returnColliders;
             quad.retrieve(&returnColliders, b);
 
             vector<Collision*> collisions = PolygonCollider::calculateCollision(b, &returnColliders);
@@ -83,6 +85,37 @@ void setQuadBounds(Point _bounds)
 void drawQuadTree()
 {
     quad.draw();
+}
+
+void addToMaskLayer(PolygonCollider * col, unsigned int maskLayer)
+{
+    if (maskLayer >= mask.size()) mask.resize(maskLayer + 1);
+    mask[maskLayer].insert(col);
+}
+
+void removeFromMaskLayer(PolygonCollider * col, unsigned int maskLayer)
+{
+    if (maskLayer < mask.size())
+        mask[maskLayer].erase(col);
+}
+
+RayCastHit * raycast(Point a, Point b, int maskLayer)
+{
+    RayCastHit* hit;
+    set<PolygonCollider*> returnColliders;
+    quad.retrieve(&returnColliders, a, b);
+    if (maskLayer >= 0 && maskLayer < mask.size()) {
+        for each (PolygonCollider *c in mask[maskLayer]) {
+            returnColliders.erase(c);
+        }
+    }
+    vector<RayCastHit*> hits = PolygonCollider::checkRayCast(a, b, returnColliders);
+    
+    if (hits.size() > 0) {
+        hits[0]->getOtherCollider()->getGameObject()->rayHit(hits[0]);
+        return hits[0];
+    }
+    return nullptr;
 }
 
 

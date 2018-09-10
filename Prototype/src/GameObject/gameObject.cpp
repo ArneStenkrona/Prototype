@@ -82,22 +82,26 @@ void GameObject::onCollisionEnter(Collision *collision)
 
 void GameObject::onColliding(Collision *collision)
 {
-    if (hasComponent<PolygonCollider>()) {
         for each (Component *comp in components)
         {
             comp->onColliding(collision);
         }
-    }
 }
 
 void GameObject::onCollisionExit()
 {
-    if (hasComponent<PolygonCollider>()) {
         for each (Component *comp in components)
         {
             comp->onCollisionExit();
         }
-    }
+}
+
+void GameObject::rayHit(RayCastHit * hit)
+{
+        for each (Component *comp in components)
+        {
+            comp->rayHit(hit);
+        }
 }
 
 void GameObject::start()

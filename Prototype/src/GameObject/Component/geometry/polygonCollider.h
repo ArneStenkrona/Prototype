@@ -5,6 +5,7 @@
 #include "velocity.h"
 #include "System/game/gameLogic.h"
 #include <vector>
+#include "System\Physics\rayCastHit.h"
 
 //Polygon collider uses a convex polygon for hit detection
 //This uses seperation axis method of collision testing
@@ -43,11 +44,16 @@ public:
 
     //Collision test
     static bool checkCollision(PolygonCollider *a, PolygonCollider *b, Point& n, double &t);
-
     //Checks collision between nonstatic collider a and every collider in b
     //Collision is passed by reference and gives a collision-object with the collision data
-    static vector<Collision*> calculateCollision(PolygonCollider *a, vector<PolygonCollider*> *b);
+    static vector<Collision*> calculateCollision(PolygonCollider *a, set<PolygonCollider*> *b);
 
+    //Checks if raycast hits any of colliders
+    //Returns a vector of rayCastHits sorted by distance from a
+    static vector<RayCastHit*> checkRayCast(Point a, Point b, set<PolygonCollider*> colliders);
+
+    void addToMask(unsigned int maskLayer);
+    void removeFromMask(unsigned int maskLayer);
 
 private:
 

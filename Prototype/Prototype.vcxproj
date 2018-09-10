@@ -204,6 +204,7 @@
     <ClInclude Include="src\math\lTimer.h" />
     <ClInclude Include="src\System\Physics\collision.h" />
     <ClInclude Include="src\System\Physics\physicsEngine.h" />
+    <ClInclude Include="src\System\Physics\rayCastHit.h" />
     <ClInclude Include="src\tools\stringTools.h" />
     <ClInclude Include="src\World\editor\editor.h" />
     <ClInclude Include="src\World\room.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="src\math\lTimer.cpp" />
     <ClCompile Include="src\System\Physics\collision.cpp" />
     <ClCompile Include="src\System\Physics\physicsEngine.cpp" />
+    <ClCompile Include="src\System\Physics\rayCastHit.cpp" />
     <ClCompile Include="src\tools\stringTools.cpp" />
     <ClCompile Include="src\World\editor\editor.cpp" />
     <ClCompile Include="src\World\room.cpp" />

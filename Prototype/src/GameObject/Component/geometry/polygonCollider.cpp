@@ -67,7 +67,7 @@ Polyshape PolygonCollider::getPolygon()
 }
 
 
-vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vector<PolygonCollider*>* B)
+vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<PolygonCollider*>* B)
 {
     //Tuple containing time of collision, where 0.0 is the beginning of the frame and 1.0 is the end,
     //And the corresponding collider
@@ -152,6 +152,115 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, vect
     }
     return vector<Collision*>();
 }
+
+//Courtesy of https://www.codeproject.com/Tips/862988/Find-the-Intersection-Point-of-Two-Line-Segments
+bool LineSegementsIntersect(Point p, Point p2, Point q, Point q2,
+     Point *intersection, bool considerCollinearOverlapAsIntersect = false)
+{
+    Point r = p2 - p;
+    Point s = q2 - q;
+    double rxs = r.cross(s);
+    double qpxr = (q - p).cross(r);
+
+    // If r x s = 0 and (q - p) x r = 0, then the two lines are collinear.
+    if (abs(rxs) < 0.00000001 && abs(qpxr) < 0.00000001)
+    {
+        // 1. If either  0 <= (q - p) * r <= r * r or 0 <= (p - q) * s <= * s
+        // then the two lines are overlapping,
+        if (considerCollinearOverlapAsIntersect)
+            if ((0 <= (q - p).dot(r) && (q - p).dot(r) <= r.dot(r) || (0 <= (p - q).dot(s) && (p - q).dot(s) <= s.dot(s))))
+                return true;
+
+        // 2. If neither 0 <= (q - p) * r = r * r nor 0 <= (p - q) * s <= s * s
+        // then the two lines are collinear but disjoint.
+        // No need to implement this expression, as it follows from the expression above.
+        return false;
+    }
+
+    // 3. If r x s = 0 and (q - p) x r != 0, then the two lines are parallel and non-intersecting.
+    if (abs(rxs) < 0.00001 && abs(qpxr) >= 0.00001)
+        return false;
+
+    // t = (q - p) x s / (r x s)
+    double t = (q - p).cross(s) / rxs;
+
+    // u = (q - p) x r / (r x s)
+
+    double u = (q - p).cross(r) / rxs;
+
+    // 4. If r x s != 0 and 0 <= t <= 1 and 0 <= u <= 1
+    // the two line segments meet at the point p + t r = q + u s.
+    if (abs(rxs) >= 0.00001 && (0 <= t && t <= 1) && (0 <= u && u <= 1))
+    {
+        // We can calculate the intersection point using either t or u.
+        *intersection = p + t * r;
+
+        // An intersection was found.
+        return true;
+    }
+
+    // 5. Otherwise, the two line segments are not parallel but do not intersect.
+    return false;
+}
+
+vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonCollider*> colliders)
+{
+    vector<RayCastHit*> hits;
+
+    for each (PolygonCollider* col in colliders ){
+        const Point * colV = &col->polygon.vertices[0];
+        int aNum = col->polygon.numberOfVertices;
+        const Point offset = col->position->position;
+
+        double minDistance = DBL_MAX;
+
+        Point intersect;
+        Point colPerpNorm;
+        bool intersected = false;
+
+        for (int i = 0; i < aNum; i++) {
+            Point colA = colV[i] + offset;
+            Point colB = colV[(i + 1) % aNum] + offset;
+            double ix, iy;
+            Point in;
+            if (LineSegementsIntersect(a, b, colA, colB, &in, true)) {
+            //if (lineIntersect(colA.x, colA.y, colB.x, colB.y,
+                //a.x, a.y, b.x, b.y, ix, iy)) {
+                intersected = true;
+                //Point in = Point(ix, iy);
+
+                double dist = in.distanceTo(a);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    intersect = in;
+                    colPerpNorm = colA - colB;
+                }
+            }
+        }
+        if (intersected) {
+            Point normal = Point(-colPerpNorm.y, colPerpNorm.x).normalized();
+            if (normal.dot(b - a) > 0) normal = Point::empty - normal;
+            hits.push_back(new RayCastHit(a, intersect, normal, col));
+        }
+    }
+    //Sort after earliest collision
+    std::sort(begin(hits), end(hits), [](RayCastHit* const t1, RayCastHit* const t2) {
+        return t1->getLength() < t2->getLength();
+    });
+    return hits;
+}
+
+void PolygonCollider::addToMask(unsigned int maskLayer)
+{
+    addToMaskLayer(this, maskLayer);
+}
+
+void PolygonCollider::removeFromMask(unsigned int maskLayer)
+{
+    removeFromMaskLayer(this, maskLayer);
+}
+
+
 //Algorithm courtesy of PollyColly
 //A tutorial can be found here: https://github.com/kirbysayshi/oli-demos/blob/master/Polycolly/docs/html/2D%20polygon.htm
 bool PolygonCollider::checkCollision(PolygonCollider *colA, PolygonCollider *colB, Point & _collisionNormal, double & _collisionTime)

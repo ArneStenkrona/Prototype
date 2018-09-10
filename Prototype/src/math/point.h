@@ -22,13 +22,13 @@ public:
 
     //Arithmetic operators
     //Addition
-    Point Point::operator+(const Point &other);
+    Point Point::operator+(const Point &other) const;
     Point& Point::operator+=(const Point  &other);
     //Subtraction
-    Point Point::operator-(const Point &other);
+    Point Point::operator-(const Point &other) const;
     Point& Point::operator-=(const Point  &other);
     //Multiplication
-    Point Point::operator*(const Point &other);
+    Point Point::operator*(const Point &other) const;
     Point& Point::operator*=(const Point &other);
     Point Point::operator*(const double &other) const;
     Point& Point::operator*=(const double &other);
@@ -43,15 +43,18 @@ public:
     Point normalized() const;
 
     //Returns distance between this and other
-    double distanceTo(const Point &other);
+    double distanceTo(const Point &other) const;
 
     //Returns the dot product of this and other
-    double dot(const Point &other);
+    double dot(const Point &other) const;
+
+    //Returns the cross product of this and other
+    double cross(const Point &other) const;
 
     //Returns the angle, in degrees, of the vector
-    double toAngle();
+    double toAngle() const;
 
-    std::string toString();
+    std::string toString() const;
 };
 
 

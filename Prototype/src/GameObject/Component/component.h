@@ -1,5 +1,6 @@
 #pragma once
 #include "System\Physics\collision.h"
+#include "System\Physics\rayCastHit.h"
 
 class GameObject;
 //Abstract class for components.
@@ -27,6 +28,9 @@ public:
     virtual void onColliding(Collision *collision);
     //Called if exiting collision with other entity
     virtual void onCollisionExit();
+
+    //Called on rayHit
+    virtual void rayHit(RayCastHit* hit);
 
     //gameObject getter
     GameObject* getGameObject();

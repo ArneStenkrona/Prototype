@@ -177,6 +177,9 @@
     <ClInclude Include="src\GameObject\Component\graphics\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Physics\rayCastHit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main\Prototype.cpp">
@@ -333,6 +336,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Physics\rayCastHit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

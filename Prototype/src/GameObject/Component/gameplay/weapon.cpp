@@ -2,6 +2,7 @@
 #include "System\graphics\textureManager.h"
 #include "System\IO\inputManager.h"
 #include "GameObject\prefabrications.h"
+#include "System\Physics\physicsEngine.h"
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -17,7 +18,9 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
     animator->addClip(AnimationClip{ "idle", 240, 243, 7 });
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
 
-    splash = muzzleFlash()->getComponent<Splash>();
+    splash1 = muzzleFlash()->getComponent<Splash>();
+    splash2 = shrapnel1()->getComponent<Splash>();
+
     beam = laserBeam()->getComponent<Beam>();
 }
 
@@ -43,7 +46,7 @@ void Weapon::update()
     rotation->rotation = direction.toAngle();
 
     if (ownerPosition)
-        position->position = ownerPosition->position + (13 * direction) - Point(0, 2);
+        position->position = ownerPosition->position + (10 * direction) - Point(0, 2);
 
     switch (state) {
     case idle:
@@ -53,9 +56,19 @@ void Weapon::update()
         }    
         break;
     case shoot:
+        Point origin = position->position + (13 * direction) + Point(19, 16);
+        Point end = position->position + (700 * direction) + Point(19, 16);
+        RayCastHit* hit = raycast(origin, end, 0);
+        if (hit != nullptr) {
+            end = hit->getIntersection();
+            Point n = hit->getNormal();
+            splash2->spawn(end - Point(0, 16), n.toAngle(), Point(0, 16));
+            delete(hit);
+            hit = nullptr;
+        }
         animator->playClip("shoot", false, true);
-        splash->spawn(position->position + (10 *  direction), rotation->rotation, rotation->pivot);
-        beam->setPoints(position->position + (13 *  direction) + Point(19,16), position->position + (1000 * direction) + Point(19, 16));
+        splash1->spawn(position->position + (10 *  direction), rotation->rotation, rotation->pivot);
+        beam->setPoints(origin, end);
         ownerVelocity->velocity -= direction * 5;
         state = idle;
         break;

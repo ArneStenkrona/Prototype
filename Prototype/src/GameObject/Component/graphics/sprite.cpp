@@ -90,3 +90,7 @@ void Sprite::setMirror(bool horizontal, bool vertical)
     mirrorV = vertical;
 }
 
+void Sprite::rayHit(RayCastHit * hit)
+{
+}
+

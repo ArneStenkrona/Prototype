@@ -2,6 +2,7 @@
 #include <list>
 #include "Component/component.h"
 #include "System\Physics\collision.h"
+#include "System\Physics\rayCastHit.h"
 
 using namespace::std;
 
@@ -51,12 +52,15 @@ public:
 
     //THESE COLLISION-METHODS SHOULD ONLY BE ACCESSIBLE BY PHYSICSENGINE
     //THIS NEEDS TO BE FIXED
-    //Calls onCollisionEnter(), if collider is present, on all components
+    //Calls onCollisionEnter() on all components
     virtual void onCollisionEnter(Collision *collision);
-    //Calls onColliding(), if collider is present, on all components
+    //Calls onColliding() on all components
     virtual void onColliding(Collision *collision);
-    //Calls onCollisionExit(), if collider is present, on all components
+    //Calls onCollisionExit() on all components
     virtual void onCollisionExit();
+    
+    //Calls rayHit() on all components
+    virtual void rayHit(RayCastHit* hit);
 
 private:
     //Call start() in every component

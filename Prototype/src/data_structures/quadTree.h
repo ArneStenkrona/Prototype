@@ -18,7 +18,10 @@ public:
     //Splites into for subnodes
     void split();
     //Return all hitboxes that could collide with the given hitbox
-    vector<PolygonCollider*> *retrieve(vector<PolygonCollider*> *returnBoxes, PolygonCollider *box);
+    set<PolygonCollider*> *retrieve(set<PolygonCollider*> *returnColliders, PolygonCollider *box);
+    //Return all colliders that could collide with the given line ab
+    set<PolygonCollider*> *retrieve(set<PolygonCollider*> *returnColliders, Point a, Point b);
+
     /*
     * Insert the object into the quadtree. If the node
     * exceeds the capacity, it will split and add all
@@ -40,7 +43,7 @@ private:
     //int recompile;
 
     int level;
-    vector<PolygonCollider*> colliders;
+    set<PolygonCollider*> colliders;
     //position is the position of this node, bounds are the dimensions
     Point position, bounds;
     QuadTree *nodes[4];

@@ -23,6 +23,7 @@ GameObject * character()
 
     g->addComponent<PolygonCollider>()->setStatic(false);
     g->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point(3, 0), 26, 39.7));
+    g->getComponent<PolygonCollider>()->addToMask(0);
     g->getComponent<Position>()->position = Point(50, 50);
     g->addComponent<Animator>()->addClip(AnimationClip{ "idle", 16, 21, 7 });
     g->getComponent<Animator>()->addClip(AnimationClip{ "running", 0, 4, 3 });
@@ -34,6 +35,14 @@ GameObject * muzzleFlash()
 {
     GameObject* g = new GameObject();
     g->addComponent<Splash>();
+    g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
+    return g;
+}
+
+GameObject * shrapnel1()
+{
+    GameObject* g = new GameObject();
+    g->addComponent<Splash>()->setClip({"shrapnel", 227, 229, 3});
     g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     return g;
 }

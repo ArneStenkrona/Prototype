@@ -12,7 +12,7 @@ Point::Point(double _x, double _y) : x(_x), y(_y)
 
 }
 
-Point Point::operator+(const Point &other)
+Point Point::operator+(const Point &other) const
 {
     Point result = *this;
     result += other;
@@ -27,7 +27,7 @@ Point& Point::operator+=(const Point &other)
     return *this;
 }
 
-Point Point::operator-(const Point &other)
+Point Point::operator-(const Point &other) const
 {
     Point result = *this;
     result -= other;
@@ -42,7 +42,7 @@ Point& Point::operator-=(const Point &other)
     return *this;
 }
 
-Point Point::operator*(const Point &other)
+Point Point::operator*(const Point &other) const
 {
     Point result = *this;
     result *= other;
@@ -93,23 +93,28 @@ Point Point::normalized() const
     }
 }
 
-double Point::distanceTo(const Point &other)
+double Point::distanceTo(const Point &other) const
 {
     return (*this - other).magnitude();
 }
 
-double Point::dot(const Point & other)
+double Point::dot(const Point & other) const
 {
     return x * other.x + y * other.y;
 }
 
+double Point::cross(const Point & other) const
+{
+    return x * other.y - y * other.x;
+}
+
 constexpr int radToDeg(float rad) { return rad * (180 / M_PI); }
-double Point::toAngle()
+double Point::toAngle() const
 {
     return radToDeg(atan2(y, x));
 }
 
-std::string Point::toString()
+std::string Point::toString() const
 {
     return "Point(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 }

@@ -1,6 +1,7 @@
 #include "quadTree.h"
 #include <iostream>
 #include "System\graphics\graphicsEngine.h"
+#include <math.h>
 
 QuadTree::QuadTree(int pLevel, Point _position, Point _bounds) : level(pLevel), position(_position), bounds(_bounds)
 {
@@ -42,7 +43,7 @@ void QuadTree::split()
     nodes[3] = new QuadTree(level + 1, Point(x + subWidth, y + subHeight), Point(subWidth, subHeight));
 }
 
-vector<PolygonCollider*>* QuadTree::retrieve(vector<PolygonCollider*> *returnColliders, PolygonCollider *collider)
+set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders, PolygonCollider *collider)
 {
     int index = getIndex(collider);
     if (index != -1 && nodes[0] != nullptr) {
@@ -83,12 +84,122 @@ vector<PolygonCollider*>* QuadTree::retrieve(vector<PolygonCollider*> *returnCol
 
 
     if (overlap) {
-        returnColliders->reserve(returnColliders->size() + colliders.size());
-        returnColliders->insert(returnColliders->end(), colliders.begin(), colliders.end());
+        //returnColliders->reserve(returnColliders->size() + colliders.size());
+        returnColliders->insert(colliders.begin(), colliders.end());
     }
 
     return returnColliders;
+}
 
+bool segmentIntersectRectangle(double a_rectangleMinX,
+    double a_rectangleMinY,
+    double a_rectangleMaxX,
+    double a_rectangleMaxY,
+    double a_p1x,
+    double a_p1y,
+    double a_p2x,
+    double a_p2y)
+{
+    // Find min and max X for the segment
+
+    double minX = a_p1x;
+    double maxX = a_p2x;
+
+    if (a_p1x > a_p2x)
+    {
+        minX = a_p2x;
+        maxX = a_p1x;
+    }
+
+    // Find the intersection of the segment's and rectangle's x-projections
+
+    if (maxX > a_rectangleMaxX)
+    {
+        maxX = a_rectangleMaxX;
+    }
+
+    if (minX < a_rectangleMinX)
+    {
+        minX = a_rectangleMinX;
+    }
+
+    if (minX > maxX) // If their projections do not intersect return false
+    {
+        return false;
+    }
+
+    // Find corresponding min and max Y for min and max X we found before
+
+    double minY = a_p1y;
+    double maxY = a_p2y;
+
+    double dx = a_p2x - a_p1x;
+
+    if (std::abs(dx) > 0.0000001)
+    {
+        double a = (a_p2y - a_p1y) / dx;
+        double b = a_p1y - a * a_p1x;
+        minY = a * minX + b;
+        maxY = a * maxX + b;
+    }
+
+    if (minY > maxY)
+    {
+        double tmp = maxY;
+        maxY = minY;
+        minY = tmp;
+    }
+
+    // Find the intersection of the segment's and rectangle's y-projections
+
+    if (maxY > a_rectangleMaxY)
+    {
+        maxY = a_rectangleMaxY;
+    }
+
+    if (minY < a_rectangleMinY)
+    {
+        minY = a_rectangleMinY;
+    }
+
+    if (minY > maxY) // If Y-projections do not intersect return false
+    {
+        return false;
+    }
+
+    return true;
+}
+set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*>* returnColliders, Point a, Point b)
+{
+    bool quadrants[] = { false,false,false,false };
+    quadrants[0] = segmentIntersectRectangle(position.x, position.y, position.x + (bounds.x / 2), position.y + (bounds.y / 2),
+        a.x, a.y, b.x, b.y);
+    quadrants[1] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y, position.x + bounds.x, position.y + (bounds.y / 2),
+        a.x, a.y, b.x, b.y);
+    quadrants[2] = segmentIntersectRectangle(position.x, position.y + (bounds.y / 2), position.x + (bounds.x / 2), position.y + bounds.y,
+        a.x, a.y, b.x, b.y);
+    quadrants[3] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y + (bounds.y / 2), position.x + bounds.x, position.y + bounds.y,
+        a.x, a.y, b.x, b.y);
+
+    if (nodes[0] != nullptr) {
+        for (int i = 0; i < 4; i++) {
+            if (true || quadrants[i])
+            {
+                nodes[i]->retrieve(returnColliders, a, b);
+            }
+        }
+    }
+      
+    bool overlap = segmentIntersectRectangle(position.x, position.y, position.x + bounds.x, position.y + bounds.y,
+    a.x, a.y, b.x, b.y);
+
+
+    if (overlap) {
+        //returnColliders->reserve(returnColliders->size() + colliders.size());
+        returnColliders->insert(colliders.begin(), colliders.end());
+    }
+
+    return returnColliders;
 }
 
 void QuadTree::insert(PolygonCollider * collider)
@@ -103,20 +214,32 @@ void QuadTree::insert(PolygonCollider * collider)
         }
     }
 
-    colliders.push_back(collider);
+    colliders.insert(collider);
 
     if (colliders.size() > Max_Objects && level < Max_Levels) {
         if (nodes[0] == nullptr) {
             split();
         }
         int i = 0;
-        while (i < colliders.size()) {
+       /* while (i < colliders.size()) {
             int index = getIndex(colliders[i]);
             if (index != -1) {
                 nodes[index]->insert(colliders[i]);
                 colliders.erase(colliders.begin() + i);
             } else {
                 i++;
+            }
+        }*/
+
+        std::set<PolygonCollider*>::iterator it;
+        for (it = colliders.begin(); it != colliders.end(); ) {
+            int index = getIndex(*it);
+            if (index != -1) {
+                nodes[index]->insert(*it);
+                colliders.erase(it++);
+            }
+            else {
+                it++;
             }
         }
     }
