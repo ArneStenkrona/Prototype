@@ -16,18 +16,26 @@ Renderer::~Renderer()
     GraphicsEngine::removeFromRenderQueue(this, renderLayer);
 }
 
-void Renderer::start()
+void Renderer::onActivate()
 {
     GraphicsEngine::addToRenderQueue(this, renderLayer);
+}
+
+void Renderer::onDeactivate()
+{
+    GraphicsEngine::removeFromRenderQueue(this, renderLayer);
+}
+
+void Renderer::start()
+{
 }
 
 void Renderer::update()
 {
 }
 
-void Renderer::setRenderLayer(int layer)
+void Renderer::setRenderLayer(unsigned int layer)
 {
-    if (layer < 0) throw invalid_argument("Expected positive index");
     GraphicsEngine::removeFromRenderQueue(this, renderLayer);
     renderLayer = layer;
     GraphicsEngine::addToRenderQueue(this, layer);

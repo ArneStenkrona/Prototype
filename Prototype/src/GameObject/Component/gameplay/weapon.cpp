@@ -28,6 +28,10 @@ void Weapon::start()
 
 void Weapon::update()
 {
+}
+
+void Weapon::lateUpdate()
+{
     //Update position and rotation
     int x, y;
     getMouseCoordinates(&x, &y);
@@ -48,7 +52,7 @@ void Weapon::update()
         animator->playClip("idle", true);
         if (getMouseClick()) {
             state = shoot;
-        }    
+        }
         break;
     case shoot:
         Point origin = position->position + (13 * direction) + Point(19, 16);
@@ -63,8 +67,8 @@ void Weapon::update()
         }
         animator->playClip("shoot", false, true);
         Point splashPos = position->position + (10 * direction);
-        ObjectPool::instantiate("flash", { splashPos.x, splashPos.y, rotation->rotation, rotation->pivot.x, rotation->pivot.y});
-        ObjectPool::instantiate("beam", {origin.x, origin.y, end.x, end.y});
+        ObjectPool::instantiate("flash", { splashPos.x, splashPos.y, rotation->rotation, rotation->pivot.x, rotation->pivot.y });
+        ObjectPool::instantiate("beam", { origin.x, origin.y, end.x, end.y });
         ownerVelocity->velocity -= direction * 5;
         state = idle;
         break;

@@ -42,5 +42,8 @@ private:
     //Changes the speed with which animations are played
     double animationSpeedFactor;
 
+    //Sets up the queued clip
+    void playQueued();
+
     Sprite *sprite;
 };

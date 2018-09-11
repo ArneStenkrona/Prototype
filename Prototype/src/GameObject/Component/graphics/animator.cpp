@@ -20,11 +20,7 @@ void Animator::update()
         transitionFrames -= 1 / animationSpeedFactor;
 
         if ((int)(transitionFrames * animationSpeedFactor) < 0) {
-            currentClip = queuedClip;
-            queuedClip = nullptr;
-            sprite->setAnimationIndicies(currentClip->startIndex, currentClip->endIndex);
-            transitionFrames = -1;
-            inTransition = false;
+            playQueued();
         }
     }
     sprite->setFrameFactor((int)(currentClip->frameFactor * animationSpeedFactor));
@@ -53,12 +49,23 @@ void Animator::setSpeedFactor(double factor)
 void Animator::playClip(string clipName, bool transition, bool restart)
 {
     if (!restart && clipName == currentClip->name) return;
+        queuedClip = &animationClips[clipName];
     if (transition) {
         transitionFrames = (currentClip->endIndex - sprite->getTileIndex()) * currentClip->frameFactor;
+        inTransition = true;
     }
     else {
-        transitionFrames = -1;
+        playQueued();
     }
-        inTransition = true;
-        queuedClip = &animationClips[clipName];
+}
+
+void Animator::playQueued()
+{
+    if (queuedClip) {
+        transitionFrames = -1;
+        currentClip = queuedClip;
+        queuedClip = nullptr;
+        sprite->setAnimationIndicies(currentClip->startIndex, currentClip->endIndex);
+        inTransition = false;
+    }
 }

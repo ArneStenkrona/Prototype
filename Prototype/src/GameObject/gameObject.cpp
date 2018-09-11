@@ -13,6 +13,8 @@ GameObject::GameObject(std::string _name) : components(list<Component*>()), acti
 
 set<GameObject*> GameObject::all_gameObjects = set<GameObject*>();
 set<GameObject*> GameObject::just_activated_gameObjects = set<GameObject*>();
+set<GameObject*> GameObject::just_deactivated_gameObjects = set<GameObject*>();
+
 
 GameObject::~GameObject()
 {
@@ -29,6 +31,10 @@ GameObject::~GameObject()
 
 void GameObject::startAll()
 {
+    for each (GameObject* obj in all_gameObjects)
+    {
+        if (obj->active) obj->onActivate();
+    }
     for each (GameObject *obj in all_gameObjects)
     {
         obj->start();
@@ -37,18 +43,29 @@ void GameObject::startAll()
 
 void GameObject::updateAll()
 {
-    for each (GameObject* obj in just_activated_gameObjects)
-    {
-        if (obj->active) obj->awake();
-    }
-
-    //Empty list after all objects has called awake method
-    just_activated_gameObjects.clear();
 
     for each (GameObject *obj in all_gameObjects)
     {
         if (obj->active) obj->update();
     }
+    for each (GameObject *obj in all_gameObjects)
+    {
+        if (obj->active) obj->lateUpdate();
+    }
+
+    for each (GameObject* obj in just_activated_gameObjects)
+    {
+        if (obj->active) obj->onActivate();
+    }
+    //Empty list after all objects has called activate method
+    just_activated_gameObjects.clear();
+
+    for each (GameObject* obj in just_deactivated_gameObjects)
+    {
+        if (obj->active) obj->onDeactivate();
+    }
+    //Empty list after all objects has called activate method
+    just_deactivated_gameObjects.clear();
 }
 
 bool GameObject::getActive()
@@ -58,14 +75,16 @@ bool GameObject::getActive()
 
 void GameObject::setActive(bool b)
 {
-    active = b;
     //This will be sent to gameLogics list of objects activated this frame, which will call this objects start method;
-    if (b)
+    if (b && !active) {
+        just_deactivated_gameObjects.erase(this);
         just_activated_gameObjects.insert(this);
-    else {
-        just_activated_gameObjects.erase(this);
     }
-
+    else if (!b && active) {
+        just_activated_gameObjects.erase(this);
+        just_deactivated_gameObjects.insert(this);
+    }
+    active = b;
 }
 
 void GameObject::updateComponents()
@@ -123,11 +142,19 @@ void GameObject::start()
     }
 }
 
-void GameObject::awake()
+void GameObject::onActivate()
 {
     for each (Component *comp in components)
     {
-        comp->awake();
+        comp->onActivate();
+    }
+}
+
+void GameObject::onDeactivate()
+{
+    for each (Component *comp in components)
+    {
+        comp->onDeactivate();
     }
 }
 
@@ -136,5 +163,13 @@ void GameObject::update()
     for each (Component *comp in components)
     {
         comp->update();
+    }
+}
+
+void GameObject::lateUpdate()
+{
+    for each (Component *comp in components)
+    {
+        comp->lateUpdate();
     }
 }

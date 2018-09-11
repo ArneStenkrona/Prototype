@@ -16,6 +16,7 @@ public:
     Weapon(GameObject *_object);
     void start();
     void update();
+    void lateUpdate();
     void updateComponents();
 
     void setOwner(GameObject* owner);

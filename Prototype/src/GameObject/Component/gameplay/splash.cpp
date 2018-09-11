@@ -21,7 +21,7 @@ void Splash::start()
 }
 
 
-void Splash::awake()
+void Splash::onActivate()
 {
     std::vector<double> args = object->getArgs();
     if (args.size() >= 5) {

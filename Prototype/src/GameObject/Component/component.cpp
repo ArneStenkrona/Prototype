@@ -9,11 +9,19 @@ void Component::start()
 {
 }
 
-void Component::awake()
+void Component::onActivate()
+{
+}
+
+void Component::onDeactivate()
 {
 }
 
 void Component::update()
+{
+}
+
+void Component::lateUpdate()
 {
 }
 

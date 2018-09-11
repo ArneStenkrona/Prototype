@@ -9,10 +9,12 @@ public:
 
     ~Renderer();
 
+    void onActivate();
+    void onDeactivate();
     void start();
     void update();
 
-    void setRenderLayer(int layer);
+    void setRenderLayer(unsigned int layer);
 
     static void setCamera(GameObject *_camera);
     static GameObject *mainCamera;

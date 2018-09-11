@@ -13,9 +13,13 @@ public:
     //To be called on initialization in game.
     virtual void start();
     //To be called on activation of object.
-    virtual void awake();
+    virtual void onActivate();
+    //To be called on inactivation of object
+    virtual void onDeactivate();
     //To be called on each frame;
     virtual void update();
+    //To be called on each frame after update()
+    virtual void lateUpdate();
 
     //Updates all references to components
     virtual void updateComponents();

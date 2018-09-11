@@ -2,13 +2,13 @@
 #include "GameObject\gameObject.h"
 #include "GameObject\objectPool.h"
 
-Beam::Beam(GameObject * _object) : Component(_object), counter(0)
+Beam::Beam(GameObject * _object) : Component(_object), counter(0), contraction(50)
 {
     lineRenderer = requireComponent<LineRenderer>();
 }
 
 bool woke = false;
-void Beam::awake()
+void Beam::onActivate()
 {
     std::vector<double> args = object->getArgs();
     if (args.size() >= 4)
@@ -31,6 +31,18 @@ unsigned char colors[] = { 0, 50, 100, 150, 200, 255 };
 void Beam::update()
 {
     if (counter > -1) {
+        if (contraction) {
+            Point a = lineRenderer->a;
+            Point b = lineRenderer->b;
+            if (a.distanceTo(b) > contraction) {
+                Point direction = (b - a).normalized();
+                lineRenderer->a += direction * contraction;
+            }
+            else {
+                lineRenderer->setColor(0, 0, 0, 0);
+                counter = -1;
+            }
+        }
         lineRenderer->setColor(255, colors[counter], colors[counter], colors[counter]);
         counter--;
     }

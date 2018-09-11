@@ -150,11 +150,9 @@ void GraphicsEngine::renderGraphics()
     for (vector<set<Renderer*>>::reverse_iterator i = renderQueue.rbegin();
         i != renderQueue.rend(); ++i) {
         for each (Renderer *r in (*i)) {
-            if (r->getGameObject()->getActive()) r->render();
+            r->render();
         }
     }
-
-
     activeWindow->present();
 }
 

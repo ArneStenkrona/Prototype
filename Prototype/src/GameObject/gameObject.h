@@ -21,7 +21,7 @@ public:
     //Calls start() for all objects in all_gameobjects
     static void startAll();
     //Call awake() for all objects in just_activated_gameobjects
-    //and update() for all objects in all_gameObjects
+    //and update() and lateUpdate() for all active objects in all_gameObjects
     static void updateAll();
 
     //Gets component of specified type. Returns null if no such component exists
@@ -71,10 +71,14 @@ public:
 private:
     //Call start() in every component
     void start();
-    //Call awake() in every component
-    void awake();
+    //Call onActivate() in every component
+    void onActivate();
+    //Call onDeactivate() in every component
+    void onDeactivate();
     //Call update() in every component
     void update();
+    //Call lateUpdate() in every component
+    void lateUpdate();
 
     //Updates all components references
     void updateComponents();
@@ -91,6 +95,8 @@ private:
     static std::set<GameObject*> all_gameObjects;
     //List of all gameObjects that turned active this frame
     static std::set<GameObject*> just_activated_gameObjects;
+    //List of all gameObjects that turned inactive this frame
+    static std::set<GameObject*> just_deactivated_gameObjects;
 
     std::string name;
 

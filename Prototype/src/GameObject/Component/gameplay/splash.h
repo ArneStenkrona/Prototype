@@ -11,7 +11,7 @@ class Splash : public Component {
 public:
     Splash(GameObject *_object);
     void start();
-    void awake();
+    void onActivate();
     void update();
     void updateComponents();
 

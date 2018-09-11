@@ -6,7 +6,7 @@ class GameObject;
 class Beam : public Component {
 public:
     Beam(GameObject *_object);
-    void awake();
+    void onActivate();
     void start();
     void update();
     void updateComponents();
@@ -16,4 +16,6 @@ public:
 private:
     LineRenderer* lineRenderer;
     int counter;
+    //How fast the beam contracts
+    int contraction;
 };
