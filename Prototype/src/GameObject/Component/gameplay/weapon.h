@@ -41,9 +41,4 @@ private:
     int state;
     int prevState;
     int transitionCounter;
-
-    Splash* splash1;
-    Splash* splash2;
-
-    Beam* beam;
 };

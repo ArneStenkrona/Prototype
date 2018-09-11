@@ -25,6 +25,7 @@ public:
     //restart determines if clip should be restarted if already playing
     void playClip(string clipName, bool transition, bool restart = false);
 
+    inline std::string getCurrentClip() const { return currentClip->name; }
 private:
     //The clip currently playing
     AnimationClip *currentClip;

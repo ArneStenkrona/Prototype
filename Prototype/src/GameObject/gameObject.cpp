@@ -1,17 +1,18 @@
 #include "gameObject.h"
 #include "../System/game/gameLogic.h"
 #include "Component\geometry\polygonCollider.h"
+#include <iostream>
 
 //getComponent() is in header file, due to being a template function
 //setComponent() is in header file, due to being a template function
 
-GameObject::GameObject() : components(list<Component*>()), active(true)
+GameObject::GameObject(std::string _name) : components(list<Component*>()), active(true), name(_name)
 {
-    all_gameObjects.push_back(this);
+    all_gameObjects.insert(this);
 }
 
-list<GameObject*> GameObject::all_gameObjects = list<GameObject*>();
-list<GameObject*> GameObject::just_activated_gameObjects = list<GameObject*>();
+set<GameObject*> GameObject::all_gameObjects = set<GameObject*>();
+set<GameObject*> GameObject::just_activated_gameObjects = set<GameObject*>();
 
 GameObject::~GameObject()
 {
@@ -23,7 +24,7 @@ GameObject::~GameObject()
 
     components.clear();
 
-    all_gameObjects.remove(this);
+    all_gameObjects.erase(this);
 }
 
 void GameObject::startAll()
@@ -36,17 +37,17 @@ void GameObject::startAll()
 
 void GameObject::updateAll()
 {
-    for each (GameObject *obj in just_activated_gameObjects)
+    for each (GameObject* obj in just_activated_gameObjects)
     {
-        obj->awake();
+        if (obj->active) obj->awake();
     }
 
-    //Empty list after all objects has called start method
-    just_activated_gameObjects.empty();
+    //Empty list after all objects has called awake method
+    just_activated_gameObjects.clear();
 
     for each (GameObject *obj in all_gameObjects)
     {
-        obj->update();
+        if (obj->active) obj->update();
     }
 }
 
@@ -59,7 +60,12 @@ void GameObject::setActive(bool b)
 {
     active = b;
     //This will be sent to gameLogics list of objects activated this frame, which will call this objects start method;
-    just_activated_gameObjects.push_back(this);
+    if (b)
+        just_activated_gameObjects.insert(this);
+    else {
+        just_activated_gameObjects.erase(this);
+    }
+
 }
 
 void GameObject::updateComponents()
@@ -102,6 +108,11 @@ void GameObject::rayHit(RayCastHit * hit)
         {
             comp->rayHit(hit);
         }
+}
+
+void GameObject::setArgs(std::vector<double> _args)
+{
+    args = _args;
 }
 
 void GameObject::start()

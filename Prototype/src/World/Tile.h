@@ -10,7 +10,7 @@
 class Tile {
 public:
     Tile(int _tileIndex);
-    Tile(int _tileIndex, optional<Polyshape> _polygon);
+    Tile(int _tileIndex, std::optional<Polyshape> _polygon);
     ~Tile();
 
     bool hasCollider();
@@ -26,6 +26,6 @@ private:
     //Defines texture within the tileset
     int tileIndex;
     //Collider shape, if present
-    optional<Polyshape> polygon;
+    std::optional<Polyshape> polygon;
 
 };

@@ -98,7 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;glew32.lib;glew32s.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;glew32.lib;glew32s.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;glew32s.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;opengl32.lib;glew32s.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,7 +160,9 @@
     <ClInclude Include="src\GameObject\Component\gameplay\weapon.h" />
     <ClInclude Include="src\GameObject\Component\graphics\lineRenderer.h" />
     <ClInclude Include="src\GameObject\Component\graphics\renderer.h" />
-    <ClInclude Include="src\GameObject\prefabrications.h" />
+    <ClInclude Include="src\GameObject\Prefabrications\prefabrication.h" />
+    <ClInclude Include="src\GameObject\objectPool.h" />
+    <ClInclude Include="src\GameObject\Prefabrications\prefabrications.h" />
     <ClInclude Include="src\SDL2_GFX\SDL2_rotozoom.h" />
     <ClInclude Include="src\data_structures\quadTree.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
@@ -217,7 +219,9 @@
     <ClCompile Include="src\GameObject\Component\gameplay\weapon.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\lineRenderer.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\renderer.cpp" />
-    <ClCompile Include="src\GameObject\prefabrications.cpp" />
+    <ClCompile Include="src\GameObject\Prefabrications\prefabrication.cpp" />
+    <ClCompile Include="src\GameObject\objectPool.cpp" />
+    <ClCompile Include="src\GameObject\Prefabrications\prefabrications.cpp" />
     <ClCompile Include="src\SDL2_GFX\SDL2_rotozoom.c" />
     <ClCompile Include="src\data_structures\quadTree.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />

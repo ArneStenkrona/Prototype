@@ -9,6 +9,7 @@
 #include "System\IO\inputManager.h"
 #include "scene\debug_scenes\debug_scene0.h"
 #include <iostream>
+#include "GameObject\objectPool.h"
 
 //The current scene in game
 Scene *currentScene;

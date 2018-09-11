@@ -7,7 +7,8 @@
 #include "GameObject/Component/geometry/polygonCollider.h"
 #include "GameObject/Component/geometry/position.h"
 #include "GameObject/Component/geometry/velocity.h"
-#include "GameObject\prefabrications.h"
+#include "GameObject\Prefabrications\prefabrications.h"
+#include "GameObject\objectPool.h"
 #include <iostream>
 
 Debug_scene0::Debug_scene0() : Scene()
@@ -22,7 +23,7 @@ void Debug_scene0::setUpScene()
 {
     Scene::setUpScene();
 
-    GameObject *c = character();
+    GameObject *c = Character().instantiate();
 
     GameObject *weapon = new GameObject();
     weapon->addComponent<Weapon>()->setOwner(c);
@@ -30,5 +31,9 @@ void Debug_scene0::setUpScene()
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(c);
     SpriteRenderer::setCamera(camera);
+
+    ObjectPool::addToPool(new MuzzleFlash(), 10);
+    ObjectPool::addToPool(new Shrapnel(), 10);
+    ObjectPool::addToPool(new LaserBeam(), 10);
 }
 

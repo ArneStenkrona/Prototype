@@ -8,11 +8,15 @@
 #include "GameObject/Component/geometry/position.h"
 #include "GameObject/Component/geometry/velocity.h"
 #include "GameObject\Component\gameplay\splash.h"
-#include "Component\gameplay\beam.h"
+#include "GameObject\Component\gameplay\beam.h"
 
-GameObject * character()
+Character::Character() : Prefabrication("character")
 {
-    GameObject* g = new GameObject();
+}
+
+GameObject * Character::instantiate()
+{
+    GameObject* g = new GameObject(name);
 
     g->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     g->getComponent<Sprite>()->setWidthHeight(1, 2);
@@ -31,25 +35,37 @@ GameObject * character()
     return g;
 }
 
-GameObject * muzzleFlash()
+MuzzleFlash::MuzzleFlash() : Prefabrication("flash")
 {
-    GameObject* g = new GameObject();
+}
+
+GameObject * MuzzleFlash::instantiate()
+{
+    GameObject* g = new GameObject(name);
     g->addComponent<Splash>();
     g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     return g;
 }
 
-GameObject * shrapnel1()
+Shrapnel::Shrapnel() : Prefabrication("shrapnel")
 {
-    GameObject* g = new GameObject();
-    g->addComponent<Splash>()->setClip({"shrapnel", 227, 229, 3});
+}
+
+GameObject * Shrapnel::instantiate()
+{
+    GameObject* g = new GameObject(name);
+    g->addComponent<Splash>()->setClip({ "shrapnel", 227, 229, 3 });
     g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     return g;
 }
 
-GameObject * laserBeam()
+LaserBeam::LaserBeam() : Prefabrication("beam")
 {
-    GameObject* g = new GameObject();
+}
+
+GameObject * LaserBeam::instantiate()
+{
+    GameObject* g = new GameObject(name);
     g->addComponent<Beam>();
     return g;
 }

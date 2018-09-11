@@ -1,9 +1,22 @@
 #include "beam.h"
 #include "GameObject\gameObject.h"
+#include "GameObject\objectPool.h"
 
-Beam::Beam(GameObject * _object) : Component(_object), counter(-1)
+Beam::Beam(GameObject * _object) : Component(_object), counter(0)
 {
     lineRenderer = requireComponent<LineRenderer>();
+}
+
+bool woke = false;
+void Beam::awake()
+{
+    std::vector<double> args = object->getArgs();
+    if (args.size() >= 4)
+        setPoints(Point(args[0], args[1]), Point(args[2], args[3]));
+    lineRenderer->thickness = 3;
+    lineRenderer->setColor(255, 255, 255, 255);
+    counter = 5;
+    woke = true;
 }
 
 void Beam::start()
@@ -21,6 +34,10 @@ void Beam::update()
         lineRenderer->setColor(255, colors[counter], colors[counter], colors[counter]);
         counter--;
     }
+    else if (woke) {
+        ObjectPool::repool(object);
+        woke = false;
+    }
 }
 
 void Beam::updateComponents()
@@ -32,7 +49,4 @@ void Beam::setPoints(Point a, Point b)
 {
     lineRenderer->a = a;
     lineRenderer->b = b;
-    lineRenderer->thickness = 3;
-    lineRenderer->setColor(255, 255, 255, 255);
-    counter = 5;
 }

@@ -6,6 +6,7 @@ class GameObject;
 class Beam : public Component {
 public:
     Beam(GameObject *_object);
+    void awake();
     void start();
     void update();
     void updateComponents();

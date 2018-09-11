@@ -1,8 +1,9 @@
 #include "weapon.h"
 #include "System\graphics\textureManager.h"
 #include "System\IO\inputManager.h"
-#include "GameObject\prefabrications.h"
+#include "GameObject\Prefabrications\prefabrications.h"
 #include "System\Physics\physicsEngine.h"
+#include "GameObject\objectPool.h"
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -17,18 +18,12 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
     sprite->setTileIndex(240);
     animator->addClip(AnimationClip{ "idle", 240, 243, 7 });
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
-
-    splash1 = muzzleFlash()->getComponent<Splash>();
-    splash2 = shrapnel1()->getComponent<Splash>();
-
-    beam = laserBeam()->getComponent<Beam>();
 }
 
 void Weapon::start()
 {
     state = idle;
     rotation->pivot = Point(16,16);
-    beam->setPoints(Point(0,0), Point(64,64));
 }
 
 void Weapon::update()
@@ -62,13 +57,14 @@ void Weapon::update()
         if (hit != nullptr) {
             end = hit->getIntersection();
             Point n = hit->getNormal();
-            splash2->spawn(end - Point(0, 16), n.toAngle(), Point(0, 16));
+            ObjectPool::instantiate("shrapnel", { end.x, end.y - 16, n.toAngle(), 0, 16 });
             delete(hit);
             hit = nullptr;
         }
         animator->playClip("shoot", false, true);
-        splash1->spawn(position->position + (10 *  direction), rotation->rotation, rotation->pivot);
-        beam->setPoints(origin, end);
+        Point splashPos = position->position + (10 * direction);
+        ObjectPool::instantiate("flash", { splashPos.x, splashPos.y, rotation->rotation, rotation->pivot.x, rotation->pivot.y});
+        ObjectPool::instantiate("beam", {origin.x, origin.y, end.x, end.y});
         ownerVelocity->velocity -= direction * 5;
         state = idle;
         break;

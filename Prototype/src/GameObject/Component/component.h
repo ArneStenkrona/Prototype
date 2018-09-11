@@ -48,8 +48,8 @@ protected:
 template<class T>
 T * Component::requireComponent()
 {
-    if (!is_base_of<Component, T>::value) {
-        throw invalid_argument("Expected Component Type");
+    if (!std::is_base_of<Component, T>::value) {
+        throw std::invalid_argument("Expected Component Type");
     }
     return object->hasComponent<T>() ? object->getComponent<T>() : object->addComponent<T>();
 }

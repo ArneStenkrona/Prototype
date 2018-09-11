@@ -11,11 +11,11 @@ class Splash : public Component {
 public:
     Splash(GameObject *_object);
     void start();
+    void awake();
     void update();
     void updateComponents();
 
     void setClip(AnimationClip clip);
-    void spawn(Point pos, double rot, Point pivot);
 private:
     Position * position;
     Velocity* velocity;
@@ -25,4 +25,6 @@ private:
     SpriteRenderer* renderer;
 
     string clipName;
+
+    bool woke = false;
 };

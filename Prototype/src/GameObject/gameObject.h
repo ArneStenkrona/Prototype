@@ -1,10 +1,10 @@
 #pragma once
 #include <list>
+#include <vector>
+#include <set>
 #include "Component/component.h"
 #include "System\Physics\collision.h"
 #include "System\Physics\rayCastHit.h"
-
-using namespace::std;
 
 //Game objects by default are empty. Components can be added to them to create behaviour.
 //Only one of each component can be held.
@@ -13,7 +13,7 @@ class GameObject {
 public:
 
     //Constructor adds object to list of all gameObjects in gameLogic
-    GameObject();
+    GameObject(std::string _name = "");
 
     //Destructor deletes all components
     ~GameObject();
@@ -50,8 +50,11 @@ public:
     //sets active
     void setActive(bool b);
 
+    inline std::string getName() const { return name; }
+
     //THESE COLLISION-METHODS SHOULD ONLY BE ACCESSIBLE BY PHYSICSENGINE
     //THIS NEEDS TO BE FIXED
+    //ALSO, WHY ARE THEY VIRTUAL?
     //Calls onCollisionEnter() on all components
     virtual void onCollisionEnter(Collision *collision);
     //Calls onColliding() on all components
@@ -61,6 +64,9 @@ public:
     
     //Calls rayHit() on all components
     virtual void rayHit(RayCastHit* hit);
+
+    void setArgs(std::vector<double> _args);
+    inline std::vector<double> getArgs() const { return args; }
 
 private:
     //Call start() in every component
@@ -76,15 +82,22 @@ private:
 
 
     //Components contained by this gameobject
-    list<Component*> components;
+    std::list<Component*> components;
 
     //If active, this gameObject will be updates each frame
     bool active;
 
     //List of all gameObjects
-    static list<GameObject*> all_gameObjects;
+    static std::set<GameObject*> all_gameObjects;
     //List of all gameObjects that turned active this frame
-    static list<GameObject*> just_activated_gameObjects;
+    static std::set<GameObject*> just_activated_gameObjects;
+
+    std::string name;
+
+protected:
+    //arguments that can be used at any time
+    //suggested use is in awake() after pool instantiation
+    std::vector<double> args;
 };
 
 
@@ -93,7 +106,7 @@ template<class T>
 T * GameObject::getComponent()
 {
     if (!std::is_base_of<Component, T>::value) {
-        throw invalid_argument("Expected Component Type");
+        throw std::invalid_argument("Expected Component Type");
         return NULL;
     }
 
@@ -113,7 +126,7 @@ T * GameObject::addComponent()
 {
 
     if (!std::is_base_of<Component, T>::value) {
-        throw invalid_argument("Expected Component Type");
+        throw std::invalid_argument("Expected Component Type");
         return NULL;
     }
 
@@ -133,7 +146,7 @@ void * GameObject::removeComponent()
 {
 
     if (!std::is_base_of<Component, T>::value) {
-        throw invalid_argument("Expected Component Type");
+        throw std::invalid_argument("Expected Component Type");
         return 0;
     }
 
@@ -162,8 +175,8 @@ void * GameObject::removeComponent()
 template<class T>
 bool GameObject::hasComponent()
 {
-    if (!is_base_of<Component, T>::value) {
-        throw invalid_argument("Expected Component Type");
+    if (!std::is_base_of<Component, T>::value) {
+        throw std::invalid_argument("Expected Component Type");
     }
 
     for each  (Component *t in components)
