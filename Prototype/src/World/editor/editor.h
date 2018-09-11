@@ -21,7 +21,7 @@ private:
     Room *activeRoom;
 
     //The selected tile type
-    int selectedTileType;
+    unsigned int tileIndex;
 
     void setTile();
 

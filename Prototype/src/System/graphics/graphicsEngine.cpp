@@ -14,6 +14,7 @@
 #include "opengl\rendererGL.h"
 #include "opengl\vertexBufferLayout.h"
 #include "opengl\textureGL.h"
+#include "World\editor\editor.h"
 
 using namespace::std;
 vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();

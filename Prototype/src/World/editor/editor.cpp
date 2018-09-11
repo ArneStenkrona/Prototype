@@ -52,14 +52,6 @@ void Editor::run()
             updateInput();
             updateInputManager();
 
-            if (getMouseClick()) {
-                if (editorWindow->withinSelector()) {
-                    editorWindow->setSelectedTile();
-                }
-                else {
-                    setTile();
-                }
-            }
             //If frame finished early
             int frameTicks = capTimer.getTicks();
             if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
@@ -67,6 +59,7 @@ void Editor::run()
                 SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
             }
             countedFrames++;
+
 
             LWindow::updateAll();
         }   
@@ -125,6 +118,15 @@ void Editor::updateInput()
             dX += 7;
         }
         editorWindow->updatePosition(dX, dY);
+    }
+
+    if (getKey(MOUSE_LEFT)) {
+        if (editorWindow->withinSelector()) {
+            editorWindow->setSelectedTile();
+        }
+        else {
+            setTile();
+        }
     }
 }
 

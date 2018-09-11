@@ -8,7 +8,7 @@ LWindow::LWindow(int _screen_width, int _screen_height,
                int _scale_x, int _scale_y): gWindow(NULL), mRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
                                         scale_x(_scale_x), scale_y(_scale_y),
-                                        mouseOver(false), clickQueue(list<bool>()),
+                                        mouseOver(false),
                                         vertexArrayID(0)
 {
     if (!init()) {
@@ -70,22 +70,6 @@ void LWindow::getDimensions(int * x, int * y)
     SDL_GetWindowSize(gWindow, x, y);
 }
 
-bool LWindow::popClickQueue()
-{
-
-    bool res;
-
-    if (clickQueue.size() != 0) {
-        res = clickQueue.front();
-        clickQueue.pop_front();
-    }
-    else {
-        res = false;
-    }
-
-    return res;
-}
-
 void LWindow::clear()
 {
     SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -121,10 +105,28 @@ void LWindow::pollEvent(SDL_Event e)
             }
         }
         else {
-            switch (e.type)
-            {
+            switch (e.type) {
             case SDL_MOUSEBUTTONDOWN:
-                clickQueue.push_back(true);
+                switch (e.button.button)
+                {
+                case SDL_BUTTON_LEFT:
+                    leftMouse = true;
+                    break;
+                case SDL_BUTTON_RIGHT:
+                    rightMouse = true;
+                    break;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                switch (e.button.button)
+                {
+                case SDL_BUTTON_LEFT:
+                    leftMouse = false;
+                    break;
+                case SDL_BUTTON_RIGHT:
+                    rightMouse = false;
+                    break;
+                }
                 break;
             }
         }
@@ -139,18 +141,6 @@ bool LWindow::init()
             printf("Window could not be created! DSL_Error: %s\n", SDL_GetError());
             return false;
         }
-
-        /*context = SDL_GL_CreateContext(gWindow);
-        glewExperimental = GL_TRUE;
-
-        if (glewInit() != GLEW_OK) {
-            printf("Failed to initialize GLEW");
-            return false;
-        }
-        glViewport(0, 0, screen_width, screen_height);
-
-        GLCall(glEnable(GL_BLEND));
-        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));*/
 
         //Create renderer for window
         mRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);

@@ -199,6 +199,9 @@
     <ClInclude Include="src\System\graphics\parallaxBackground.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
     <ClInclude Include="src\System\graphics\TileMap.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIElement.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UITile.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h" />
     <ClInclude Include="src\System\GUI\Window\EditorWindow.h" />
     <ClInclude Include="src\System\GUI\Window\lwindow.h" />
     <ClInclude Include="src\System\IO\inputManager.h" />
@@ -257,6 +260,9 @@
     <ClCompile Include="src\System\graphics\parallaxBackground.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UITile.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp" />
     <ClCompile Include="src\System\GUI\Window\EditorWindow.cpp" />
     <ClCompile Include="src\System\GUI\Window\lwindow.cpp" />
     <ClCompile Include="src\System\IO\inputManager.cpp" />

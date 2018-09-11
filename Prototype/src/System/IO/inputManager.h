@@ -9,6 +9,8 @@ enum INPUT_KEYS {
     INPUT_KEY_D,
     INPUT_KEY_SPACE,
     INPUT_KEY_LSHIFT,
+    MOUSE_LEFT,
+    MOUSE_RIGHT,
     NMBR
 };
 
@@ -27,7 +29,5 @@ bool getKeyUp(INPUT_KEYS key);
 bool getKey(INPUT_KEYS key);
 //Sets the referenced variables to mouse coordinates
 void getMouseCoordinates(int *x, int *y);
-//Pops active windows clickqueue
-bool getMouseClick();
 
 #pragma once

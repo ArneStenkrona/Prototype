@@ -32,9 +32,10 @@ public:
 
     bool getMouseOver();
 
-    bool popClickQueue();
-
     inline SDL_Window* getSDLWindow() const { return gWindow; };
+
+    inline bool getLeftMouse() const { return leftMouse; }
+    inline bool getRightMouse() const { return rightMouse; }
 
     void clear();
     void present();
@@ -65,14 +66,16 @@ private:
     //mouse is over window
     bool mouseOver;
 
+    //mouse button being pressed
+    bool leftMouse;
+    bool rightMouse;
+
     bool exit;
     //checks if user exists the window
     void pollEvent(SDL_Event e);
 
     bool init();
     void close();
-    //queue for mouse clicks. Might expand this to other events
-    list<bool> clickQueue;
 
     SDL_GLContext context;
     unsigned int vertexArrayID;

@@ -2,7 +2,7 @@
 #include "lwindow.h"
 #include <vector>
 #include "World\room.h"
-
+#include "System\GUI\UIElement\UITileSelector.h"
 /*
     This class represents the main viewport in editing mode.
     It is a mess right now, not unlike a lot of my code.
@@ -58,6 +58,7 @@ private:
 
     
     TileSelector tileSelector;
+    UITileSelector* uiTileSelector;
 
     //This tileindex will be used when creating tiles in the editor
     //It might be appropriate to move this responsibility to the editor class

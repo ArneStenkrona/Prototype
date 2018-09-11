@@ -9,8 +9,6 @@ bool lastKeyStates[NMBR];
 //Keystates updated on keyPress
 bool currentKeyStates[NMBR];
 
-bool mouseClick;
-
 bool initializeInputManager() {
 
     updateCurrentKeys();
@@ -49,11 +47,6 @@ void getMouseCoordinates(int *x, int *y)
     SDL_GetMouseState(x, y);
 }
 
-bool getMouseClick()
-{
-    return mouseClick;
-}
-
 void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_SPACE] = KeyboardState[SDL_SCANCODE_SPACE];
     currentKeyStates[INPUT_KEY_W] = KeyboardState[SDL_SCANCODE_W];
@@ -61,6 +54,8 @@ void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_S] = KeyboardState[SDL_SCANCODE_S];
     currentKeyStates[INPUT_KEY_D] = KeyboardState[SDL_SCANCODE_D];
     currentKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
+    currentKeyStates[MOUSE_LEFT] = GraphicsEngine::getActiveWindow()->getLeftMouse();
+    currentKeyStates[MOUSE_RIGHT] = GraphicsEngine::getActiveWindow()->getRightMouse();
 }
 
 void updateInputManager() {
@@ -71,8 +66,7 @@ void updateInputManager() {
     lastKeyStates[INPUT_KEY_S] = KeyboardState[SDL_SCANCODE_S];
     lastKeyStates[INPUT_KEY_D] = KeyboardState[SDL_SCANCODE_D];
     lastKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
-    
+    lastKeyStates[MOUSE_LEFT] = GraphicsEngine::getActiveWindow()->getLeftMouse();
+    lastKeyStates[MOUSE_RIGHT] = GraphicsEngine::getActiveWindow()->getRightMouse();
     updateCurrentKeys();
-
-    mouseClick = GraphicsEngine::getActiveWindow()->popClickQueue();
 }

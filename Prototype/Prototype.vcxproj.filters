@@ -186,6 +186,15 @@
     <ClInclude Include="src\GameObject\Prefabrications\prefabrication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UITile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main\Prototype.cpp">
@@ -351,6 +360,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject\Prefabrications\prefabrications.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UITile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

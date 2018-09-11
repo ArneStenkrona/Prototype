@@ -2,12 +2,14 @@
 #include "System\IO\inputManager.h"
 #include <iostream>
 #include "System\graphics\textureManager.h"
+#include "System\GUI\UIElement\UITileSelector.h"
 
 const int EditorWindow::gridSize = 32;
 
 EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), selectedTile(0)
 {
+    uiTileSelector = new UITileSelector(32 * 4, 32 * 4, 0, 4, 4);
 }
 
 void EditorWindow::update()
@@ -44,6 +46,8 @@ void EditorWindow::update()
         drawOutlineSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF, 0x00, 0x00, 0xFF);
         renderTileSelector();
     }
+    UIElement::updateUIElements();
+    UIElement::renderUIElements();
     present();
 }
 

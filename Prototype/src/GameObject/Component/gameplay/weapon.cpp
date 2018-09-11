@@ -50,7 +50,7 @@ void Weapon::lateUpdate()
     switch (state) {
     case idle:
         animator->playClip("idle", true);
-        if (getMouseClick()) {
+        if (getKeyDown(MOUSE_LEFT)) {
             state = shoot;
         }
         break;
