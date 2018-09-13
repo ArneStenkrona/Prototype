@@ -1,4 +1,4 @@
-#include "UITile.h"
+#include "UISelectTile.h"
 #include "System\graphics\lTexture.h"
 #include "World\editor\editor.h"
 #include "System\IO\inputManager.h"
@@ -6,26 +6,26 @@
 #include "System\graphics\graphicsEngine.h"
 #include "UITileSelector.h"
 
-UITile::UITile(UITileSelector* _selector, int _posx, int _posy,
-               unsigned int _layer, unsigned int _tileIndex)
+UISelectTile::UISelectTile(UITileSelector* _selector, int _posx, int _posy,
+               unsigned int _layer, int _tileIndex)
     : UIElement(_posx, _posy, 32, 32, _layer, true), tileIndex(_tileIndex),
       selector(_selector)
 {
 }
 
-void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    SDL_Rect outlineRect = { x, y, 32, 32 };
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), r, g, b, a);
-    SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);
-}
-
-void UITile::render()
+void UISelectTile::render()
 {
-    TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex);
-    drawOutlineSquare(positionX, positionY, r, g, b, a);
+
+    if (tileIndex < 0) {
+        TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
+    }
+    else {
+        TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex);
+    }
+    UIElement::drawOutlineSquare(positionX, positionY, r, g, b, a);
 }
 
-void UITile::onMouseOver()
+void UISelectTile::onMouseOver()
 {
     if (getKeyDown(MOUSE_LEFT)) {
         selector->setIndex(tileIndex);
@@ -42,9 +42,9 @@ void UITile::onMouseOver()
     }
 }
 
-void UITile::update()
+void UISelectTile::update()
 {
-    if (selector->getIndex() == tileIndex) {
+    if (selector->getSelectedIndex() == tileIndex) {
         r = 0x00;
         g = 0xff;
         b = 0x00;

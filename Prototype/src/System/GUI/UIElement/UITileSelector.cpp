@@ -1,18 +1,22 @@
 #include "UITileSelector.h"
+#include <iostream>
 
-UITileSelector::UITileSelector(int _posx, int _posy, unsigned int _layer,
+UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows)
     : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false),
-      columns(_columns), rows(_rows)
+      columns(_columns), rows(_rows), indX(0), indY(0)
 {
-    tiles.resize(columns);
+    tiles.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
         tiles[i].resize(rows);
         for (int j = 0; j < rows; j++) {
-            tiles[i][j] = new UITile(this, positionX + (i * 32), positionY + (j * 32),
+            tiles[i][j] = new UISelectTile(this, positionX + (i * 32), positionY + (j * 32),
                                      layer, i + (16 * j));
         }
     }
+    tiles[columns].resize(1);
+    tiles[columns][0] = new UISelectTile(this, positionX + (columns * 32), positionY,
+                                   layer, -1);
 }
 
 UITileSelector::~UITileSelector()
@@ -26,26 +30,11 @@ UITileSelector::~UITileSelector()
 
 void UITileSelector::moveIndices(int dx, int dy)
 {
-    if (dx > 0) {
-        if (indX + columns + 1 < 16)
-            indX++;
-    }
-    else if (dx < 0) {
-        if (indX - 1 > 0)
-            indX--;
-    }
-    if (dy > 0) {
-        if (indY + rows + 1 < 16)
-            indY++;
-    }
-    else if (dy < 0) {
-        if (indY - 1 > 0)
-            indY--;
-    }
-
+    if (indX + columns + dx <= 16 && indX + dx >= 0) indX += dx;
+    if (indY + rows + dy <= 16 && indY + dy >= 0) indY += dy;
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            tiles[i][j]->setTileIndex(indX + i + (32 * (indY + j)) );
+            tiles[i][j]->setTileIndex(indX + i + (16 * (indY + j)) );
         }
     }
 }

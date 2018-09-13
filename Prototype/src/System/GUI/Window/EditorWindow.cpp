@@ -7,16 +7,14 @@
 const int EditorWindow::gridSize = 32;
 
 EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
-    _scale_x, _scale_y), activeRoom(_activeRoom), selectedTile(0)
+    _scale_x, _scale_y), activeRoom(_activeRoom)
 {
-    uiTileSelector = new UITileSelector(32 * 4, 32 * 4, 0, 4, 4);
+    gridSelector = new UIGridSelector(_activeRoom, 0, 0, 0);
 }
 
 void EditorWindow::update()
 {
     LWindow::update();
-
-    setActiveTileCoordinates();
 
     //Clear screen
     clear();
@@ -25,27 +23,7 @@ void EditorWindow::update()
 
     //Render the tiles of the room
     renderTiles();
-    //Render grid, could be optimized by drawing lines instead of squares
-    //X and Y will be passed as referense to get coordinates for the grid and selected grid
-    int x = 0;
-    int y = 0;
-    activeRoom->getDimensions(x,y);
-    for (int i = 0; i < x; i++) {
-        for (int j = 0; j < y ; j++) {
-            drawOutlineSquare((i * gridSize) - posX, (j * gridSize) - posY, 0x00, 0x00, 0x00, 0xFF);
-        }
-    }
-
-    //Render active square
-    if (withinSelector()) {
-        renderTileSelector();
-        getMouseCoordinates(&x, &y);
-        drawOutlineSquare((x / (gridSize * scale_x)) * gridSize, (y / (gridSize * scale_y)) * gridSize, 0x00, 0xFF, 0xFF, 0xFF);
-    }
-    else {
-        drawOutlineSquare(activeX * gridSize - posX, activeY * gridSize - posY, 0xFF, 0x00, 0x00, 0xFF);
-        renderTileSelector();
-    }
+    gridSelector->setPosition(-posX, -posY);
     UIElement::updateUIElements();
     UIElement::renderUIElements();
     present();
@@ -54,6 +32,7 @@ void EditorWindow::update()
 void EditorWindow::setRoom(Room * room)
 {
     activeRoom = room;
+    gridSelector->setRoom(room);
 }
 
 
@@ -72,38 +51,7 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
 
 void EditorWindow::updateTileSelector(int deltaX, int deltaY)
 {
-    if (tileSelector.posX + tileSelector.dimX + deltaX <= 16 && tileSelector.posX + deltaX >= 0) tileSelector.posX += deltaX;
-    if (tileSelector.posY + tileSelector.dimY + deltaY <= 16 && tileSelector.posY + deltaY >= 0) tileSelector.posY += deltaY;
-}
-
-//This function does not work atm!!!
-void EditorWindow::setActiveTileCoordinates()
-{
-    int x = 0;
-    int y = 0;
-    getMouseCoordinates(&x, &y);
-    x /= scale_x;
-    y /= scale_y;
-    activeX = (x + posX) / (gridSize);
-    activeY = (y + posY) / (gridSize);
-    //Fix negative integer division off by one error
-    if (x + posX < 0) activeX--;
-    if (y + posY < 0) activeY--;
-}
-
-void EditorWindow::renderTileSelector()
-{
-    //Render available tiles
-    for (int i = tileSelector.posX; i < tileSelector.posX + tileSelector.dimX; i++) {
-        for (int j = tileSelector.posY; j < tileSelector.posY + tileSelector.dimY; j++) {
-            TextureManager::tileMap.texture.renderTile((i - tileSelector.posX) * gridSize,(j - tileSelector.posY) * gridSize, i + j * 16);
-        }
-    }
-    //Render delete button
-    TextureManager::miscellaneous[0].render(0, tileSelector.dimX * gridSize);
-    //Render selected outline
-    if (selectedTile == -1) drawOutlineSquare(0, 4 * gridSize, 0x00, 0xFF, 0x00, 0xFF);
-    else drawOutlineSquare(((selectedTile % 16) - tileSelector.posX) * gridSize, ((selectedTile / 16) - tileSelector.posY) * gridSize, 0x00, 0xFF, 0x00, 0xFF);
+    if (deltaX || deltaY) tileSelector->moveIndices(deltaX, deltaY);
 }
 
 void EditorWindow::renderTiles()
@@ -117,43 +65,22 @@ void EditorWindow::renderTiles()
     }
 }
 
-void EditorWindow::getActiveTileCoordinates(int & x, int & y)
-{
-    x = activeX;
-    y = activeY;
-}
-
 void EditorWindow::updatePosition(int deltaX, int deltaY)
 {
     posX += deltaX;
     posY += deltaY;
 }
 
-bool EditorWindow::withinSelector()
-{
-    int x = 0;
-    int y = 0;
-    getMouseCoordinates(&x, &y);
-    //How many tiles
-    int tileCount = TextureManager::TOTAL_TILE_TEXTURES;
-    return (x < tileSelector.dimX * gridSize * scale_x && y < tileSelector.dimY * gridSize * scale_y) ||
-        (x < gridSize * scale_x && y < (tileSelector.dimY + 1) * gridSize * scale_y);
 
-}
-
-void EditorWindow::setSelectedTile()
+void EditorWindow::setTile(unsigned int x, unsigned int y)
 {
-    int x = 0;
-    int y = 0;
-    getMouseCoordinates(&x, &y);
-    if ((y / (gridSize * scale_y)) >= tileSelector.dimY) selectedTile = -1; 
-    else {
-        selectedTile = tileSelector.posX + (x / (gridSize * scale_x)) +
-            16 * (tileSelector.posY + (y / (gridSize * scale_y)));
+    Tile *tile;
+    int selectedTile = tileSelector->getSelectedIndex();
+    if (selectedTile == -1) {
+        tile = NULL;
     }
-}
-
-int EditorWindow::getSelectedTile()
-{
-    return selectedTile;
+    else {
+        tile = new Tile(selectedTile);
+    }
+    activeRoom->setTile(x, y, tile);
 }

@@ -67,23 +67,6 @@ void Editor::run()
     }
 }
 
-void Editor::setTile()
-{
-    int x = 0;
-    int y = 0;
-
-    Tile *tile;
-    editorWindow->getActiveTileCoordinates(x,y);
-    int selectedTile = editorWindow->getSelectedTile();
-    if (selectedTile == -1) {
-        tile = NULL;
-    }
-    else {
-        tile = new Tile(selectedTile);
-    }
-    activeRoom->setTile(x, y, tile);
-}
-
 void Editor::updateInput()
 {
     int dX = 0;
@@ -118,15 +101,6 @@ void Editor::updateInput()
             dX += 7;
         }
         editorWindow->updatePosition(dX, dY);
-    }
-
-    if (getKey(MOUSE_LEFT)) {
-        if (editorWindow->withinSelector()) {
-            editorWindow->setSelectedTile();
-        }
-        else {
-            setTile();
-        }
     }
 }
 

@@ -200,7 +200,9 @@
     <ClInclude Include="src\System\graphics\textureManager.h" />
     <ClInclude Include="src\System\graphics\TileMap.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIElement.h" />
-    <ClInclude Include="src\System\GUI\UIElement\UITile.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIGridTile.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UISelectTile.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h" />
     <ClInclude Include="src\System\GUI\Window\EditorWindow.h" />
     <ClInclude Include="src\System\GUI\Window\lwindow.h" />
@@ -261,7 +263,9 @@
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp" />
-    <ClCompile Include="src\System\GUI\UIElement\UITile.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIGridTile.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UISelectTile.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp" />
     <ClCompile Include="src\System\GUI\Window\EditorWindow.cpp" />
     <ClCompile Include="src\System\GUI\Window\lwindow.cpp" />

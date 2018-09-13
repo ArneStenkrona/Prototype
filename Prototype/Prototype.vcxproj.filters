@@ -189,10 +189,16 @@
     <ClInclude Include="src\System\GUI\UIElement\UIElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UITile.h">
+    <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h">
+    <ClInclude Include="src\System\GUI\UIElement\UISelectTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIGridTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -365,10 +371,16 @@
     <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UITile.cpp">
+    <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp">
+    <ClCompile Include="src\System\GUI\UIElement\UISelectTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIGridTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

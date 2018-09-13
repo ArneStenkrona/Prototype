@@ -5,7 +5,7 @@
 
 class UIElement {
 public:
-    UIElement(int _posx, int _posy, int _width, int _height, unsigned int _layer, bool _visible);
+    UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _visible);
     ~UIElement();
 
     int positionX, positionY;
@@ -14,11 +14,13 @@ public:
     static void updateUIElements();
     //Renders all UIElements
     static void renderUIElements();
+
+    static void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 protected:
     //Container for all UIElements, divided by layer
     static std::vector<std::set<UIElement*>> allUIElements;
     
-    unsigned int layer;
+    int layer;
     bool visible;
 
     virtual void render();

@@ -20,11 +20,6 @@ private:
     //The room currently being edited;
     Room *activeRoom;
 
-    //The selected tile type
-    unsigned int tileIndex;
-
-    void setTile();
-
     void updateInput();
 
     //Opens a windows api dialog to find a filepath.

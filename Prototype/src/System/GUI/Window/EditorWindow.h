@@ -3,18 +3,11 @@
 #include <vector>
 #include "World\room.h"
 #include "System\GUI\UIElement\UITileSelector.h"
+#include "System\GUI\UIElement\UIGridSelector.h"
+
 /*
     This class represents the main viewport in editing mode.
-    It is a mess right now, not unlike a lot of my code.
 */
-
-struct TileSelector {
-    int dimX = 4;
-    int dimY = 4;
-    int posX = 0;
-    int posY = 0;
-};
-
 class EditorWindow : public LWindow {
 public:
     EditorWindow(int _screen_width, int _screen_height,
@@ -26,46 +19,26 @@ public:
 
     void renderTiles();
 
-    void getActiveTileCoordinates(int &x, int &y);
-
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
     //updates position of the tile selector
     void updateTileSelector(int deltaX, int deltaY);
-
-
-
-    //Is the mouse within the select tile area?
-    bool withinSelector();
-
-    void setSelectedTile();
-    int getSelectedTile();
+    void setTile(unsigned int x, unsigned int y);
 
 private:
     static const int gridSize;
     void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
     void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
+
     //Room in the editor
     Room *activeRoom;
-    //The active tile coordinates
-    int activeX;
-    int activeY;
+
 
     //position relative to origin
     int posX;
     int posY;
 
-    
-    TileSelector tileSelector;
-    UITileSelector* uiTileSelector;
-
-    //This tileindex will be used when creating tiles in the editor
-    //It might be appropriate to move this responsibility to the editor class
-    int selectedTile;
-
-    //Updates activeX and activeY
-    void setActiveTileCoordinates();
-
-    void renderTileSelector();
+    UITileSelector* tileSelector;
+    UIGridSelector* gridSelector;
 };

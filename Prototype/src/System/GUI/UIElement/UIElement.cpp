@@ -1,10 +1,11 @@
 #include "UIElement.h"
 #include "System\IO\inputManager.h"
+#include "System\graphics\graphicsEngine.h"
 
 std::vector<std::set<UIElement*>> UIElement::allUIElements = std::vector<std::set<UIElement*>>();
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
-                    unsigned int _layer, bool _visible)
+                    int _layer, bool _visible)
     : positionX(_posx), positionY(_posy), width(_width), height(_height), 
       layer(_layer), visible(_visible)
 {
@@ -43,8 +44,9 @@ void UIElement::updateUIElements()
                 getMouseCoordinates(&x, &y);
                 x /= 2;
                 y /= 2;
-                if (pointWithin(x, y, e->positionX, e->positionY, e->width, e->height))
+                if (pointWithin(x, y, e->positionX, e->positionY, e->width, e->height)) {
                     selected = e;
+                }
             }
         }
     }
@@ -58,7 +60,8 @@ void UIElement::renderUIElements()
     for (std::vector<std::set<UIElement*>>::reverse_iterator i = allUIElements.rbegin();
         i != allUIElements.rend(); ++i) {
         for each (UIElement *e in (*i)) {
-            if (e->visible) e->render();
+            if (e->visible) 
+                e->render();
         }
     }
 }
@@ -74,3 +77,10 @@ void UIElement::onMouseOver()
 void UIElement::update()
 {
 }
+
+void UIElement::drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+    SDL_Rect outlineRect = { x, y, 32, 32 };
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), r, g, b, a);
+    SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);
+}
+
