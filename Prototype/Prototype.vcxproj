@@ -215,6 +215,7 @@
     <ClInclude Include="src\System\Physics\rayCastHit.h" />
     <ClInclude Include="src\tools\stringTools.h" />
     <ClInclude Include="src\World\editor\editor.h" />
+    <ClInclude Include="src\World\objects\object.h" />
     <ClInclude Include="src\World\room.h" />
     <ClInclude Include="src\World\Tile.h" />
     <ClInclude Include="targetver.h" />
@@ -279,6 +280,7 @@
     <ClCompile Include="src\System\Physics\rayCastHit.cpp" />
     <ClCompile Include="src\tools\stringTools.cpp" />
     <ClCompile Include="src\World\editor\editor.cpp" />
+    <ClCompile Include="src\World\objects\object.cpp" />
     <ClCompile Include="src\World\room.cpp" />
     <ClCompile Include="src\World\Tile.cpp" />
   </ItemGroup>

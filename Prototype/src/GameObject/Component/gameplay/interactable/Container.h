@@ -15,6 +15,8 @@ public:
     Container(GameObject *_object);
     void updateComponents();
 
+    void update();
+
     void rayHit(RayCastHit* hit);
 
 private:

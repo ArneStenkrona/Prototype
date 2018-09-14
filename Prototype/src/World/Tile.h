@@ -10,12 +10,16 @@
 class Tile {
 public:
     Tile(int _tileIndex);
+    Tile(int _tileIndex, int _rotation);
     Tile(int _tileIndex, std::optional<Polyshape> _polygon);
+    Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation);
+
     ~Tile();
 
     bool hasCollider();
     Polyshape *getPolygon();
     int getIndex();
+    inline int getRotation() { return rotation; }
 
     GameObject* gameObjectFromTile(int x, int y);
 
@@ -27,5 +31,6 @@ private:
     int tileIndex;
     //Collider shape, if present
     std::optional<Polyshape> polygon;
-
+    //multiples of 90 degree rotation
+    int rotation;
 };

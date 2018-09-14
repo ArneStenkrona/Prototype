@@ -71,7 +71,7 @@ void UIGridSelector::setTile(int x, int y)
         tile = NULL;
     }
     else {
-        tile = new Tile(selectedTile);
+        tile = new Tile(selectedTile, tileSelector->getRotation());
     }
     room->setTile(x, y, tile);
 }

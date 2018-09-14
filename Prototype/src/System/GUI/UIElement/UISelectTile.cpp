@@ -20,6 +20,11 @@ void UISelectTile::render()
         TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
     }
     else {
+        if (rotation)
+        TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex,
+                                                   1, 1, false, false,
+                                                   rotation * 90, 16, 16);
+        else
         TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex);
     }
     UIElement::drawOutlineSquare(positionX, positionY, r, g, b, a);
@@ -44,6 +49,10 @@ void UISelectTile::onMouseOver()
 
 void UISelectTile::update()
 {
+    if (selector->getSelectedIndex() == tileIndex)
+        rotation = selector->getRotation();
+    else
+        rotation = 0;
     if (selector->getSelectedIndex() == tileIndex) {
         r = 0x00;
         g = 0xff;

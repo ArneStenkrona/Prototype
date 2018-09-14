@@ -9,7 +9,8 @@ public:
     ~UITileSelector();
 
     inline unsigned int getSelectedIndex() const { return selectedTileIndex; }
-    void setIndex(unsigned int _index) { selectedTileIndex = _index; }
+    inline unsigned int getRotation() const { return rotation; }
+    void setIndex(unsigned int _index) { selectedTileIndex = _index; rotation = 0; }
     void moveIndices(int dx, int dy);
 private:
     std::vector<std::vector<UISelectTile*>> tiles;
@@ -18,4 +19,8 @@ private:
     //offset for indicies
     int indX, indY;
     unsigned int columns, rows;
+
+    void update();
+
+    int rotation;
 };

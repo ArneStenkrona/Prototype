@@ -1,10 +1,10 @@
 #include "UITileSelector.h"
-#include <iostream>
+#include "System\IO\inputManager.h"
 
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows)
     : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false),
-      columns(_columns), rows(_rows), indX(0), indY(0)
+      columns(_columns), rows(_rows), indX(0), indY(0), rotation(0)
 {
     tiles.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
@@ -36,5 +36,12 @@ void UITileSelector::moveIndices(int dx, int dy)
         for (int j = 0; j < rows; j++) {
             tiles[i][j]->setTileIndex(indX + i + (16 * (indY + j)) );
         }
+    }
+}
+
+void UITileSelector::update()
+{
+    if (getKeyDown(INPUT_KEY_R)) {
+        rotation = (rotation + 1) % 4;
     }
 }

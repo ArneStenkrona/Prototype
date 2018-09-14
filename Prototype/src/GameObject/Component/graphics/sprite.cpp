@@ -5,7 +5,7 @@ Sprite::Sprite(GameObject * _object) : Component(_object), startIndex(-1), endIn
 frameFactor(3), frameFactorCounter(0), widthFactor(1), heightFactor(1),
 renderOffsetX(0), renderOffsetY(0), mirrorH(false), mirrorV(false)
 {
-    texture = &TextureManager::tile_textures[TextureManager::DEFAULT_TILE_TEXTURE];
+    texture = &TextureManager::miscellaneous[0];
 }
 
 void Sprite::update()

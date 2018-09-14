@@ -12,17 +12,6 @@ class TextureManager {
 
 public:
 
-    static enum TILE_TEXTURE_NAMES
-    {
-        DEFAULT_TILE_TEXTURE,
-        FLOOR,
-        WALL,
-        WALL_BASE,
-        ROCK_0_075,
-        ROCK_075_1,
-        TOTAL_TILE_TEXTURES
-    };
-
     static enum BACKGROUND_TEXTURE_NAMES
     {
         DEFAULT_BACKGROUND_LAYER,
@@ -49,8 +38,6 @@ public:
     //The lower half of the tileset is resereved for tiles without hitboxes
     static void loadTileSet(TILEMAPS map);
 
-    //Vector of all tile textures
-    static std::vector<LTexture> tile_textures;
     //Vector of all background textures
     static std::vector<std::vector<LTexture>> background_layer_textures;
 

@@ -98,6 +98,7 @@ void Room::readFromFile()
     bool isTile;
     int tileIndex;
     bool hasCollider;
+    int rotation;
     std::optional<Polyshape> polygon;
     //buffer to store variable
     vector<string> buffer;
@@ -118,7 +119,8 @@ void Room::readFromFile()
                 //Assign variables
                 if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
                 tileIndex = std::stoi(dataPoints[0]);
-                hasCollider = dataPoints[1][0] == 'T';
+                rotation = std::stoi(dataPoints[1]);
+                hasCollider = dataPoints[2][0] != 'N';
 
                 if (hasCollider) {
                     polygon = Polyshape::parsePolygon(dataPoints[2]);
@@ -126,7 +128,7 @@ void Room::readFromFile()
                 else {
                     polygon = {};
                 }
-                tileMatrix[x][y] = new Tile(tileIndex, polygon);
+                tileMatrix[x][y] = new Tile(tileIndex, polygon, rotation);
             }
             x++;
         }
@@ -189,8 +191,7 @@ void Room::saveToFile(string path)
 
                 buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "| "; //Tile texture index
 
-                buffer += BOOL_STR(tileMatrix[x][y]->hasCollider()); //is collider present
-                buffer += "| ";
+                buffer += std::to_string(tileMatrix[x][y]->getRotation()) + "| "; //Rotation
 
                 //Gets all the points of collider if one is present
                 if (tileMatrix[x][y]->hasCollider()) {

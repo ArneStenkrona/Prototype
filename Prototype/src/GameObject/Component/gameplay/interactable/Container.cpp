@@ -24,6 +24,10 @@ void Container::updateComponents()
     collider = (object->hasComponent<PolygonCollider>()) ? object->getComponent<PolygonCollider>() : collider;
 }
 
+void Container::update()
+{
+}
+
 void Container::rayHit(RayCastHit * hit)
 {
     int indx = sprite->getTileIndex();

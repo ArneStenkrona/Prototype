@@ -2,7 +2,6 @@
 #include <string>
 #include "graphicsEngine.h"
 
-std::vector<LTexture> TextureManager::tile_textures;
 std::vector<std::vector<LTexture>> TextureManager::background_layer_textures;
 std::vector<LTexture> TextureManager::miscellaneous;
 std::vector<LTexture> TextureManager::spriteSheets;
@@ -16,21 +15,6 @@ TileMap TextureManager::tileMap;
 
 void TextureManager::initalizeTextureManager()
 {
-
-    tile_textures.resize(TOTAL_TILE_TEXTURES);
-
-    for (int i = 0; i < TOTAL_TILE_TEXTURES; i++) {
-        tile_textures.push_back(LTexture());
-    }
-
-    //Load all textures
-    tile_textures[DEFAULT_TILE_TEXTURE].loadFromFile("Assets/textures/Default/default texture.png", GraphicsEngine::getActiveRenderer());
-    tile_textures[FLOOR].loadFromFile("Assets/textures/laboratory/floor.png", GraphicsEngine::getActiveRenderer());
-    tile_textures[WALL].loadFromFile("Assets/textures/laboratory/wall.png", GraphicsEngine::getActiveRenderer());
-    tile_textures[WALL_BASE].loadFromFile("Assets/textures/laboratory/wall base.png", GraphicsEngine::getActiveRenderer());
-    tile_textures[ROCK_0_075].loadFromFile("Assets/textures/laboratory/rock_0-075.png", GraphicsEngine::getActiveRenderer());
-    tile_textures[ROCK_075_1].loadFromFile("Assets/textures/laboratory/rock_075-1.png", GraphicsEngine::getActiveRenderer());
-
     miscellaneous.push_back(LTexture());
     miscellaneous[0].loadFromFile("Assets/textures/Miscellaneous/delete.png", GraphicsEngine::getActiveRenderer());
 
@@ -78,10 +62,6 @@ SDL_Rect TextureManager::generateTileQuad(unsigned int index)
 
 void TextureManager::closeTextureManager()
 {
-    for (int i = 0; i < TOTAL_TILE_TEXTURES; i++) {
-        tile_textures[i].free();
-    }
-
     for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
         spriteSheets[i].free();
     }

@@ -24,4 +24,5 @@ private:
     void update();
 
     UITileSelector* selector;
+    int rotation;
 };
