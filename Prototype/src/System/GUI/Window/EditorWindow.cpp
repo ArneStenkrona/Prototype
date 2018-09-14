@@ -21,8 +21,6 @@ void EditorWindow::update()
     //Render the background
     activeRoom->renderBackground(Point(posX,posY));
 
-    //Render the tiles of the room
-    renderTiles();
     gridSelector->setPosition(-posX, -posY);
     UIElement::updateUIElements();
     UIElement::renderUIElements();
@@ -52,17 +50,6 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
 void EditorWindow::updateTileSelector(int deltaX, int deltaY)
 {
     if (deltaX || deltaY) tileSelector->moveIndices(deltaX, deltaY);
-}
-
-void EditorWindow::renderTiles()
-{
-    for (int x = 0; x < activeRoom->tileMatrix.size(); x++) {
-        for (int y = 0; y < activeRoom->tileMatrix[x].size(); y++) {
-            if (activeRoom->tileMatrix[x][y] != NULL) {
-                activeRoom->tileMatrix[x][y]->renderTile((x * gridSize) - posX,(y * gridSize) - posY);
-            }
-        }
-    }
 }
 
 void EditorWindow::updatePosition(int deltaX, int deltaY)

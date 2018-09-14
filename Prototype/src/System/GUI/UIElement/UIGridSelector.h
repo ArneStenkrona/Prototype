@@ -20,6 +20,8 @@ private:
     void update();
     void onMouseOver();
 
+    void renderRoom();
+
     Room* room;
     UITileSelector* tileSelector;
     std::vector<std::vector<UIGridTile*>> tiles;

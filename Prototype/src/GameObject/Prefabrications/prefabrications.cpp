@@ -9,6 +9,7 @@
 #include "GameObject/Component/geometry/velocity.h"
 #include "GameObject\Component\gameplay\splash.h"
 #include "GameObject\Component\gameplay\beam.h"
+#include "GameObject\Component\gameplay\interactable\Container.h"
 
 Character::Character() : Prefabrication("character")
 {
@@ -67,5 +68,16 @@ GameObject * LaserBeam::instantiate()
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Beam>();
+    return g;
+}
+
+GlassContainer::GlassContainer() : Prefabrication("glassContainer")
+{
+}
+
+GameObject * GlassContainer::instantiate()
+{
+    GameObject* g = new GameObject(name);
+    g->addComponent<Container>();
     return g;
 }

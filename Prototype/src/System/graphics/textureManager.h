@@ -37,6 +37,7 @@ public:
 
     static enum SPRITE_SHEETS {
         PRT,
+        OBJECTS_1,
         TOTAL_SPRITE_SHEETS
     };
 

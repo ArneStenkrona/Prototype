@@ -17,8 +17,6 @@ public:
 
     void setRoom(Room *room);
 
-    void renderTiles();
-
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
     //updates position of the tile selector

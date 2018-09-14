@@ -24,3 +24,9 @@ public:
     LaserBeam();
     GameObject* instantiate();
 };
+
+class GlassContainer : public Prefabrication {
+public:
+    GlassContainer();
+    GameObject* instantiate();
+};

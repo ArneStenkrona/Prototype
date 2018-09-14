@@ -32,6 +32,9 @@ void Debug_scene0::setUpScene()
     camera->addComponent<Camera>()->setTarget(c);
     SpriteRenderer::setCamera(camera);
 
+    GameObject* container = GlassContainer().instantiate();
+    container->getComponent<Position>()->position = Point(7 * 32, 4 * 32);
+
     ObjectPool::addToPool(new MuzzleFlash(), 10);
     ObjectPool::addToPool(new Shrapnel(), 10);
     ObjectPool::addToPool(new LaserBeam(), 10);

@@ -9,7 +9,8 @@ std::vector<LTexture> TextureManager::spriteSheets;
 
 const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.png" };
 const std::string TextureManager::colliderPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.col" };
-const std::string TextureManager::sheetPaths[TextureManager::TOTAL_SPRITE_SHEETS] = { "Assets/Sprites/prt/prt.png" };
+const std::string TextureManager::sheetPaths[TextureManager::TOTAL_SPRITE_SHEETS] = { "Assets/Sprites/prt/prt.png",
+                                                                                      "Assets/Sprites/objects/objects1.png"};
 
 TileMap TextureManager::tileMap;
 
@@ -44,18 +45,17 @@ void TextureManager::initalizeTextureManager()
             background_layer_textures[i].push_back(LTexture());
         }
     }
-
-    for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
-        spriteSheets.push_back(LTexture());
-        spriteSheets[i].loadFromFile(sheetPaths[i], GraphicsEngine::getActiveRenderer());
-    }
-
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background2.png", GraphicsEngine::getActiveRenderer());
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/plx0.png", GraphicsEngine::getActiveRenderer());
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][2].loadFromFile("Assets/textures/Backgrounds/plx1.png", GraphicsEngine::getActiveRenderer());
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][3].loadFromFile("Assets/textures/Backgrounds/plx2.png", GraphicsEngine::getActiveRenderer());
 
-
+    for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
+        spriteSheets.push_back(LTexture());
+    }
+    for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
+        spriteSheets[i].loadFromFile(sheetPaths[i], GraphicsEngine::getActiveRenderer());
+    }
 }
 
 void TextureManager::loadTileSet(TILEMAPS map)
@@ -68,15 +68,11 @@ void TextureManager::loadTileSet(TILEMAPS map)
 
 SDL_Rect TextureManager::generateTileQuad(unsigned int index)
 {
-
     SDL_Rect tileQuad;
-
     tileQuad.x = 32 * (index % 16);
     tileQuad.y = 32 * (index / 16);
     tileQuad.w = 32;
     tileQuad.h = 32;
-
-
     return tileQuad;
 }
 
@@ -84,6 +80,10 @@ void TextureManager::closeTextureManager()
 {
     for (int i = 0; i < TOTAL_TILE_TEXTURES; i++) {
         tile_textures[i].free();
+    }
+
+    for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
+        spriteSheets[i].free();
     }
 
     for (int i = 0; i < TOTAL_BACKGROUND_TEXTURES; i++) {

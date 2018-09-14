@@ -44,6 +44,11 @@ void Splash::update()
 
 void Splash::updateComponents()
 {
+    position = (object->hasComponent<Position>()) ? object->getComponent<Position>() : position;
+    velocity = (object->hasComponent<Velocity>()) ? object->getComponent<Velocity>() : velocity;
+    rotation = (object->hasComponent<Rotation>()) ? object->getComponent<Rotation>() : rotation;
+    sprite = (object->hasComponent<Sprite>()) ? object->getComponent<Sprite>() : sprite;
+    animator = (object->hasComponent<Animator>()) ? object->getComponent<Animator>() : animator;
 }
 
 void Splash::setClip(AnimationClip clip)

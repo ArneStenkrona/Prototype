@@ -6,7 +6,7 @@
 #include "World\Tile.h"
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
-    :UIElement(_posx, _posy, 0, 0, _layer + 1, false), room(_room)
+    :UIElement(_posx, _posy, 0, 0, _layer + 2, true), room(_room)
 {
     setRoom(room);
     tileSelector = tileSelector = new UITileSelector(0, 0, _layer, 4, 4);
@@ -20,6 +20,18 @@ void UIGridSelector::setPosition(int x, int y)
 
 void UIGridSelector::render()
 {
+    renderRoom();
+}
+
+void UIGridSelector::renderRoom()
+{
+    for (int x = 0; x < room->tileMatrix.size(); x++) {
+        for (int y = 0; y < room->tileMatrix[x].size(); y++) {
+            if (room->tileMatrix[x][y] != NULL) {
+                room->tileMatrix[x][y]->renderTile((x * 32) + positionX, (y * 32) + positionY);
+            }
+        }
+    }
 }
 
 void UIGridSelector::update()
@@ -46,7 +58,7 @@ void UIGridSelector::setRoom(Room* _room)
     for (int i = 0; i < columns; i++) {
         tiles[i].resize(rows);
         for (int j = 0; j < rows; j++) {
-            tiles[i][j] = new UIGridTile(this, layer, i, j);
+            tiles[i][j] = new UIGridTile(this, layer - 1, i, j);
         }
     }
 }

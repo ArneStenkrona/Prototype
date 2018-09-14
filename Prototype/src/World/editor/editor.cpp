@@ -6,6 +6,7 @@
 #include "math\rectangle.h"
 #include "math\lTimer.h"
 #include "System\graphics\graphicsEngine.h"
+#include <iostream>
 
 Editor::Editor()
 {
@@ -57,6 +58,9 @@ void Editor::run()
             if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
                 //Wait remaining time
                 SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
+            }
+            else {
+                std::cout << "FPS LOW: " << avgFPS << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
             }
             countedFrames++;
 
