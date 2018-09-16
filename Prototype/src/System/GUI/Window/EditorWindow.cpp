@@ -47,11 +47,6 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
     SDL_RenderFillRect(mRenderer, &fillRect);
 }
 
-void EditorWindow::updateTileSelector(int deltaX, int deltaY)
-{
-    if (deltaX || deltaY) tileSelector->moveIndices(deltaX, deltaY);
-}
-
 void EditorWindow::updatePosition(int deltaX, int deltaY)
 {
     posX += deltaX;

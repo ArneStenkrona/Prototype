@@ -70,8 +70,3 @@ void Camera::setTarget(GameObject *targetObject)
     targetPosition = target->getComponent<Position>();
     targetBounds = Point(targetObject->getComponent<PolygonCollider>()->getWidth(), targetObject->getComponent<PolygonCollider>()->getHeight());
 }
-
-Position * Camera::getPosition()
-{
-    return position;
-}

@@ -19,8 +19,6 @@ public:
 
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
-    //updates position of the tile selector
-    void updateTileSelector(int deltaX, int deltaY);
     void setTile(unsigned int x, unsigned int y);
 
 private:

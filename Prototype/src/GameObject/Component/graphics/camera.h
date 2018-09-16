@@ -14,7 +14,7 @@ public:
 
     void setTarget(GameObject *targetObject);
 
-    Position *getPosition();
+    inline Position *getPosition() const { return position; }
 
     //The target which the camera aims at
     GameObject *target;

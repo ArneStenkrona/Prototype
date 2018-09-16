@@ -26,7 +26,7 @@ const float GraphicsEngine::SCALE_X = 2;
 const float GraphicsEngine::SCALE_Y = 2;
 //Frame rate related
 const int GraphicsEngine::SCREEN_FPS = 60;
-const int GraphicsEngine::SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
+const int GraphicsEngine::MICROSECONDS_PER_FRAME = 1000000 / SCREEN_FPS;
 //game window
 LWindow* GraphicsEngine::activeWindow = NULL;
 //The window renderer
@@ -41,6 +41,7 @@ const bool GraphicsEngine::initSDL() {
         printf("SDL could not initialize! SDL_Error; %s\n", SDL_GetError());
         return false;
     }
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
     return true;
 }
 
@@ -104,7 +105,7 @@ void GraphicsEngine::experimentGL()
 bool GraphicsEngine::initializeGraphicsEngine()
 {
 
-    return initSDL();// && initOpenGL();
+    return initSDL();
 }
 
 LWindow * GraphicsEngine::createGameWindow()

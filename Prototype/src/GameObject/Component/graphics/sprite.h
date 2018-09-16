@@ -11,13 +11,13 @@ public:
     void update();
 
     //Gets image dimensions
-    int getWidth();
-    int getHeight();
+    inline int getWidth() const { return texture->getHeight(); }
+    inline int getHeight() const { return texture->getWidth(); };
 
     LTexture *texture;
 
     void setTileIndex(int i);
-    int getTileIndex();
+    inline int getTileIndex() const { return tileIndex; }
 
     //Sets height and width factors
     void setWidthHeight(int width, int height);
@@ -26,7 +26,7 @@ public:
     void setAnimationIndicies(int start, int end);
 
     void setFrameFactor(int i);
-    int getFrameFactor();
+    inline int getFrameFactor() const { return frameFactor; }
 
     void renderSprite(int x, int y);
     void renderSprite(int x, int y, double rotation, Point pivot);

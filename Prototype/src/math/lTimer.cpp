@@ -1,5 +1,5 @@
 #include "ltimer.h"
-
+#include <chrono>
 
 LTimer::LTimer()
 {
@@ -11,6 +11,11 @@ LTimer::LTimer()
     mStarted = false;
 }
 
+inline uint64_t getCurrentMicroSeconds() {
+    auto now = std::chrono::high_resolution_clock::now();
+    return std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count();
+}
+
 void LTimer::start()
 {
     //Start the timer
@@ -20,7 +25,7 @@ void LTimer::start()
     mPaused = false;
 
     //Get the current clock time
-    mStartTicks = SDL_GetTicks();
+    mStartTicks = getCurrentMicroSeconds();
     mPausedTicks = 0;
 }
 
@@ -46,7 +51,7 @@ void LTimer::pause()
         mPaused = true;
 
         //Calculate the paused ticks
-        mPausedTicks = SDL_GetTicks() - mStartTicks;
+        mPausedTicks = getCurrentMicroSeconds() - mStartTicks;
         mStartTicks = 0;
     }
 }
@@ -60,17 +65,17 @@ void LTimer::unpause()
         mPaused = false;
 
         //Reset the starting ticks
-        mStartTicks = SDL_GetTicks() - mPausedTicks;
+        mStartTicks = getCurrentMicroSeconds() - mPausedTicks;
 
         //Reset the paused ticks
         mPausedTicks = 0;
     }
 }
 
-Uint32 LTimer::getTicks()
+long LTimer::getMicroSeconds()
 {
     //The actual timer time
-    Uint32 time = 0;
+    long time = 0;
 
     //If the timer is running
     if (mStarted)
@@ -84,7 +89,7 @@ Uint32 LTimer::getTicks()
         else
         {
             //Return the current time minus the start time
-            time = SDL_GetTicks() - mStartTicks;
+            time = getCurrentMicroSeconds() - mStartTicks;
         }
     }
 

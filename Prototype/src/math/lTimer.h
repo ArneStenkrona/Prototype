@@ -1,7 +1,5 @@
 #pragma once
-#include <SDL_image.h>
-
-
+#include <stdint.h>
 
 class LTimer
 {
@@ -16,7 +14,7 @@ public:
     void unpause();
 
     //Gets the timer's time
-    Uint32 getTicks();
+    long getMicroSeconds();
 
     //Checks the status of the timer
     bool isStarted();
@@ -24,10 +22,10 @@ public:
 
 private:
     //The clock time when the timer started
-    Uint32 mStartTicks;
+    uint64_t mStartTicks;
 
     //The ticks stored when the timer was paused
-    Uint32 mPausedTicks;
+    uint64_t mPausedTicks;
 
     //The timer status
     bool mPaused;

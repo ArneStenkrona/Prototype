@@ -52,11 +52,6 @@ void Renderer::setCamera(GameObject * _camera)
     }
 }
 
-Point Renderer::getCameraPosition()
-{
-    return cameraPosition->position;
-}
-
 void Renderer::render()
 {
 }

@@ -27,9 +27,7 @@ void SpriteRenderer::render()
 {
     //Check if camera is available
     if (cameraPosition != nullptr) {
-        Point renderPosition;
-        Point cameraPos = cameraPosition->position;
-        renderPosition = position->position - cameraPos;
+        Point renderPosition = position->position - cameraPosition->position;
         if (rotation)
             sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation, rotation->pivot);
         else sprite->renderSprite(renderPosition.x, renderPosition.y);

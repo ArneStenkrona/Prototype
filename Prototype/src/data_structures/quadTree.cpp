@@ -82,12 +82,9 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders
     bool overlap = colliderPos.x + colliderDimensions.x >= position.x && colliderPos.x < position.x + bounds.x
          && colliderPos.y + colliderDimensions.y >= position.y && colliderPos.y < position.y + bounds.y;
 
-
     if (overlap) {
-        //returnColliders->reserve(returnColliders->size() + colliders.size());
         returnColliders->insert(colliders.begin(), colliders.end());
     }
-
     return returnColliders;
 }
 

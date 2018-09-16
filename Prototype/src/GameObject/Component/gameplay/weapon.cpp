@@ -4,6 +4,7 @@
 #include "GameObject\Prefabrications\prefabrications.h"
 #include "System\Physics\physicsEngine.h"
 #include "GameObject\objectPool.h"
+#include <iostream>
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -20,6 +21,8 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
 }
 
+int counter = 0;
+
 void Weapon::start()
 {
     state = idle;
@@ -28,6 +31,7 @@ void Weapon::start()
 
 void Weapon::update()
 {
+    counter += 1;
 }
 
 void Weapon::lateUpdate()
@@ -71,6 +75,8 @@ void Weapon::lateUpdate()
         ObjectPool::instantiate("beam", { origin.x, origin.y, end.x, end.y });
         ownerVelocity->velocity -= direction * 5;
         state = idle;
+        std::cout << counter << std::endl;
+        counter = 0;
         break;
     }
     prevState = state;
@@ -89,4 +95,5 @@ void Weapon::setOwner(GameObject* owner)
 {
     ownerPosition = owner->getComponent<Position>();
     ownerVelocity = owner->getComponent<Velocity>();
+    renderer->setRenderLayer(owner->getComponent<Renderer>()->getRenderLayer());
 }

@@ -41,7 +41,35 @@ void UITileSelector::moveIndices(int dx, int dy)
 
 void UITileSelector::update()
 {
+
     if (getKeyDown(INPUT_KEY_R)) {
         rotation = (rotation + 1) % 4;
+    }
+
+    if (getKeyDown(INPUT_KEY_F)) {
+        flipH = !flipH;
+    }
+
+    if (getKeyDown(INPUT_KEY_G)) {
+        flipV = !flipV;
+    }
+
+    if (getKey(INPUT_KEY_LSHIFT)) {
+        int dX = 0;
+        int dY = 0;
+
+        if (getKeyDown(INPUT_KEY_W)) {
+            dY -= 1;
+        }
+        if (getKeyDown(INPUT_KEY_S)) {
+            dY += 1;
+        }
+        if (getKeyDown(INPUT_KEY_A)) {
+            dX -= 1;
+        }
+        if (getKeyDown(INPUT_KEY_D)) {
+            dX += 1;
+        }
+        if (dX || dY) moveIndices(dX, dY);
     }
 }

@@ -20,9 +20,9 @@ void UISelectTile::render()
         TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
     }
     else {
-        if (rotation)
+        if (rotation || flipH || flipV)
         TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex,
-                                                   1, 1, false, false,
+                                                   1, 1, flipH, flipV,
                                                    rotation * 90, 16, 16);
         else
         TextureManager::tileMap.texture.renderTile(positionX, positionY, tileIndex);
@@ -49,10 +49,15 @@ void UISelectTile::onMouseOver()
 
 void UISelectTile::update()
 {
-    if (selector->getSelectedIndex() == tileIndex)
+    if (selector->getSelectedIndex() == tileIndex) {
         rotation = selector->getRotation();
-    else
+        selector->getFlip(flipH, flipV);
+    }
+    else {
         rotation = 0;
+        flipH = false;
+        flipV = false;
+    }
     if (selector->getSelectedIndex() == tileIndex) {
         r = 0x00;
         g = 0xff;

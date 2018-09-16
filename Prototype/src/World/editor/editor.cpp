@@ -32,10 +32,6 @@ void Editor::run()
     LTimer fpsTimer;
     //The frames per second cap timer
     LTimer capTimer;
-    //In memory text stream
-    std::stringstream timeText;
-    //Start counting frames per second
-    long countedFrames = 0;
     fpsTimer.start();
 
     string path = getFilePath(true);
@@ -44,25 +40,22 @@ void Editor::run()
         loadFile(path);
         while (!editorWindow->hasExited()) {
             capTimer.start();
-            //Calculate and correct fps
-            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-            if (avgFPS > 2000000)
-            {
-                avgFPS = 0;
-            }
+
             updateInput();
             updateInputManager();
 
             //If frame finished early
-            int frameTicks = capTimer.getTicks();
-            if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
+            int frameTicks = capTimer.getMicroSeconds();
+            if (frameTicks < GraphicsEngine::MICROSECONDS_PER_FRAME) {
                 //Wait remaining time
-                SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
+                SDL_Delay((GraphicsEngine::MICROSECONDS_PER_FRAME - frameTicks) / 1000);
             }
             else {
-                std::cout << "FPS LOW: " << avgFPS << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+                if (frameTicks > GraphicsEngine::MICROSECONDS_PER_FRAME + 1) {
+                    float fps = 1000000 / frameTicks;
+                    std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+                }
             }
-            countedFrames++;
 
 
             LWindow::updateAll();
@@ -77,19 +70,6 @@ void Editor::updateInput()
     int dY = 0;
 
     if (getKey(INPUT_KEY_LSHIFT)) {
-        if (getKeyDown(INPUT_KEY_W)) {
-            dY -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_S)) {
-            dY += 1;
-        }
-        if (getKeyDown(INPUT_KEY_A)) {
-            dX -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_D)) {
-            dX += 1;
-        }
-        editorWindow->updateTileSelector(dX, dY);
     }
     else {
         if (getKey(INPUT_KEY_W)) {

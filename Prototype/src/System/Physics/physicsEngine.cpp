@@ -54,6 +54,7 @@ void performHitdetection() {
         if (!b->getStatic() && b->getActive()) {
             set<PolygonCollider*> returnColliders;
             quad.retrieve(&returnColliders, b);
+            //cout << returnColliders.size() << " | " << ALL_COLLIDERS.size() << endl;
 
             vector<Collision*> collisions = PolygonCollider::calculateCollision(b, &returnColliders);
             for each (Collision *collision in collisions) {
@@ -104,6 +105,7 @@ RayCastHit * raycast(Point a, Point b, int maskLayer)
     RayCastHit* hit;
     set<PolygonCollider*> returnColliders;
     quad.retrieve(&returnColliders, a, b);
+
     if (maskLayer >= 0 && maskLayer < mask.size()) {
         for each (PolygonCollider *c in mask[maskLayer]) {
             returnColliders.erase(c);

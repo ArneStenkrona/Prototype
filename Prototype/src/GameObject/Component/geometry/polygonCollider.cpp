@@ -36,36 +36,10 @@ void PolygonCollider::updateComponents()
     velocity = (object->hasComponent<Velocity>()) ? object->getComponent<Velocity>() : velocity;
 }
 
-double PolygonCollider::getWidth()
-{
-    return polygon._width;
-}
-
-double PolygonCollider::getHeight()
-{
-    return polygon._height;
-}
-
-Point PolygonCollider::getPosition()
-{
-    return position->position;
-}
-
-Point PolygonCollider::getVelocity()
-{
-    return velocity->velocity;
-}
-
 void PolygonCollider::setPolygon(Polyshape _polygon)
 {
     polygon = _polygon;
 }
-
-Polyshape PolygonCollider::getPolygon()
-{
-    return polygon;
-}
-
 
 vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<PolygonCollider*>* B)
 {
@@ -105,11 +79,11 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
                     //Check if A is actually approaching other collider
                     if (a->relativeVelocity(get<1>(col)).normalized().dot(collisionNormal) < 0.000001) {
                     //Velocity required to reach collision
-                    Point velC = a->velocity->velocity * collisionTime;
+                    const Point velC = a->velocity->velocity * collisionTime;
                     //Overlapping velocity
-                    Point overVel = a->velocity->velocity - velC;
+                    const Point overVel = a->velocity->velocity - velC;
 
-                    Point correctedVelocity = a->velocity->velocity - collisionNormal * overVel.dot(collisionNormal);
+                    const Point correctedVelocity = a->velocity->velocity - collisionNormal * overVel.dot(collisionNormal);
 
                     //Is it a vertex to vertex collision?
                     bool vToV = false;
@@ -139,7 +113,7 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
                         }
                         //else {
                             //a->velocity->velocity = correctedVelocity;
-                            Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
+                            const Point perpNormal(-collisionNormal.y, collisionNormal.x);
 
                             a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
 
@@ -442,7 +416,7 @@ bool PolygonCollider::intervalIntersect(const Point * A, int Anum, const Point *
     }
 }
 
-Point PolygonCollider::relativeVelocity(PolygonCollider *other)
+Point PolygonCollider::relativeVelocity(PolygonCollider *other) const
 {
     if (isStatic && other->isStatic) return Point::empty;
 
@@ -452,19 +426,9 @@ Point PolygonCollider::relativeVelocity(PolygonCollider *other)
     return velocity->velocity - other->velocity->velocity;
 }
 
-bool PolygonCollider::getActive()
-{
-    return isActive && object->getActive();
-}
-
 void PolygonCollider::setActive(bool b)
 {
     isActive = b;
-}
-
-bool PolygonCollider::getStatic()
-{
-    return isStatic;
 }
 
 void PolygonCollider::setStatic(bool b)

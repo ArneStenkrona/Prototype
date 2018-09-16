@@ -45,7 +45,3 @@ void Component::rayHit(RayCastHit * hit)
 {
 }
 
-GameObject * Component::getGameObject()
-{
-    return object;
-}

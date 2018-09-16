@@ -3,11 +3,12 @@
 #include "GameObject\Component\geometry\polygonCollider.h"
 #include "GameObject\Component\graphics\spriteRenderer.h"
 
-Tile::Tile(int _tileIndex) : Tile(_tileIndex, {}, 0)
+Tile::Tile(int _tileIndex) : Tile(_tileIndex, {}, 0, false, false)
 {
 }
 
-Tile::Tile(int _tileIndex, int _rotation): Tile(_tileIndex, {}, _rotation)
+Tile::Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV)
+    : Tile(_tileIndex, {}, _rotation, _flipH, _flipV)
 {
     int colliderCol = tileIndex % 16;
     int colliderRow = tileIndex / 16;
@@ -15,12 +16,15 @@ Tile::Tile(int _tileIndex, int _rotation): Tile(_tileIndex, {}, _rotation)
     polygon = TextureManager::tileMap.colliderMatrix[colliderCol][colliderRow];
 }
 
-Tile::Tile(int _tileIndex, optional<Polyshape> _polygon): Tile(_tileIndex, _polygon, 0)
+Tile::Tile(int _tileIndex, optional<Polyshape> _polygon)
+    : Tile(_tileIndex, _polygon, 0, false, false)
 {
 }
 
-Tile::Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation)
-    : tileIndex(_tileIndex), polygon(_polygon), rotation(_rotation)
+Tile::Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation,
+                                                    bool _flipH, bool _flipV)
+    : tileIndex(_tileIndex), polygon(_polygon), rotation(_rotation),
+    flipH(_flipH), flipV(_flipV)
 {
 }
 
@@ -53,6 +57,8 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
     obj->addComponent<SpriteRenderer>();
     obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
     obj->getComponent<Sprite>()->setTileIndex(tileIndex);
+    obj->getComponent<Sprite>()->setMirror(flipH, flipV);
+    if (flipV) printf("okidoki");
     if (rotation) {
         obj->addComponent<Rotation>()->rotation = (rotation * 90);
         obj->getComponent<Rotation>()->pivot = Point(16,16);
@@ -67,9 +73,9 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
 
 void Tile::renderTile(int x, int y)
 {
-    if (rotation)
+    if (rotation || flipH || flipV)
     TextureManager::tileMap.texture.renderTile(x, y, tileIndex,
-                                               1,1, false, false,
+                                               1,1, flipH, flipV,
                                                rotation * 90, 16, 16);
     else 
         TextureManager::tileMap.texture.renderTile(x, y, tileIndex);

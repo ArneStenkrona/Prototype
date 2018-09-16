@@ -15,11 +15,12 @@ public:
     void update();
 
     void setRenderLayer(unsigned int layer);
+    unsigned int getRenderLayer() const { return renderLayer; }
 
     static void setCamera(GameObject *_camera);
     static GameObject *mainCamera;
 
-    static Point getCameraPosition();
+    inline static Point getCameraPosition() { return cameraPosition->position; }
 
     virtual void render();
 

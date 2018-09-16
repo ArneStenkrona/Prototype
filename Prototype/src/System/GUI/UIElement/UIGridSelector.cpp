@@ -67,11 +67,14 @@ void UIGridSelector::setTile(int x, int y)
 {
     Tile *tile;
     int selectedTile = tileSelector->getSelectedIndex();
+    bool flipH, flipV;
+    tileSelector->getFlip(flipH, flipV);
     if (selectedTile == -1) {
         tile = NULL;
     }
     else {
-        tile = new Tile(selectedTile, tileSelector->getRotation());
+        tile = new Tile(selectedTile, tileSelector->getRotation(),
+                        flipH, flipV);
     }
     room->setTile(x, y, tile);
 }

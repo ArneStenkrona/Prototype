@@ -37,7 +37,7 @@ public:
     virtual void rayHit(RayCastHit* hit);
 
     //gameObject getter
-    GameObject* getGameObject();
+    inline GameObject* getGameObject() const { return object; }
 
 protected:
     //The Gameobject this is attached to

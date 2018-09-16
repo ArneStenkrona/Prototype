@@ -20,27 +20,27 @@ public:
     void updateComponents();
 
     //getters for the dimensions of the shape
-    double getWidth();
-    double getHeight();
+    inline double getWidth() const { return polygon._width; }
+    inline double getHeight() const { return polygon._height; }
     //getter for position
-    Point getPosition();
+    inline Point getPosition() const { return position->position; }
 
     //getter for velocity
-    Point getVelocity();
+    inline Point getVelocity() const { return velocity->velocity; }
 
     //returns true if active and gameObject is active
-    bool getActive();
+    inline bool getActive() const { return isActive && object->getActive(); }
     //sets active
     void setActive(bool b);
 
     //returns true if active and gameObject is active
-    bool getStatic();
+    inline bool getStatic() const { return isStatic; }
     //sets static
     void setStatic(bool b);
 
     //Set the polygon used for hit detection
     void setPolygon(Polyshape _polygon);
-    Polyshape getPolygon();
+    inline Polyshape getPolygon() const { return polygon; }
 
     //Collision test
     static bool checkCollision(PolygonCollider *a, PolygonCollider *b, Point& n, double &t);
@@ -70,7 +70,7 @@ private:
 
     Polyshape polygon;
     //Returns velocity relative to other
-    Point relativeVelocity(PolygonCollider *other);
+    Point relativeVelocity(PolygonCollider *other) const;
     
     //Determines wether the hitbox is active
     bool isActive;

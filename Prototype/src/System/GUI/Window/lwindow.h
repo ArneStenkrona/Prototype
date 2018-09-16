@@ -30,7 +30,7 @@ public:
     //Returns true if window should be closed
     bool hasExited();
 
-    bool getMouseOver();
+    inline bool getMouseOver() const { return mouseOver; }
 
     inline SDL_Window* getSDLWindow() const { return gWindow; };
 

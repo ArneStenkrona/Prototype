@@ -10,6 +10,7 @@ public:
 
     inline unsigned int getSelectedIndex() const { return selectedTileIndex; }
     inline unsigned int getRotation() const { return rotation; }
+    inline void getFlip(bool &_flipH, bool &_flipV) { _flipH = flipH; _flipV = flipV; }
     void setIndex(unsigned int _index) { selectedTileIndex = _index; rotation = 0; }
     void moveIndices(int dx, int dy);
 private:
@@ -23,4 +24,5 @@ private:
     void update();
 
     int rotation;
+    bool flipH, flipV;
 };

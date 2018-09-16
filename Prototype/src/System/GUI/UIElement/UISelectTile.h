@@ -25,4 +25,5 @@ private:
 
     UITileSelector* selector;
     int rotation;
+    bool flipH, flipV;
 };

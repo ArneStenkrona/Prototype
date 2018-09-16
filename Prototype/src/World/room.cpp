@@ -99,6 +99,7 @@ void Room::readFromFile()
     int tileIndex;
     bool hasCollider;
     int rotation;
+    bool flipH, flipV;
     std::optional<Polyshape> polygon;
     //buffer to store variable
     vector<string> buffer;
@@ -120,15 +121,18 @@ void Room::readFromFile()
                 if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
                 tileIndex = std::stoi(dataPoints[0]);
                 rotation = std::stoi(dataPoints[1]);
-                hasCollider = dataPoints[2][0] != 'N';
+                flipH = dataPoints[2][0] != 'F';
+                flipV = dataPoints[2][1] != 'F';
+                hasCollider = dataPoints[3][0] != 'N';
 
                 if (hasCollider) {
-                    polygon = Polyshape::parsePolygon(dataPoints[2]);
+                    polygon = Polyshape::parsePolygon(dataPoints[3]);
                 }
                 else {
                     polygon = {};
                 }
-                tileMatrix[x][y] = new Tile(tileIndex, polygon, rotation);
+                tileMatrix[x][y] = new Tile(tileIndex, polygon, rotation,
+                                            flipH, flipV);
             }
             x++;
         }
@@ -192,6 +196,14 @@ void Room::saveToFile(string path)
                 buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "| "; //Tile texture index
 
                 buffer += std::to_string(tileMatrix[x][y]->getRotation()) + "| "; //Rotation
+
+                //FLIP
+                bool flipH, flipV;
+                tileMatrix[x][y]->getFlip(flipH, flipV);
+                buffer += BOOL_STR(flipH);
+                buffer += BOOL_STR(flipV); 
+                buffer += +"| ";
+
 
                 //Gets all the points of collider if one is present
                 if (tileMatrix[x][y]->hasCollider()) {

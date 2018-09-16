@@ -22,7 +22,6 @@ LWindow::~LWindow()
 {
     close();
     all_windows.remove(this);
-    SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(gWindow);
 }
 
@@ -53,11 +52,6 @@ SDL_Renderer * LWindow::getRenderer()
 bool LWindow::hasExited()
 {
     return exit;
-}
-
-bool LWindow::getMouseOver()
-{
-    return mouseOver;
 }
 
 void LWindow::getPos(int *x, int *y)
@@ -136,14 +130,14 @@ bool LWindow::init()
 {
 
         //Create window
-        gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+        gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN);
         if (gWindow == NULL) {
             printf("Window could not be created! DSL_Error: %s\n", SDL_GetError());
             return false;
         }
 
         //Create renderer for window
-        mRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+        mRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
         if (mRenderer == NULL) {
             printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
             return false;

@@ -31,10 +31,13 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV, double rotation, int px, int py);
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV);
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor);
-    void renderTile(int x, int y, int tileIndex);
+    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV, double rotation, int px, int py) const;
+    inline void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV) 
+        { renderTile(x, y, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, 0, 0, 0); }
+    inline void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor)
+        { renderTile(x, y, tileIndex, widthFactor, heightFactor, false, false); }
+    inline void renderTile(int x, int y, int tileIndex) 
+        { renderTile(x, y, tileIndex, 1, 1, false, false); }
 
     //Renders the tile in the texture given by the tileQuad with roation and flip
     void renderTileEx(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Rect *tileQuad = NULL);

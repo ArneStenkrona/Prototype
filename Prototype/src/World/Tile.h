@@ -10,9 +10,9 @@
 class Tile {
 public:
     Tile(int _tileIndex);
-    Tile(int _tileIndex, int _rotation);
+    Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV);
     Tile(int _tileIndex, std::optional<Polyshape> _polygon);
-    Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation);
+    Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation, bool _flipH, bool _flipV);
 
     ~Tile();
 
@@ -20,6 +20,7 @@ public:
     Polyshape *getPolygon();
     int getIndex();
     inline int getRotation() { return rotation; }
+    inline void getFlip(bool &_flipH, bool &_flipV) { _flipH = flipH; _flipV = flipV; }
 
     GameObject* gameObjectFromTile(int x, int y);
 
@@ -33,4 +34,6 @@ private:
     std::optional<Polyshape> polygon;
     //multiples of 90 degree rotation
     int rotation;
+    bool flipH;
+    bool flipV;
 };

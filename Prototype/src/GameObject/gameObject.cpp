@@ -68,11 +68,6 @@ void GameObject::updateAll()
     just_deactivated_gameObjects.clear();
 }
 
-bool GameObject::getActive()
-{
-    return active;
-}
-
 void GameObject::setActive(bool b)
 {
     //This will be sent to gameLogics list of objects activated this frame, which will call this objects start method;

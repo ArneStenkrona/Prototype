@@ -75,10 +75,7 @@ void gameLoop() {
     LTimer fpsTimer;
     //The frames per second cap timer
     LTimer capTimer;
-    //In memory text stream
-    std::stringstream timeText;
     //Start counting frames per second
-    long countedFrames = 0;
     fpsTimer.start();
 
     //Initalize input Manager
@@ -91,14 +88,6 @@ void gameLoop() {
     //While games is running
     while (!gameWindow->hasExited()) {
         capTimer.start();
-        //Calculate and correct fps
-        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-        if (avgFPS > 2000000) avgFPS = 0;
-
-        //Set text to be rendered
-        timeText.str("");
-        timeText << "Average Frames Per Second (With Cap)" << avgFPS;
-
         GraphicsEngine::clearWindow();
         updatePhysics();
         updateGameLogic();
@@ -107,16 +96,17 @@ void gameLoop() {
         //drawQuadTree(); //This will not work until this is put in GraphicsEngine
 
         //If frame finished early
-        int frameTicks = capTimer.getTicks();
-        if (frameTicks < GraphicsEngine::SCREEN_TICK_PER_FRAME) {
+        int frameTicks = capTimer.getMicroSeconds();
+        if (frameTicks < GraphicsEngine::MICROSECONDS_PER_FRAME) {
             //Wait remaining time
-            SDL_Delay(GraphicsEngine::SCREEN_TICK_PER_FRAME - frameTicks);
+            SDL_Delay((GraphicsEngine::MICROSECONDS_PER_FRAME - frameTicks) / 1000);
         }
         else {
-            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-            std::cout << "FPS LOW: " << avgFPS << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+            if (frameTicks > GraphicsEngine::MICROSECONDS_PER_FRAME + 1) {
+                float fps = 1000000 / frameTicks;
+                std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+            }
         }
-        countedFrames++;
         currentFrame++;
 
         LWindow::updateAll();

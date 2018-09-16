@@ -46,7 +46,7 @@ public:
 
 
     //returns active
-    bool getActive();
+    inline bool getActive() const { return active; }
     //sets active
     void setActive(bool b);
 

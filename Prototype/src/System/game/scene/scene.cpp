@@ -30,8 +30,3 @@ void Scene::setRoom(Room *room)
     //Sets the bounds of the collider quadTree to room dimensions
     setQuadBounds(room->getDimensions());
 }
-
-Room * Scene::getRoom()
-{
-    return CURRENT_ROOM;
-}

@@ -19,7 +19,7 @@ public:
     virtual void setUpScene();
 
     //Gets the current room in scene
-    Room *getRoom();
+    inline Room *getRoom() const { return CURRENT_ROOM; }
 
 protected:
     //The room the player is currently in

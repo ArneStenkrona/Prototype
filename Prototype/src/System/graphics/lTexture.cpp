@@ -112,38 +112,20 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 
 }
 
-void LTexture::renderTile(int x, int y, int tileIndex)
-{
-    renderTile(x, y, tileIndex, 1, 1, false, false);
-}
-
-
-void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor)
-{
-    renderTile(x, y, tileIndex, widthFactor, heightFactor, false, false);
-}
-
-
-void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV)
-{
-    renderTile(x, y, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, 0, 0, 0);
-
-}
-
-void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV, double rotation, int px, int py)
+void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, 
+                          bool mirrorH, bool mirrorV, double rotation, int px, int py) const
 {
     SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor };
     SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
 
     SDL_Point pivot = { px, py };
-
     
     if (mirrorH && mirrorV)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 90, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 90, &pivot, SDL_FLIP_NONE);
     else if (mirrorH)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, NULL, SDL_FLIP_HORIZONTAL);
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_HORIZONTAL);
     else if (mirrorV)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, NULL, SDL_FLIP_VERTICAL);
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_VERTICAL);
     else SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_NONE);
 }
 

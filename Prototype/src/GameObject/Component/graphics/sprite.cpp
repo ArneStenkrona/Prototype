@@ -20,24 +20,9 @@ void Sprite::update()
     }
 }
 
-int Sprite::getWidth()
-{
-    return texture->getWidth();
-}
-
-int Sprite::getHeight()
-{
-    return texture->getHeight();
-}
-
 void Sprite::setTileIndex(int i)
 {
     tileIndex = i;
-}
-
-int Sprite::getTileIndex()
-{
-    return tileIndex;
 }
 
 void Sprite::setWidthHeight(int width, int height)
@@ -57,11 +42,6 @@ void Sprite::setAnimationIndicies(int startInd, int endInd)
 void Sprite::setFrameFactor(int i)
 {
     frameFactor = i;
-}
-
-int Sprite::getFrameFactor()
-{
-    return frameFactor;
 }
 
 void Sprite::renderSprite(int x, int y)

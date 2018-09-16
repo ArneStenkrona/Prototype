@@ -29,7 +29,7 @@ public:
 
     //Frame rate related
     static const int SCREEN_FPS;
-    static const int SCREEN_TICK_PER_FRAME;
+    static const int MICROSECONDS_PER_FRAME;
     //Clears gameWindow
     static void clearWindow();
 
