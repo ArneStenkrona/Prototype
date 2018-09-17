@@ -100,24 +100,32 @@ void removeFromMaskLayer(PolygonCollider * col, unsigned int maskLayer)
         mask[maskLayer].erase(col);
 }
 
-RayCastHit * raycast(Point a, Point b, int maskLayer)
+bool raycast(Point a, Point b, int maskLayer, std::string message)
+{
+    RayCastHit* out;
+    return raycast(a, b, out, maskLayer, message);
+}
+
+bool raycast(Point a, Point b, RayCastHit* &out, int maskLayer, std::string message)
 {
     RayCastHit* hit;
     set<PolygonCollider*> returnColliders;
     quad.retrieve(&returnColliders, a, b);
+    //cout << returnColliders.size() << " | " << ALL_COLLIDERS.size() << endl;
 
     if (maskLayer >= 0 && maskLayer < mask.size()) {
         for each (PolygonCollider *c in mask[maskLayer]) {
             returnColliders.erase(c);
         }
     }
-    vector<RayCastHit*> hits = PolygonCollider::checkRayCast(a, b, returnColliders);
+    vector<RayCastHit*> hits = PolygonCollider::checkRayCast(a, b, returnColliders, message);
     
     if (hits.size() > 0) {
         hits[0]->getOtherCollider()->getGameObject()->rayHit(hits[0]);
-        return hits[0];
+        out = hits[0];
+        return true;
     }
-    return nullptr;
+    return false;
 }
 
 

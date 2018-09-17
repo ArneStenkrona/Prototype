@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "System/IO/inputManager.h"
 #include <algorithm>
+#include "System\Physics\physicsEngine.h"
 
 Movement::Movement(GameObject *_object) : Component(_object),
 state(nullState), prevState(nullState), transitionCounter(0),
@@ -25,21 +26,14 @@ void Movement::updateComponents()
 
 void Movement::onCollisionEnter(Collision * collision)
 {
-    //printf("ENTER\n");
 }
 
 void Movement::onColliding(Collision *collision)
 {
-
-    if (collision->collisionNormal.dot(Point::up) < 0.000001)
-        grounded = true;
-
-    //printf("COLLIDING\n");
 }
 
 void Movement::onCollisionExit()
 {
-    //printf("EXIT\n");
 }
 
 
@@ -49,6 +43,8 @@ void Movement::start()
 
 void Movement::update()
 {
+    Point origin = position->position + Point(3, 39.7);
+    grounded = raycast(origin, origin  + Point(26, 2), 0) || raycast(origin + Point(26, 0), origin + Point(-26, 2), 0);
     //Initalize direction vector to 0,0
     Point direction = Point();
 
@@ -121,6 +117,4 @@ void Movement::update()
             velocity->velocity -= Point::up * 10;
         }
     }
-    if(velocity->velocity.y > 3.0)
-        grounded = false;
 }

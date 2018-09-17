@@ -4,7 +4,6 @@
 #include "GameObject\Prefabrications\prefabrications.h"
 #include "System\Physics\physicsEngine.h"
 #include "GameObject\objectPool.h"
-#include <iostream>
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -21,8 +20,6 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
 }
 
-int counter = 0;
-
 void Weapon::start()
 {
     state = idle;
@@ -31,7 +28,6 @@ void Weapon::start()
 
 void Weapon::update()
 {
-    counter += 1;
 }
 
 void Weapon::lateUpdate()
@@ -61,8 +57,8 @@ void Weapon::lateUpdate()
     case shoot:
         Point origin = position->position + (13 * direction) + Point(19, 16);
         Point end = position->position + (700 * direction) + Point(19, 16);
-        RayCastHit* hit = raycast(origin, end, 0);
-        if (hit != nullptr) {
+        RayCastHit* hit;
+        if (raycast(origin, end, hit, 0, "lsr")) {
             end = hit->getIntersection();
             Point n = hit->getNormal();
             ObjectPool::instantiate("shrapnel", { end.x, end.y - 16, n.toAngle(), 0, 16 });
@@ -75,8 +71,6 @@ void Weapon::lateUpdate()
         ObjectPool::instantiate("beam", { origin.x, origin.y, end.x, end.y });
         ownerVelocity->velocity -= direction * 5;
         state = idle;
-        std::cout << counter << std::endl;
-        counter = 0;
         break;
     }
     prevState = state;

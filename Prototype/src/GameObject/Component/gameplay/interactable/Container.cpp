@@ -30,11 +30,13 @@ void Container::update()
 
 void Container::rayHit(RayCastHit * hit)
 {
-    int indx = sprite->getTileIndex();
-    if (indx < 4) {
-        sprite->setTileIndex(indx + 1);
-        if (indx + 1 == 4) {
-            collider->setPolygon(Rectangular(Point(8, 25), 16, 7));
+    if (hit->getMessage() == "lsr") {
+        int indx = sprite->getTileIndex();
+        if (indx < 4) {
+            sprite->setTileIndex(indx + 1);
+            if (indx + 1 == 4) {
+                collider->setPolygon(Rectangular(Point(8, 25), 16, 7));
+            }
         }
     }
 }

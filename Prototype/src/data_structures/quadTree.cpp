@@ -46,16 +46,46 @@ void QuadTree::split()
 set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders, PolygonCollider *collider)
 {
     int index = getIndex(collider);
-    if (index != -1 && nodes[0] != nullptr) {
+    if (index > -1 && nodes[0] != nullptr) {
         nodes[index]->retrieve(returnColliders, collider);
     }
     else if (nodes[0] != nullptr)//If collider does not fit into the node, get all of the children 
     {
-        for (int i = 0; i < sizeof(nodes) / sizeof(*nodes); i++) {
-            nodes[i]->retrieve(returnColliders, collider);
+        switch (index) {
+            case -1:
+                for (int i = 0; i < sizeof(nodes) / sizeof(*nodes); i++) {
+                    nodes[i]->retrieve(returnColliders, collider);
+                }
+            case -2:
+                nodes[0]->retrieve(returnColliders, collider);
+                nodes[1]->retrieve(returnColliders, collider);
+                break;
+            case -3:
+                nodes[2]->retrieve(returnColliders, collider);
+                nodes[3]->retrieve(returnColliders, collider);
+                break;
+            case -4:
+                nodes[0]->retrieve(returnColliders, collider);
+                nodes[3]->retrieve(returnColliders, collider);
+                break;
+            case -5:
+                nodes[1]->retrieve(returnColliders, collider);
+                nodes[2]->retrieve(returnColliders, collider);
+                break;
         }
     }
-    //Position of the box
+    if (nodes[0] == nullptr) {
+        returnColliders->insert(colliders.begin(), colliders.end());
+    }
+    else {
+        if (colliders.size() != 0) printf("noooooooo");
+    }
+
+    /*returnColliders->insert(colliders.begin(), colliders.end());
+    for (int i = 0; i < sizeof(nodes) / sizeof(*nodes); i++) {
+        if (nodes[i] != nullptr )nodes[i]->retrieve(returnColliders, collider);
+    }*/
+    /*//Position of the box
     Point colliderPos = collider->getPosition() + collider->getPolygon().getEffectiveOrigin();
     //dimensions of the box
     Point colliderDimensions;
@@ -84,7 +114,7 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders
 
     if (overlap) {
         returnColliders->insert(colliders.begin(), colliders.end());
-    }
+    }*/
     return returnColliders;
 }
 
@@ -201,46 +231,85 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*>* returnColliders
 
 void QuadTree::insert(PolygonCollider * collider)
 {
-
     if (nodes[0] != nullptr) {
         int index = getIndex(collider);
 
-        if (index != -1) {
+        if (index > -1) {
             nodes[index]->insert(collider);
             return;
         }
-    }
-
-    colliders.insert(collider);
-
-    if (colliders.size() > Max_Objects && level < Max_Levels) {
-        if (nodes[0] == nullptr) {
-            split();
-        }
-        int i = 0;
-       /* while (i < colliders.size()) {
-            int index = getIndex(colliders[i]);
-            if (index != -1) {
-                nodes[index]->insert(colliders[i]);
-                colliders.erase(colliders.begin() + i);
-            } else {
-                i++;
+        else {
+            switch (index) {
+            case -1:
+                nodes[0]->insert(collider);
+                nodes[1]->insert(collider);
+                nodes[2]->insert(collider);
+                nodes[3]->insert(collider);
+                break;
+            case -2:
+                nodes[0]->insert(collider);
+                nodes[1]->insert(collider);
+                break;
+            case -3:
+                nodes[2]->insert(collider);
+                nodes[3]->insert(collider);
+                break;
+            case -4:
+                nodes[0]->insert(collider);
+                nodes[3]->insert(collider);
+                break;
+            case -5:
+                nodes[1]->insert(collider);
+                nodes[2]->insert(collider);
+                break;
             }
-        }*/
-
+        }
+    }
+    colliders.insert(collider);
+    if (nodes[0] == nullptr && colliders.size() > Max_Objects && level < Max_Levels) {
+            split();
+    }
+    if (nodes[0] != nullptr) {
         std::set<PolygonCollider*>::iterator it;
         for (it = colliders.begin(); it != colliders.end(); ) {
             int index = getIndex(*it);
-            if (index != -1) {
+            if (index > -1) {
                 nodes[index]->insert(*it);
                 colliders.erase(it++);
             }
             else {
+                switch (index) {
+                case -1:
+                    nodes[0]->insert(*it);
+                    nodes[1]->insert(*it);
+                    nodes[2]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -2:
+                    nodes[0]->insert(*it);
+                    nodes[1]->insert(*it);
+                    break;
+                case -3:
+                    nodes[2]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -4:
+                    nodes[0]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -5:
+                    nodes[1]->insert(*it);
+                    nodes[2]->insert(*it);
+                    break;
+
+                }
                 it++;
             }
         }
+        colliders.clear();
     }
 }
+
 
 void QuadTree::setBounds(Point _bounds)
 {
@@ -295,12 +364,16 @@ int QuadTree::getIndex(PolygonCollider * collider)
     }
 
     //Object can completely fit within the top quadrants
-    bool topQuadrant = (colliderPos.y + colliderDimensions.y < horizontalMidpoint);
+    bool topQuadrant = (colliderPos.y + colliderDimensions.y <= horizontalMidpoint);
     //Object can completely fit within the bottom quadrants
-    bool bottomQuadrant = (colliderPos.y > horizontalMidpoint);
+    bool bottomQuadrant = (colliderPos.y >= horizontalMidpoint);
+    //Object can completely fit within the left quadrants
+    bool leftQuadrant = (colliderPos.x + colliderDimensions.x <= verticalMidpoint);
+    //Object can completely fit within the right quadrants
+    bool rightQuadrant = (colliderPos.x >= verticalMidpoint);
 
     //Object can completely fit within the left quadrants
-    if (colliderPos.x + colliderDimensions.x < verticalMidpoint) {
+    if (leftQuadrant) {
         if (topQuadrant) {
             index = 1;
         }
@@ -309,13 +382,25 @@ int QuadTree::getIndex(PolygonCollider * collider)
         }
     }
     //Object can completely fit within the right quadrants
-    else if (colliderPos.x > verticalMidpoint) {
-        if (topQuadrant) {
+    else if (rightQuadrant) {
+        if (topQuadrant) 
             index = 0;
-        }
-        else if (bottomQuadrant) {
+        else if (bottomQuadrant)
             index = 3;
-        }
+    }
+    else {
+        //both top quadrants
+        if (topQuadrant && !leftQuadrant)
+            index = -2;
+        //both bottom quadrants
+        if (bottomQuadrant && !leftQuadrant)
+            index = -3;
+        //both left quadrants
+        if (leftQuadrant && !bottomQuadrant)
+            index = -4;
+        //both right quadrants
+        if (rightQuadrant && !bottomQuadrant)
+            index = -5;
     }
 
     return index;

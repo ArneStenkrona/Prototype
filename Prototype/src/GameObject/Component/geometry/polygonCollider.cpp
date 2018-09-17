@@ -107,17 +107,16 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
                         collisions.push_back(collision);
 
                         if (collisionTime < 0.0) {
-                            a->position->position -= collisionNormal * collisionTime - 0.0001 * a->velocity->velocity;
-                           // Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
-                          //  a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
-                        }
-                        //else {
-                            //a->velocity->velocity = correctedVelocity;
-                            const Point perpNormal(-collisionNormal.y, collisionNormal.x);
-
+                            a->position->position -= collisionNormal * collisionTime;// -0.01 * a->velocity->velocity.normalized();
+                            Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
                             a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
-
-                        //}
+                        }
+                        else {
+                            a->velocity->velocity = correctedVelocity;
+                           
+                            //const Point perpNormal(-collisionNormal.y, collisionNormal.x);
+                            //a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
+                        }
                     }
                 }            
             }
@@ -177,7 +176,7 @@ bool LineSegementsIntersect(Point p, Point p2, Point q, Point q2,
     return false;
 }
 
-vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonCollider*> colliders)
+vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonCollider*> colliders, std::string message)
 {
     vector<RayCastHit*> hits;
 
@@ -214,7 +213,7 @@ vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonC
         if (intersected) {
             Point normal = Point(-colPerpNorm.y, colPerpNorm.x).normalized();
             if (normal.dot(b - a) > 0) normal = Point::empty - normal;
-            hits.push_back(new RayCastHit(a, intersect, normal, col));
+            hits.push_back(new RayCastHit(a, intersect, normal, col, message));
         }
     }
     //Sort after earliest collision
@@ -303,8 +302,6 @@ bool PolygonCollider::checkCollision(PolygonCollider *colA, PolygonCollider *col
         return false;
     }
 
-    //make sure the polygons gets pushed away from each other
-
     if (_collisionNormal.x * xOffset.x + _collisionNormal.y * xOffset.y < 0.0) {
         _collisionNormal *= -1.0;
     }
@@ -389,7 +386,7 @@ bool PolygonCollider::intervalIntersect(const Point * A, int Anum, const Point *
         double v = xVel.x * xAxis.x + xVel.y * xAxis.y;
 
         //small velocity, so only the overlap test will be relevant
-        if (fabs(v) < 0.0000001) {
+        if (fabs(v) == 0.0) {// 0.0000001) {
             return false;
         }
 

@@ -50,7 +50,7 @@ public:
 
     //Checks if raycast hits any of colliders
     //Returns a vector of rayCastHits sorted by distance from a
-    static vector<RayCastHit*> checkRayCast(Point a, Point b, set<PolygonCollider*> colliders);
+    static vector<RayCastHit*> checkRayCast(Point a, Point b, set<PolygonCollider*> colliders, std::string message = "");
 
     void addToMask(unsigned int maskLayer);
     void removeFromMask(unsigned int maskLayer);

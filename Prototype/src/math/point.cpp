@@ -111,6 +111,7 @@ double Point::cross(const Point & other) const
 constexpr int radToDeg(float rad) { return rad * (180 / M_PI); }
 double Point::toAngle() const
 {
+    if (x == 0.0 && y == 0.0) return 0;
     return radToDeg(atan2(y, x));
 }
 
