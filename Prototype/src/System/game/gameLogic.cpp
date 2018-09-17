@@ -89,8 +89,8 @@ void gameLoop() {
     while (!gameWindow->hasExited()) {
         capTimer.start();
         GraphicsEngine::clearWindow();
-        updatePhysics();
         updateGameLogic();
+        updatePhysics();
         GraphicsEngine::renderGraphics();
         updateInputManager();
         //drawQuadTree(); //This will not work until this is put in GraphicsEngine
