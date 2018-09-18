@@ -54,12 +54,12 @@ void Movement::update()
     if (getKey(INPUT_KEY_A))
     {
         direction += Point::left;
-        if (velocity->velocity.x < -0.01) state = running;
+        if (velocity->velocity.x < -2) state = running;
     }
     if (getKey(INPUT_KEY_D))
     {
         direction += Point::right;
-        if (velocity->velocity.x > 0.01) state = running;
+        if (velocity->velocity.x > 2) state = running;
     }
 
     if (getKey(INPUT_KEY_W))

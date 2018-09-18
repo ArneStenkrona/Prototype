@@ -364,13 +364,13 @@ int QuadTree::getIndex(PolygonCollider * collider)
     }
 
     //Object can completely fit within the top quadrants
-    bool topQuadrant = (colliderPos.y + colliderDimensions.y <= horizontalMidpoint);
+    bool topQuadrant = (colliderPos.y + colliderDimensions.y < horizontalMidpoint);
     //Object can completely fit within the bottom quadrants
-    bool bottomQuadrant = (colliderPos.y >= horizontalMidpoint);
+    bool bottomQuadrant = (colliderPos.y > horizontalMidpoint);
     //Object can completely fit within the left quadrants
-    bool leftQuadrant = (colliderPos.x + colliderDimensions.x <= verticalMidpoint);
+    bool leftQuadrant = (colliderPos.x + colliderDimensions.x < verticalMidpoint);
     //Object can completely fit within the right quadrants
-    bool rightQuadrant = (colliderPos.x >= verticalMidpoint);
+    bool rightQuadrant = (colliderPos.x > verticalMidpoint);
 
     //Object can completely fit within the left quadrants
     if (leftQuadrant) {
