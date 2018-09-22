@@ -28,12 +28,33 @@ UITileSelector::~UITileSelector()
     }
 }
 
-Tile * UITileSelector::getTile() const
+void UITileSelector::getRotationAndFlip(int & rot, bool & h, bool & v)
 {
-    //Forgive me for typecasting
-    if ((UISelectableTile*)selected)
-        return ((UISelectableTile*)selected)->getTile();
-    else 
-        return NULL;
+    rot = rotation;
+    h = flipH;
+    v = flipV;
 }
 
+Tile * UITileSelector::getTile() const
+{
+    Tile *tile;
+    if (selectedIndex == -1)
+        tile = NULL;
+    else
+        tile = new Tile(selectedIndex, rotation, flipH, flipV);
+    return tile;
+}
+
+void UITileSelector::derivedUpdate()
+{
+    if (getActiveSelector() == this) {
+        if (getKeyDown(INPUT_KEY_R))
+            rotation = (rotation + 1) % 4;
+
+        if (getKeyDown(INPUT_KEY_F))
+            flipH = !flipH;
+
+        if (getKeyDown(INPUT_KEY_G))
+            flipV = !flipV;
+    }
+}

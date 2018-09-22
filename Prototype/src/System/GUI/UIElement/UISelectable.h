@@ -18,6 +18,9 @@ protected:
     virtual void derivedRender();
     //updates before regular update()
     virtual void derivedUpdate();
+    //called when selected
+    virtual void select();
+    //called when unselected
     virtual void unselect();
     int index;
     Color currentColor;

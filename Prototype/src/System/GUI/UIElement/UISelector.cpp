@@ -26,16 +26,22 @@ void UISelector::derivedUpdate()
 {
 }
 
-void UISelector::setSelected(UISelectable * s)
+void UISelector::setSelected(int i)
 {
-    if (selected) selected->unselect();
-    selected = s;
+    if (i == selectedIndex) return;
+    try {
+        UISelectable* current = selectables[selectedIndex % columns][selectedIndex / rows];
+        current->unselect();
+    }
+    catch (const std::out_of_range& e) {
+    }
+    selectedIndex = i;
 }
 
 void UISelector::setActive()
 {
     if (activeSelector != this) {
-        activeSelector->selected = NULL;
+        activeSelector->selectedIndex = NULL;
         activeSelector = this;
     }
 }

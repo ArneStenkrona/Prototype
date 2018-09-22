@@ -9,11 +9,10 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, 0, 0, _layer + 3, true), room(_room)
 {
     setRoom(room);
+    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+                                              6 * 32, _layer, 6, 2);
     tileSelector = new UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                                       0, _layer, 6, 6);
-
-    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                                                6 * 32, _layer, 6, 2);
 
     border[0] = new UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                              0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 1);

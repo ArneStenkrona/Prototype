@@ -11,12 +11,12 @@ public:
     ~UISelector();
 
     inline static UISelector* getActiveSelector() { return activeSelector; }
-    inline UISelectable* getSelected() const { return selected; }
+    inline int getSelected() const { return selectedIndex; }
 protected:
     //updates before regular update()
     virtual void derivedUpdate();
-    //Selected selectable
-    UISelectable* selected;
+    //Selected index
+    int selectedIndex;
     //All UISelectables in layout
     std::vector<std::vector<UISelectable*>> selectables;
     //columns and rows in layout
@@ -25,7 +25,7 @@ protected:
     int indX, indY;
 private:
     //selected UISelectable
-    void setSelected(UISelectable* s);
+    void setSelected(int i);
     void setActive();
     //Dimensions of whatever data-structure is being selected
     unsigned int indexLimitX, indexLimity;

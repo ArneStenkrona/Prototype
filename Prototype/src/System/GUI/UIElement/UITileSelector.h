@@ -10,7 +10,13 @@ public:
                     Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
     ~UITileSelector();
 
+    void getRotationAndFlip(int &rot, bool &h, bool &v);
+
     //Creates and returns a tile based on selected
     Tile* getTile() const;
 private:
+    int rotation;
+    bool flipH, flipV;
+
+    void derivedUpdate();
 };

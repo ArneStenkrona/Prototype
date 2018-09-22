@@ -1,14 +1,12 @@
 #include "UIColliderSelector.h"
 #include "System\IO\inputManager.h"
 #include "UISelectableCollider.h"
-#include <iostream>
 
 UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer, 
                                        unsigned int _columns, unsigned int _rows,
                                        Color _selectedColor, Color _hoverColor)
     : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8)
 {
-    std::cout << rows << std::endl;
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
@@ -30,9 +28,8 @@ UIColliderSelector::~UIColliderSelector()
 
 Polyshape * UIColliderSelector::getPolygon() const
 {
-    //Forgive me for typecasting
-    if ((UISelectableCollider*)selected)
-        return ((UISelectableCollider*)selected)->getPolygon();
+    if (Polyshape::basicPolygons.size() > selectedIndex)
+        return &Polyshape::basicPolygons[selectedIndex];
     else
         return NULL;
 }

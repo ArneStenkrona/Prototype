@@ -17,6 +17,10 @@ void UISelectable::derivedUpdate()
 {
 }
 
+void UISelectable::select()
+{
+}
+
 void UISelectable::render()
 {
     derivedRender();
@@ -27,7 +31,8 @@ void UISelectable::onMouseOver()
 {
     if (getKeyDown(MOUSE_LEFT)) {
         selector->setActive();
-        selector->setSelected(this);
+        selector->setSelected(index);
+        select();
         currentColor = selectedColor;
     }
     else {
@@ -37,7 +42,7 @@ void UISelectable::onMouseOver()
 
 void UISelectable::update() {
     derivedUpdate();
-    if (selector->getSelected() == this) {
+    if (selector->getSelected() == index) {
         currentColor = selectedColor;
     }
     else {

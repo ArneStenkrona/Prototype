@@ -6,10 +6,6 @@ UISelectableCollider::UISelectableCollider(UISelector * _selector, int _posX, in
     : UISelectable(_selector, _posX, _posY, 32, 32, _layer, _index, _selectedColor, _hoverColor)
 {
 }
-Polyshape * UISelectableCollider::getPolygon()
-{
-    return &Polyshape::basicPolygons[index];
-}
 
 void UISelectableCollider::derivedRender()
 {
