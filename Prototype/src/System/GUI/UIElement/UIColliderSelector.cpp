@@ -1,16 +1,20 @@
 #include "UIColliderSelector.h"
 #include "System\IO\inputManager.h"
+#include "UISelectableCollider.h"
+#include <iostream>
 
-UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer, unsigned int _columns, unsigned int _rows)
-    : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false),
-    columns(_columns), rows(_rows), indX(0), indY(0)
+UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer, 
+                                       unsigned int _columns, unsigned int _rows,
+                                       Color _selectedColor, Color _hoverColor)
+    : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8)
 {
-    colliders.resize(columns + 1);
+    std::cout << rows << std::endl;
+    selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
-        colliders[i].resize(rows);
+        selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {
-            colliders[i][j] = new UISelectCollider(this, positionX + (i * 32), positionY + (j * 32),
-                layer, i + (16 * j));
+            selectables[i][j] = new UISelectableCollider(this, positionX + (i * 32), positionY + (j * 32),
+                                                         layer, i + (16 * j), _selectedColor, _hoverColor);
         }
     }
 }
@@ -19,40 +23,16 @@ UIColliderSelector::~UIColliderSelector()
 {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            delete(colliders[i][j]);
+            delete(selectables[i][j]);
         }
     }
 }
 
-void UIColliderSelector::moveIndices(int dx, int dy)
+Polyshape * UIColliderSelector::getPolygon() const
 {
-    //if (indX + columns + dx <= 16 && indX + dx >= 0) indX += dx;
-    //if (indY + rows + dy <= 16 && indY + dy >= 0) indY += dy;
-    for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++) {
-            colliders[i][j]->setColliderIndex(indX + i + (16 * (indY + j)));
-        }
-    }
-}
-
-void UIColliderSelector::update()
-{
-    if (getKey(INPUT_KEY_LCTRL)) {
-        int dX = 0;
-        int dY = 0;
-
-        if (getKeyDown(INPUT_KEY_W)) {
-            dY -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_S)) {
-            dY += 1;
-        }
-        if (getKeyDown(INPUT_KEY_A)) {
-            dX -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_D)) {
-            dX += 1;
-        }
-        if (dX || dY) moveIndices(dX, dY);
-    }
+    //Forgive me for typecasting
+    if ((UISelectableCollider*)selected)
+        return ((UISelectableCollider*)selected)->getPolygon();
+    else
+        return NULL;
 }

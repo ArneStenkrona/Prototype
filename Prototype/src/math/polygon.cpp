@@ -10,6 +10,12 @@
 #include <SDL_image.h>
 #include "System\graphics\graphicsEngine.h"
 
+std::vector<Polyshape> Polyshape::basicPolygons = { Rectangular(Point(0, 0), 32, 32),
+Triangle(Point(0, 0), Point(32, 32), Point(0, 32)),
+Triangle(Point(32, 0), Point(32, 32), Point(0, 32)),
+Triangle(Point(0, 0), Point(32, 0), Point(0, 32)),
+Triangle(Point(32, 0), Point(32, 32), Point(0, 0)) };
+
 Polyshape::~Polyshape()
 {
     vertices.clear();

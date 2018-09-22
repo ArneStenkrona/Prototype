@@ -26,7 +26,7 @@ protected:
 private:
     //selected UISelectable
     void setSelected(UISelectable* s);
-    inline void setActive() { activeSelector = this; }
+    void setActive();
     //Dimensions of whatever data-structure is being selected
     unsigned int indexLimitX, indexLimity;
 

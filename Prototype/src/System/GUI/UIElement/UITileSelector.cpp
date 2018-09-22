@@ -11,12 +11,12 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
         selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableTile(this, positionX + (i * 32), positionY + (j * 32),
-                                     layer, i + (16 * j));
+                                     layer, i + (16 * j), _selectedColor, _hoverColor);
         }
     }
     selectables[columns].resize(1);
     selectables[columns][0] = new UISelectableTile(this, positionX + (columns * 32), positionY,
-                                   layer, -1);
+                                   layer, -1, _selectedColor, _hoverColor);
 }
 
 UITileSelector::~UITileSelector()
@@ -28,7 +28,7 @@ UITileSelector::~UITileSelector()
     }
 }
 
-Tile * UITileSelector::getTile()
+Tile * UITileSelector::getTile() const
 {
     //Forgive me for typecasting
     if ((UISelectableTile*)selected)

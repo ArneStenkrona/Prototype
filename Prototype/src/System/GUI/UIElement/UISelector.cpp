@@ -32,6 +32,14 @@ void UISelector::setSelected(UISelectable * s)
     selected = s;
 }
 
+void UISelector::setActive()
+{
+    if (activeSelector != this) {
+        activeSelector->selected = NULL;
+        activeSelector = this;
+    }
+}
+
 void UISelector::moveIndices(int dx, int dy)
 {
     if (indX + columns + dx <= indexLimitX && indX + dx >= 0) indX += dx;

@@ -41,6 +41,8 @@ public:
 
     std::string toString();
 
+    //Basic polygons, useful for making colliders
+    static std::vector<Polyshape> basicPolygons;
 protected:
     //This sets the dimensions of the shape
     //Should be called everytime the shape is altered

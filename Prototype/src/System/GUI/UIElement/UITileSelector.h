@@ -11,6 +11,6 @@ public:
     ~UITileSelector();
 
     //Creates and returns a tile based on selected
-    Tile* getTile();
+    Tile* getTile() const;
 private:
 };

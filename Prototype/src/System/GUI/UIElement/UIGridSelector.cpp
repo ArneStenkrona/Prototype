@@ -12,7 +12,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     tileSelector = new UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                                       0, _layer, 6, 6);
 
-    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X ,
+    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                                                 6 * 32, _layer, 6, 2);
 
     border[0] = new UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,

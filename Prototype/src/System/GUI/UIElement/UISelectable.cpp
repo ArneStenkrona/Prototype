@@ -25,8 +25,8 @@ void UISelectable::render()
 
 void UISelectable::onMouseOver()
 {
-    selector->setActive();
     if (getKeyDown(MOUSE_LEFT)) {
+        selector->setActive();
         selector->setSelected(this);
         currentColor = selectedColor;
     }
