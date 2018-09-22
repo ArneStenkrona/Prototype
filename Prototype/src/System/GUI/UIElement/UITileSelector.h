@@ -1,28 +1,16 @@
 #pragma once
-#include "UISelectTile.h"
+#include "UISelectableTile.h"
+#include "UISelector.h"
 #include <vector>
 
-class UITileSelector : public UIElement {
+class UITileSelector : public UISelector {
 public:
     UITileSelector(int _posx, int _posy, int _layer,
-                    unsigned int _columns, unsigned int _rows);
+                    unsigned int _columns, unsigned int _rows,
+                    Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
     ~UITileSelector();
 
-    inline unsigned int getSelectedIndex() const { return selectedTileIndex; }
-    inline unsigned int getRotation() const { return rotation; }
-    inline void getFlip(bool &_flipH, bool &_flipV) { _flipH = flipH; _flipV = flipV; }
-    void setIndex(unsigned int _index) { selectedTileIndex = _index; rotation = 0; }
-    void moveIndices(int dx, int dy);
+    //Creates and returns a tile based on selected
+    Tile* getTile();
 private:
-    std::vector<std::vector<UISelectTile*>> tiles;
-    //selected tileIndex
-    int selectedTileIndex;
-    //offset for indicies
-    int indX, indY;
-    unsigned int columns, rows;
-
-    void update();
-
-    int rotation;
-    bool flipH, flipV;
 };

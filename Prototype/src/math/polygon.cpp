@@ -7,7 +7,8 @@
 #include <vector>
 #include "triangle.h"
 #include "rectangle.h"
-
+#include <SDL_image.h>
+#include "System\graphics\graphicsEngine.h"
 
 Polyshape::~Polyshape()
 {
@@ -70,22 +71,6 @@ Point Polyshape::getEffectiveOrigin()
 {
     return effectiveOrigin;
 }
-/*
-Point Polyshape::vertexClosestToOrigin()
-{
-    Point closest;
-    double min = std::numeric_limits<double>::max();
-
-    for (int i = 0; i < numberOfVertices; i++) {
-        double dist = vertices[i].distanceTo(Point::empty);
-        if (dist < min) {
-            closest = vertices[i];
-            min = dist;
-        }
-    }
-
-    return closest;
-}*/
 
 Polyshape Polyshape::parsePolygon(std::string s)
 {
@@ -110,6 +95,15 @@ Polyshape Polyshape::parsePolygon(std::string s)
         polygon = Rectangular(points[0], points[1], points[2], points[3]);
     }
     return polygon;
+}
+
+void Polyshape::renderPolygon(int x, int y)
+{
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 0, 255, 0, 255);
+    for (int i = 0; i < vertices.size(); i++) {
+        SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), vertices[i].x + x, vertices[i].y + y,
+                vertices[(i + 1) % vertices.size()].x + x, vertices[(i + 1) % vertices.size()].y + y);
+    }
 }
 
 std::string Polyshape::toString()

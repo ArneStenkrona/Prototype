@@ -192,9 +192,6 @@
     <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -205,6 +202,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\World\objects\object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIBorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIColliderSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelectCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\graphics\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelectableTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -380,9 +398,6 @@
     <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -393,6 +408,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\World\objects\object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIBorder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIColliderSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelectCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelectableTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

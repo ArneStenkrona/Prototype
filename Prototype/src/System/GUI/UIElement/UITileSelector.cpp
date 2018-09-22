@@ -2,20 +2,20 @@
 #include "System\IO\inputManager.h"
 
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
-                              unsigned int _columns, unsigned int _rows)
-    : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false),
-      columns(_columns), rows(_rows), indX(0), indY(0), rotation(0)
+                              unsigned int _columns, unsigned int _rows,
+                              Color _selectedColor, Color _hoverColor)
+    : UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16)
 {
-    tiles.resize(columns + 1);
+    selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
-        tiles[i].resize(rows);
+        selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {
-            tiles[i][j] = new UISelectTile(this, positionX + (i * 32), positionY + (j * 32),
+            selectables[i][j] = new UISelectableTile(this, positionX + (i * 32), positionY + (j * 32),
                                      layer, i + (16 * j));
         }
     }
-    tiles[columns].resize(1);
-    tiles[columns][0] = new UISelectTile(this, positionX + (columns * 32), positionY,
+    selectables[columns].resize(1);
+    selectables[columns][0] = new UISelectableTile(this, positionX + (columns * 32), positionY,
                                    layer, -1);
 }
 
@@ -23,53 +23,17 @@ UITileSelector::~UITileSelector()
 {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            delete(tiles[i][j]);
+            delete(selectables[i][j]);
         }
     }
 }
 
-void UITileSelector::moveIndices(int dx, int dy)
+Tile * UITileSelector::getTile()
 {
-    if (indX + columns + dx <= 16 && indX + dx >= 0) indX += dx;
-    if (indY + rows + dy <= 16 && indY + dy >= 0) indY += dy;
-    for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++) {
-            tiles[i][j]->setTileIndex(indX + i + (16 * (indY + j)) );
-        }
-    }
+    //Forgive me for typecasting
+    if ((UISelectableTile*)selected)
+        return ((UISelectableTile*)selected)->getTile();
+    else 
+        return NULL;
 }
 
-void UITileSelector::update()
-{
-
-    if (getKeyDown(INPUT_KEY_R)) {
-        rotation = (rotation + 1) % 4;
-    }
-
-    if (getKeyDown(INPUT_KEY_F)) {
-        flipH = !flipH;
-    }
-
-    if (getKeyDown(INPUT_KEY_G)) {
-        flipV = !flipV;
-    }
-
-    if (getKey(INPUT_KEY_LSHIFT)) {
-        int dX = 0;
-        int dY = 0;
-
-        if (getKeyDown(INPUT_KEY_W)) {
-            dY -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_S)) {
-            dY += 1;
-        }
-        if (getKeyDown(INPUT_KEY_A)) {
-            dX -= 1;
-        }
-        if (getKeyDown(INPUT_KEY_D)) {
-            dX += 1;
-        }
-        if (dX || dY) moveIndices(dX, dY);
-    }
-}

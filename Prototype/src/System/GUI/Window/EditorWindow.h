@@ -19,7 +19,6 @@ public:
 
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
-    void setTile(unsigned int x, unsigned int y);
 
 private:
     static const int gridSize;
@@ -35,6 +34,5 @@ private:
     int posX;
     int posY;
 
-    UITileSelector* tileSelector;
     UIGridSelector* gridSelector;
 };

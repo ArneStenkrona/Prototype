@@ -2,6 +2,7 @@
 #include "math\point.h"
 #include <vector>
 #include <set>
+#include "System\graphics\color.h"
 
 class UIElement {
 public:
@@ -15,7 +16,8 @@ public:
     //Renders all UIElements
     static void renderUIElements();
 
-    static void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    static void drawOutlineSquare(int x, int y, Color color);
+    static void drawSolidSquare(int x, int y, Color color);
 protected:
     //Container for all UIElements, divided by layer
     static std::vector<std::set<UIElement*>> allUIElements;

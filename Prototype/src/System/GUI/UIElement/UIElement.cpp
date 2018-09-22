@@ -78,9 +78,16 @@ void UIElement::update()
 {
 }
 
-void UIElement::drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+void UIElement::drawOutlineSquare(int x, int y, Color color) {
     SDL_Rect outlineRect = { x, y, 32, 32 };
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), r, g, b, a);
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
     SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);
+}
+
+void UIElement::drawSolidSquare(int x, int y, Color color)
+{
+    SDL_Rect fillRect = { x, y, 32, 32 };
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(GraphicsEngine::getActiveRenderer(), &fillRect);
 }
 

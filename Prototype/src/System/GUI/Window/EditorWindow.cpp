@@ -3,6 +3,7 @@
 #include <iostream>
 #include "System\graphics\textureManager.h"
 #include "System\GUI\UIElement\UITileSelector.h"
+#include "System\graphics\graphicsEngine.h"
 
 const int EditorWindow::gridSize = 32;
 
@@ -51,18 +52,4 @@ void EditorWindow::updatePosition(int deltaX, int deltaY)
 {
     posX += deltaX;
     posY += deltaY;
-}
-
-
-void EditorWindow::setTile(unsigned int x, unsigned int y)
-{
-    Tile *tile;
-    int selectedTile = tileSelector->getSelectedIndex();
-    if (selectedTile == -1) {
-        tile = NULL;
-    }
-    else {
-        tile = new Tile(selectedTile);
-    }
-    activeRoom->setTile(x, y, tile);
 }

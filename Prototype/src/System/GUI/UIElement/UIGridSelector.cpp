@@ -6,10 +6,27 @@
 #include "World\Tile.h"
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
-    :UIElement(_posx, _posy, 0, 0, _layer + 2, true), room(_room)
+    :UIElement(_posx, _posy, 0, 0, _layer + 3, true), room(_room)
 {
     setRoom(room);
-    tileSelector = tileSelector = new UITileSelector(0, 0, _layer, 4, 4);
+    tileSelector = new UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+                                      0, _layer, 6, 6);
+
+    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X ,
+                                                6 * 32, _layer, 6, 2);
+
+    border[0] = new UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+                             0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 1);
+    border[1] = new UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
+                             GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 1);
+}
+
+UIGridSelector::~UIGridSelector()
+{
+    delete(tileSelector);
+    delete(colliderSelector);
+    delete(border[0]);
+    delete(border[1]);
 }
 
 void UIGridSelector::setPosition(int x, int y)
@@ -65,16 +82,5 @@ void UIGridSelector::setRoom(Room* _room)
 
 void UIGridSelector::setTile(int x, int y)
 {
-    Tile *tile;
-    int selectedTile = tileSelector->getSelectedIndex();
-    bool flipH, flipV;
-    tileSelector->getFlip(flipH, flipV);
-    if (selectedTile == -1) {
-        tile = NULL;
-    }
-    else {
-        tile = new Tile(selectedTile, tileSelector->getRotation(),
-                        flipH, flipV);
-    }
-    room->setTile(x, y, tile);
+    room->setTile(x, y, tileSelector->getTile());
 }

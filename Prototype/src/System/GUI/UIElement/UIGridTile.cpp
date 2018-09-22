@@ -11,7 +11,7 @@ UIGridTile::UIGridTile(UIGridSelector * _selector, int _layer, unsigned int _ind
 void UIGridTile::render()
 {
 
-    UIElement::drawOutlineSquare(positionX, positionY, r, g, b, a);
+    UIElement::drawOutlineSquare(positionX, positionY, { r, g, b, a });
 }
 
 void UIGridTile::onMouseOver()

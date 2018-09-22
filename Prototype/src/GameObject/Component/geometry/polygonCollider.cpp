@@ -120,7 +120,9 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
                     }
                     else {
                         if (collisionTime < 0.0) {
-                            a->position->position -= collisionNormal * collisionTime;// -0.01 * a->velocity->velocity.normalized();
+                            a->position->position -= collisionNormal * collisionTime -0.01 * a->velocity->velocity.normalized();
+                            Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
+                            a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
                         }
                     }
                 }            

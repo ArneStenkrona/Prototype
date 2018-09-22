@@ -36,6 +36,9 @@ public:
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);
 
+    //Renders the outline of the polygon
+    void renderPolygon(int x, int y);
+
     std::string toString();
 
 protected:
