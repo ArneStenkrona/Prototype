@@ -17,6 +17,6 @@ public:
 private:
     int rotation;
     bool flipH, flipV;
-
     void derivedUpdate();
+    void derivedSetSelected(int i);
 };

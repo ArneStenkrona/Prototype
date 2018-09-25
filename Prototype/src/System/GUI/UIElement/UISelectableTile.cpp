@@ -3,16 +3,18 @@
 #include "UISelector.h"
 #include "System\IO\inputManager.h"
 #include "UITileSelector.h"
+#include "UISelectableTile.h"
 
-UISelectableTile::UISelectableTile(UISelector * _selector, int _posX, int _posY, unsigned int _layer, 
+UISelectableTile::UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
                                    int _index, Color _selectedColor, Color _hoverColor)
-    : UISelectable(_selector, _posX, _posY, 32, 32, _layer, _index, _selectedColor, _hoverColor), rotation(0), flipH(0), flipV(0)
+    : UISelectable(_selector, _posX, _posY, 32, 32, _layer, _index, _selectedColor, _hoverColor), rotation(0), flipH(0), flipV(0),
+      tSelector(_selector)
 {
 }
 
 void UISelectableTile::derivedRender()
 {
-    if (index < 0) {
+    if (index > 255) {
         TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
     }
     else {
@@ -25,18 +27,13 @@ void UISelectableTile::derivedRender()
     }
 }
 
-void UISelectableTile::select()
+void UISelectableTile::derivedUpdate()
 {
-    //Forgive me for typecasting
-    if ((UITileSelector*)selector)
-        return ((UITileSelector*)selector)->getRotationAndFlip(rotation, flipH, flipV);
-    else
-        printf("COULD NOT UPDATE ROTATION AND FLIP FOR UISelectableTile. \n TYPECAST FAILED. \n");
-}
-
-void UISelectableTile::unselect()
-{
-    rotation = 0;
-    flipH = 0;
-    flipV = 0;
+    if (selector->getSelected() == index)
+        tSelector->getRotationAndFlip(rotation, flipH, flipV);
+    else {
+        rotation = 0;
+        flipH = false;
+        flipV = false;
+    }
 }

@@ -79,7 +79,16 @@ void UIGridSelector::setRoom(Room* _room)
     }
 }
 
-void UIGridSelector::setTile(int x, int y)
+void UIGridSelector::setElement(int x, int y)
 {
-    room->setTile(x, y, tileSelector->getTile());
+    UISelector* s = UISelector::getActiveSelector();
+    if (s == tileSelector)
+        room->setTile(x, y, tileSelector->getTile());
+    if (s == colliderSelector) {
+        Tile* t = room->getTile(x, y);
+        if (t)
+            t->setPolygon(*colliderSelector->getPolygon());
+        else if (colliderSelector->getPolygon())
+            room->setTile(x, y, new Tile(-1, *colliderSelector->getPolygon()));          
+    }
 }

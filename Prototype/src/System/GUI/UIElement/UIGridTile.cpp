@@ -17,7 +17,7 @@ void UIGridTile::render()
 void UIGridTile::onMouseOver()
 {
     if (getKey(MOUSE_LEFT)) {
-        selector->setTile(indX, indY);
+        selector->setElement(indX, indY);
     }
     r = 0xff;
     g = 0x00;

@@ -16,13 +16,13 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
     }
     selectables[columns].resize(1);
     selectables[columns][0] = new UISelectableTile(this, positionX + (columns * 32), positionY,
-                                   layer, -1, _selectedColor, _hoverColor);
+                                   layer, 256, _selectedColor, _hoverColor);
 }
 
 UITileSelector::~UITileSelector()
 {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
+    for (int i = 0; i < selectables.size(); i++) {
+        for (int j = 0; j < selectables[i].size(); j++) {
             delete(selectables[i][j]);
         }
     }
@@ -38,7 +38,7 @@ void UITileSelector::getRotationAndFlip(int & rot, bool & h, bool & v)
 Tile * UITileSelector::getTile() const
 {
     Tile *tile;
-    if (selectedIndex == -1)
+    if (selectedIndex == indexLimitX * indexLimity)
         tile = NULL;
     else
         tile = new Tile(selectedIndex, rotation, flipH, flipV);
@@ -57,4 +57,11 @@ void UITileSelector::derivedUpdate()
         if (getKeyDown(INPUT_KEY_G))
             flipV = !flipV;
     }
+}
+
+void UITileSelector::derivedSetSelected(int i)
+{
+    rotation = 0;
+    flipH = false;
+    flipV = false;
 }

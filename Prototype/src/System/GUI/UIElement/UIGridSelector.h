@@ -6,6 +6,8 @@
 #include "UIColliderSelector.h"
 #include "UIBorder.h"
 
+//Bad name for class, should be something like "UIEditor"
+//because of big responsibility
 class UIGridSelector : public UIElement {
 public:
     UIGridSelector(Room* _room, int _posx, int _posy, int _layer);
@@ -14,7 +16,8 @@ public:
     void setPosition(int x, int y);
 
     void setRoom(Room* _room);
-    void setTile(int x, int y);
+    //Sets element from active selector at position (x, y)
+    void setElement(int x, int y);
 
 private:
     unsigned int columns, rows;

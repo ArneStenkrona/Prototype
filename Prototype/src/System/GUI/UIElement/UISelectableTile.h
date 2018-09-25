@@ -3,14 +3,17 @@
 #include "UISelectable.h"
 #include "World\Tile.h"
 
+class UITileSelector;
 class UISelectableTile : public UISelectable {
 public:
-    UISelectableTile(UISelector* _selector, int _posX, int _posY, unsigned int _layer,
+    UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
         int _index, Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
 private:
     void derivedRender();
-    void select();
-    void unselect();
+    void derivedUpdate();
+
     int rotation;
     bool flipH, flipV;
+
+    UITileSelector* tSelector;
 };

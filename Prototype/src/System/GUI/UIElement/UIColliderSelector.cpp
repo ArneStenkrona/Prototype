@@ -7,7 +7,7 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
                                        Color _selectedColor, Color _hoverColor)
     : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8)
 {
-    selectables.resize(columns + 1);
+    selectables.resize(columns);
     for (int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {

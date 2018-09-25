@@ -1,5 +1,6 @@
 #include "UISelector.h"
 #include "System\IO\inputManager.h"
+#include <iostream>
 
 UISelector* UISelector::activeSelector = NULL;
 
@@ -9,11 +10,6 @@ UISelector::UISelector(int _posx, int _posy, int _layer,
     : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false), columns(_columns), rows(_rows),
       indexLimitX(_indexLimitX), indexLimity(_indexLimitY)
 {
-    selectables.resize(columns + 1);
-    for (int i = 0; i < columns; i++) {
-        selectables[i].resize(rows);
-    }
-
     activeSelector = this;
 }
 
@@ -28,20 +24,17 @@ void UISelector::derivedUpdate()
 
 void UISelector::setSelected(int i)
 {
-    if (i == selectedIndex) return;
-    try {
-        UISelectable* current = selectables[selectedIndex % columns][selectedIndex / rows];
-        current->unselect();
-    }
-    catch (const std::out_of_range& e) {
-    }
     selectedIndex = i;
+    derivedSetSelected(i);
+}
+
+void UISelector::derivedSetSelected(int i)
+{
 }
 
 void UISelector::setActive()
 {
     if (activeSelector != this) {
-        activeSelector->selectedIndex = NULL;
         activeSelector = this;
     }
 }

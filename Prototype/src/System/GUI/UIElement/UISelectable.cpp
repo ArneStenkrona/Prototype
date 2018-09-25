@@ -49,7 +49,3 @@ void UISelectable::update() {
         currentColor = COLOR_NONE;
     }
 }
-
-void UISelectable::unselect()
-{
-}

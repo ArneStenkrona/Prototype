@@ -54,14 +54,15 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
 {
     GameObject *obj = new GameObject();
     obj->addComponent<Position>()->position = Point(x * 32, y * 32);
-    obj->addComponent<SpriteRenderer>();
-    obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
-    obj->getComponent<Sprite>()->setTileIndex(tileIndex);
-    obj->getComponent<Sprite>()->setMirror(flipH, flipV);
-    if (flipV) printf("okidoki");
-    if (rotation) {
-        obj->addComponent<Rotation>()->rotation = (rotation * 90);
-        obj->getComponent<Rotation>()->pivot = Point(16,16);
+    if (tileIndex >= 0) {
+        obj->addComponent<SpriteRenderer>();
+        obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
+        obj->getComponent<Sprite>()->setTileIndex(tileIndex);
+        obj->getComponent<Sprite>()->setMirror(flipH, flipV);
+            if (rotation) {
+                obj->addComponent<Rotation>()->rotation = (rotation * 90);
+                obj->getComponent<Rotation>()->pivot = Point(16, 16);
+            }
     }
 
     if (hasCollider()) {
@@ -79,4 +80,6 @@ void Tile::renderTile(int x, int y)
                                                rotation * 90, 16, 16);
     else 
         TextureManager::tileMap.texture.renderTile(x, y, tileIndex);
+    if (polygon.has_value())
+        polygon.value().renderPolygon(x, y);
 }

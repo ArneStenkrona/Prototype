@@ -21,7 +21,7 @@ protected:
     //called when selected
     virtual void select();
     //called when unselected
-    virtual void unselect();
+    //virtual void unselect();
     int index;
     Color currentColor;
     Color selectedColor;

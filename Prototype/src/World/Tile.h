@@ -17,6 +17,7 @@ public:
     ~Tile();
 
     bool hasCollider();
+    void setPolygon(Polyshape p) { if (polygon) polygon = p; };
     Polyshape *getPolygon();
     int getIndex();
     inline int getRotation() { return rotation; }
