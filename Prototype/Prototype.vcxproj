@@ -220,6 +220,7 @@
     <ClInclude Include="src\System\Physics\physicsEngine.h" />
     <ClInclude Include="src\System\Physics\rayCastHit.h" />
     <ClInclude Include="src\tools\stringTools.h" />
+    <ClInclude Include="src\tools\timeMacros.h" />
     <ClInclude Include="src\World\editor\editor.h" />
     <ClInclude Include="src\World\objects\object.h" />
     <ClInclude Include="src\World\room.h" />
@@ -290,6 +291,7 @@
     <ClCompile Include="src\System\Physics\physicsEngine.cpp" />
     <ClCompile Include="src\System\Physics\rayCastHit.cpp" />
     <ClCompile Include="src\tools\stringTools.cpp" />
+    <ClCompile Include="src\tools\timeMacros.cpp" />
     <ClCompile Include="src\World\editor\editor.cpp" />
     <ClCompile Include="src\World\objects\object.cpp" />
     <ClCompile Include="src\World\room.cpp" />

@@ -9,6 +9,7 @@
 #include "System\Physics\collision.h"
 #include <map>
 #include <set>
+#include "tools\timeMacros.h"
 
 //All existing hitboxes, both active and inactive
 list<PolygonCollider*> ALL_COLLIDERS = list<PolygonCollider*>();

@@ -24,7 +24,9 @@ void UISelectable::select()
 void UISelectable::render()
 {
     derivedRender();
-    UIElement::drawOutlineSquare(positionX, positionY, currentColor);
+    UIElement::drawOutlineSquare(currentColor);
+    if (!selector->isActive())
+        UIElement::drawSolidSquare({255,255,255,80});
 }
 
 void UISelectable::onMouseOver()
@@ -42,7 +44,7 @@ void UISelectable::onMouseOver()
 
 void UISelectable::update() {
     derivedUpdate();
-    if (selector->getSelected() == index) {
+    if (selector->getSelectedIndex() == index) {
         currentColor = selectedColor;
     }
     else {

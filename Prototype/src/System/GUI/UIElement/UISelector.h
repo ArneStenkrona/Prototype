@@ -11,7 +11,8 @@ public:
     ~UISelector();
 
     inline static UISelector* getActiveSelector() { return activeSelector; }
-    inline int getSelected() const { return selectedIndex; }
+    inline bool isActive() const { return activeSelector == this; }
+    inline int getSelectedIndex() const { return selectedIndex; }
 protected:
     //selected UISelectable
     void setSelected(int i);

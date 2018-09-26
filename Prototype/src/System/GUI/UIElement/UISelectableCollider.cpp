@@ -9,7 +9,7 @@ UISelectableCollider::UISelectableCollider(UISelector * _selector, int _posX, in
 
 void UISelectableCollider::derivedRender()
 {
-    UIElement::drawSolidSquare(positionX, positionY, { 0, 0, 0, 255 });
+    UIElement::drawSolidSquare({ 0, 0, 0, 255 });
     if (Polyshape::basicPolygons.size() > index) Polyshape::basicPolygons[index].renderPolygon(positionX, positionY);
 }
 

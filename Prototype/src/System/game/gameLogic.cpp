@@ -10,6 +10,7 @@
 #include "scene\debug_scenes\debug_scene0.h"
 #include <iostream>
 #include "GameObject\objectPool.h"
+#include "tools\timeMacros.h"
 
 //The current scene in game
 Scene *currentScene;
@@ -84,6 +85,7 @@ void gameLoop() {
     TextureManager::initalizeTextureManager();
 
     setScene();
+
 
     //While games is running
     while (!gameWindow->hasExited()) {

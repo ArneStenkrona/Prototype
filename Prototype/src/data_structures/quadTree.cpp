@@ -41,6 +41,45 @@ void QuadTree::split()
     nodes[1] = new QuadTree(level + 1, Point(x, y), Point(subWidth, subHeight));
     nodes[2] = new QuadTree(level + 1, Point(x, y + subHeight), Point(subWidth, subHeight));
     nodes[3] = new QuadTree(level + 1, Point(x + subWidth, y + subHeight), Point(subWidth, subHeight));
+
+
+        std::set<PolygonCollider*>::iterator it;
+        for (it = colliders.begin(); it != colliders.end(); ) {
+            int index = getIndex(*it);
+            if (index > -1) {
+                nodes[index]->insert(*it);
+                colliders.erase(it++);
+            }
+            else {
+                switch (index) {
+                case -1:
+                    nodes[0]->insert(*it);
+                    nodes[1]->insert(*it);
+                    nodes[2]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -2:
+                    nodes[0]->insert(*it);
+                    nodes[1]->insert(*it);
+                    break;
+                case -3:
+                    nodes[2]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -4:
+                    nodes[0]->insert(*it);
+                    nodes[3]->insert(*it);
+                    break;
+                case -5:
+                    nodes[1]->insert(*it);
+                    nodes[2]->insert(*it);
+                    break;
+
+                }
+                it++;
+            }
+        }
+        colliders.clear();
 }
 
 set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders, PolygonCollider *collider)
@@ -77,44 +116,6 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders
     if (nodes[0] == nullptr) {
         returnColliders->insert(colliders.begin(), colliders.end());
     }
-    else {
-        if (colliders.size() != 0) printf("noooooooo");
-    }
-
-    /*returnColliders->insert(colliders.begin(), colliders.end());
-    for (int i = 0; i < sizeof(nodes) / sizeof(*nodes); i++) {
-        if (nodes[i] != nullptr )nodes[i]->retrieve(returnColliders, collider);
-    }*/
-    /*//Position of the box
-    Point colliderPos = collider->getPosition() + collider->getPolygon().getEffectiveOrigin();
-    //dimensions of the box
-    Point colliderDimensions;
-
-    //if the collider is nonstatic, account for velocity
-    if (collider->getStatic()) {
-        colliderDimensions = Point(collider->getWidth(), collider->getHeight());
-    }
-    else {
-        Point vel = collider->getVelocity();
-        colliderDimensions = Point(collider->getWidth() + fabs(vel.x), collider->getHeight() + fabs(vel.y));
-
-        //Account for the direction of the velocity
-        if (vel.x < 0.0) {
-            colliderPos = colliderPos + Point(vel.x, 0.0);
-        }
-
-        if (vel.y < 0.0) {
-            colliderPos = colliderPos + Point(0.0, vel.y);
-        }
-
-    }
-
-    bool overlap = colliderPos.x + colliderDimensions.x >= position.x && colliderPos.x < position.x + bounds.x
-         && colliderPos.y + colliderDimensions.y >= position.y && colliderPos.y < position.y + bounds.y;
-
-    if (overlap) {
-        returnColliders->insert(colliders.begin(), colliders.end());
-    }*/
     return returnColliders;
 }
 
@@ -233,7 +234,6 @@ void QuadTree::insert(PolygonCollider * collider)
 {
     if (nodes[0] != nullptr) {
         int index = getIndex(collider);
-
         if (index > -1) {
             nodes[index]->insert(collider);
             return;
@@ -262,51 +262,14 @@ void QuadTree::insert(PolygonCollider * collider)
                 nodes[1]->insert(collider);
                 nodes[2]->insert(collider);
                 break;
+            case -6:
+                return;
             }
         }
     }
     colliders.insert(collider);
     if (nodes[0] == nullptr && colliders.size() > Max_Objects && level < Max_Levels) {
             split();
-    }
-    if (nodes[0] != nullptr) {
-        std::set<PolygonCollider*>::iterator it;
-        for (it = colliders.begin(); it != colliders.end(); ) {
-            int index = getIndex(*it);
-            if (index > -1) {
-                nodes[index]->insert(*it);
-                colliders.erase(it++);
-            }
-            else {
-                switch (index) {
-                case -1:
-                    nodes[0]->insert(*it);
-                    nodes[1]->insert(*it);
-                    nodes[2]->insert(*it);
-                    nodes[3]->insert(*it);
-                    break;
-                case -2:
-                    nodes[0]->insert(*it);
-                    nodes[1]->insert(*it);
-                    break;
-                case -3:
-                    nodes[2]->insert(*it);
-                    nodes[3]->insert(*it);
-                    break;
-                case -4:
-                    nodes[0]->insert(*it);
-                    nodes[3]->insert(*it);
-                    break;
-                case -5:
-                    nodes[1]->insert(*it);
-                    nodes[2]->insert(*it);
-                    break;
-
-                }
-                it++;
-            }
-        }
-        colliders.clear();
     }
 }
 
@@ -330,7 +293,6 @@ void QuadTree::draw()
         }
     }
 }
-
 
 int QuadTree::getIndex(PolygonCollider * collider)
 {

@@ -19,7 +19,7 @@ public:
     static void removeFromRenderQueue(Renderer *r, int layer);
 
     static SDL_Renderer* getActiveRenderer();
-    static LWindow* getActiveWindow() { return activeWindow; }
+    inline static LWindow* getActiveWindow() { return activeWindow; }
 
     //Screen dimension constants
     static const int SCREEN_WIDTH;

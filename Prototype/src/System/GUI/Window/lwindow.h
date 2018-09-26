@@ -37,6 +37,9 @@ public:
     inline bool getLeftMouse() const { return leftMouse; }
     inline bool getRightMouse() const { return rightMouse; }
 
+    inline unsigned int getWidth() const { return screen_width; }
+    inline unsigned int getHeight() const { return screen_height; }
+
     void clear();
     void present();
 
@@ -50,10 +53,10 @@ protected:
     SDL_Renderer* mRenderer;
 
     //Screen dimension constants, though I might remove this if I set window to resizable
-    const int screen_width;
-    const int screen_height;
-    const int scale_x;
-    const int scale_y;
+    const unsigned int screen_width;
+    const unsigned int screen_height;
+    const unsigned int scale_x;
+    const unsigned int scale_y;
 
     //Sets referenced variables to window coordinates
     void getPos(int *x, int *y);

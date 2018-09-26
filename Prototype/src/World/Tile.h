@@ -16,6 +16,8 @@ public:
 
     ~Tile();
 
+    static const unsigned int TILE_SIZE;
+
     bool hasCollider();
     void setPolygon(Polyshape p) { if (polygon) polygon = p; };
     Polyshape *getPolygon();

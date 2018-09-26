@@ -36,7 +36,7 @@ public:
 
 private:
     //Max objects per node level
-    int Max_Objects = 10;
+    int Max_Objects = 20;
     //Max number of levels
     int Max_Levels = 5;
 

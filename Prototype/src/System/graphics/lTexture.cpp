@@ -115,6 +115,11 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, 
                           bool mirrorH, bool mirrorV, double rotation, int px, int py) const
 {
+    //Check if visible in viewport
+    if (x > GraphicsEngine::getActiveWindow()->getWidth() / GraphicsEngine::SCALE_X || 
+        y > GraphicsEngine::getActiveWindow()->getHeight() / GraphicsEngine::SCALE_Y ||
+        x + 32 * widthFactor < 0 || y + 32 * heightFactor < 0) return;
+
     SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor };
     SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
 

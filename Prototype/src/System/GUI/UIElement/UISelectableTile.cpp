@@ -29,7 +29,7 @@ void UISelectableTile::derivedRender()
 
 void UISelectableTile::derivedUpdate()
 {
-    if (selector->getSelected() == index)
+    if (selector->getSelectedIndex() == index)
         tSelector->getRotationAndFlip(rotation, flipH, flipV);
     else {
         rotation = 0;

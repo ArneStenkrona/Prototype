@@ -3,6 +3,8 @@
 #include "GameObject\Component\geometry\polygonCollider.h"
 #include "GameObject\Component\graphics\spriteRenderer.h"
 
+const unsigned int Tile::TILE_SIZE = 32;
+
 Tile::Tile(int _tileIndex) : Tile(_tileIndex, {}, 0, false, false)
 {
 }
@@ -53,7 +55,7 @@ int Tile::getIndex()
 GameObject* Tile::gameObjectFromTile(int x, int y)
 {
     GameObject *obj = new GameObject();
-    obj->addComponent<Position>()->position = Point(x * 32, y * 32);
+    obj->addComponent<Position>()->position = Point(x * TILE_SIZE, y * TILE_SIZE);
     if (tileIndex >= 0) {
         obj->addComponent<SpriteRenderer>();
         obj->addComponent<Sprite>()->texture = &TextureManager::tileMap.texture;
@@ -61,7 +63,7 @@ GameObject* Tile::gameObjectFromTile(int x, int y)
         obj->getComponent<Sprite>()->setMirror(flipH, flipV);
             if (rotation) {
                 obj->addComponent<Rotation>()->rotation = (rotation * 90);
-                obj->getComponent<Rotation>()->pivot = Point(16, 16);
+                obj->getComponent<Rotation>()->pivot = Point(TILE_SIZE / 2, TILE_SIZE / 2);
             }
     }
 
@@ -77,7 +79,7 @@ void Tile::renderTile(int x, int y)
     if (rotation || flipH || flipV)
     TextureManager::tileMap.texture.renderTile(x, y, tileIndex,
                                                1,1, flipH, flipV,
-                                               rotation * 90, 16, 16);
+                                               rotation * 90, TILE_SIZE / 2, TILE_SIZE / 2);
     else 
         TextureManager::tileMap.texture.renderTile(x, y, tileIndex);
     if (polygon.has_value())
