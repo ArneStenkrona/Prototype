@@ -1,8 +1,8 @@
 #include "lTexture.h"
 #include "System\graphics\graphicsEngine.h"
+#include "World\Tile.h"
 
-
-LTexture::LTexture() : mTexture(NULL), mWidth(0), mHeight(0)
+LTexture::LTexture() : mTexture(NULL), mWidth(0), mHeight(0), tilesPerRow(0)
 {
 }
 
@@ -43,6 +43,7 @@ bool LTexture::loadFromFile(std::string path, SDL_Renderer* renderer)
             //Get image dimensions
             mWidth = loadedSurface->w;
             mHeight = loadedSurface->h;
+            tilesPerRow = mWidth / Tile::TILE_SIZE;
         }
 
         //Get rid of old loaded surface
@@ -118,10 +119,13 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     //Check if visible in viewport
     if (x > GraphicsEngine::getActiveWindow()->getWidth() / GraphicsEngine::SCALE_X || 
         y > GraphicsEngine::getActiveWindow()->getHeight() / GraphicsEngine::SCALE_Y ||
-        x + 32 * widthFactor < 0 || y + 32 * heightFactor < 0) return;
+        x + Tile::TILE_SIZE * widthFactor < 0 || y + Tile::TILE_SIZE * heightFactor < 0) return;
 
-    SDL_Rect renderQuad = { x, y, 32 * widthFactor, 32 * heightFactor };
-    SDL_Rect tileRect = { ((tileIndex * widthFactor) % 16) * 32, ((tileIndex * heightFactor) / 16) * 32, 32 * widthFactor, 32 * heightFactor };
+    SDL_Rect renderQuad = { x, y, Tile::TILE_SIZE * widthFactor, Tile::TILE_SIZE * heightFactor };
+    SDL_Rect tileRect = { ((tileIndex * widthFactor) % tilesPerRow) * Tile::TILE_SIZE, 
+                          ((tileIndex * heightFactor) / tilesPerRow) * Tile::TILE_SIZE, 
+                          Tile::TILE_SIZE * widthFactor, 
+                           Tile::TILE_SIZE * heightFactor };
 
     SDL_Point pivot = { px, py };
     

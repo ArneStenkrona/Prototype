@@ -55,4 +55,7 @@ private:
     //Image dimensions
     int mWidth;
     int mHeight;
+
+    //How many tiles can be fitted per row
+    unsigned int tilesPerRow;
 };

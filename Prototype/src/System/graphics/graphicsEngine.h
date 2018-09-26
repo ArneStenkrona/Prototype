@@ -44,12 +44,6 @@ private:
     static LWindow* activeWindow;
 
     static const bool initSDL();
-    /* Sets version and parameters for openGL
-    OBSERVE: This does not yet call glewInit()
-    as a context may not have yet been created*/
-    static const bool initOpenGL();
-
-    static void experimentGL();
 
     static LTexture frameBuffer;
 };

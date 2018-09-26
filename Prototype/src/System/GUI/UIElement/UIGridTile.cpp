@@ -3,8 +3,9 @@
 #include "System\IO\inputManager.h"
 
 UIGridTile::UIGridTile(UIGridSelector * _selector, int _layer, unsigned int _indX, unsigned int _indY)
-    : UIElement(_selector->positionX + indX * 32, _selector->positionY + indY * 32, 32, 32, _layer, true), 
-    indX(_indX), indY(_indY), selector(_selector)
+    : UIElement(_selector->positionX + indX * Tile::TILE_SIZE, _selector->positionY + indY * Tile::TILE_SIZE, 
+                Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, true),
+                indX(_indX), indY(_indY), selector(_selector)
 {
 }
 
@@ -32,6 +33,6 @@ void UIGridTile::update()
     b = 0x00;
     a = 0x40;
 
-    positionX = selector->positionX + indX * 32;
-    positionY = selector->positionY + indY * 32;
+    positionX = selector->positionX + indX * Tile::TILE_SIZE;
+    positionY = selector->positionY + indY * Tile::TILE_SIZE;
 }

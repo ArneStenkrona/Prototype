@@ -4,10 +4,11 @@
 #include "System\IO\inputManager.h"
 #include "UITileSelector.h"
 #include "UISelectableTile.h"
+#include "World\Tile.h"
 
 UISelectableTile::UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
                                    int _index, Color _selectedColor, Color _hoverColor)
-    : UISelectable(_selector, _posX, _posY, 32, 32, _layer, _index, _selectedColor, _hoverColor), rotation(0), flipH(0), flipV(0),
+    : UISelectable(_selector, _posX, _posY, Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, _index, _selectedColor, _hoverColor), rotation(0), flipH(0), flipV(0),
       tSelector(_selector)
 {
 }

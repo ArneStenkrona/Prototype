@@ -1,13 +1,13 @@
 #include "UISelector.h"
 #include "System\IO\inputManager.h"
-#include <iostream>
+#include "World\Tile.h"
 
 UISelector* UISelector::activeSelector = NULL;
 
 UISelector::UISelector(int _posx, int _posy, int _layer, 
                        unsigned int _columns, unsigned int _rows,
                        unsigned int _indexLimitX, unsigned int _indexLimitY)
-    : UIElement(_posx, _posy, 32 * _columns, 32 * _rows, _layer, false), columns(_columns), rows(_rows),
+    : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, Tile::TILE_SIZE * _rows, _layer, false), columns(_columns), rows(_rows),
       indexLimitX(_indexLimitX), indexLimity(_indexLimitY)
 {
     activeSelector = this;

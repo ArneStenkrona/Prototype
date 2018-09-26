@@ -4,7 +4,9 @@
 #include "GameObject\Component\graphics\spriteRenderer.h"
 
 const unsigned int Tile::TILE_SIZE = 32;
-
+//This is assuming a tilesheet is 1024x1024 pixels
+const unsigned int Tile::TILES_PER_ROW = 1024 / Tile::TILE_SIZE;
+const unsigned int Tile::TILES_PER_COLUMN = 1024 / Tile::TILE_SIZE;
 Tile::Tile(int _tileIndex) : Tile(_tileIndex, {}, 0, false, false)
 {
 }
@@ -12,8 +14,8 @@ Tile::Tile(int _tileIndex) : Tile(_tileIndex, {}, 0, false, false)
 Tile::Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV)
     : Tile(_tileIndex, {}, _rotation, _flipH, _flipV)
 {
-    int colliderCol = tileIndex % 16;
-    int colliderRow = tileIndex / 16;
+    int colliderCol = tileIndex % TILES_PER_ROW;
+    int colliderRow = tileIndex / TILES_PER_ROW;
 
     polygon = TextureManager::tileMap.colliderMatrix[colliderCol][colliderRow];
 }

@@ -10,7 +10,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
 {
     setRoom(room);
     colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                                              6 * 32, _layer, 6, 2);
+                                              6 * Tile::TILE_SIZE, _layer, 6, 2);
     tileSelector = new UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                                       0, _layer, 6, 6);
 
@@ -44,7 +44,7 @@ void UIGridSelector::renderRoom()
     for (int x = 0; x < room->tileMatrix.size(); x++) {
         for (int y = 0; y < room->tileMatrix[x].size(); y++) {
             if (room->tileMatrix[x][y] != NULL) {
-                room->tileMatrix[x][y]->renderTile((x * 32) + positionX, (y * 32) + positionY);
+                room->tileMatrix[x][y]->renderTile((x * Tile::TILE_SIZE) + positionX, (y * Tile::TILE_SIZE) + positionY);
             }
         }
     }
@@ -65,8 +65,8 @@ void UIGridSelector::setRoom(Room* _room)
     int x = 0;
     int y = 0;
     room->getDimensions(x, y);
-    width = x * 32;
-    height = y * 32;
+    width = x * Tile::TILE_SIZE;
+    height = y * Tile::TILE_SIZE;
     columns = x;
     rows = y;
 
@@ -84,11 +84,15 @@ void UIGridSelector::setElement(int x, int y)
     UISelector* s = UISelector::getActiveSelector();
     if (s == tileSelector)
         room->setTile(x, y, tileSelector->getTile());
+
     if (s == colliderSelector) {
         Tile* t = room->getTile(x, y);
-        if (t)
-            t->setPolygon(*colliderSelector->getPolygon());
-        else if (colliderSelector->getPolygon())
-            room->setTile(x, y, new Tile(-1, *colliderSelector->getPolygon()));          
+        Polyshape* p = colliderSelector->getPolygon();
+        if (p) {
+            if (t)
+                t->setPolygon(*p);
+            else
+                room->setTile(x, y, new Tile(-1, *p));
+        }
     }
 }

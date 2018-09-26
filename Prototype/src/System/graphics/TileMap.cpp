@@ -5,6 +5,7 @@
 #include <sstream>
 #include "math\rectangle.h"
 #include "graphicsEngine.h"
+#include "World\Tile.h"
 
 #define toDigit(c) (c-'0')
 
@@ -12,9 +13,9 @@ using namespace::std;
 
 TileMap::TileMap(): colliderMatrix(vector<vector<optional<Polyshape>>>())
 {
-    colliderMatrix.resize(16);
+    colliderMatrix.resize(Tile::TILES_PER_ROW);
     for (int i = 0; i < colliderMatrix.size(); i++) {
-        colliderMatrix[i].resize(16);
+        colliderMatrix[i].resize(Tile::TILES_PER_COLUMN);
     }
     for (int i = 0; i < colliderMatrix.size(); i++) {
         for (int j = 0; j < colliderMatrix[i].size(); j++) {

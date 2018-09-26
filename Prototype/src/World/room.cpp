@@ -140,8 +140,8 @@ void Room::readFromFile()
         x = 0;
     }
 
-    _width = sizeX * 32.0;
-    _height = sizeY * 32.0;
+    _width = sizeX * Tile::TILE_SIZE;
+    _height = sizeY * Tile::TILE_SIZE;
     parallaxBackground->setOrigin(Point(0,0));// _width / 2, _height / 2));
 }
 

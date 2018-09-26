@@ -1,6 +1,7 @@
 #include "UIColliderSelector.h"
 #include "System\IO\inputManager.h"
 #include "UISelectableCollider.h"
+#include "World\Tile.h"
 
 UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer, 
                                        unsigned int _columns, unsigned int _rows,
@@ -11,8 +12,8 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
     for (int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {
-            selectables[i][j] = new UISelectableCollider(this, positionX + (i * 32), positionY + (j * 32),
-                                                         layer, i + (16 * j), _selectedColor, _hoverColor);
+            selectables[i][j] = new UISelectableCollider(this, positionX + (i * Tile::TILE_SIZE), positionY + (j * Tile::TILE_SIZE),
+                                                         layer, i + (indexLimitX * j), _selectedColor, _hoverColor);
         }
     }
 }

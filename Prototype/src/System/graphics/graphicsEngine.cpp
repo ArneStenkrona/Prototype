@@ -2,19 +2,10 @@
 #include "System\graphics\graphicsEngine.h"
 #include <vector>
 #include <SDL.h>
-#include <GL/glew.h>
-#include <SDL_opengl.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "opengl\indexBuffer.h"
-#include "opengl\vertexBuffer.h"
-#include "opengl\shaderGL.h"
-#include "opengl\vertexArray.h"
-#include "opengl\rendererGL.h"
-#include "opengl\vertexBufferLayout.h"
-#include "opengl\textureGL.h"
-#include "World\editor\editor.h"
+
 
 using namespace::std;
 vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();
@@ -43,63 +34,6 @@ const bool GraphicsEngine::initSDL() {
     }
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
     return true;
-}
-
-const bool GraphicsEngine::initOpenGL() {
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    return true;
-}
-
-void GraphicsEngine::experimentGL()
-{
-    ShaderGL sh("Assets/shaders/TextureShader.shader");
-    sh.bind();
-
-    TextureGL texture("Assets/Concept Art/prototype title screen.png", 1);
-    texture.bind();
-    sh.setUniform1i("u_Texture", 1);
-
-    RendererGL renderer(SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    //Element
-    float positions[] = { 
-        -0.5f, -0.5f, 0.0f, 1.0f,
-         0.5f, -0.5f, 1.0f, 1.0f,
-         0.5f,  0.5f, 1.0f, 0.0f,
-        -0.5f,  0.5f, 0.0f, 0.0f
-    };
-
-    unsigned int indices[] = { 
-        0, 1, 2, 
-        2, 3, 0
-    };
-
-    VertexArray va;
-    VertexBuffer vb(positions, 4 * 4 * sizeof(float));
-    VertexBufferLayout layout;
-    layout.push<float>(2);
-    layout.push<float>(2);
-    va.addBuffer(vb, layout);
-
-    IndexBuffer ib(indices, 6);
-    //End element    
-
-    while (true) {
-        renderer.clear();
-        renderer.draw(va, ib, sh);
-        renderer.present();
-        SDL_GL_SwapWindow(activeWindow->getSDLWindow());
-    }
 }
 
 bool GraphicsEngine::initializeGraphicsEngine()

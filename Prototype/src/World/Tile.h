@@ -17,6 +17,8 @@ public:
     ~Tile();
 
     static const unsigned int TILE_SIZE;
+    static const unsigned int TILES_PER_ROW;
+    static const unsigned int TILES_PER_COLUMN;
 
     bool hasCollider();
     void setPolygon(Polyshape p) { if (polygon) polygon = p; };

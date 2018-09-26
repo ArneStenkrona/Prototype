@@ -26,7 +26,7 @@ void UISelectable::render()
     derivedRender();
     UIElement::drawOutlineSquare(currentColor);
     if (!selector->isActive())
-        UIElement::drawSolidSquare({255,255,255,80});
+        UIElement::drawSolidSquare({255,255,255,40});
 }
 
 void UISelectable::onMouseOver()
