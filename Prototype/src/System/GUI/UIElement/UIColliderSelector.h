@@ -2,6 +2,8 @@
 #include "UISelector.h"
 #include "math\polygon.h"
 #include <vector>
+#include <optional>
+
 class UIColliderSelector : public UISelector {
 public:
     UIColliderSelector(int _posx, int _posy, int _layer,
@@ -9,6 +11,6 @@ public:
         Color _selectedColor = COLOR_PURPLE, Color _hoverColor = COLOR_CYAN);
     ~UIColliderSelector();
 
-    Polyshape* getPolygon() const;
+    std::optional<Polyshape> getPolygon() const;
 private:
 };

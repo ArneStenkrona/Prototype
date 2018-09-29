@@ -5,7 +5,7 @@ class PolygonCollider;
 class RayCastHit {
 public:
     RayCastHit(Point _origin, Point _intersection, Point _normal, PolygonCollider* other);
-    RayCastHit(Point _origin, Point _intersection, Point _normal, PolygonCollider* other, std::string _message);
+    RayCastHit(Point _origin, Point _intersection, Point _normal, PolygonCollider* other, const std::string &_message);
 
 
     inline Point getIntersection() const { return intersection; }

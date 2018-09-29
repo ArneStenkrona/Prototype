@@ -27,10 +27,10 @@ UIColliderSelector::~UIColliderSelector()
     }
 }
 
-Polyshape * UIColliderSelector::getPolygon() const
+std::optional<Polyshape> UIColliderSelector::getPolygon() const
 {
     if (Polyshape::basicPolygons.size() > selectedIndex)
-        return &Polyshape::basicPolygons[selectedIndex];
+        return Polyshape::basicPolygons[selectedIndex];
     else
-        return NULL;
+        return {};
 }

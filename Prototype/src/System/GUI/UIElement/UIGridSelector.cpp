@@ -4,6 +4,7 @@
 #include <iostream>
 #include "System\GUI\Window\EditorWindow.h"
 #include "World\Tile.h"
+#include <optional>
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, 0, 0, _layer + 3, true), room(_room)
@@ -87,12 +88,10 @@ void UIGridSelector::setElement(int x, int y)
 
     if (s == colliderSelector) {
         Tile* t = room->getTile(x, y);
-        Polyshape* p = colliderSelector->getPolygon();
-        if (p) {
-            if (t)
-                t->setPolygon(*p);
-            else
-                room->setTile(x, y, new Tile(-1, *p));
-        }
+        std::optional<Polyshape> p = colliderSelector->getPolygon();
+        if (t)
+            t->setPolygon(p);
+        else
+            room->setTile(x, y, new Tile(-1, p));
     }
 }

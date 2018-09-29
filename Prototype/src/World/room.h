@@ -11,7 +11,7 @@
 class Room {
 public:
 
-    Room(string _file_path);
+    Room(const std::string _file_path);
     ~Room();
 
     //loads the matrix from .txt file
@@ -20,7 +20,7 @@ public:
     //unloads the matrix
     void unload();
     //Saves the room
-    void saveToFile(string path);
+    void saveToFile(const std::string &path);
     //Saves the room, with default argument being the file_path variable.
     void saveToFile();
 
@@ -52,7 +52,7 @@ public:
 
 private:
     //File path of the room data
-    string file_path;
+    std::string file_path;
 
     int tileMapIndex;
     int backgroundIndex;

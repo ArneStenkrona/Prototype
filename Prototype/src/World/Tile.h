@@ -21,7 +21,7 @@ public:
     static const unsigned int TILES_PER_COLUMN;
 
     bool hasCollider();
-    void setPolygon(Polyshape p) { if (polygon) polygon = p; };
+    void setPolygon(std::optional<Polyshape> p) { polygon = p; };
     Polyshape *getPolygon();
     int getIndex();
     inline int getRotation() { return rotation; }

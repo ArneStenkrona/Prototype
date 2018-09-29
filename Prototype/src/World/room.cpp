@@ -21,7 +21,7 @@
         ( std::ostringstream() << std::dec << x ) ).str()
 
 
-Room::Room(string _file_path) : file_path(_file_path), _width(-1), _height(-1)
+Room::Room(const string _file_path) : file_path(_file_path), _width(-1), _height(-1)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
@@ -166,7 +166,7 @@ void Room::saveToFile()
     saveToFile(file_path);
 }
 
-void Room::saveToFile(string path)
+void Room::saveToFile(const std::string &path)
 {
     //opens filestream
     ofstream outFile;
