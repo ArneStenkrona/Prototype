@@ -34,8 +34,8 @@ void Weapon::lateUpdate()
 {
     //Update position and rotation
     int x, y;
-    getMouseCoordinates(&x, &y);
-    Point direction = (renderer->getCameraPosition() + (Point(x, y) * 0.5) - (ownerPosition->position + Point(16, 12))).normalized();
+    getMouseWorldCoordinates(x, y);
+    Point direction = (renderer->getCameraPosition() + Point(x, y) - (ownerPosition->position + Point(16, 12))).normalized();
     if (direction.x < 0) {
         sprite->setMirror(false, true);
     }

@@ -11,10 +11,10 @@ using namespace::std;
 vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();
 
 //Screen dimension constants
-const int GraphicsEngine::SCREEN_WIDTH = 2 * 512;
-const int GraphicsEngine::SCREEN_HEIGHT = 2 * 288;
 const float GraphicsEngine::SCALE_X = 2;
 const float GraphicsEngine::SCALE_Y = 2;
+const int GraphicsEngine::SCREEN_WIDTH = GraphicsEngine::SCALE_X * 512;
+const int GraphicsEngine::SCREEN_HEIGHT = GraphicsEngine::SCALE_Y * 288;
 //Frame rate related
 const int GraphicsEngine::SCREEN_FPS = 60;
 const int GraphicsEngine::MICROSECONDS_PER_FRAME = 1000000 / SCREEN_FPS;

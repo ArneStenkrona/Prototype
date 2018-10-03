@@ -41,9 +41,7 @@ void UIElement::updateUIElements()
             e->update();
             if (!selected && e->visible) {
                 int x, y;
-                getMouseCoordinates(&x, &y);
-                x /= 2;
-                y /= 2;
+                getMouseWorldCoordinates(x, y);
                 if (pointWithin(x, y, e->positionX, e->positionY, e->width, e->height)) {
                     selected = e;
                 }

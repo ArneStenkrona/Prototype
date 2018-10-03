@@ -42,9 +42,16 @@ bool getKey(INPUT_KEYS key) {
 
 }
 
-void getMouseCoordinates(int *x, int *y)
+void getMouseCoordinates(int& x, int& y)
 {
-    SDL_GetMouseState(x, y);
+    SDL_GetMouseState(&x, &y);
+}
+
+void getMouseWorldCoordinates(int& x, int& y)
+{
+    SDL_GetMouseState(&x, &y);
+    x /= GraphicsEngine::SCALE_X;
+    y /= GraphicsEngine::SCALE_Y;
 }
 
 void updateCurrentKeys() {

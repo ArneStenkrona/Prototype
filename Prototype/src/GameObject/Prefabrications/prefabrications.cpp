@@ -21,7 +21,6 @@ GameObject * Character::instantiate()
 
     g->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     g->getComponent<Sprite>()->setWidthHeight(1, 2);
-    g->getComponent<Sprite>()->setAnimationIndicies(0, 4);
     g->getComponent<Sprite>()->setRenderOffset(0, -24);
     g->addComponent<SpriteRenderer>()->setRenderLayer(1);
     g->addComponent<Movement>();

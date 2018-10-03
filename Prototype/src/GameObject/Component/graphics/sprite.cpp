@@ -1,23 +1,17 @@
 #include "sprite.h"
 #include "System/graphics/textureManager.h"
+#include "animator.h"
 
-Sprite::Sprite(GameObject * _object) : Component(_object), startIndex(-1), endIndex(-1),
-frameFactor(3), frameFactorCounter(0), widthFactor(1), heightFactor(1),
-renderOffsetX(0), renderOffsetY(0), mirrorH(false), mirrorV(false)
+Sprite::Sprite(GameObject * _object) : Component(_object),
+    widthFactor(1), heightFactor(1),
+    renderOffsetX(0), renderOffsetY(0), 
+    mirrorH(false), mirrorV(false)
 {
     texture = &TextureManager::miscellaneous[0];
 }
 
 void Sprite::update()
 {
-    if (!(startIndex == endIndex || startIndex == -1 || endIndex == -1)) {
-        if (frameFactorCounter >= frameFactor) {
-            frameFactorCounter = 0;
-            tileIndex++;
-            if (tileIndex > endIndex) tileIndex = startIndex;
-        }
-        frameFactorCounter++;
-    }
 }
 
 void Sprite::setTileIndex(int i)
@@ -30,18 +24,6 @@ void Sprite::setWidthHeight(int width, int height)
     if (width <= 16 && width > 0) widthFactor = width;
     if (height <= 16 && height > 0) heightFactor = height;
 
-}
-
-void Sprite::setAnimationIndicies(int startInd, int endInd)
-{
-    startIndex = startInd;
-    endIndex = endInd;
-    tileIndex = startIndex;
-}
-
-void Sprite::setFrameFactor(int i)
-{
-    frameFactor = i;
 }
 
 void Sprite::renderSprite(int x, int y)
@@ -72,5 +54,13 @@ void Sprite::setMirror(bool horizontal, bool vertical)
 
 void Sprite::rayHit(RayCastHit * hit)
 { 
+}
+
+void Sprite::incrementIndex()
+{
+    tileIndex += widthFactor;
+    /*TODO
+        add code that accounts for height factor
+    */
 }
 

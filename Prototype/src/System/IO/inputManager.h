@@ -32,6 +32,10 @@ bool getKeyUp(INPUT_KEYS key);
 //Returns true if key is currently pressed
 bool getKey(INPUT_KEYS key);
 //Sets the referenced variables to mouse coordinates
-void getMouseCoordinates(int *x, int *y);
+void getMouseCoordinates(int& x, int& y);
+//Sets the referenced variables to mouse world coordinates
+//that is, considering scale of the window
+void getMouseWorldCoordinates(int& x, int& y);
+
 
 #pragma once

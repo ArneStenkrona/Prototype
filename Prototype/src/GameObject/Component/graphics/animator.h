@@ -27,6 +27,7 @@ public:
 
     inline std::string getCurrentClip() const { return currentClip->name; }
 private:
+    Sprite *sprite;
     //The clip currently playing
     AnimationClip *currentClip;
     //The clip about to be played
@@ -45,5 +46,7 @@ private:
     //Sets up the queued clip
     void playQueued();
 
-    Sprite *sprite;
+    //Incremented every in-game frame.
+    //If equal to frameFactor, set to 0 and increment tileIndex
+    int frameFactorCounter;
 };
