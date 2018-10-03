@@ -5,15 +5,17 @@
 #include "System\GUI\UIElement\UITileSelector.h"
 #include "System\graphics\graphicsEngine.h"
 #include "System\GUI\UIElement\UIButton.h"
+#include "World\editor\editor.h"
 
 const int EditorWindow::gridSize = 32;
 
-EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
-    _scale_x, _scale_y), activeRoom(_activeRoom)
+EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
+    _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor)
 {
     gridSelector = new UIGridSelector(_activeRoom, 0, 0, 0);
 
-    new UIButton(0,0,50,20,0,"TESTING TEXT");
+    buttons[NEW_FILE_BUTTON] = new UIButton(this, 0, 0, 70, 20, 0, "NEW FILE");
+    buttons[SAVE_BUTTON] = new UIButton(this, 70, 0, 30, 20, 0,"SAVE");
 }
 
 void EditorWindow::update()
@@ -49,6 +51,14 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
     SDL_Rect fillRect = { x, y, gridSize, gridSize };
     SDL_SetRenderDrawColor(mRenderer, r, g, b, a);
     SDL_RenderFillRect(mRenderer, &fillRect);
+}
+
+void EditorWindow::notify(UIButton * e)
+{
+    if (e == buttons[NEW_FILE_BUTTON])
+        1;
+    else if (e == buttons[SAVE_BUTTON])
+        editor->save();
 }
 
 void EditorWindow::updatePosition(int deltaX, int deltaY)

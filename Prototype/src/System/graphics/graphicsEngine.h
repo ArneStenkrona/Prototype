@@ -12,7 +12,7 @@ public:
     static void closeGraphicsEngine();
 
     static LWindow* createGameWindow();
-    static EditorWindow* createEditorWindow();
+    static EditorWindow* createEditorWindow(Editor *editor);
 
     //Renderers will render layer by layer
     static void addToRenderQueue(Renderer *r, int layer);

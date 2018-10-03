@@ -12,6 +12,8 @@ public:
     ~Editor();
 
     void run();
+
+    void save();
 private:
     EditorWindow *editorWindow;
 

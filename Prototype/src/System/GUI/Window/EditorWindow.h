@@ -8,9 +8,11 @@
 /*
     This class represents the main viewport in editing mode.
 */
+class UIButton;
+class Editor;
 class EditorWindow : public LWindow {
 public:
-    EditorWindow(int _screen_width, int _screen_height,
+    EditorWindow(Editor* _editor, int _screen_width, int _screen_height,
         int _scale_x, int _scale_y, Room *_activeRoom);
 
     void update();
@@ -20,19 +22,29 @@ public:
     //updates the position relative to origin
     void updatePosition(int deltaX, int deltaY);
 
+
 private:
-    static const int gridSize;
-    void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-    void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-
-
+    Editor *editor;
     //Room in the editor
     Room *activeRoom;
+    static const int gridSize;
 
 
     //position relative to origin
     int posX;
     int posY;
 
+    static enum BUTTONS {
+        NEW_FILE_BUTTON,
+        SAVE_BUTTON,
+        TOTAL_BUTTONS
+    };
+    UIButton *buttons[TOTAL_BUTTONS];
+
     UIGridSelector* gridSelector;
+
+    void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    void notify(UIButton* e);
+    friend class UIButton;
 };

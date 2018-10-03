@@ -50,10 +50,10 @@ LWindow * GraphicsEngine::createGameWindow()
     return activeWindow;
 }
 
-EditorWindow * GraphicsEngine::createEditorWindow()
+EditorWindow * GraphicsEngine::createEditorWindow(Editor *editor)
 {
     delete(activeWindow);
-    EditorWindow* win = new EditorWindow(SCREEN_WIDTH + (7 * Tile::TILE_SIZE * SCALE_X), 
+    EditorWindow* win = new EditorWindow(editor, SCREEN_WIDTH + (7 * Tile::TILE_SIZE * SCALE_X), 
                                          SCREEN_HEIGHT + (3 * Tile::TILE_SIZE * SCALE_Y), 
                                          SCALE_X, SCALE_Y, NULL);
     activeWindow = win;

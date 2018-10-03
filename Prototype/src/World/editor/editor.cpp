@@ -10,7 +10,7 @@
 
 Editor::Editor()
 {
-    editorWindow = GraphicsEngine::createEditorWindow();
+    editorWindow = GraphicsEngine::createEditorWindow(this);
     //Initalize input Manager
     initializeInputManager();
     //Initalize texture manager
@@ -59,8 +59,15 @@ void Editor::run()
 
             LWindow::updateAll();
         }   
-        activeRoom->saveToFile(getFilePath(false));
+        if (MessageBoxA(NULL, "Save?", "Choose mode", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
+            save();
+        }
     }
+}
+
+void Editor::save()
+{
+    activeRoom->saveToFile(getFilePath(false));
 }
 
 void Editor::updateInput()

@@ -1,17 +1,18 @@
 #pragma once
 #include "UIElement.h"
 #include <string>
+#include "System\GUI\Window\EditorWindow.h"
 
 class UIButton : public UIElement {
 public:
-    UIButton(int _positionX, int _positionY, int _width, int _height,
+    UIButton(EditorWindow* _owner, int _positionX, int _positionY, int _width, int _height,
              int _layer, std::string _text);
  
 protected:
     const std::string text;
     
-    //action to be taken when button is pressed
-    virtual void action();
+    //notifies owner
+    virtual void notify();
 
 private:
     void onMouseOver();
@@ -22,4 +23,6 @@ private:
     bool mouseOver;
     //Click is held while mouse over
     bool holdClick;
+
+    EditorWindow* owner;
 };
