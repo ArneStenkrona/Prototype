@@ -89,3 +89,32 @@ void UIElement::drawSolidSquare(Color color)
     SDL_RenderFillRect(GraphicsEngine::getActiveRenderer(), &fillRect);
 }
 
+void UIElement::renderText(int offsetX, int offsetY, std::string text, ALIGNMENT align, Color color) const
+{
+    int alignx, aligny = 0;
+    switch (align) {
+    case ALIGN_UP:
+        alignx = (width / 2) - (text.length() * (4 / 2));
+        aligny = 0;
+        break;
+    case ALIGN_DOWN:
+        alignx = (width / 2) - (text.length() * (4 / 2));
+        aligny = height - 8;
+        break;
+    case ALIGN_LEFT:
+        alignx = 0;
+        aligny = (height / 2) - 4;
+        break;
+    case ALIGN_RIGHT:
+        alignx = width - (text.length() * 4);
+        aligny = (height / 2) - 4;
+        break;
+    case ALIGN_CENTER:
+        alignx = (width / 2) - (text.length() * (4 / 2));
+        aligny = (height / 2) - 4;
+        break;
+    }
+
+    TextureManager::fontTextures[0].renderText(positionX + alignx + offsetX, positionY + aligny + offsetY, text, color);
+}
+

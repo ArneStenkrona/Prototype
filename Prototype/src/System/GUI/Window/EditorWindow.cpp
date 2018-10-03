@@ -4,6 +4,7 @@
 #include "System\graphics\textureManager.h"
 #include "System\GUI\UIElement\UITileSelector.h"
 #include "System\graphics\graphicsEngine.h"
+#include "System\GUI\UIElement\UIButton.h"
 
 const int EditorWindow::gridSize = 32;
 
@@ -11,6 +12,8 @@ EditorWindow::EditorWindow(int _screen_width, int _screen_height, int _scale_x, 
     _scale_x, _scale_y), activeRoom(_activeRoom)
 {
     gridSelector = new UIGridSelector(_activeRoom, 0, 0, 0);
+
+    new UIButton(0,0,50,20,0,"TESTING TEXT");
 }
 
 void EditorWindow::update()

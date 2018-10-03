@@ -29,7 +29,7 @@ void Animator::update()
         currentClip->startIndex == -1 || currentClip->endIndex == -1)) {
         if (frameFactorCounter >= currentClip->frameFactor * animationSpeedFactor) {
             frameFactorCounter = 0;
-            sprite->incrementIndex();
+            sprite->tileIndex++;
             if (sprite->tileIndex > currentClip->endIndex) 
                 sprite->tileIndex = currentClip->startIndex;
         }

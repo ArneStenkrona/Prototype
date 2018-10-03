@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include "color.h"
 
 class LTexture
 {
@@ -38,6 +39,10 @@ public:
         { renderTile(x, y, tileIndex, widthFactor, heightFactor, false, false); }
     inline void renderTile(int x, int y, int tileIndex) 
         { renderTile(x, y, tileIndex, 1, 1, false, false); }
+
+    void renderText(int x, int y, std::string text) const;
+    void renderText(int x, int y, std::string text, Color color) const;
+
 
     //Renders the tile in the texture given by the tileQuad with roation and flip
     void renderTileEx(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Rect *tileQuad = NULL);

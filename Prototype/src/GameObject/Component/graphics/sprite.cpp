@@ -55,12 +55,3 @@ void Sprite::setMirror(bool horizontal, bool vertical)
 void Sprite::rayHit(RayCastHit * hit)
 { 
 }
-
-void Sprite::incrementIndex()
-{
-    tileIndex += widthFactor;
-    /*TODO
-        add code that accounts for height factor
-    */
-}
-

@@ -31,9 +31,6 @@ public:
 
     void rayHit(RayCastHit* hit);
 
-    //increases the tile index with consideration to width and height factor
-    void incrementIndex();
-
 private:
     //How many tiles the sprite occupies;
     //Example: widthFactor = 2 and heightFactor = 3 is a sprite that takes up 2 tiles in width and 3 tiles in height

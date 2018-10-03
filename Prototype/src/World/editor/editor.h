@@ -15,14 +15,18 @@ public:
 private:
     EditorWindow *editorWindow;
 
-    vector<vector<Tile*>> *tileMatrix; //Never used?
+    std::string currentPath;
 
     //The room currently being edited;
     Room *activeRoom;
 
     void updateInput();
 
+    //Asks user for new or pre-existing file
+    //returns true if success
+    bool openFile();
+
     //Opens a windows api dialog to find a filepath.
     string getFilePath(bool requireExistingPath);
-    void loadFile(std::string path);
+    void loadFile(const std::string& path);
 };

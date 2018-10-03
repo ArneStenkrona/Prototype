@@ -30,6 +30,12 @@ public:
         TOTAL_SPRITE_SHEETS
     };
 
+    static enum FONT_TEXTURES
+    {
+        FONT1,
+        TOTAL_FONTS
+    };
+
     static void initalizeTextureManager();
 
     //Loads textures into tileset
@@ -47,6 +53,9 @@ public:
     //Vector of all sprite sheets
     static std::vector<LTexture> spriteSheets;
 
+    //Vector of all font textures
+    static std::vector<LTexture> fontTextures;
+
     //Current tilemap
     static TileMap tileMap;
 
@@ -60,6 +69,9 @@ private:
     static const std::string colliderPaths[TOTAL_MAPS];
     //Filepaths of all sprite sheets
     static const std::string sheetPaths[TOTAL_SPRITE_SHEETS];
+
+    //Filepaths of all font textures
+    static const std::string fontPaths[TOTAL_FONTS];
 
     //Generates and returns an SDL_Rect for a tile at the given index (assuming a tilesheet arranged in 16*16)
     static SDL_Rect generateTileQuad(unsigned int index);

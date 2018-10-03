@@ -16,6 +16,7 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
 
     sprite->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     sprite->setTileIndex(240);
+    //sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
     animator->addClip(AnimationClip{ "idle", 240, 243, 7 });
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
 }

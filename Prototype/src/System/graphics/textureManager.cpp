@@ -5,11 +5,13 @@
 std::vector<std::vector<LTexture>> TextureManager::background_layer_textures;
 std::vector<LTexture> TextureManager::miscellaneous;
 std::vector<LTexture> TextureManager::spriteSheets;
+std::vector<LTexture> TextureManager::fontTextures;
 
 const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.png" };
 const std::string TextureManager::colliderPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.col" };
 const std::string TextureManager::sheetPaths[TextureManager::TOTAL_SPRITE_SHEETS] = { "Assets/Sprites/prt/prt.png",
                                                                                       "Assets/Sprites/objects/objects1.png"};
+const std::string TextureManager::fontPaths[TextureManager::TOTAL_FONTS] = { "Assets/textures/Text/font1.png"};
 
 TileMap TextureManager::tileMap;
 
@@ -39,6 +41,12 @@ void TextureManager::initalizeTextureManager()
     }
     for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
         spriteSheets[i].loadFromFile(sheetPaths[i], GraphicsEngine::getActiveRenderer());
+    }
+    for (int i = 0; i < TOTAL_FONTS; i++) {
+        fontTextures.push_back(LTexture());
+    }
+    for (int i = 0; i < TOTAL_FONTS; i++) {
+        fontTextures[i].loadFromFile(fontPaths[i], GraphicsEngine::getActiveRenderer());
     }
 }
 

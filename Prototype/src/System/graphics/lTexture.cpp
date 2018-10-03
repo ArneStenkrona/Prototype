@@ -1,6 +1,7 @@
 #include "lTexture.h"
 #include "System\graphics\graphicsEngine.h"
 #include "World\Tile.h"
+#include <iostream>
 
 LTexture::LTexture() : mTexture(NULL), mWidth(0), mHeight(0), tilesPerRow(0)
 {
@@ -122,8 +123,10 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
         x + Tile::TILE_SIZE * widthFactor < 0 || y + Tile::TILE_SIZE * heightFactor < 0) return;
 
     SDL_Rect renderQuad = { x, y, Tile::TILE_SIZE * widthFactor, Tile::TILE_SIZE * heightFactor };
-    SDL_Rect tileRect = { ((tileIndex * widthFactor) % tilesPerRow) * Tile::TILE_SIZE, 
-                          ((tileIndex * heightFactor) / tilesPerRow) * Tile::TILE_SIZE, 
+    //corrected index
+    int ix = tileIndex * widthFactor;
+    SDL_Rect tileRect = { (ix % tilesPerRow) * Tile::TILE_SIZE,
+                          (ix / tilesPerRow) * heightFactor * Tile::TILE_SIZE, 
                           Tile::TILE_SIZE * widthFactor, 
                            Tile::TILE_SIZE * heightFactor };
 
@@ -136,6 +139,24 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     else if (mirrorV)
         SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_VERTICAL);
     else SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_NONE);
+}
+
+void LTexture::renderText(int x, int y, std::string text) const
+{
+    int position = 0;
+    for (char& c : text) {
+        SDL_Rect renderQuad = { x + (4 * position), y, 4, mHeight };
+        SDL_Rect charRect = { (int)c * 4, 0, 4, mHeight };
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &charRect, &renderQuad, NULL, NULL, SDL_FLIP_NONE);
+        position++;
+    }
+}
+
+void LTexture::renderText(int x, int y, std::string text, Color color) const
+{
+    SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
+    renderText(x, y, text);
+    SDL_SetTextureColorMod(mTexture, 255, 255, 255);
 }
 
 void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip, SDL_Rect * tileQuad)

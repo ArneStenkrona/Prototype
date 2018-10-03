@@ -34,10 +34,9 @@ void Editor::run()
     LTimer capTimer;
     fpsTimer.start();
 
-    string path = getFilePath(true);
 
-    if (path.size() > 0) {
-        loadFile(path);
+
+    if (openFile()) {
         while (!editorWindow->hasExited()) {
             capTimer.start();
 
@@ -88,6 +87,17 @@ void Editor::updateInput()
     }
 }
 
+bool Editor::openFile()
+{
+        currentPath = getFilePath(true);
+        if (currentPath.length() > 0) {
+            loadFile(currentPath);
+            return true;
+        }
+        else
+            return false;
+}
+
 string Editor::getFilePath(bool requireExistingFile)
 {
     OPENFILENAMEA ofn;       // common dialog box structure
@@ -123,7 +133,7 @@ string Editor::getFilePath(bool requireExistingFile)
     
 }
 
-void Editor::loadFile(std::string path)
+void Editor::loadFile(const std::string& path)
 {
     activeRoom = new Room(path);
     activeRoom->readFromFile();
