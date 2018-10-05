@@ -7,8 +7,11 @@
 #include <optional>
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
-    :UIElement(_posx, _posy, 0, 0, _layer + 3, true), room(_room)
+    :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X, 
+                             GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 
+                             _layer + 3, true), room(_room)
 {
+
     setRoom(room);
     colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                                               6 * Tile::TILE_SIZE, _layer, 6, 2);
@@ -29,23 +32,20 @@ UIGridSelector::~UIGridSelector()
     delete(border[1]);
 }
 
-void UIGridSelector::setPosition(int x, int y)
-{
-    positionX = x;
-    positionY = y;
-}
-
 void UIGridSelector::render()
 {
     renderRoom();
+    if (isSelected())
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_CENTER);
 }
 
 void UIGridSelector::renderRoom()
 {
+    room->renderBackground(Point(-roomPosX, -roomPosY));
     for (int x = 0; x < room->tileMatrix.size(); x++) {
         for (int y = 0; y < room->tileMatrix[x].size(); y++) {
             if (room->tileMatrix[x][y] != NULL) {
-                room->tileMatrix[x][y]->renderTile((x * Tile::TILE_SIZE) + positionX, (y * Tile::TILE_SIZE) + positionY);
+                room->tileMatrix[x][y]->renderTile((x * Tile::TILE_SIZE) + roomPosX, (y * Tile::TILE_SIZE) + roomPosY);
             }
         }
     }
@@ -53,6 +53,25 @@ void UIGridSelector::renderRoom()
 
 void UIGridSelector::update()
 {
+    if (isSelected()) {
+        int dX = 0;
+        int dY = 0;
+
+        if (getKey(INPUT_KEY_W)) {
+            dY += 7;
+        }
+        if (getKey(INPUT_KEY_S)) {
+            dY -= 7;
+        }
+        if (getKey(INPUT_KEY_A)) {
+            dX += 7;
+        }
+        if (getKey(INPUT_KEY_D)) {
+            dX -= 7;
+        }
+        roomPosX += dX;
+        roomPosY += dY;
+    }
 }
 
 void UIGridSelector::onMouseOver()
@@ -66,8 +85,6 @@ void UIGridSelector::setRoom(Room* _room)
     int x = 0;
     int y = 0;
     room->getDimensions(x, y);
-    width = x * Tile::TILE_SIZE;
-    height = y * Tile::TILE_SIZE;
     columns = x;
     rows = y;
 

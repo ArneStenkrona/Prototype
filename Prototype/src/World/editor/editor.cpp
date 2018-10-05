@@ -40,7 +40,6 @@ void Editor::run()
         while (!editorWindow->hasExited()) {
             capTimer.start();
 
-            updateInput();
             updateInputManager();
 
             //If frame finished early
@@ -67,30 +66,6 @@ void Editor::run()
 void Editor::save()
 {
     activeRoom->saveToFile(getFilePath(false));
-}
-
-void Editor::updateInput()
-{
-    int dX = 0;
-    int dY = 0;
-
-    if (getKey(INPUT_KEY_LSHIFT)) {
-    }
-    else {
-        if (getKey(INPUT_KEY_W)) {
-            dY -= 7;
-        }
-        if (getKey(INPUT_KEY_S)) {
-            dY += 7;
-        }
-        if (getKey(INPUT_KEY_A)) {
-            dX -= 7;
-        }
-        if (getKey(INPUT_KEY_D)) {
-            dX += 7;
-        }
-        editorWindow->updatePosition(dX, dY);
-    }
 }
 
 bool Editor::openFile()

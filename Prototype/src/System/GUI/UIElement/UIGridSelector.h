@@ -13,13 +13,25 @@ public:
     UIGridSelector(Room* _room, int _posx, int _posy, int _layer);
     ~UIGridSelector();
 
-    void setPosition(int x, int y);
-
     void setRoom(Room* _room);
     //Sets element from active selector at position (x, y)
     void setElement(int x, int y);
 
+    //Checks if gridselector is selected
+    inline bool isSelected() const { return selected || UIElement::isSelected(); }
+
 private:
+    Room* room;
+    UITileSelector* tileSelector;
+    UIColliderSelector* colliderSelector;
+    std::vector<std::vector<UIGridTile*>> tiles;
+    //Is any tile in tiles selected?
+    bool selected;
+    //room offset position
+    int roomPosX, roomPosY;
+
+    UIBorder* border[2];
+    //Dimensions of the room
     unsigned int columns, rows;
     void render();
     void update();
@@ -27,10 +39,5 @@ private:
 
     void renderRoom();
 
-    Room* room;
-    UITileSelector* tileSelector;
-    UIColliderSelector* colliderSelector;
-    std::vector<std::vector<UIGridTile*>> tiles;
-
-    UIBorder* border[2];
+    friend class UIGridTile;
 };

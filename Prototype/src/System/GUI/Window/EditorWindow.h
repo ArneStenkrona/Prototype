@@ -19,20 +19,11 @@ public:
 
     void setRoom(Room *room);
 
-    //updates the position relative to origin
-    void updatePosition(int deltaX, int deltaY);
-
-
 private:
     Editor *editor;
     //Room in the editor
     Room *activeRoom;
     static const int gridSize;
-
-
-    //position relative to origin
-    int posX;
-    int posY;
 
     static enum BUTTONS {
         NEW_FILE_BUTTON,

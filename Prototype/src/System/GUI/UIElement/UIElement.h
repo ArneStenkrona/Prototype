@@ -31,9 +31,10 @@ public:
     static void updateUIElements();
     //Renders all UIElements
     static void renderUIElements();
+    //Checks if element is selected
+    inline bool isSelected() const { return selectedElement == this; }
+    static void setSelected(UIElement* element);
 protected:
-    //Container for all UIElements, divided by layer
-    static std::vector<std::set<UIElement*>> allUIElements;
     
     int layer;
     bool visible;
@@ -41,6 +42,10 @@ protected:
     virtual void render();
     //called if mouse is over
     virtual void onMouseOver();
+    //called if selected
+    virtual void onSelect();
+    //called if deselected
+    virtual void onDeselect();
     //unconditional update
     virtual void update();
 
@@ -53,4 +58,10 @@ protected:
 
     //Renders text at position
     void renderText(std::string text, Color color = { 255,255,255,255 }, Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
+
+private:
+    //Container for all UIElements, divided by layer
+    static std::vector<std::set<UIElement*>> allUIElements;
+    //Currently selected element (last clicked on)
+    static UIElement* selectedElement;
 };

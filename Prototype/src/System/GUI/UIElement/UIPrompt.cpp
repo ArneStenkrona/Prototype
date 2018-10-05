@@ -3,6 +3,7 @@
 UIPrompt::UIPrompt(int _positionX, int _positionY, int _width, int _height, int _layer, std::string _question)
         :UIMovable(_positionX, _positionY, _width, _height, _layer), question(_question)
 {
+    UIElement::setSelected(this);
 }
 
 void UIPrompt::render()
@@ -16,9 +17,12 @@ void UIPrompt::render()
     std::string rText = userInput.substr(start, userInput.length());
     UIElement::renderText(rText, { 255,255,255,255 }, ALIGN_LEFT, 5);
 
+    if (isSelected())
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE);
 }
 
 void UIPrompt::derivedUpdate()
 {
-    modifyStringFromInput(userInput);
+    if (isSelected())
+        modifyStringFromInput(userInput);
 }

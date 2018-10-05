@@ -26,10 +26,6 @@ void EditorWindow::update()
 
     //Clear screen
     clear();
-    //Render the background
-    activeRoom->renderBackground(Point(posX,posY));
-
-    gridSelector->setPosition(-posX, -posY);
     UIElement::renderUIElements();
     present();
 }
@@ -60,10 +56,4 @@ void EditorWindow::notify(UIButton * e)
         new UIPrompt(50,50,150,50,0, "FILENAME: ");
     else if (e == buttons[SAVE_BUTTON])
         editor->save();
-}
-
-void EditorWindow::updatePosition(int deltaX, int deltaY)
-{
-    posX += deltaX;
-    posY += deltaY;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 
 std::vector<std::set<UIElement*>> UIElement::allUIElements = std::vector<std::set<UIElement*>>();
+UIElement* UIElement::selectedElement = nullptr;
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
                     int _layer, bool _visible)
@@ -36,21 +37,24 @@ void UIElement::updateUIElements()
     //If more than one have the lowest layer number
     //one of them will be picked according to
     //iterator order
-    UIElement* selected = nullptr;
+    UIElement* mouseOverElement = nullptr;
     for each (std::set<UIElement*> s in allUIElements) {
         for each (UIElement* e in s) {
             e->update();
-            if (!selected && e->visible) {
+            if (!mouseOverElement && e->visible) {
                 int x, y;
                 getMouseWorldCoordinates(x, y);
                 if (pointWithin(x, y, e->positionX, e->positionY, e->width, e->height)) {
-                    selected = e;
+                    mouseOverElement = e;
                 }
             }
         }
     }
-    if (selected != nullptr) {
-        selected->onMouseOver();
+    if (mouseOverElement != nullptr) {
+        if (getKeyDown(MOUSE_LEFT)) {
+            setSelected(mouseOverElement);
+        }
+        mouseOverElement->onMouseOver();
     }
 }
 
@@ -65,11 +69,27 @@ void UIElement::renderUIElements()
     }
 }
 
+inline void UIElement::setSelected(UIElement * element)
+{
+    if (selectedElement != nullptr && selectedElement != element)
+        selectedElement->onDeselect();
+    selectedElement = element;
+    selectedElement->onSelect();
+}
+
 void UIElement::render()
 {
 }
 
 void UIElement::onMouseOver()
+{
+}
+
+void UIElement::onSelect()
+{
+}
+
+void UIElement::onDeselect()
 {
 }
 

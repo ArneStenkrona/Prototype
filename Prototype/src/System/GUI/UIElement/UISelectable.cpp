@@ -42,6 +42,16 @@ void UISelectable::onMouseOver()
     }
 }
 
+void UISelectable::onSelect()
+{
+    selector->selected = true;
+}
+
+void UISelectable::onDeselect()
+{
+    selector->selected = false;
+}
+
 void UISelectable::update() {
     derivedUpdate();
     if (selector->getSelectedIndex() == index) {

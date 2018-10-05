@@ -19,6 +19,8 @@ private:
     void onMouseOver();
     //unconditional update
     void update();
+    void onSelect();
+    void onDeselect();
 
     UIGridSelector* selector;
 };

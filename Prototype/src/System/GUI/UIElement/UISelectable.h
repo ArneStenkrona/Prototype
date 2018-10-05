@@ -31,11 +31,13 @@ protected:
 private:
 
     void render();
-    //called if mouse is over
-    void onMouseOver();
     //unconditional update
     void update();
+    //called if mouse is over
+    void onMouseOver();
 
+    void onSelect();
+    void onDeselect();
 
     friend class UISelector;
 };

@@ -33,6 +33,16 @@ void UIGridTile::update()
     b = 0x00;
     a = 0x40;
 
-    positionX = selector->positionX + indX * Tile::TILE_SIZE;
-    positionY = selector->positionY + indY * Tile::TILE_SIZE;
+    positionX = selector->roomPosX + indX * Tile::TILE_SIZE;
+    positionY = selector->roomPosY + indY * Tile::TILE_SIZE;
+}
+
+void UIGridTile::onSelect()
+{
+    selector->selected = true;
+}
+
+void UIGridTile::onDeselect()
+{
+    selector->selected = false;
 }

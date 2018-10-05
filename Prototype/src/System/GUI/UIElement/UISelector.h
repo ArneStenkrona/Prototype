@@ -13,14 +13,8 @@ public:
     inline static UISelector* getActiveSelector() { return activeSelector; }
     inline bool isActive() const { return activeSelector == this; }
     inline int getSelectedIndex() const { return selectedIndex; }
-protected:
-    //selected UISelectable
-    void setSelected(int i);
-    //Called after setSelected()
-    virtual void derivedSetSelected(int i);
-    //updates before update()
-    virtual void derivedUpdate();
 
+protected:
     //All UISelectables in layout
     std::vector<std::vector<UISelectable*>> selectables;
     //Selected index
@@ -32,15 +26,27 @@ protected:
     //Dimensions of the data structure that index is pointing at
     const unsigned int indexLimitX, indexLimity;
 
-private:
-    void setActive();
-    //Dimensions of whatever data-structure is being selected
+    //selected UISelectable
+    void setSelected(int i);
+    //Called after setSelected()
+    virtual void derivedSetSelected(int i);
+    //updates before update()
+    virtual void derivedUpdate();
+    //Checks if element is selected
+    inline bool isSelected() const { return selected; }
 
+private:
+    static UISelector* activeSelector;
+
+    //Is any UISelectable in selectables selected?
+    bool selected;
+
+    void setActive();
+
+    //move indices of all selected
     void moveIndices(int dx, int dy);
 
     void update();
-
-    static UISelector* activeSelector;
 
     friend class UISelectable;
 };

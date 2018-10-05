@@ -50,7 +50,7 @@ Tile * UITileSelector::getTile() const
 
 void UITileSelector::derivedUpdate()
 {
-    if (getActiveSelector() == this) {
+    if (isSelected()) {
         if (getKeyDown(INPUT_KEY_R))
             rotation = (rotation + 1) % 4;
 

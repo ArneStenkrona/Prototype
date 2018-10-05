@@ -22,8 +22,6 @@ private:
     //The room currently being edited;
     Room *activeRoom;
 
-    void updateInput();
-
     //Asks user for new or pre-existing file
     //returns true if success
     bool openFile();

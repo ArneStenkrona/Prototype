@@ -53,24 +53,23 @@ void UISelector::moveIndices(int dx, int dy)
 void UISelector::update()
 {
     derivedUpdate();
-    if (activeSelector == this) {
-        if (getKey(INPUT_KEY_LSHIFT)) {
-            int dX = 0;
-            int dY = 0;
+    if (isSelected()) {
+        int dX = 0;
+        int dY = 0;
 
-            if (getKeyDown(INPUT_KEY_W)) {
-                dY -= 1;
-            }
-            if (getKeyDown(INPUT_KEY_S)) {
-                dY += 1;
-            }
-            if (getKeyDown(INPUT_KEY_A)) {
-                dX -= 1;
-            }
-            if (getKeyDown(INPUT_KEY_D)) {
-                dX += 1;
-            }
-            if (dX || dY) moveIndices(dX, dY);
+        if (getKeyDown(INPUT_KEY_W)) {
+            dY -= 1;
         }
+        if (getKeyDown(INPUT_KEY_S)) {
+            dY += 1;
+        }
+        if (getKeyDown(INPUT_KEY_A)) {
+            dX -= 1;
+        }
+        if (getKeyDown(INPUT_KEY_D)) {
+            dX += 1;
+        }
+        if (dX || dY) moveIndices(dX, dY);
     }
+
 }
