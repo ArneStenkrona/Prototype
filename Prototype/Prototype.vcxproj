@@ -203,6 +203,7 @@
     <ClInclude Include="src\System\graphics\TileMap.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIBorder.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIButton.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIMovable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPrompt.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableCollider.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIBorder.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIButton.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIMovable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPrompt.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableCollider.cpp" />

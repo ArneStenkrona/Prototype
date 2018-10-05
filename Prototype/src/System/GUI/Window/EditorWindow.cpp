@@ -4,6 +4,7 @@
 #include "System\graphics\textureManager.h"
 #include "System\GUI\UIElement\UITileSelector.h"
 #include "System\graphics\graphicsEngine.h"
+#include "System\GUI\UIElement\UIPrompt.h"
 #include "System\GUI\UIElement\UIButton.h"
 #include "World\editor\editor.h"
 
@@ -12,14 +13,15 @@ const int EditorWindow::gridSize = 32;
 EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor)
 {
-    gridSelector = new UIGridSelector(_activeRoom, 0, 0, 0);
+    gridSelector = new UIGridSelector(_activeRoom, 0, 0, 2);
 
-    buttons[NEW_FILE_BUTTON] = new UIButton(this, 0, 0, 70, 20, 0, "NEW FILE");
-    buttons[SAVE_BUTTON] = new UIButton(this, 70, 0, 30, 20, 0,"SAVE");
+    buttons[NEW_FILE_BUTTON] = new UIButton(this, 0, 0, 70, 20, 1, "NEW FILE");
+    buttons[SAVE_BUTTON] = new UIButton(this, 70, 0, 30, 20, 1,"SAVE");
 }
 
 void EditorWindow::update()
 {
+    UIElement::updateUIElements();
     LWindow::update();
 
     //Clear screen
@@ -28,7 +30,6 @@ void EditorWindow::update()
     activeRoom->renderBackground(Point(posX,posY));
 
     gridSelector->setPosition(-posX, -posY);
-    UIElement::updateUIElements();
     UIElement::renderUIElements();
     present();
 }
@@ -56,7 +57,7 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
 void EditorWindow::notify(UIButton * e)
 {
     if (e == buttons[NEW_FILE_BUTTON])
-        1;
+        new UIPrompt(50,50,150,50,0, "FILENAME: ");
     else if (e == buttons[SAVE_BUTTON])
         editor->save();
 }

@@ -40,9 +40,9 @@ void UIButton::render()
     else
         renderColor = { 80, 80, 80, 255 };
 
-    UIElement::drawSolidSquare(renderColor);
-    UIElement::drawOutlineSquare({60, 60, 60, 255});
+    UIElement::drawSquare(width, height, renderColor);
+    UIElement::drawSquare(width, height, {60, 60, 60, 255}, OUTLINE_SQUARE);
 
-    UIElement::renderText(1,1, text, ALIGN_CENTER, { 0,0,0,0 });
-    UIElement::renderText(0, 0, text, ALIGN_CENTER);
+    UIElement::renderText(text, { 0,0,0,0 }, ALIGN_CENTER, 1, 1);
+    UIElement::renderText(text, { 255,255,255,255 }, ALIGN_CENTER);
 }

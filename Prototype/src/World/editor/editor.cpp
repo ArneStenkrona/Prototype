@@ -55,9 +55,8 @@ void Editor::run()
                     std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
                 }
             }
-
-
             LWindow::updateAll();
+
         }   
         if (MessageBoxA(NULL, "Save?", "Choose mode", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
             save();

@@ -4,15 +4,22 @@
 #include <set>
 #include "System\graphics\color.h"
 
-static enum ALIGNMENT {
+static enum Alignment {
     ALIGN_UP,
     ALIGN_DOWN,
     ALIGN_LEFT,
     ALIGN_RIGHT,
     ALIGN_CENTER,
+    ALIGN_UPPER_LEFT,
+    ALIGN_UPPER_RIGHT,
+    ALIGN_LOWER_LEFT,
+    ALIGN_LOWER_RIGHT,
     ALIGN_NONE
 };
-
+static enum Square_type {
+    SOLID_SQUARE,
+    OUTLINE_SQUARE
+};
 class UIElement {
 public:
     UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _visible);
@@ -36,15 +43,14 @@ protected:
     virtual void onMouseOver();
     //unconditional update
     virtual void update();
-    //Draws squares at position, and width dimensions, of UIElement
-    void drawOutlineSquare(Color color);
-    void drawSolidSquare(Color color);
+
+    //takes alignment and width and height of image to be rendered
+    //returns alignment offset parameters
+    void getAlignmentOffset(Alignment align, int _width, int _height, int &alignx, int &aligny) const;
+    //Draws square at position, and width dimensions, of UIElement
+    void drawSquare(int _width, int _height, Color color, Square_type type = SOLID_SQUARE, 
+                    Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
+
     //Renders text at position
-    inline void renderText(int offsetX, int offsetY, std::string text)
-    { renderText(offsetX, offsetY, text, ALIGN_NONE, { 255,255,255,255 }); }
-    inline void renderText(int offsetX, int offsetY, std::string text, Color color)
-    { renderText(offsetX, offsetY, text, ALIGN_NONE, color); }
-    inline void renderText(int offsetX, int offsetY, std::string text, ALIGNMENT align = ALIGN_CENTER)
-    { renderText(offsetX, offsetY, text, align, { 255,255,255,255 }); }
-    void renderText(int offsetX, int offsetY, std::string text, ALIGNMENT align, Color color) const;
+    void renderText(std::string text, Color color = { 255,255,255,255 }, Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
 };

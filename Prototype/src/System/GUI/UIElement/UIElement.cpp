@@ -1,6 +1,7 @@
 #include "UIElement.h"
 #include "System\IO\inputManager.h"
 #include "System\graphics\graphicsEngine.h"
+#include <iostream>
 
 std::vector<std::set<UIElement*>> UIElement::allUIElements = std::vector<std::set<UIElement*>>();
 
@@ -48,7 +49,7 @@ void UIElement::updateUIElements()
             }
         }
     }
-    if (selected) {
+    if (selected != nullptr) {
         selected->onMouseOver();
     }
 }
@@ -76,44 +77,75 @@ void UIElement::update()
 {
 }
 
-void UIElement::drawOutlineSquare(Color color) {
-    SDL_Rect outlineRect = { positionX, positionY, width, height };
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
-    SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);
-}
-
-void UIElement::drawSolidSquare(Color color)
+void UIElement::getAlignmentOffset(Alignment align, int _width, int _height, int & alignx, int & aligny) const
 {
-    SDL_Rect fillRect = { positionX, positionY, width, height};
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(GraphicsEngine::getActiveRenderer(), &fillRect);
-}
-
-void UIElement::renderText(int offsetX, int offsetY, std::string text, ALIGNMENT align, Color color) const
-{
-    int alignx, aligny = 0;
     switch (align) {
     case ALIGN_UP:
-        alignx = (width / 2) - (text.length() * (4 / 2));
+        alignx = (width / 2) - (_width / 2);
         aligny = 0;
         break;
     case ALIGN_DOWN:
-        alignx = (width / 2) - (text.length() * (4 / 2));
-        aligny = height - 8;
+        alignx = (width / 2) - (_width / 2);
+        aligny = height - _height;
         break;
     case ALIGN_LEFT:
         alignx = 0;
-        aligny = (height / 2) - 4;
+        aligny = (height / 2) - (_height / 2);
         break;
     case ALIGN_RIGHT:
-        alignx = width - (text.length() * 4);
-        aligny = (height / 2) - 4;
+        alignx = width - _width;
+        aligny = (height / 2) - (_height / 2);
         break;
     case ALIGN_CENTER:
-        alignx = (width / 2) - (text.length() * (4 / 2));
-        aligny = (height / 2) - 4;
+        alignx = (width / 2) - (_width / 2);
+        aligny = (height / 2) - (_height / 2);
+        break;
+    case ALIGN_UPPER_LEFT:
+        alignx = 0;
+        aligny = 0;
+        break;
+    case ALIGN_UPPER_RIGHT:
+        alignx = width - _width;
+        aligny = 0;
+        break;
+    case ALIGN_LOWER_LEFT:
+        alignx = 0;
+        aligny = height - _height;
+        break;
+    case ALIGN_LOWER_RIGHT:
+        alignx = width - _width;
+        aligny = height - _height;
+        break;
+    case ALIGN_NONE:
+        alignx = 0;
+        aligny = 0;
         break;
     }
+}
+
+void UIElement::drawSquare(int _width, int _height, Color color, Square_type type, Alignment align, int offsetX, int offsetY) const
+{
+    int alignx, aligny = 0;
+    getAlignmentOffset(align, _width, _height, alignx, aligny);
+    SDL_Rect rect = { positionX + alignx + offsetX, positionY + aligny + offsetY, _width, _height };
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
+    switch (type)
+    {
+    case SOLID_SQUARE:
+        SDL_RenderFillRect(GraphicsEngine::getActiveRenderer(), &rect);
+        break;
+    case OUTLINE_SQUARE:
+        SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &rect);
+        break;
+    default:
+        break;
+    }
+}
+
+void UIElement::renderText(std::string text, Color color, Alignment align, int offsetX, int offsetY) const
+{
+    int alignx, aligny = 0;
+    getAlignmentOffset(align, text.length() * 4, 8, alignx, aligny);
 
     TextureManager::fontTextures[0].renderText(positionX + alignx + offsetX, positionY + aligny + offsetY, text, color);
 }

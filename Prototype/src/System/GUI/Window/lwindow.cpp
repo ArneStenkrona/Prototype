@@ -42,6 +42,7 @@ void LWindow::updateAll()
 
 void LWindow::update()
 {
+    inputBuffer = "";
 }
 
 SDL_Renderer * LWindow::getRenderer()
@@ -122,43 +123,45 @@ void LWindow::pollEvent(SDL_Event e)
                     break;
                 }
                 break;
+            case SDL_TEXTINPUT:
+                inputBuffer = e.text.text;
+                break;
             }
         }
 }
 
 bool LWindow::init()
 {
+    //Create window
+    gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN);
+    if (gWindow == NULL) {
+        printf("Window could not be created! DSL_Error: %s\n", SDL_GetError());
+        return false;
+    }
 
-        //Create window
-        gWindow = SDL_CreateWindow("Prototype", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, SDL_WINDOW_SHOWN);
-        if (gWindow == NULL) {
-            printf("Window could not be created! DSL_Error: %s\n", SDL_GetError());
-            return false;
-        }
+    //Create renderer for window
+    mRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+    if (mRenderer == NULL) {
+        printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+        return false;
+    }
 
-        //Create renderer for window
-        mRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
-        if (mRenderer == NULL) {
-            printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-            return false;
-        }
-      
         windowID = SDL_GetWindowID(gWindow);
-        //Initialize renderer color
-        SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        //Enable alpha in draw mode
-        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
-        //Set render scale
-        SDL_RenderSetScale(mRenderer, scale_x, scale_y);
-        //Initialize PNG loading
-        int imgFlags = IMG_INIT_PNG;
-        if (!(IMG_Init(imgFlags) & imgFlags))
-        {
-            printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-            return false;
-        }
-        frameBuffer.createBlank(screen_width, screen_height, mRenderer);
-        frameBuffer.setAsRenderTarget(mRenderer);
+    //Initialize renderer color
+    SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    //Enable alpha in draw mode
+    SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+    //Set render scale
+    SDL_RenderSetScale(mRenderer, scale_x, scale_y);
+    //Initialize PNG loading
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags))
+    {
+        printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+        return false;
+    }
+    frameBuffer.createBlank(screen_width, screen_height, mRenderer);
+    frameBuffer.setAsRenderTarget(mRenderer);
     return true;
 }
 

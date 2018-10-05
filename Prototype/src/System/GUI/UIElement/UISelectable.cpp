@@ -24,9 +24,9 @@ void UISelectable::select()
 void UISelectable::render()
 {
     derivedRender();
-    UIElement::drawOutlineSquare(currentColor);
+    UIElement::drawSquare(width, height, currentColor, OUTLINE_SQUARE);
     if (!selector->isActive())
-        UIElement::drawSolidSquare({255,255,255,40});
+        UIElement::drawSquare(width, height, {255,255,255,40});
 }
 
 void UISelectable::onMouseOver()

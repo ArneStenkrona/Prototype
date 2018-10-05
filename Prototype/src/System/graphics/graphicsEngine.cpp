@@ -33,6 +33,7 @@ const bool GraphicsEngine::initSDL() {
         return false;
     }
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+    SDL_StartTextInput();
     return true;
 }
 

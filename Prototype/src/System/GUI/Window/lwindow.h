@@ -40,6 +40,8 @@ public:
     inline unsigned int getWidth() const { return screen_width; }
     inline unsigned int getHeight() const { return screen_height; }
 
+    inline std::string getInputBuffer() const { return inputBuffer; }
+
     void clear();
     void present();
 
@@ -72,6 +74,8 @@ private:
     //mouse button being pressed
     bool leftMouse;
     bool rightMouse;
+    //String being inputed currently by user
+    std::string inputBuffer;
 
     bool exit;
     //checks if user exists the window
