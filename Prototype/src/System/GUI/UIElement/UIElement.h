@@ -22,7 +22,7 @@ static enum Square_type {
 };
 class UIElement {
 public:
-    UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _visible);
+    UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _tangible, bool _visible = true);
     ~UIElement();
 
     int positionX, positionY;
@@ -34,9 +34,13 @@ public:
     //Checks if element is selected
     inline bool isSelected() const { return selectedElement == this; }
     static void setSelected(UIElement* element);
+
 protected:
-    
+    //The layer this element belongs to
     int layer;
+    //If the element can be clicked/hovered over
+    bool tangible;
+    //If the element should be rendered
     bool visible;
 
     virtual void render();
@@ -49,6 +53,7 @@ protected:
     //unconditional update
     virtual void update();
 
+
     //takes alignment and width and height of image to be rendered
     //returns alignment offset parameters
     void getAlignmentOffset(Alignment align, int _width, int _height, int &alignx, int &aligny) const;
@@ -58,6 +63,7 @@ protected:
 
     //Renders text at position
     void renderText(std::string text, Color color = { 255,255,255,255 }, Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
+
 
 private:
     //Container for all UIElements, divided by layer

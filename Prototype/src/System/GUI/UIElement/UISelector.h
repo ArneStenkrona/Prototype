@@ -47,6 +47,7 @@ private:
     void moveIndices(int dx, int dy);
 
     void update();
+    void render();
 
     friend class UISelectable;
 };

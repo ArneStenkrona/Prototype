@@ -73,3 +73,9 @@ void UISelector::update()
     }
 
 }
+
+void UISelector::render()
+{
+    if (isSelected())
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_CENTER);
+}

@@ -13,7 +13,7 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
         selectables[i].resize(rows);
         for (int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableCollider(this, positionX + (i * Tile::TILE_SIZE), positionY + (j * Tile::TILE_SIZE),
-                                                         layer, i + (indexLimitX * j), _selectedColor, _hoverColor);
+                                                         layer + 1, i + (indexLimitX * j), _selectedColor, _hoverColor);
         }
     }
 }

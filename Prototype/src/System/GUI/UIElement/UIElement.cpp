@@ -7,9 +7,9 @@ std::vector<std::set<UIElement*>> UIElement::allUIElements = std::vector<std::se
 UIElement* UIElement::selectedElement = nullptr;
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
-                    int _layer, bool _visible)
+                    int _layer, bool _tangible, bool _visible)
     : positionX(_posx), positionY(_posy), width(_width), height(_height), 
-      layer(_layer), visible(_visible)
+      layer(_layer), tangible(_tangible), visible(_visible)
 {
     if (allUIElements.size() < layer + 1) {
         allUIElements.resize(layer + 1);
@@ -41,7 +41,7 @@ void UIElement::updateUIElements()
     for each (std::set<UIElement*> s in allUIElements) {
         for each (UIElement* e in s) {
             e->update();
-            if (!mouseOverElement && e->visible) {
+            if (!mouseOverElement && e->tangible) {
                 int x, y;
                 getMouseWorldCoordinates(x, y);
                 if (pointWithin(x, y, e->positionX, e->positionY, e->width, e->height)) {

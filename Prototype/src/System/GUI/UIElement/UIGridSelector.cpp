@@ -4,12 +4,13 @@
 #include <iostream>
 #include "System\GUI\Window\EditorWindow.h"
 #include "World\Tile.h"
+#include "UIButton.h"
 #include <optional>
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X, 
                              GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 
-                             _layer + 3, true), room(_room)
+                             _layer + 4, true), room(_room)
 {
 
     setRoom(room);
@@ -19,9 +20,9 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
                                       0, _layer, 6, 6);
 
     border[0] = new UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                             0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 1);
+                             0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2);
     border[1] = new UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
-                             GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 1);
+                             GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2);
 }
 
 UIGridSelector::~UIGridSelector()

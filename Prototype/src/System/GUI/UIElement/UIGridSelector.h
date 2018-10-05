@@ -25,6 +25,7 @@ private:
     UITileSelector* tileSelector;
     UIColliderSelector* colliderSelector;
     std::vector<std::vector<UIGridTile*>> tiles;
+
     //Is any tile in tiles selected?
     bool selected;
     //room offset position

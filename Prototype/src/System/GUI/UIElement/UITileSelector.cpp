@@ -13,13 +13,13 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
             selectables[i][j] = new UISelectableTile(this, 
                                                     positionX + (i * Tile::TILE_SIZE), 
                                                     positionY + (j * Tile::TILE_SIZE),
-                                                    layer, i + (indexLimitX * j), 
+                                                    layer + 1, i + (indexLimitX * j), 
                                                     _selectedColor, _hoverColor);
         }
     }
     selectables[columns].resize(1);
     selectables[columns][0] = new UISelectableTile(this, positionX + (columns * Tile::TILE_SIZE), positionY,
-                                                   layer, indexLimitX * indexLimity, _selectedColor, _hoverColor);
+                                                   layer + 1, indexLimitX * indexLimity, _selectedColor, _hoverColor);
 }
 
 UITileSelector::~UITileSelector()
