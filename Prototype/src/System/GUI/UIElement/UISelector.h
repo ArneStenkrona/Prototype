@@ -7,7 +7,8 @@ class UISelector : public UIElement {
 public:
     UISelector(int _posx, int _posy, int _layer,
         unsigned int _columns, unsigned int _rows, 
-        unsigned int _indexLimitX, unsigned int _indexLimitY);
+        unsigned int _indexLimitX, unsigned int _indexLimitY,
+        const std::string _label);
     ~UISelector();
 
     inline static UISelector* getActiveSelector() { return activeSelector; }
@@ -15,6 +16,8 @@ public:
     inline int getSelectedIndex() const { return selectedIndex; }
 
     void getRotationAndFlip(int &rot, bool &h, bool &v);
+
+    static const unsigned int LABEL_HEIGHT = 16;
 
 protected:
     //All UISelectables in layout
@@ -41,8 +44,11 @@ protected:
 
 private:
     static UISelector* activeSelector;
+    //Label of this selector
+    const std::string label;
+    //Height of the label
 
-    //Is any UISelectable in selectables selected?
+    //Is any UISelectable in selectables selected? Hacky solution to isSelected(), should be done in a less coupled way
     bool selected;
 
     void setActive();

@@ -75,6 +75,9 @@ protected:
 
     //Renders text at position
     void renderText(std::string text, Color color = { 255,255,255,255 }, Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
+    //Renders text at position, with backdrop
+    void renderTextBackdrop(std::string text, Color color = { 255,255,255,255 }, Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0, Color backColor = COLOR_BLACK) const;
+
 
 private:
     //Container for all UIElements, divided by layer

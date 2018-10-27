@@ -187,6 +187,12 @@ void UIElement::renderText(std::string text, Color color, Alignment align, int o
     TextureManager::fontTextures[0].renderText(positionX + alignx + offsetX, positionY + aligny + offsetY, text, color);
 }
 
+void UIElement::renderTextBackdrop(std::string text, Color color, Alignment align, int offsetX, int offsetY, Color backColor) const
+{
+    renderText(text, backColor, align, offsetX + 1, offsetY + 1);
+    renderText(text, color, align, offsetX, offsetY);
+}
+
 void UIElement::moveToFrontOffLayer(unsigned int l)
 {
     vector<UIElement*>::iterator it = allUIElements[layer].begin();

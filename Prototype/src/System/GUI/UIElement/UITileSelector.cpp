@@ -4,7 +4,7 @@
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows,
                               Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16)
+    : UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16, "TILES")
 {
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
@@ -12,7 +12,7 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
         for (int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableTile(this, 
                                                     positionX + (i * Tile::TILE_SIZE), 
-                                                    positionY + (j * Tile::TILE_SIZE),
+                                                    LABEL_HEIGHT + positionY + (j * Tile::TILE_SIZE),
                                                     layer + 1, i + (indexLimitX * j), 
                                                     _selectedColor, _hoverColor);
         }

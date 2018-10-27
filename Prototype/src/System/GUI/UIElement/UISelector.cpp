@@ -6,9 +6,10 @@ UISelector* UISelector::activeSelector = NULL;
 
 UISelector::UISelector(int _posx, int _posy, int _layer, 
                        unsigned int _columns, unsigned int _rows,
-                       unsigned int _indexLimitX, unsigned int _indexLimitY)
-    : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, Tile::TILE_SIZE * _rows, _layer, false), columns(_columns), rows(_rows),
-      indexLimitX(_indexLimitX), indexLimity(_indexLimitY)
+                       unsigned int _indexLimitX, unsigned int _indexLimitY,
+                       const std::string _label)
+    : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, LABEL_HEIGHT + Tile::TILE_SIZE * _rows, _layer, false), columns(_columns), rows(_rows),
+      indexLimitX(_indexLimitX), indexLimity(_indexLimitY), label(_label)
 {
     activeSelector = this;
 }
@@ -104,6 +105,9 @@ void UISelector::update()
 
 void UISelector::render()
 {
+    UIElement::drawSquare(width, 16, COLOR_BLACK, SOLID_SQUARE, ALIGN_UP);
+    UIElement::renderTextBackdrop(label, COLOR_WHITE, ALIGN_UP, 0, 2, COLOR_DARK_GREY);
+
     if (isSelected())
         UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_CENTER);
 }

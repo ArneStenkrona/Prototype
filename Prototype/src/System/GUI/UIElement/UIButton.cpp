@@ -65,6 +65,5 @@ void UIButton::render()
     UIElement::drawSquare(width, height, renderColor);
     UIElement::drawSquare(width, height, outlineColor, OUTLINE_SQUARE);
 
-    UIElement::renderText(text, { 0,0,0,0 }, ALIGN_CENTER, 1, 1);
-    UIElement::renderText(text, { 255,255,255,255 }, ALIGN_CENTER);
+    UIElement::renderTextBackdrop(text, { 255,255,255,255 }, ALIGN_CENTER);
 }
