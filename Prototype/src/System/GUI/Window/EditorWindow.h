@@ -4,11 +4,11 @@
 #include "World\room.h"
 #include "System\GUI\UIElement\UITileSelector.h"
 #include "System\GUI\UIElement\UIGridSelector.h"
+#include "System\GUI\UIElement\UIButton.h"
 
 /*
     This class represents the main viewport in editing mode.
 */
-class UIButton;
 class Editor;
 class EditorWindow : public LWindow {
 public:
@@ -30,12 +30,10 @@ private:
         SAVE_BUTTON,
         TOTAL_BUTTONS
     };
-    UIButton *buttons[TOTAL_BUTTONS];
+    UIButton buttons[TOTAL_BUTTONS];
 
-    UIGridSelector* gridSelector;
+    UIGridSelector gridSelector;
 
     void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
     void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-    void notify(UIButton* e);
-    friend class UIButton;
 };

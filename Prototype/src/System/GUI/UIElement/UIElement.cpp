@@ -3,23 +3,39 @@
 #include "System\graphics\graphicsEngine.h"
 #include <iostream>
 
-std::vector<std::set<UIElement*>> UIElement::allUIElements = std::vector<std::set<UIElement*>>();
+std::vector<std::vector<UIElement*>> UIElement::allUIElements = std::vector<std::vector<UIElement*>>();
 UIElement* UIElement::selectedElement = nullptr;
+unsigned int UIElement::NumberOfElements = 0;
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
                     int _layer, bool _tangible, bool _visible)
     : positionX(_posx), positionY(_posy), width(_width), height(_height), 
-      layer(_layer), tangible(_tangible), visible(_visible)
+      layer(_layer), tangible(_tangible), visible(_visible), ID(NumberOfElements)
 {
     if (allUIElements.size() < layer + 1) {
         allUIElements.resize(layer + 1);
     }
-    allUIElements[layer].insert(this);
+    allUIElements[layer].push_back(this);
+
+    NumberOfElements++;
 }
 
 UIElement::~UIElement()
 {
-    allUIElements[layer].erase(this);
+    if (selectedElement == this)
+        selectedElement = nullptr;
+
+    vector<UIElement*>::iterator it = allUIElements[layer].begin();
+
+    while (it != allUIElements[layer].end()) {
+
+        if (*it == this) {
+
+            it = allUIElements[layer].erase(it);
+            break;
+        }
+        else ++it;
+    }
 }
 
 //helper function
@@ -38,8 +54,8 @@ void UIElement::updateUIElements()
     //one of them will be picked according to
     //iterator order
     UIElement* mouseOverElement = nullptr;
-    for each (std::set<UIElement*> s in allUIElements) {
-        for each (UIElement* e in s) {
+    for (std::vector<UIElement*> s : allUIElements) {
+        for (UIElement* e : s) {
             e->update();
             if (!mouseOverElement && e->tangible) {
                 int x, y;
@@ -51,7 +67,7 @@ void UIElement::updateUIElements()
         }
     }
     if (mouseOverElement != nullptr) {
-        if (getKeyDown(MOUSE_LEFT)) {
+        if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
             setSelected(mouseOverElement);
         }
         mouseOverElement->onMouseOver();
@@ -60,11 +76,12 @@ void UIElement::updateUIElements()
 
 void UIElement::renderUIElements()
 {
-    for (std::vector<std::set<UIElement*>>::reverse_iterator i = allUIElements.rbegin();
+    for (std::vector<std::vector<UIElement*>>::reverse_iterator i = allUIElements.rbegin();
         i != allUIElements.rend(); ++i) {
-        for each (UIElement *e in (*i)) {
-            if (e->visible) 
-                e->render();
+        for (std::vector<UIElement*>::reverse_iterator j = (*i).rbegin();
+            j != (*i).rend(); ++j) {
+            if ((*j)->visible) 
+                (*j)->render();
         }
     }
 }
@@ -168,5 +185,22 @@ void UIElement::renderText(std::string text, Color color, Alignment align, int o
     getAlignmentOffset(align, text.length() * 4, 8, alignx, aligny);
 
     TextureManager::fontTextures[0].renderText(positionX + alignx + offsetX, positionY + aligny + offsetY, text, color);
+}
+
+void UIElement::moveToFrontOffLayer(unsigned int l)
+{
+    vector<UIElement*>::iterator it = allUIElements[layer].begin();
+
+    while (it != allUIElements[layer].end()) {
+
+        if (*it == this) {
+
+            it = allUIElements[layer].erase(it);
+            break;
+        }
+        else ++it;
+    }
+    layer = l;
+    allUIElements[layer].insert(allUIElements[layer].begin(), this);
 }
 

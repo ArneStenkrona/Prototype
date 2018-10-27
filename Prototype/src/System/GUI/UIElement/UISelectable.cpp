@@ -9,6 +9,10 @@ UISelectable::UISelectable(UISelector * _selector, int _posX, int _posY, unsigne
 {
 }
 
+UISelectable::~UISelectable()
+{
+}
+
 void UISelectable::derivedRender()
 {
 }
@@ -31,7 +35,7 @@ void UISelectable::render()
 
 void UISelectable::onMouseOver()
 {
-    if (getKeyDown(MOUSE_LEFT)) {
+    if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
         selector->setActive();
         selector->setSelected(index);
         select();

@@ -68,7 +68,7 @@ void Movement::update()
     }
     if (getKey(INPUT_KEY_S))
     {
-        direction += Point::up;
+        //direction += Point::up;
     }
     if (!grounded) state = falling;
 

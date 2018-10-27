@@ -103,6 +103,9 @@ void updateCurrentKeys() {
     currentKeyStates[INPUT_KEY_BACKSPACE] = KeyboardState[SDL_SCANCODE_BACKSPACE];
     currentKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
     currentKeyStates[INPUT_KEY_LCTRL] = KeyboardState[SDL_SCANCODE_LCTRL];
+    currentKeyStates[INPUT_KEY_KP_ENTER] = KeyboardState[SDL_SCANCODE_KP_ENTER];
+    currentKeyStates[INPUT_KEY_RETURN] = KeyboardState[SDL_SCANCODE_RETURN];
+    currentKeyStates[INPUT_KEY_TAB] = KeyboardState[SDL_SCANCODE_TAB];
     currentKeyStates[MOUSE_LEFT] = GraphicsEngine::getActiveWindow()->getLeftMouse();
     currentKeyStates[MOUSE_RIGHT] = GraphicsEngine::getActiveWindow()->getRightMouse();
 }
@@ -149,6 +152,9 @@ void updateInputManager() {
     lastKeyStates[INPUT_KEY_BACKSPACE] = KeyboardState[SDL_SCANCODE_BACKSPACE];
     lastKeyStates[INPUT_KEY_LSHIFT] = KeyboardState[SDL_SCANCODE_LSHIFT];
     lastKeyStates[INPUT_KEY_LCTRL] = KeyboardState[SDL_SCANCODE_LCTRL];
+    lastKeyStates[INPUT_KEY_KP_ENTER] = KeyboardState[SDL_SCANCODE_KP_ENTER];
+    lastKeyStates[INPUT_KEY_RETURN] = KeyboardState[SDL_SCANCODE_RETURN];
+    lastKeyStates[INPUT_KEY_TAB] = KeyboardState[SDL_SCANCODE_TAB];
     lastKeyStates[MOUSE_LEFT] = GraphicsEngine::getActiveWindow()->getLeftMouse();
     lastKeyStates[MOUSE_RIGHT] = GraphicsEngine::getActiveWindow()->getRightMouse();
     updateCurrentKeys();

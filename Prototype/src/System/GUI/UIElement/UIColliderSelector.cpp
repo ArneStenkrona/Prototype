@@ -20,11 +20,6 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
 
 UIColliderSelector::~UIColliderSelector()
 {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            delete(selectables[i][j]);
-        }
-    }
 }
 
 std::optional<Polyshape> UIColliderSelector::getPolygon() const

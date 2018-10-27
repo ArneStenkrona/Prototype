@@ -5,18 +5,27 @@
 #include "System\GUI\UIElement\UITileSelector.h"
 #include "System\graphics\graphicsEngine.h"
 #include "System\GUI\UIElement\UIPrompt.h"
-#include "System\GUI\UIElement\UIButton.h"
+#include "System\GUI\UIElement\UIActionListener.h"
 #include "World\editor\editor.h"
-
 const int EditorWindow::gridSize = 32;
 
-EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
-    _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor)
-{
-    gridSelector = new UIGridSelector(_activeRoom, 0, 0, 2);
+class UISaveFileListener : public UIActionListener {
+public:
+    UISaveFileListener(Editor* _editor) {
+        editor = _editor;
+    }
+    void actionPerformed(UIEvent* e) {
+        editor->save();
+    }
+private:
+    Editor* editor;
+};
 
-    buttons[NEW_FILE_BUTTON] = new UIButton(this, 0, 0, 70, 20, 1, "NEW FILE");
-    buttons[SAVE_BUTTON] = new UIButton(this, 70, 0, 30, 20, 1,"SAVE");
+EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
+    _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
+    buttons{ UIButton(new UIPromptListener("FILENAME: "), 0, 0, 70, 20, 1, "NEW FILE") ,
+             UIButton(new UISaveFileListener(editor), 70, 0, 30, 20, 1,"SAVE")}
+{
 }
 
 void EditorWindow::update()
@@ -33,7 +42,7 @@ void EditorWindow::update()
 void EditorWindow::setRoom(Room * room)
 {
     activeRoom = room;
-    gridSelector->setRoom(room);
+    gridSelector.setRoom(room);
 }
 
 
@@ -50,10 +59,3 @@ void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b
     SDL_RenderFillRect(mRenderer, &fillRect);
 }
 
-void EditorWindow::notify(UIButton * e)
-{
-    if (e == buttons[NEW_FILE_BUTTON])
-        new UIPrompt(50,50,150,50,0, "FILENAME: ");
-    else if (e == buttons[SAVE_BUTTON])
-        editor->save();
-}

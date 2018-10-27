@@ -1,26 +1,36 @@
 #include "UIButton.h"
 #include "System\IO\inputManager.h"
+#include "UIEvent.h"
 
-UIButton::UIButton(EditorWindow* _owner,int _positionX, int _positionY, int _width, int _height,
+UIButton::UIButton(UIActionListener* _listener, int _positionX, int _positionY, int _width, int _height,
                    int _layer, std::string _text)
-    :UIElement(_positionX, _positionY, _width, _height, _layer, true),
-     text(_text), owner(_owner)
+    :UIComponent(_positionX, _positionY, _width, _height, _layer),
+     text(_text), listener(_listener)
 {
 }
 
-void UIButton::notify()
+UIButton::~UIButton()
 {
-    owner->notify(this);
+    delete listener;
+    listener = 0;
+}
+
+void UIButton::sendEvent()
+{
+    UIEvent* e = new UIEvent();
+    listener->actionPerformed(e);
+    delete e;
 }
 
 void UIButton::onMouseOver()
 {
+    UIComponent::onMouseOver();
     mouseOver = true;
     if (getKey(MOUSE_LEFT)) {
         holdClick = true;
     }
     if (getKeyUp(MOUSE_LEFT)) {
-        notify();
+        sendEvent();
     }
 }
 
@@ -28,6 +38,12 @@ void UIButton::update()
 {
     mouseOver = false;
     holdClick = false;
+    if (isSelected() && (getKey(INPUT_KEY_KP_ENTER) || getKey(INPUT_KEY_RETURN))) {
+        holdClick = true;
+    }
+    if (isSelected() && (getKeyUp(INPUT_KEY_KP_ENTER) || getKeyUp(INPUT_KEY_RETURN))) {
+        sendEvent();
+    }
 }
 
 void UIButton::render()
@@ -40,8 +56,14 @@ void UIButton::render()
     else
         renderColor = { 80, 80, 80, 255 };
 
+    Color outlineColor;
+    if (isSelected())
+        outlineColor = { 66, 134, 244, 255 };
+    else
+        outlineColor = { 60, 60, 60, 255 };
+
     UIElement::drawSquare(width, height, renderColor);
-    UIElement::drawSquare(width, height, {60, 60, 60, 255}, OUTLINE_SQUARE);
+    UIElement::drawSquare(width, height, outlineColor, OUTLINE_SQUARE);
 
     UIElement::renderText(text, { 0,0,0,0 }, ALIGN_CENTER, 1, 1);
     UIElement::renderText(text, { 255,255,255,255 }, ALIGN_CENTER);

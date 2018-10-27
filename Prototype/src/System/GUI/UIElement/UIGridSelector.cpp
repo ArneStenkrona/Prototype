@@ -10,27 +10,23 @@
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X, 
                              GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 
-                             _layer + 4, true), room(_room)
+                             _layer + 4, true), 
+    room(_room), colliderSelector(UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+        6 * Tile::TILE_SIZE, _layer, 6, 2)),
+    tileSelector(UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+        0, _layer, 6, 6)),
+    border{ UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+                             0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2),
+           UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
+                             GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)}
+
 {
-
     setRoom(room);
-    colliderSelector = new UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                                              6 * Tile::TILE_SIZE, _layer, 6, 2);
-    tileSelector = new UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                                      0, _layer, 6, 6);
-
-    border[0] = new UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                             0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2);
-    border[1] = new UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
-                             GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2);
+    setSelected(this);
 }
 
 UIGridSelector::~UIGridSelector()
 {
-    delete(tileSelector);
-    delete(colliderSelector);
-    delete(border[0]);
-    delete(border[1]);
 }
 
 void UIGridSelector::render()
@@ -101,12 +97,12 @@ void UIGridSelector::setRoom(Room* _room)
 void UIGridSelector::setElement(int x, int y)
 {
     UISelector* s = UISelector::getActiveSelector();
-    if (s == tileSelector)
-        room->setTile(x, y, tileSelector->getTile());
+    if (s == &tileSelector)
+        room->setTile(x, y, tileSelector.getTile());
 
-    if (s == colliderSelector) {
+    if (s == &colliderSelector) {
         Tile* t = room->getTile(x, y);
-        std::optional<Polyshape> p = colliderSelector->getPolygon();
+        std::optional<Polyshape> p = colliderSelector.getPolygon();
         if (t)
             t->setPolygon(p);
         else

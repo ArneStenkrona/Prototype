@@ -203,7 +203,11 @@
     <ClInclude Include="src\System\graphics\TileMap.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIBorder.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIButton.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIActionListener.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIComponent.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIEvent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIMovable.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPrompt.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableCollider.h" />
@@ -213,6 +217,7 @@
     <ClInclude Include="src\System\GUI\UIElement\UIGridTile.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UITextBox.h" />
     <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h" />
     <ClInclude Include="src\System\GUI\Window\EditorWindow.h" />
     <ClInclude Include="src\System\GUI\Window\lwindow.h" />
@@ -277,7 +282,11 @@
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIBorder.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIButton.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIActionListener.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIEvent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIMovable.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPrompt.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableCollider.cpp" />
@@ -287,6 +296,7 @@
     <ClCompile Include="src\System\GUI\UIElement\UIGridTile.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UITextBox.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp" />
     <ClCompile Include="src\System\GUI\Window\EditorWindow.cpp" />
     <ClCompile Include="src\System\GUI\Window\lwindow.cpp" />

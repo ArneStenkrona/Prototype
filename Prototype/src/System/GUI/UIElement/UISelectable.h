@@ -9,6 +9,7 @@ class UISelectable : public UIElement {
 public:
     UISelectable(UISelector* _selector, int _posX, int _posY, unsigned int _width, unsigned int _height, unsigned int _layer,
         int _index,  Color _selectedColor, Color _hoverColor);
+    ~UISelectable();
 
     inline int getIndex() const { return index; }
     inline void setIndex(int _index) { index = _index; }

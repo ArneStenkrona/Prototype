@@ -22,8 +22,8 @@ public:
 
 private:
     Room* room;
-    UITileSelector* tileSelector;
-    UIColliderSelector* colliderSelector;
+    UITileSelector tileSelector;
+    UIColliderSelector colliderSelector;
     std::vector<std::vector<UIGridTile*>> tiles;
 
     //Is any tile in tiles selected?
@@ -31,7 +31,7 @@ private:
     //room offset position
     int roomPosX, roomPosY;
 
-    UIBorder* border[2];
+    UIBorder border[2];
     //Dimensions of the room
     unsigned int columns, rows;
     void render();

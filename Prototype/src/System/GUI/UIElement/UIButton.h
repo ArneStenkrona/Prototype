@@ -1,18 +1,22 @@
 #pragma once
-#include "UIElement.h"
+#include "UIComponent.h"
 #include <string>
-#include "System\GUI\Window\EditorWindow.h"
+#include "UIActionListener.h"
 
-class UIButton : public UIElement {
+class UIButton : public UIComponent {
 public:
-    UIButton(EditorWindow* _owner, int _positionX, int _positionY, int _width, int _height,
+    //Creates an instance of UIButton with listener _listener.
+    //The listener is destroyed when UIButton is destroyed
+    UIButton(UIActionListener* _listener, int _positionX, int _positionY, int _width, int _height,
              int _layer, std::string _text);
+    ~UIButton();
  
 protected:
     const std::string text;
     
-    //notifies owner
-    virtual void notify();
+    //Generates and sends an event to owner
+    //Event does not survive the generateEvent function call
+    virtual void sendEvent();
 
 private:
     void onMouseOver();
@@ -24,5 +28,5 @@ private:
     //Click is held while mouse over
     bool holdClick;
 
-    EditorWindow* owner;
+    UIActionListener* listener;
 };
