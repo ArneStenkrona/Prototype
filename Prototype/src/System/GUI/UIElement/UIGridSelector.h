@@ -7,6 +7,7 @@
 #include "UIObjectSelector.h"
 #include "UIToolSelector.h"
 #include "UIBorder.h"
+#include "UIInfoBox.h"
 
 //Bad name for class, should be something like "UIEditor"
 //because of big responsibility
@@ -16,11 +17,11 @@ public:
     ~UIGridSelector();
 
     void setRoom(Room* _room);
-    //Sets element from active selector at position (x, y)
-    void setElement(int x, int y);
 
     //Checks if gridselector is selected
     inline bool isSelected() const { return selected || UIElement::isSelected(); }
+
+    void getActiveTileCoordinates(int &x, int &y);
 
 private:
     Room* room;
@@ -28,12 +29,17 @@ private:
     UIColliderSelector colliderSelector;
     UIObjectSelector objectSelector;
     UIToolSelector toolSelector;
+
+    UIInfoBox infoBox;
+
     std::vector<std::vector<UIGridTile*>> tiles;
 
     //Is any tile in tiles selected?
     bool selected;
     //room offset position
     int roomPosX, roomPosY;
+    //Tells what coordinate tile is active
+    int tilePosX, tilePosY;
 
     UIBorder border[2];
     //Dimensions of the room
@@ -43,6 +49,10 @@ private:
     void onMouseOver();
 
     void renderRoom();
+    //Sets element from active selector at position (x, y)
+    void setElement(int x, int y);
+    
+    void setActiveTileCoordinates(int x, int y);
 
     friend class UIGridTile;
 };

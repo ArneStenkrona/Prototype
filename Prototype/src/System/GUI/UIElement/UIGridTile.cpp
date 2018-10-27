@@ -17,6 +17,8 @@ void UIGridTile::render()
 
 void UIGridTile::onMouseOver()
 {
+    selector->setActiveTileCoordinates(indX, indY);
+
     if (getKey(MOUSE_LEFT)) {
         selector->setElement(indX, indY);
     }
@@ -45,4 +47,5 @@ void UIGridTile::onSelect()
 void UIGridTile::onDeselect()
 {
     selector->selected = false;
+    selector->setActiveTileCoordinates(-1, -1);
 }

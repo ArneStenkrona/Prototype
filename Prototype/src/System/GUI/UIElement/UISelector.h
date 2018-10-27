@@ -45,6 +45,8 @@ protected:
     //Checks if element is selected
     inline bool isSelected() const { return selected; }
 
+    void onSelect();
+
     void setActive();
 
 private:

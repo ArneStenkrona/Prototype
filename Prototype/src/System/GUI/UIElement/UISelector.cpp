@@ -49,6 +49,11 @@ void UISelector::derivedSetSelected(int i)
 {
 }
 
+void UISelector::onSelect()
+{
+    setActive();
+}
+
 void UISelector::setActive()
 {
     if (activeSelector != this) {

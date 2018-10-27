@@ -206,6 +206,7 @@
     <ClInclude Include="src\System\GUI\UIElement\UIActionListener.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIComponent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIEvent.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIInfoBox.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIMovable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIObjectSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPanel.h" />
@@ -289,6 +290,7 @@
     <ClCompile Include="src\System\GUI\UIElement\UIActionListener.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIEvent.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIInfoBox.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIMovable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIObjectSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPanel.cpp" />

@@ -8,10 +8,10 @@
 #include <optional>
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
-    :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X, 
-                             GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 
-                             _layer + 4, true), 
-    room(_room), 
+    :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+        GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
+        _layer + 4, true),
+    room(_room), infoBox(UIInfoBox(this, 0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 32 * 5, 32 * 3, _layer, "INFO: ")),
     toolSelector(UIToolSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + (6 * Tile::TILE_SIZE),
                  0, _layer)),
     objectSelector(UIObjectSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
@@ -100,6 +100,12 @@ void UIGridSelector::setRoom(Room* _room)
     }
 }
 
+void UIGridSelector::getActiveTileCoordinates(int & x, int & y)
+{
+    x = tilePosX;
+    y = tilePosY;
+}
+
 void UIGridSelector::setElement(int x, int y)
 {
     UISelector* s = UISelector::getActiveSelector();
@@ -124,4 +130,10 @@ void UIGridSelector::setElement(int x, int y)
 
         break;
     }
+}
+
+void UIGridSelector::setActiveTileCoordinates(int x, int y)
+{
+    tilePosX = x;
+    tilePosY = y;
 }
