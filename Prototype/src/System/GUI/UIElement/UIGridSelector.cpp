@@ -13,7 +13,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
                              _layer + 4, true), 
     room(_room), 
     toolSelector(UIToolSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + (6 * Tile::TILE_SIZE),
-                 0, _layer, 1, 6)),
+                 0, _layer)),
     objectSelector(UIObjectSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                   ( 2 * UISelector::LABEL_HEIGHT) + (6 + 2) * Tile::TILE_SIZE, _layer, 6, 2)),
     colliderSelector(UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
@@ -27,6 +27,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
 
 {
     setRoom(room);
+    setSelected(&tileSelector);
     setSelected(this);
 }
 
@@ -103,18 +104,24 @@ void UIGridSelector::setElement(int x, int y)
 {
     UISelector* s = UISelector::getActiveSelector();
 
-    if (s == &toolSelector)
+    //*NOTE* Tools should be defined by enum for clariy
+    switch (toolSelector.getSelectedIndex()) {
+    case 0:
+        if (s == &tileSelector)
+            room->setTile(x, y, tileSelector.getTile());
+
+        if (s == &colliderSelector) {
+            Tile* t = room->getTile(x, y);
+            std::optional<Polyshape> p = colliderSelector.getPolygon();
+            if (t)
+                t->setPolygon(p);
+            else
+                room->setTile(x, y, new Tile(-1, p));
+        }
+        break;
+    case 1:
         room->setTile(x, y, NULL);
 
-    if (s == &tileSelector)
-        room->setTile(x, y, tileSelector.getTile());
-
-    if (s == &colliderSelector) {
-        Tile* t = room->getTile(x, y);
-        std::optional<Polyshape> p = colliderSelector.getPolygon();
-        if (t)
-            t->setPolygon(p);
-        else
-            room->setTile(x, y, new Tile(-1, p));
+        break;
     }
 }

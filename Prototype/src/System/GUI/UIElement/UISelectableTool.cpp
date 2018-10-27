@@ -1,6 +1,7 @@
 #include "UISelectableTool.h"
 #include "UIToolSelector.h"
 #include "System\graphics\textureManager.h"
+#include "System\IO\inputManager.h"
 
 UISelectableTool::UISelectableTool(UIToolSelector * _selector, int _posX, int _posY, 
                                    unsigned int _layer, int _index, 
@@ -9,7 +10,31 @@ UISelectableTool::UISelectableTool(UIToolSelector * _selector, int _posX, int _p
 {
 }
 
+void UISelectableTool::render()
+{
+    UIElement::drawSquare(width, height, COLOR_PINK, SOLID_SQUARE, ALIGN_CENTER);
+    derivedRender();
+    UIElement::drawSquare(width, height, currentColor, OUTLINE_SQUARE);
+}
+
 void UISelectableTool::derivedRender()
 {
-    TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
+    TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, index);
+}
+
+void UISelectableTool::onSelect()
+{
+    setSelected(UISelector::getActiveSelector());
+}
+
+void UISelectableTool::onMouseOver()
+{
+    if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
+        selector->setSelected(index);
+        select();
+        currentColor = selectedColor;
+    }
+    else {
+        currentColor = hoverColor;
+    }
 }

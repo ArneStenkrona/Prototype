@@ -1,6 +1,7 @@
 #pragma once
 #include "UIElement.h"
 #include "UISelectable.h"
+#include "UISelectableTool.h"
 #include <vector>
 
 class UISelector : public UIElement {
@@ -14,6 +15,8 @@ public:
     inline static UISelector* getActiveSelector() { return activeSelector; }
     inline bool isActive() const { return activeSelector == this; }
     inline int getSelectedIndex() const { return selectedIndex; }
+
+    inline std::string getLabel() const { return label; }
 
     void getRotationAndFlip(int &rot, bool &h, bool &v);
 
@@ -42,6 +45,8 @@ protected:
     //Checks if element is selected
     inline bool isSelected() const { return selected; }
 
+    void setActive();
+
 private:
     static UISelector* activeSelector;
     //Label of this selector
@@ -51,7 +56,6 @@ private:
     //Is any UISelectable in selectables selected? Hacky solution to isSelected(), should be done in a less coupled way
     bool selected;
 
-    void setActive();
 
     //move indices of all selected
     void moveIndices(int dx, int dy);
@@ -59,5 +63,7 @@ private:
     void update();
     void render();
 
+
     friend class UISelectable;
+    friend class UISelectableTool;
 };

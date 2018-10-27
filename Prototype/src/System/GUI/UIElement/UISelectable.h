@@ -34,16 +34,18 @@ protected:
     virtual void select();
     //called when unselected
     //virtual void unselect();
+
+    void onSelect();
+    void onDeselect();
+
+    //called if mouse is over
+    void onMouseOver();
 private:
 
     void render();
     //unconditional update
     void update();
-    //called if mouse is over
-    void onMouseOver();
 
-    void onSelect();
-    void onDeselect();
 
 
     friend class UISelector;

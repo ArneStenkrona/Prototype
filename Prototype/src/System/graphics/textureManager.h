@@ -28,6 +28,7 @@ public:
         PRT,
         OBJECTS_1,
         OBJECT_ICONS,
+        TOOL_ICONS,
         TOTAL_SPRITE_SHEETS
     };
 

@@ -2,9 +2,8 @@
 #include "UISelectableTool.h"
 
 UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer, 
-                               unsigned int _columns, unsigned int _rows, 
                                Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16, "TOOLS")
+    : UISelector(_posx, _posy, _layer, 1, 2, 1, 2, "TOOLS")
 {
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
@@ -17,4 +16,14 @@ UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer,
                 _selectedColor, _hoverColor);
         }
     }
+}
+
+void UIToolSelector::update()
+{
+}
+
+void UIToolSelector::render()
+{
+    UIElement::drawSquare(width, 16, COLOR_BLACK, SOLID_SQUARE, ALIGN_UP);
+    UIElement::renderTextBackdrop(getLabel(), COLOR_WHITE, ALIGN_UP, 0, 2, COLOR_DARK_GREY);
 }

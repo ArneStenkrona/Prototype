@@ -109,5 +109,5 @@ void UISelector::render()
     UIElement::renderTextBackdrop(label, COLOR_WHITE, ALIGN_UP, 0, 2, COLOR_DARK_GREY);
 
     if (isSelected())
-        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_CENTER);
+        UIElement::drawSquare(width, height - LABEL_HEIGHT, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_DOWN, 0);
 }
