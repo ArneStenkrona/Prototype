@@ -10,6 +10,4 @@ public:
         int _index, Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
 private:
     void derivedRender();
-
-    UITileSelector* tSelector;
 };

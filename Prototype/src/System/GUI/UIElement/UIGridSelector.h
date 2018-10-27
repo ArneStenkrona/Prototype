@@ -5,6 +5,7 @@
 #include "UITileSelector.h"
 #include "UIColliderSelector.h"
 #include "UIObjectSelector.h"
+#include "UIToolSelector.h"
 #include "UIBorder.h"
 
 //Bad name for class, should be something like "UIEditor"
@@ -26,6 +27,7 @@ private:
     UITileSelector tileSelector;
     UIColliderSelector colliderSelector;
     UIObjectSelector objectSelector;
+    UIToolSelector toolSelector;
     std::vector<std::vector<UIGridTile*>> tiles;
 
     //Is any tile in tiles selected?

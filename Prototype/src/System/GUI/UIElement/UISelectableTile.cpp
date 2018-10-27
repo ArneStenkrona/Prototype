@@ -14,15 +14,10 @@ UISelectableTile::UISelectableTile(UITileSelector* _selector, int _posX, int _po
 
 void UISelectableTile::derivedRender()
 {
-    if (index > 255) {
-        TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
-    }
-    else {
-        if (rotation || flipH || flipV)
-            TextureManager::tileMap.texture.renderTile(positionX, positionY, index,
-                1, 1, flipH, flipV,
-                rotation * 90, 16, 16);
-        else
-            TextureManager::tileMap.texture.renderTile(positionX, positionY, index);
-    }
+    if (rotation || flipH || flipV)
+        TextureManager::tileMap.texture.renderTile(positionX, positionY, index,
+            1, 1, flipH, flipV,
+            rotation * 90, 16, 16);
+    else
+        TextureManager::tileMap.texture.renderTile(positionX, positionY, index);
 }

@@ -10,17 +10,12 @@ UISelectableObject::UISelectableObject(UIObjectSelector * _selector, int _posX, 
 
 void UISelectableObject::derivedRender()
 {
-    if (index > 255) {
-        TextureManager::miscellaneous[0].renderTile(positionX, positionY, 0);
-    }
-    else {
-        if (rotation || flipH || flipV)
-            TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(positionX, positionY, index,
-                1, 1, flipH, flipV,
-                rotation * 90, 16, 16);
-        else
-            TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(positionX, positionY, index);
-    }
+    if (rotation || flipH || flipV)
+        TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(positionX, positionY, index,
+            1, 1, flipH, flipV,
+            rotation * 90, 16, 16);
+    else
+        TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(positionX, positionY, index);
 }
 
 void UISelectableObject::derivedUpdate()

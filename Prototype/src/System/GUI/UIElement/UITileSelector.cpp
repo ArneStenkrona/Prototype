@@ -17,9 +17,6 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                                                     _selectedColor, _hoverColor);
         }
     }
-    selectables[columns].resize(1);
-    selectables[columns][0] = new UISelectableTile(this, positionX + (columns * Tile::TILE_SIZE), positionY,
-                                                   layer + 1, indexLimitX * indexLimity, _selectedColor, _hoverColor);
 }
 
 Tile * UITileSelector::getTile() const

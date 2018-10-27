@@ -15,9 +15,6 @@ UIObjectSelector::UIObjectSelector(int _posx, int _posy, int _layer, unsigned in
                 _selectedColor, _hoverColor);
         }
     }
-    selectables[columns].resize(1);
-    selectables[columns][0] = new UISelectableObject(this, positionX + (columns * 32), positionY,
-        layer + 1, indexLimitX * indexLimity, _selectedColor, _hoverColor);
 }
 
 UIObjectSelector::~UIObjectSelector()

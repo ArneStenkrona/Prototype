@@ -12,6 +12,8 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
                              GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 
                              _layer + 4, true), 
     room(_room), 
+    toolSelector(UIToolSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + (6 * Tile::TILE_SIZE),
+                 0, _layer, 1, 6)),
     objectSelector(UIObjectSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                   ( 2 * UISelector::LABEL_HEIGHT) + (6 + 2) * Tile::TILE_SIZE, _layer, 6, 2)),
     colliderSelector(UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
@@ -100,6 +102,10 @@ void UIGridSelector::setRoom(Room* _room)
 void UIGridSelector::setElement(int x, int y)
 {
     UISelector* s = UISelector::getActiveSelector();
+
+    if (s == &toolSelector)
+        room->setTile(x, y, NULL);
+
     if (s == &tileSelector)
         room->setTile(x, y, tileSelector.getTile());
 
