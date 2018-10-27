@@ -252,6 +252,12 @@
     <ClInclude Include="src\System\GUI\UIElement\UIComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelectableObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIObjectSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main\Prototype.cpp">
@@ -480,6 +486,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelectableObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIObjectSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

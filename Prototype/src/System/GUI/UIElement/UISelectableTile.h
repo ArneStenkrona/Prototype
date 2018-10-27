@@ -10,10 +10,6 @@ public:
         int _index, Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
 private:
     void derivedRender();
-    void derivedUpdate();
-
-    int rotation;
-    bool flipH, flipV;
 
     UITileSelector* tSelector;
 };

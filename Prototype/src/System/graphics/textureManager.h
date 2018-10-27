@@ -27,6 +27,7 @@ public:
     static enum SPRITE_SHEETS {
         PRT,
         OBJECTS_1,
+        OBJECT_ICONS,
         TOTAL_SPRITE_SHEETS
     };
 
@@ -55,6 +56,7 @@ public:
 
     //Vector of all font textures
     static std::vector<LTexture> fontTextures;
+
 
     //Current tilemap
     static TileMap tileMap;

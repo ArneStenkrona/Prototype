@@ -14,6 +14,8 @@ public:
     inline bool isActive() const { return activeSelector == this; }
     inline int getSelectedIndex() const { return selectedIndex; }
 
+    void getRotationAndFlip(int &rot, bool &h, bool &v);
+
 protected:
     //All UISelectables in layout
     std::vector<std::vector<UISelectable*>> selectables;
@@ -25,7 +27,9 @@ protected:
     int indX, indY;
     //Dimensions of the data structure that index is pointing at
     const unsigned int indexLimitX, indexLimity;
-
+    //Transformations of selected
+    int rotation;
+    bool flipH, flipV;
     //selected UISelectable
     void setSelected(int i);
     //Called after setSelected()

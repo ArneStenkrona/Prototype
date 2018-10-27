@@ -22,22 +22,6 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                                                    layer + 1, indexLimitX * indexLimity, _selectedColor, _hoverColor);
 }
 
-UITileSelector::~UITileSelector()
-{
-    for (int i = 0; i < selectables.size(); i++) {
-        for (int j = 0; j < selectables[i].size(); j++) {
-            delete(selectables[i][j]);
-        }
-    }
-}
-
-void UITileSelector::getRotationAndFlip(int & rot, bool & h, bool & v)
-{
-    rot = rotation;
-    h = flipH;
-    v = flipV;
-}
-
 Tile * UITileSelector::getTile() const
 {
     Tile *tile;
@@ -46,25 +30,4 @@ Tile * UITileSelector::getTile() const
     else
         tile = new Tile(selectedIndex, rotation, flipH, flipV);
     return tile;
-}
-
-void UITileSelector::derivedUpdate()
-{
-    if (isSelected()) {
-        if (getKeyDown(INPUT_KEY_R))
-            rotation = (rotation + 1) % 4;
-
-        if (getKeyDown(INPUT_KEY_F))
-            flipH = !flipH;
-
-        if (getKeyDown(INPUT_KEY_G))
-            flipV = !flipV;
-    }
-}
-
-void UITileSelector::derivedSetSelected(int i)
-{
-    rotation = 0;
-    flipH = false;
-    flipV = false;
 }

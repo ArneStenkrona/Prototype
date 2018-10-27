@@ -8,8 +8,7 @@
 
 UISelectableTile::UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
                                    int _index, Color _selectedColor, Color _hoverColor)
-    : UISelectable(_selector, _posX, _posY, Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, _index, _selectedColor, _hoverColor), rotation(0), flipH(0), flipV(0),
-      tSelector(_selector)
+    : UISelectable(_selector, _posX, _posY, Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, _index, _selectedColor, _hoverColor)
 {
 }
 
@@ -25,16 +24,5 @@ void UISelectableTile::derivedRender()
                 rotation * 90, 16, 16);
         else
             TextureManager::tileMap.texture.renderTile(positionX, positionY, index);
-    }
-}
-
-void UISelectableTile::derivedUpdate()
-{
-    if (selector->getSelectedIndex() == index)
-        tSelector->getRotationAndFlip(rotation, flipH, flipV);
-    else {
-        rotation = 0;
-        flipH = false;
-        flipV = false;
     }
 }

@@ -15,6 +15,17 @@ public:
     inline void setIndex(int _index) { index = _index; }
     
 protected:    
+    int index;
+    //Transformations of selected
+    int rotation;
+    bool flipH, flipV;
+
+    Color currentColor;
+    Color selectedColor;
+    Color hoverColor;
+
+    UISelector* selector;
+
     //Renders before border
     virtual void derivedRender();
     //updates before regular update()
@@ -23,12 +34,6 @@ protected:
     virtual void select();
     //called when unselected
     //virtual void unselect();
-    int index;
-    Color currentColor;
-    Color selectedColor;
-    Color hoverColor;
-
-    UISelector* selector;
 private:
 
     void render();
@@ -39,6 +44,7 @@ private:
 
     void onSelect();
     void onDeselect();
+
 
     friend class UISelector;
 };

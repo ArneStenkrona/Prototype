@@ -10,7 +10,8 @@ std::vector<LTexture> TextureManager::fontTextures;
 const std::string TextureManager::mapPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.png" };
 const std::string TextureManager::colliderPaths[TextureManager::TOTAL_MAPS] = { "Assets/textures/laboratory/TILEMAP_LAB.col" };
 const std::string TextureManager::sheetPaths[TextureManager::TOTAL_SPRITE_SHEETS] = { "Assets/Sprites/prt/prt.png",
-                                                                                      "Assets/Sprites/objects/objects1.png"};
+                                                                                      "Assets/Sprites/objects/objects1.png",
+                                                                                      "Assets/Sprites/objects/OBJECT_ICONS.png" };
 const std::string TextureManager::fontPaths[TextureManager::TOTAL_FONTS] = { "Assets/textures/Text/font1.png"};
 
 TileMap TextureManager::tileMap;

@@ -18,10 +18,6 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
     }
 }
 
-UIColliderSelector::~UIColliderSelector()
-{
-}
-
 std::optional<Polyshape> UIColliderSelector::getPolygon() const
 {
     if (Polyshape::basicPolygons.size() > selectedIndex)

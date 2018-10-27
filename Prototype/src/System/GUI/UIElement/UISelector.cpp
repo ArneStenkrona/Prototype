@@ -15,8 +15,20 @@ UISelector::UISelector(int _posx, int _posy, int _layer,
 
 UISelector::~UISelector()
 {
-    selectables.clear();
+    for (int i = 0; i < selectables.size(); i++) {
+        for (int j = 0; j < selectables[i].size(); j++) {
+            delete(selectables[i][j]);
+        }
+    }
 }
+
+void UISelector::getRotationAndFlip(int & rot, bool & h, bool & v)
+{
+    rot = rotation;
+    h = flipH;
+    v = flipV;
+}
+
 
 void UISelector::derivedUpdate()
 {
@@ -26,6 +38,10 @@ void UISelector::setSelected(int i)
 {
     selectedIndex = i;
     derivedSetSelected(i);
+
+    rotation = 0;
+    flipH = false;
+    flipV = false;
 }
 
 void UISelector::derivedSetSelected(int i)
@@ -53,6 +69,18 @@ void UISelector::moveIndices(int dx, int dy)
 void UISelector::update()
 {
     derivedUpdate();
+
+    if (getActiveSelector() == this) {
+        if (getKeyDown(INPUT_KEY_R))
+            rotation = (rotation + 1) % 4;
+
+        if (getKeyDown(INPUT_KEY_F))
+            flipH = !flipH;
+
+        if (getKeyDown(INPUT_KEY_G))
+            flipV = !flipV;
+    }
+
     if (isSelected()) {
         int dX = 0;
         int dY = 0;

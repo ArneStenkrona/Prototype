@@ -4,7 +4,7 @@
 
 UISelectable::UISelectable(UISelector * _selector, int _posX, int _posY, unsigned int _width, unsigned int _height,
                             unsigned int _layer, int _index, Color _selectedColor, Color _hoverColor)
-    : UIElement(_posX, _posY, _width, _height, _layer, true), 
+    : UIElement(_posX, _posY, _width, _height, _layer, true), rotation(0), flipH(0), flipV(0),
       selector(_selector), index(_index), selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
 }
@@ -27,6 +27,8 @@ void UISelectable::select()
 
 void UISelectable::render()
 {
+    UIElement::drawSquare(width, height, COLOR_PINK, SOLID_SQUARE, ALIGN_CENTER);
+
     derivedRender();
     UIElement::drawSquare(width, height, currentColor, OUTLINE_SQUARE);
     if (!selector->isActive())
@@ -58,10 +60,15 @@ void UISelectable::onDeselect()
 
 void UISelectable::update() {
     derivedUpdate();
+
     if (selector->getSelectedIndex() == index) {
+        selector->getRotationAndFlip(rotation, flipH, flipV);
         currentColor = selectedColor;
     }
     else {
         currentColor = COLOR_NONE;
+        rotation = 0;
+        flipH = false;
+        flipV = false;
     }
 }

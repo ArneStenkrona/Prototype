@@ -207,10 +207,12 @@
     <ClInclude Include="src\System\GUI\UIElement\UIComponent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIEvent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIMovable.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIObjectSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPanel.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPrompt.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableCollider.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UISelectableObject.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableTile.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIColliderSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIElement.h" />
@@ -286,10 +288,12 @@
     <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIEvent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIMovable.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIObjectSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPanel.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPrompt.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableCollider.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UISelectableObject.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableTile.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIColliderSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp" />
