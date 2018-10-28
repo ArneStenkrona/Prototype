@@ -10,7 +10,4 @@ public:
 private:
     void derivedRender();
     void derivedUpdate();
-
-    int rotation;
-    bool flipH, flipV;
 };

@@ -11,8 +11,8 @@ UISelectableObject::UISelectableObject(UIObjectSelector * _selector, int _posX, 
 void UISelectableObject::derivedRender()
 {
         TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(positionX, positionY, index,
-            1, 1, flipH, flipV,
-            rotation * 90, 16, 16);
+            1, 1, false, false,
+            0, 16, 16);
 }
 
 void UISelectableObject::derivedUpdate()

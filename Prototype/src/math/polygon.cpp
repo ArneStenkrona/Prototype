@@ -87,6 +87,17 @@ Point Polyshape::getEffectiveOrigin()
     return effectiveOrigin;
 }
 
+Polyshape Polyshape::rotate(double angle, Point pivot)
+{
+    Polyshape pg = *this;
+
+    for (int i = 0; i < pg.vertices.size(); i++) {
+        pg.vertices[i] = pg.vertices[i].rotate(angle, pivot);
+    }
+
+    return pg;
+}
+
 Polyshape Polyshape::parsePolygon(std::string s)
 {
     if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0, 32.0), Point(32.0, 0.0));

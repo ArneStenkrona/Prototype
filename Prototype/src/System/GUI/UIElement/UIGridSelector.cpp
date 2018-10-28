@@ -124,7 +124,7 @@ void UIGridSelector::setElement(int x, int y)
 
     //*NOTE* Tools should be defined by enum for clariy
     switch (toolSelector.getSelectedIndex()) {
-    case 0:
+    case UIToolSelector::PLACE_TOOL:
         if (s == &tileSelector)
             room->setTile(x, y, tileSelector.getTile());
 
@@ -137,7 +137,7 @@ void UIGridSelector::setElement(int x, int y)
                 room->setTile(x, y, new Tile(-1, p));
         }
         break;
-    case 1:
+    case UIToolSelector::DELETE_TOOL:
         room->setTile(x, y, NULL);
 
         break;

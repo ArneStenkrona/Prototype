@@ -21,8 +21,11 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
 
 std::optional<Polyshape> UIColliderSelector::getPolygon() const
 {
-    if (Polyshape::basicPolygons.size() > selectedIndex)
-        return Polyshape::basicPolygons[selectedIndex];
+    if (Polyshape::basicPolygons.size() > selectedIndex) {
+        Polyshape pg = Polyshape::basicPolygons[selectedIndex];
+        if (rotation) pg = pg.rotate(90 * rotation, Point(16, 16));
+        return pg;
+    }
     else
         return {};
 }
@@ -30,5 +33,9 @@ std::optional<Polyshape> UIColliderSelector::getPolygon() const
 void UIColliderSelector::renderSelected(int x, int y, Color color)
 {
     UIElement::drawSquare(width, height, { 0, 0, 0, 255 });
-    if (Polyshape::basicPolygons.size() > selectedIndex) Polyshape::basicPolygons[selectedIndex].renderPolygon(x, y, color);
+    if (Polyshape::basicPolygons.size() > selectedIndex) {
+        Polyshape pg = Polyshape::basicPolygons[selectedIndex];
+        if (rotation) pg = pg.rotate(90 * rotation, Point(16,16));
+        pg.renderPolygon(x, y, color);
+    }
 }

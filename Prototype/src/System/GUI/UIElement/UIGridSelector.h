@@ -23,8 +23,7 @@ public:
 
     void getActiveTileCoordinates(int &x, int &y);
 
-    //Get selected tool, should be enum
-    inline int getTool() const { return toolSelector.getSelectedIndex(); }
+    inline UIToolSelector::TOOL getTool() const { return (UIToolSelector::TOOL)toolSelector.getSelectedIndex(); }
 
 private:
     Room* room;

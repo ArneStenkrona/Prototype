@@ -1,9 +1,12 @@
 #include "UIToolSelector.h"
 #include "UISelectableTool.h"
 
+const std::map<UIToolSelector::TOOL, std::string> UIToolSelector::toolDictionary = { {PLACE_TOOL, "PLACE"},
+                                                                                     {DELETE_TOOL, "DELETE"} };
+
 UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer, 
                                Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, 1, 2, 1, 2, "TOOLS")
+    : UISelector(_posx, _posy, _layer, 1, TOTAL_TOOLS, 1, TOTAL_TOOLS, "TOOLS")
 {
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {

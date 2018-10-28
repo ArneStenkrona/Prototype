@@ -42,6 +42,9 @@ public:
     //Returns a point with distance 1 from origin
     Point normalized() const;
 
+    //Returns a point rotated around pivot by angle
+    Point rotate(double angle, Point pivot);
+
     //Returns distance between this and other
     double distanceTo(const Point &other) const;
 
@@ -53,6 +56,7 @@ public:
 
     //Returns the angle, in degrees, of the vector
     double toAngle() const;
+
 
     std::string toString() const;
 };

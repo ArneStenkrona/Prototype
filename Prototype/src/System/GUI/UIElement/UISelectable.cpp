@@ -4,7 +4,7 @@
 
 UISelectable::UISelectable(UISelector * _selector, int _posX, int _posY, unsigned int _width, unsigned int _height,
                             unsigned int _layer, int _index, Color _selectedColor, Color _hoverColor)
-    : UIElement(_posX, _posY, _width, _height, _layer, true), rotation(0), flipH(0), flipV(0),
+    : UIElement(_posX, _posY, _width, _height, _layer, true),
       selector(_selector), index(_index), selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
 }
@@ -62,13 +62,9 @@ void UISelectable::update() {
     derivedUpdate();
 
     if (selector->getSelectedIndex() == index) {
-        selector->getRotationAndFlip(rotation, flipH, flipV);
         currentColor = selectedColor;
     }
     else {
-        currentColor = COLOR_NONE;
-        rotation = 0;
-        flipH = false;
-        flipV = false;
+        currentColor = COLOR_NONE;;
     }
 }

@@ -19,6 +19,7 @@ void UISelectableTool::render()
 
 void UISelectableTool::derivedRender()
 {
+    UIElement::drawSquare(width, height, COLOR_BLACK, SOLID_SQUARE, ALIGN_CENTER);
     TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, index);
 }
 

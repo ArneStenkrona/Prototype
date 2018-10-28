@@ -19,10 +19,10 @@ void UIGridTile::render()
 {
     if (mouseOver()) {
         switch (selector->getTool()) {
-        case 0:
+        case UIToolSelector::PLACE_TOOL:
             UISelector::getActiveSelector()->renderSelected(positionX, positionY, { 255, 255, 255, 160 });
             break;
-        case 1:
+        case UIToolSelector::DELETE_TOOL:
             TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, 1, 1, 1, false, false, 0, 0, 0, { 255, 255, 255, 160 });
             break;
         }

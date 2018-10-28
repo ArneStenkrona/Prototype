@@ -32,7 +32,9 @@ public:
     //gets a point such that a rectangle with dimensions _width*_height
     //centered at this point would surround the polygon
     Point getEffectiveOrigin();
-    //Point vertexClosestToOrigin();
+
+    //Returns a new polygon rotated around pivot by angle
+    Polyshape rotate(double angle, Point pivot);
 
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);

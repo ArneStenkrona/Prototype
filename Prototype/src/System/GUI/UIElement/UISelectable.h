@@ -16,9 +16,6 @@ public:
     
 protected:    
     int index;
-    //Transformations of selected
-    int rotation;
-    bool flipH, flipV;
 
     Color currentColor;
     Color selectedColor;

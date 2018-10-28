@@ -93,6 +93,27 @@ Point Point::normalized() const
     }
 }
 
+#define PI 3.14159265
+Point Point::rotate(double angle, Point pivot)
+{
+    Point p = Point(x, y);
+    float s = sin(angle*PI / 180);
+    float c = cos(angle*PI / 180);
+
+    // translate point back to origin:
+    p.x -= pivot.x;
+    p.y -= pivot.y;
+
+    // rotate point
+    float xnew = p.x * c - p.y * s;
+    float ynew = p.x * s + p.y * c;
+
+    // translate point back:
+    p.x = xnew + pivot.x;
+    p.y = ynew + pivot.y;
+    return p;
+}
+
 double Point::distanceTo(const Point &other) const
 {
     return (*this - other).magnitude();
