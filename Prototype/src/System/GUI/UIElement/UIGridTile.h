@@ -17,6 +17,8 @@ private:
     void render();
     //called if mouse is over
     void onMouseOver();
+    //called if mouse leaves
+    void onMouseLeft();
     //unconditional update
     void update();
     void onSelect();

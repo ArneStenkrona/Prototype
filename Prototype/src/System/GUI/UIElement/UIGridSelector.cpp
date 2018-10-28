@@ -56,6 +56,9 @@ void UIGridSelector::renderRoom()
 
 void UIGridSelector::update()
 {
+    if (!isSelected())
+        setActiveTileCoordinates(-1, -1);
+
     if (isSelected()) {
         int dX = 0;
         int dY = 0;
@@ -79,6 +82,7 @@ void UIGridSelector::update()
 
 void UIGridSelector::onMouseOver()
 {
+    setActiveTileCoordinates(-1, -1);
 }
 
 void UIGridSelector::setRoom(Room* _room)

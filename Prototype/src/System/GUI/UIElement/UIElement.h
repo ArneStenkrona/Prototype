@@ -58,6 +58,8 @@ protected:
     virtual void render();
     //called if mouse is over
     virtual void onMouseOver();
+    //called if mouse leaves
+    virtual void onMouseLeft();
     //called if selected
     virtual void onSelect();
     //called if deselected
@@ -87,4 +89,5 @@ private:
     //Total number of elements
     static unsigned int NumberOfElements;
 
+    static UIElement* lastMouseOverElement;
 };

@@ -28,6 +28,11 @@ void UIGridTile::onMouseOver()
     a = 0xff;
 }
 
+void UIGridTile::onMouseLeft()
+{
+    selector->setActiveTileCoordinates(-1, -1);
+}
+
 void UIGridTile::update()
 {
     r = 0x00;
@@ -47,5 +52,4 @@ void UIGridTile::onSelect()
 void UIGridTile::onDeselect()
 {
     selector->selected = false;
-    selector->setActiveTileCoordinates(-1, -1);
 }

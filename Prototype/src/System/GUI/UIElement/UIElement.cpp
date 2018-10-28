@@ -5,6 +5,7 @@
 
 std::vector<std::vector<UIElement*>> UIElement::allUIElements = std::vector<std::vector<UIElement*>>();
 UIElement* UIElement::selectedElement = nullptr;
+UIElement* UIElement::lastMouseOverElement = nullptr;
 unsigned int UIElement::NumberOfElements = 0;
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
@@ -24,6 +25,8 @@ UIElement::~UIElement()
 {
     if (selectedElement == this)
         selectedElement = nullptr;
+    if (lastMouseOverElement == this)
+        lastMouseOverElement = nullptr;
 
     vector<UIElement*>::iterator it = allUIElements[layer].begin();
 
@@ -70,7 +73,10 @@ void UIElement::updateUIElements()
         if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
             setSelected(mouseOverElement);
         }
+        if (mouseOverElement != lastMouseOverElement && lastMouseOverElement)
+            lastMouseOverElement->onMouseLeft();
         mouseOverElement->onMouseOver();
+        lastMouseOverElement = mouseOverElement;
     }
 }
 
@@ -99,6 +105,10 @@ void UIElement::render()
 }
 
 void UIElement::onMouseOver()
+{
+}
+
+void UIElement::onMouseLeft()
 {
 }
 
