@@ -23,6 +23,9 @@ public:
 
     void getActiveTileCoordinates(int &x, int &y);
 
+    //Get selected tool, should be enum
+    inline int getTool() const { return toolSelector.getSelectedIndex(); }
+
 private:
     Room* room;
     UITileSelector tileSelector;

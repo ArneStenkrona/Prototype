@@ -18,7 +18,14 @@ void UIGridTile::updatePosition()
 void UIGridTile::render()
 {
     if (mouseOver()) {
-        UISelector::getActiveSelector()->renderSelected(positionX, positionY, {255, 255, 255, 160});
+        switch (selector->getTool()) {
+        case 0:
+            UISelector::getActiveSelector()->renderSelected(positionX, positionY, { 255, 255, 255, 160 });
+            break;
+        case 1:
+            TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, 1, 1, 1, false, false, 0, 0, 0, { 255, 255, 255, 160 });
+            break;
+        }
     }
 
     UIElement::drawSquare(width, height, { r, g, b, a }, OUTLINE_SQUARE);
