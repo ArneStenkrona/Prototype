@@ -11,5 +11,7 @@ public:
         Color _selectedColor = COLOR_DARK_GREEN, Color _hoverColor = COLOR_CYAN);
 
     std::optional<Polyshape> getPolygon() const;
+
+    void renderSelected(int x, int y);
 private:
 };

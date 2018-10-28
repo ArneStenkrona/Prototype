@@ -11,5 +11,7 @@ public:
 
     //Creates and returns a tile based on selected
     Tile* getTile() const;
+    //Renders the selected at position (x, y)
+    void renderSelected(int x, int y);
 private:
 };

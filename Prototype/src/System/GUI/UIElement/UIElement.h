@@ -41,6 +41,8 @@ public:
     static void setSelected(UIElement* element);
     static UIElement* getSelected() { return selectedElement; }
 
+    inline bool mouseOver() const { return lastMouseOverElement == this; }
+
     inline unsigned int getID() const { return ID; }
 
     //Moves UIElement to the front of a different layer
@@ -66,7 +68,6 @@ protected:
     virtual void onDeselect();
     //unconditional update
     virtual void update();
-
 
     //takes alignment and width and height of image to be rendered
     //returns alignment offset parameters

@@ -49,6 +49,10 @@ void UISelector::derivedSetSelected(int i)
 {
 }
 
+void UISelector::renderSelected(int x, int y)
+{
+}
+
 void UISelector::onSelect()
 {
     setActive();

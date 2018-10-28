@@ -20,6 +20,9 @@ public:
 
     void getRotationAndFlip(int &rot, bool &h, bool &v);
 
+    //Renders the selected at position (x, y)
+    virtual void renderSelected(int x, int y);
+
     static const unsigned int LABEL_HEIGHT = 16;
 
 protected:
@@ -44,6 +47,7 @@ protected:
     virtual void derivedUpdate();
     //Checks if element is selected
     inline bool isSelected() const { return selected; }
+
 
     void onSelect();
 

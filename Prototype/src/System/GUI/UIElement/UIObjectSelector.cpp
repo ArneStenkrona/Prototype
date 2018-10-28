@@ -1,5 +1,6 @@
 #include "UIObjectSelector.h"
 #include "UISelectableObject.h"
+#include "System\graphics\textureManager.h"
 
 UIObjectSelector::UIObjectSelector(int _posx, int _posy, int _layer, unsigned int _columns, unsigned int _rows, Color _selectedColor, Color _hoverColor)
     :UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16, "OBJECTS")
@@ -24,4 +25,14 @@ UIObjectSelector::~UIObjectSelector()
 Object * UIObjectSelector::getObject() const
 {
     return nullptr;
+}
+
+void UIObjectSelector::renderSelected(int x, int y)
+{
+    if (rotation || flipH || flipV)
+        TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(x, y, selectedIndex,
+            1, 1, flipH, flipV,
+            rotation * 90, 16, 16);
+    else
+        TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(x, y, selectedIndex);
 }

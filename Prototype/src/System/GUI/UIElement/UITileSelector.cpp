@@ -1,5 +1,6 @@
 #include "UITileSelector.h"
 #include "System\IO\inputManager.h"
+#include "System\graphics\textureManager.h"
 
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows,
@@ -27,4 +28,14 @@ Tile * UITileSelector::getTile() const
     else
         tile = new Tile(selectedIndex, rotation, flipH, flipV);
     return tile;
+}
+
+void UITileSelector::renderSelected(int x, int y)
+{
+    if (rotation || flipH || flipV)
+        TextureManager::tileMap.texture.renderTile(x, y, selectedIndex,
+            1, 1, flipH, flipV,
+            rotation * 90, 16, 16);
+    else
+        TextureManager::tileMap.texture.renderTile(x, y, selectedIndex);
 }

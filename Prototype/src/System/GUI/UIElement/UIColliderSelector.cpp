@@ -26,3 +26,9 @@ std::optional<Polyshape> UIColliderSelector::getPolygon() const
     else
         return {};
 }
+
+void UIColliderSelector::renderSelected(int x, int y)
+{
+    UIElement::drawSquare(width, height, { 0, 0, 0, 255 });
+    if (Polyshape::basicPolygons.size() > selectedIndex) Polyshape::basicPolygons[selectedIndex].renderPolygon(x, y);
+}
