@@ -10,7 +10,7 @@
 #include "UIInfoBox.h"
 
 //Bad name for class, should be something like "UIEditor"
-//because of big responsibility
+//because of big responsibility and also because it doesn't inherit from UISelector
 class UIGridSelector : public UIElement {
 public:
     UIGridSelector(Room* _room, int _posx, int _posy, int _layer);

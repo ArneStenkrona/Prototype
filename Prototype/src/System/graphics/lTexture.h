@@ -32,13 +32,10 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
-    void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV, double rotation, int px, int py) const;
-    inline void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, bool mirrorH, bool mirrorV) 
-        { renderTile(x, y, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, 0, 0, 0); }
-    inline void renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor)
-        { renderTile(x, y, tileIndex, widthFactor, heightFactor, false, false); }
-    inline void renderTile(int x, int y, int tileIndex) 
-        { renderTile(x, y, tileIndex, 1, 1, false, false); }
+    void renderTile(int x, int y, int tileIndex, int widthFactor = 1, int heightFactor = 1, 
+                    bool mirrorH = false, bool mirrorV = false, double rotation = 0, int pivotX = 0, int pivotY = 0,
+                    Color color = COLOR_WHITE) const;
+
 
     void renderText(int x, int y, std::string text) const;
     void renderText(int x, int y, std::string text, Color color) const;

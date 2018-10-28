@@ -21,7 +21,7 @@ public:
     void getRotationAndFlip(int &rot, bool &h, bool &v);
 
     //Renders the selected at position (x, y)
-    virtual void renderSelected(int x, int y);
+    virtual void renderSelected(int x, int y, Color color);
 
     static const unsigned int LABEL_HEIGHT = 16;
 

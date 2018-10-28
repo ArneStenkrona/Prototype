@@ -112,9 +112,9 @@ Polyshape Polyshape::parsePolygon(std::string s)
     return polygon;
 }
 
-void Polyshape::renderPolygon(int x, int y)
+void Polyshape::renderPolygon(int x, int y, Color color)
 {
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 255, 0, 255, 255);
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
     for (int i = 0; i < vertices.size(); i++) {
         SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), vertices[i].x + x, vertices[i].y + y,
                 vertices[(i + 1) % vertices.size()].x + x, vertices[(i + 1) % vertices.size()].y + y);

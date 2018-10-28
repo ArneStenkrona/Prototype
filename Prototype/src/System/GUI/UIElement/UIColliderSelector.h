@@ -12,6 +12,6 @@ public:
 
     std::optional<Polyshape> getPolygon() const;
 
-    void renderSelected(int x, int y);
+    void renderSelected(int x, int y, Color color = COLOR_PURPLE);
 private:
 };

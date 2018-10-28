@@ -2,6 +2,7 @@
 #include "point.h"
 #include <vector>
 #include <string>
+#include "System\graphics\color.h"
 
 //Base class for polygons
 //I did not want it to be named Polyshape, but windows.h has overzealous definitions
@@ -37,7 +38,7 @@ public:
     static Polyshape parsePolygon(std::string s);
 
     //Renders the outline of the polygon
-    void renderPolygon(int x, int y);
+    void renderPolygon(int x, int y, Color color = COLOR_PURPLE);
 
     std::string toString();
 

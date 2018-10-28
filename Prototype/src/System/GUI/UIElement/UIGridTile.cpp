@@ -18,7 +18,7 @@ void UIGridTile::updatePosition()
 void UIGridTile::render()
 {
     if (mouseOver()) {
-        UISelector::getActiveSelector()->renderSelected(positionX, positionY);
+        UISelector::getActiveSelector()->renderSelected(positionX, positionY, {255, 255, 255, 160});
     }
 
     UIElement::drawSquare(width, height, { r, g, b, a }, OUTLINE_SQUARE);

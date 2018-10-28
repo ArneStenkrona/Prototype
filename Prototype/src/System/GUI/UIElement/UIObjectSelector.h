@@ -12,7 +12,7 @@ public:
     //Creates and returns an object based on selected
     Object* getObject() const;
 
-    void renderSelected(int x, int y);
+    void renderSelected(int x, int y, Color color = COLOR_WHITE);
 
 private:
 };

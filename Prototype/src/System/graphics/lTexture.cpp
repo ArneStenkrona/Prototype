@@ -115,8 +115,12 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 }
 
 void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, 
-                          bool mirrorH, bool mirrorV, double rotation, int px, int py) const
+                          bool mirrorH, bool mirrorV, double rotation, int pivotX, int pivotY,
+                          Color color) const
 {
+    SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
+    SDL_SetTextureAlphaMod(mTexture, color.a);
+
     //Check if visible in viewport
     if (x > GraphicsEngine::getActiveWindow()->getWidth() / GraphicsEngine::SCALE_X || 
         y > GraphicsEngine::getActiveWindow()->getHeight() / GraphicsEngine::SCALE_Y ||
@@ -130,7 +134,7 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
                           Tile::TILE_SIZE * widthFactor, 
                            Tile::TILE_SIZE * heightFactor };
 
-    SDL_Point pivot = { px, py };
+    SDL_Point pivot = { pivotX, pivotY };
     
     if (mirrorH && mirrorV)
         SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 90, &pivot, SDL_FLIP_NONE);

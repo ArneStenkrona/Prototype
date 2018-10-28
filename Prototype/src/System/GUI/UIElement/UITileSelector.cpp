@@ -30,12 +30,10 @@ Tile * UITileSelector::getTile() const
     return tile;
 }
 
-void UITileSelector::renderSelected(int x, int y)
+void UITileSelector::renderSelected(int x, int y, Color color)
 {
-    if (rotation || flipH || flipV)
         TextureManager::tileMap.texture.renderTile(x, y, selectedIndex,
-            1, 1, flipH, flipV,
-            rotation * 90, 16, 16);
-    else
-        TextureManager::tileMap.texture.renderTile(x, y, selectedIndex);
+                                                   1, 1, flipH, flipV,
+                                                   rotation * 90, 16, 16,
+                                                   color);
 }
