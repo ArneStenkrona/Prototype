@@ -8,6 +8,9 @@ public:
                         unsigned int indX, unsigned int indY);
 
     bool selected;
+
+    void updatePosition();
+
 private:
     unsigned int indX, indY;
 

@@ -9,6 +9,12 @@ UIGridTile::UIGridTile(UIGridSelector * _selector, int _layer, unsigned int _ind
 {
 }
 
+void UIGridTile::updatePosition()
+{
+    positionX = selector->roomPosX + indX * Tile::TILE_SIZE;
+    positionY = selector->roomPosY + indY * Tile::TILE_SIZE;
+}
+
 void UIGridTile::render()
 {
     if (mouseOver()) {
@@ -42,9 +48,6 @@ void UIGridTile::update()
     g = 0x00;
     b = 0x00;
     a = 0x40;
-
-    positionX = selector->roomPosX + indX * Tile::TILE_SIZE;
-    positionY = selector->roomPosY + indY * Tile::TILE_SIZE;
 }
 
 void UIGridTile::onSelect()
