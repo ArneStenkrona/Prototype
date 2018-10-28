@@ -35,6 +35,8 @@ public:
 
     //Returns a new polygon rotated around pivot by angle
     Polyshape rotate(double angle, Point pivot);
+    //Returns a new polygon, mirrored, and pushed by offset
+    Polyshape mirror(bool horizontal, bool vertical, Point offset);
 
     //Parses a string and creates a polygon
     static Polyshape parsePolygon(std::string s);

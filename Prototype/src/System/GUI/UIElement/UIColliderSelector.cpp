@@ -23,7 +23,8 @@ std::optional<Polyshape> UIColliderSelector::getPolygon() const
 {
     if (Polyshape::basicPolygons.size() > selectedIndex) {
         Polyshape pg = Polyshape::basicPolygons[selectedIndex];
-        if (rotation) pg = pg.rotate(90 * rotation, Point(16, 16));
+        if (rotation) pg = pg.rotate(90 * rotation, Point(Tile::TILE_SIZE / 2, Tile::TILE_SIZE / 2));
+        if (flipH || flipV) pg = pg.mirror(flipH, flipV, Point(Tile::TILE_SIZE, Tile::TILE_SIZE));
         return pg;
     }
     else
@@ -35,7 +36,8 @@ void UIColliderSelector::renderSelected(int x, int y, Color color)
     UIElement::drawSquare(width, height, { 0, 0, 0, 255 });
     if (Polyshape::basicPolygons.size() > selectedIndex) {
         Polyshape pg = Polyshape::basicPolygons[selectedIndex];
-        if (rotation) pg = pg.rotate(90 * rotation, Point(16,16));
+        if (rotation) pg = pg.rotate(90 * rotation, Point(Tile::TILE_SIZE / 2, Tile::TILE_SIZE / 2));
+        if (flipH || flipV) pg = pg.mirror(flipH, flipV, Point(Tile::TILE_SIZE, Tile::TILE_SIZE));
         pg.renderPolygon(x, y, color);
     }
 }

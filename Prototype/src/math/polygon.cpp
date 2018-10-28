@@ -98,6 +98,20 @@ Polyshape Polyshape::rotate(double angle, Point pivot)
     return pg;
 }
 
+Polyshape Polyshape::mirror(bool horizontal, bool vertical, Point offset)
+{
+    Polyshape pg = *this;
+
+    for (int i = 0; i < pg.vertices.size(); i++) {
+        if (horizontal)
+            pg.vertices[i].x = offset.x - pg.vertices[i].x;
+        if (vertical)
+            pg.vertices[i].y = offset.y - pg.vertices[i].y;
+    }
+
+    return pg;
+}
+
 Polyshape Polyshape::parsePolygon(std::string s)
 {
     if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0, 32.0), Point(32.0, 0.0));
