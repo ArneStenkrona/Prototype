@@ -20,14 +20,19 @@ public:
     static const unsigned int TILES_PER_ROW;
     static const unsigned int TILES_PER_COLUMN;
 
-    bool hasCollider();
+    bool hasCollider() const;
     void setPolygon(std::optional<Polyshape> p) { polygon = p; };
     Polyshape *getPolygon();
     int getIndex();
     inline int getRotation() { return rotation; }
     inline void getFlip(bool &_flipH, bool &_flipV) { _flipH = flipH; _flipV = flipV; }
 
-    GameObject* gameObjectFromTile(int x, int y);
+    inline int getObject() const { return objectIndex; }
+    inline void setObject(int index) { objectIndex = index; }
+
+    GameObject* gameObjectFromTile(int x, int y) const;
+    //Instantiates the object contained by this tile, if any
+    GameObject* instantiateObject() const;
 
     //Renders tile at coordinates (x, y)
     void renderTile(int x, int y);
@@ -37,6 +42,8 @@ private:
     int tileIndex;
     //Collider shape, if present
     std::optional<Polyshape> polygon;
+    //Index of object to be instantiated, as defined in object.h, -1 if not present;
+    int objectIndex;
     //multiples of 90 degree rotation
     int rotation;
     bool flipH;

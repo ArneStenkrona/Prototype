@@ -15,7 +15,7 @@ Character::Character() : Prefabrication("character")
 {
 }
 
-GameObject * Character::instantiate()
+GameObject * Character::instantiate() const
 {
     GameObject* g = new GameObject(name);
 
@@ -39,7 +39,7 @@ MuzzleFlash::MuzzleFlash() : Prefabrication("flash")
 {
 }
 
-GameObject * MuzzleFlash::instantiate()
+GameObject * MuzzleFlash::instantiate() const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>();
@@ -52,7 +52,7 @@ Shrapnel::Shrapnel() : Prefabrication("shrapnel")
 {
 }
 
-GameObject * Shrapnel::instantiate()
+GameObject * Shrapnel::instantiate() const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>()->setClip({ "shrapnel", 227, 229, 3 });
@@ -65,7 +65,7 @@ LaserBeam::LaserBeam() : Prefabrication("beam")
 {
 }
 
-GameObject * LaserBeam::instantiate()
+GameObject * LaserBeam::instantiate() const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Beam>();
@@ -76,7 +76,7 @@ GlassContainer::GlassContainer() : Prefabrication("glassContainer")
 {
 }
 
-GameObject * GlassContainer::instantiate()
+GameObject * GlassContainer::instantiate() const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Container>();

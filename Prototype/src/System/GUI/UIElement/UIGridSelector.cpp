@@ -136,6 +136,16 @@ void UIGridSelector::setElement(int x, int y)
             else
                 room->setTile(x, y, new Tile(-1, p));
         }
+        if (s == &objectSelector) {
+            Tile* t = room->getTile(x, y);
+            if (t)
+                t->setObject(objectSelector.getSelectedIndex());
+            else {
+                t = new Tile(-1);
+                t->setObject(objectSelector.getSelectedIndex());
+                room->setTile(x, y, t);
+            }
+        }
         break;
     case UIToolSelector::DELETE_TOOL:
         room->setTile(x, y, NULL);

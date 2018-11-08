@@ -4,29 +4,29 @@
 class Character : public Prefabrication {
 public:
     Character();
-    GameObject* instantiate();
+    GameObject* instantiate() const;
 };
 
 class MuzzleFlash : public Prefabrication {
 public:
     MuzzleFlash();
-    GameObject* instantiate();
+    GameObject* instantiate() const;
 };
 
 class Shrapnel : public Prefabrication {
 public:
     Shrapnel();
-    GameObject* instantiate();
+    GameObject* instantiate() const;
 };
 
 class LaserBeam : public Prefabrication {
 public:
     LaserBeam();
-    GameObject* instantiate();
+    GameObject* instantiate() const;
 };
 
 class GlassContainer : public Prefabrication {
 public:
     GlassContainer();
-    GameObject* instantiate();
+    GameObject* instantiate() const;
 };

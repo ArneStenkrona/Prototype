@@ -22,11 +22,6 @@ UIObjectSelector::~UIObjectSelector()
 {
 }
 
-Object * UIObjectSelector::getObject() const
-{
-    return nullptr;
-}
-
 void UIObjectSelector::renderSelected(int x, int y, Color color)
 {
         TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(x, y, selectedIndex,

@@ -9,9 +9,6 @@ public:
         Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
     ~UIObjectSelector();
 
-    //Creates and returns an object based on selected
-    Object* getObject() const;
-
     void renderSelected(int x, int y, Color color = COLOR_WHITE);
 
 private:
