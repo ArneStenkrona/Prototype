@@ -85,10 +85,12 @@ void Room::readFromFile()
         index++;
     }
     //Resize matrix so that it can hold the room
-    gameObjectMatrix.resize(sizeX);
+    tileGameObjectMatrix.resize(sizeX);
+    dynamicGameObjectMatrix.resize(sizeX);
     tileMatrix.resize(sizeX);
     for (int i = 0; i < sizeX; i++) {
-        gameObjectMatrix[i].resize(sizeY, NULL);
+        tileGameObjectMatrix[i].resize(sizeY, NULL);
+        dynamicGameObjectMatrix[i].resize(sizeY, NULL);
         tileMatrix[i].resize(sizeY, NULL);
     }
     //Traverses the room and creates tiles
@@ -100,6 +102,8 @@ void Room::readFromFile()
     bool hasCollider;
     int rotation;
     bool flipH, flipV;
+    int objectIndex; 
+
     std::optional<Polyshape> polygon;
     //buffer to store variable
     vector<string> buffer;
@@ -131,8 +135,11 @@ void Room::readFromFile()
                 else {
                     polygon = {};
                 }
-                tileMatrix[x][y] = new Tile(tileIndex, polygon, rotation,
-                                            flipH, flipV);
+
+                objectIndex = std::stoi(dataPoints[4]);
+
+                tileMatrix[x][y] = new Tile(tileIndex, rotation,
+                                            flipH, flipV, polygon, objectIndex);
             }
             x++;
         }
@@ -191,7 +198,7 @@ void Room::saveToFile(const std::string &path)
         for (int x = 0; x < tileMatrix.size(); x++) {
 
             if (tileMatrix[x][y] != NULL) {
-                buffer += "[";
+                buffer += "["; // START OF TILE
 
                 buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "| "; //Tile texture index
 
@@ -217,8 +224,11 @@ void Room::saveToFile(const std::string &path)
                 else {
                     buffer += "N"; //Notifies lack of collider
                 }
+                buffer += +"| ";
 
-                buffer += "]";
+                buffer += std::to_string(tileMatrix[x][y]->getObject());
+
+                buffer += "]"; // END OF TILE
             }
             else {
                 buffer += "[N]";
@@ -251,7 +261,8 @@ void Room::instantiate()
     for (int x = 0; x < tileMatrix.size(); x++) {
         for (int y = 0; y < tileMatrix[x].size(); y++) {
             if (tileMatrix[x][y] != NULL) {
-                gameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
+                tileGameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
+                dynamicGameObjectMatrix[x][y] = tileMatrix[x][y]->instantiateObject(x, y);
             }
         }
     }
@@ -259,14 +270,16 @@ void Room::instantiate()
 
 void Room::deInstantiate()
 {
-    for (int x = 0; x < gameObjectMatrix.size(); x++) {
-        for (int y = 0; y < gameObjectMatrix[x].size(); y++) {
-            delete gameObjectMatrix[x][y];
-            gameObjectMatrix[x][y] = nullptr;
+    for (int x = 0; x < tileGameObjectMatrix.size(); x++) {
+        for (int y = 0; y < tileGameObjectMatrix[x].size(); y++) {
+            delete tileGameObjectMatrix[x][y];
+            tileGameObjectMatrix[x][y] = nullptr;
+            delete dynamicGameObjectMatrix[x][y];
+            dynamicGameObjectMatrix[x][y] = nullptr;
         }
     }
     //Shrink vector
-    gameObjectMatrix.resize(0);
+    tileGameObjectMatrix.resize(0);
 }
 
 Tile * Room::getTile(int x, int y)

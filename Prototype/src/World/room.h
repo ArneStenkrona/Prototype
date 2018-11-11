@@ -34,8 +34,11 @@ public:
     //Get position of room
     Point getPosition();
 
-    //GameObject matrix
-    vector<vector<GameObject*>> gameObjectMatrix;
+    //Tile GameObject matrix
+    vector<vector<GameObject*>> tileGameObjectMatrix;
+    //Dynamic GameObject matrix
+    vector<vector<GameObject*>> dynamicGameObjectMatrix;
+
     //Tile info matrix
     vector<vector<Tile*>> tileMatrix;
 

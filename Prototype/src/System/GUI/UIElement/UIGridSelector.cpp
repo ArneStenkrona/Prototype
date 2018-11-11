@@ -133,15 +133,18 @@ void UIGridSelector::setElement(int x, int y)
             std::optional<Polyshape> p = colliderSelector.getPolygon();
             if (t)
                 t->setPolygon(p);
-            else
-                room->setTile(x, y, new Tile(-1, p));
+            else {
+                t = new Tile();
+                t->setPolygon(p);
+                room->setTile(x, y, t);
+            }
         }
         if (s == &objectSelector) {
             Tile* t = room->getTile(x, y);
             if (t)
                 t->setObject(objectSelector.getSelectedIndex());
             else {
-                t = new Tile(-1);
+                t = new Tile();
                 t->setObject(objectSelector.getSelectedIndex());
                 room->setTile(x, y, t);
             }

@@ -9,8 +9,10 @@ public:
     static const Object objects[256];
     //Instantiate prefab;
     GameObject* instantiate() const;
+
+    ~Object();
 private:
-    Object(Prefabrication _prefab);
+    Object(Prefabrication* _prefab);
     Object();
-    Prefabrication prefab;
+    Prefabrication* prefab;
 };

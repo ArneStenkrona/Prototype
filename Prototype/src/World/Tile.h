@@ -9,10 +9,7 @@
 */
 class Tile {
 public:
-    Tile(int _tileIndex);
-    Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV);
-    Tile(int _tileIndex, std::optional<Polyshape> _polygon);
-    Tile(int _tileIndex, std::optional<Polyshape> _polygon, int _rotation, bool _flipH, bool _flipV);
+    Tile(int _tileIndex = -1, int _rotation = 0, bool _flipH = false, bool _flipV = false, std::optional<Polyshape> _polygon = {}, int _objectIndex = -1);
 
     ~Tile();
 
@@ -31,8 +28,8 @@ public:
     inline void setObject(int index) { objectIndex = index; }
 
     GameObject* gameObjectFromTile(int x, int y) const;
-    //Instantiates the object contained by this tile, if any
-    GameObject* instantiateObject() const;
+    //Instantiates the object contained by this tile, if any, else returns null
+    GameObject* instantiateObject(int x, int y) const;
 
     //Renders tile at coordinates (x, y)
     void renderTile(int x, int y);
