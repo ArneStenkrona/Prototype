@@ -23,7 +23,7 @@ GameObject * Character::instantiate() const
     g->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     g->getComponent<Sprite>()->setWidthHeight(1, 2);
     g->getComponent<Sprite>()->setRenderOffset(0, -24);
-    g->addComponent<SpriteRenderer>()->setRenderLayer(1);
+    g->addComponent<SpriteRenderer>()->setRenderLayer(2);
     g->addComponent<Movement>();
 
     g->addComponent<PolygonCollider>()->setStatic(false);

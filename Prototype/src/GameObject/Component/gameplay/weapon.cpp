@@ -91,5 +91,5 @@ void Weapon::setOwner(GameObject* owner)
 {
     ownerPosition = owner->getComponent<Position>();
     ownerVelocity = owner->getComponent<Velocity>();
-    renderer->setRenderLayer(owner->getComponent<Renderer>()->getRenderLayer());
+    renderer->setRenderLayer(owner->getComponent<Renderer>()->getRenderLayer() - 1);
 }
