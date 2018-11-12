@@ -14,7 +14,7 @@ public:
     //Renders the selected at position (x, y)
     void renderSelected(int x, int y, Color color = COLOR_WHITE);
 protected:
-    void update();
+    //void update();
 private:
     //How many tiles should be selected *NOTE* currently not implemented
     unsigned int tileDim;

@@ -37,7 +37,7 @@ void UITileSelector::renderSelected(int x, int y, Color color)
                                                    rotation * 90, 16, 16,
                                                    color);
 }
-
+/*
 void UITileSelector::update()
 {
     if (getKeyDown(INPUT_KEY_KP_MINUS) && tileDim > 1)
@@ -45,3 +45,4 @@ void UITileSelector::update()
     if (getKeyDown(INPUT_KEY_KP_PLUS) && tileDim < 4)
         tileDim++;
 }
+*/
