@@ -60,10 +60,14 @@ void performHitdetection() {
             vector<Collision*> collisions = PolygonCollider::calculateCollision(b, &returnColliders);
             for each (Collision *collision in collisions) {
                 
+                Collision complement = collision->complement();
+
                 if (previousCollisions.find(make_tuple(b, collision->getOtherCollider())) == previousCollisions.end()) {
                     b->getGameObject()->onCollisionEnter(collision);
+                    collision->getOtherCollider()->getGameObject()->onCollisionEnter(&complement);
                 }
                 b->getGameObject()->onColliding(collision);
+                collision->getOtherCollider()->getGameObject()->onColliding(&complement);
 
                 currentCollisions.insert(make_tuple(b, collision->getOtherCollider()));
             }
@@ -73,6 +77,8 @@ void performHitdetection() {
     for each (tuple<PolygonCollider*, PolygonCollider*> colPair in previousCollisions) {
         if (currentCollisions.find(colPair) == currentCollisions.end()) {
             get<0>(colPair)->getGameObject()->onCollisionExit();
+            get<1>(colPair)->getGameObject()->onCollisionExit();
+
         }
     }
     previousCollisions = currentCollisions;

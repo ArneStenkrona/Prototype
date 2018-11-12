@@ -273,6 +273,9 @@
     <ClInclude Include="src\System\sound\soundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameObject\Component\environment\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main\Prototype.cpp">
@@ -522,6 +525,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\sound\soundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Component\environment\material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

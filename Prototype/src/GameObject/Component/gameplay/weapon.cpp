@@ -64,7 +64,6 @@ void Weapon::lateUpdate()
             end = hit->getIntersection();
             Point n = hit->getNormal();
             ObjectPool::instantiate("shrapnel", { end.x, end.y - 16, n.toAngle(), 0, 16 });
-            SoundManager::getClip(SoundManager::THUD)->play();
             delete(hit);
             hit = nullptr;
         }

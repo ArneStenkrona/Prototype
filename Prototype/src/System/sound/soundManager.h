@@ -17,7 +17,7 @@ public:
     //Should only be closed when application exits
     static void closeSoundManager();
 
-    static SoundClip* getClip(SOUNDS sound) { return soundClips[sound]; }
+    inline static SoundClip* getClip(SOUNDS sound) { return soundClips[sound]; }
 
 private:
     static const std::string soundPaths[TOTAL_SOUNDS];

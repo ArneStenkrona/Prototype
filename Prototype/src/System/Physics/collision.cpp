@@ -1,19 +1,11 @@
 #include "collision.h"
 #include "GameObject\Component\geometry\polygonCollider.h"
 
-Collision::Collision(PolygonCollider * col, PolygonCollider *otherCol, Point colN, double colT) : 
-collider(col), otherCollider(otherCol), collisionNormal(colN), collisionTime(colT)
+Collision::Collision(PolygonCollider * col, PolygonCollider *otherCol, Point colN, double colT) 
+    : collider(col), otherCollider(otherCol), collisionNormal(colN), collisionTime(colT),
+      otherName(otherCol->getGameObject()->getName())
+    
 {
-}
-
-PolygonCollider * Collision::getCollider()
-{
-    return collider;
-}
-
-PolygonCollider * Collision::getOtherCollider()
-{
-    return otherCollider;
 }
 
 Point Collision::correctedVelocity()
@@ -24,4 +16,9 @@ Point Collision::correctedVelocity()
     Point overVel = collider->getVelocity() - velC;
     Point correctedVelocity = collider->getVelocity() - collisionNormal * overVel.dot(collisionNormal);
     return correctedVelocity;
+}
+
+Collision Collision::complement()
+{
+    return Collision(otherCollider, collider, -1  * collisionNormal, collisionTime);
 }

@@ -2,6 +2,7 @@
 #include "GameObject\Component\geometry\position.h"
 #include "GameObject\Component\geometry\polygonCollider.h"
 #include "GameObject\Component\graphics\spriteRenderer.h"
+#include "GameObject\Component\environment\material.h"
 #include "World\objects\object.h"
 #include <iostream>
 
@@ -56,6 +57,7 @@ GameObject* Tile::gameObjectFromTile(int x, int y) const
 
     if (hasCollider()) {
         obj->addComponent<PolygonCollider>()->setPolygon(polygon.value());
+        obj->addComponent<Material>()->soundMap = { {"lsr", SoundManager::THUD} };
     }
 
     return obj;

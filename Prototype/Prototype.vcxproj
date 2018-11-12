@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObject\Component\environment\material.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\beam.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\interactable\Container.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\splash.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObject\Component\environment\material.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\beam.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\interactable\Container.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\splash.cpp" />
