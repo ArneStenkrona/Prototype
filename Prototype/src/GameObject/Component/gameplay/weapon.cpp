@@ -4,6 +4,7 @@
 #include "GameObject\Prefabrications\prefabrications.h"
 #include "System\Physics\physicsEngine.h"
 #include "GameObject\objectPool.h"
+#include "System\sound\soundManager.h"
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -18,7 +19,7 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
     sprite->setTileIndex(240);
     //sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
     animator->addClip(AnimationClip{ "idle", 240, 243, 7 });
-    animator->addClip(AnimationClip{ "shoot", 244, 246, 7 });
+    animator->addClip(AnimationClip{ "shoot", 244, 246, 7, {{244, SoundManager::LASER}} });
 }
 
 void Weapon::start()
@@ -63,6 +64,7 @@ void Weapon::lateUpdate()
             end = hit->getIntersection();
             Point n = hit->getNormal();
             ObjectPool::instantiate("shrapnel", { end.x, end.y - 16, n.toAngle(), 0, 16 });
+            SoundManager::getClip(SoundManager::THUD)->play();
             delete(hit);
             hit = nullptr;
         }

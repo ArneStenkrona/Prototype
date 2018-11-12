@@ -1,16 +1,17 @@
 #include "gameLogic.h"
 #include "System/Physics/physicsEngine.h"
 #include "System\graphics\graphicsEngine.h"
+#include "System\sound\soundManager.h"
 #include "scene\scene.h"
 #include "math/lTimer.h"
+#include "System\IO\inputManager.h"
+#include "scene\debug_scenes\debug_scene0.h"
+#include "GameObject\objectPool.h"
+#include "tools\timeMacros.h"
 #include <stdio.h>
 #include <string>
 #include <sstream>
-#include "System\IO\inputManager.h"
-#include "scene\debug_scenes\debug_scene0.h"
 #include <iostream>
-#include "GameObject\objectPool.h"
-#include "tools\timeMacros.h"
 
 //The current scene in game
 Scene *currentScene;
@@ -83,6 +84,7 @@ void gameLoop() {
     initializeInputManager();
     //Initalize texture manager
     TextureManager::initalizeTextureManager();
+    SoundManager::initalizeSoundManager();
 
     setScene();
 

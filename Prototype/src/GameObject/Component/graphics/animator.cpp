@@ -5,7 +5,7 @@
 AnimationClip nullclip = {"nullclip", 0,0,1 };
 
 Animator::Animator(GameObject * _object) : Component(_object), transitionFrames(0),
-inTransition(false), animationSpeedFactor(1), currentClip(&nullclip)
+inTransition(false), animationSpeedFactor(1), currentClip(&nullclip), frameFactorCounter(0)
 {
     sprite = requireComponent<Sprite>();
 }
@@ -26,16 +26,20 @@ void Animator::update()
     }
     //Handle sprite
     if (!(currentClip->startIndex == currentClip->endIndex || 
-        currentClip->startIndex == -1 || currentClip->endIndex == -1)) {
+          currentClip->startIndex == -1 || currentClip->endIndex == -1)) {
         if (frameFactorCounter >= currentClip->frameFactor * animationSpeedFactor) {
             frameFactorCounter = 0;
             sprite->tileIndex++;
             if (sprite->tileIndex > currentClip->endIndex) 
                 sprite->tileIndex = currentClip->startIndex;
+
+        }
+        //Play sound if any
+        if (frameFactorCounter == 0 && currentClip->sounds.find(sprite->tileIndex) != currentClip->sounds.end()) {
+            SoundManager::getClip(currentClip->sounds[sprite->tileIndex])->play();
         }
         frameFactorCounter++;
     }
-    
 }
 
 void Animator::updateComponents()
@@ -79,5 +83,6 @@ void Animator::playQueued()
         queuedClip = nullptr;
         sprite->tileIndex = currentClip->startIndex;
         inTransition = false;
+        frameFactorCounter = 0;
     }
 }

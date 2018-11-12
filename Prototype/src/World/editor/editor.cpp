@@ -1,11 +1,12 @@
 #include "windows.h"
 #include "editor.h"
 #include "System/IO/inputManager.h"
+#include "System\graphics\graphicsEngine.h"
+#include "System\sound\soundManager.h"
 #include <sstream>
 #include <algorithm>
 #include "math\rectangle.h"
 #include "math\lTimer.h"
-#include "System\graphics\graphicsEngine.h"
 #include <iostream>
 
 Editor::Editor()
@@ -15,6 +16,7 @@ Editor::Editor()
     initializeInputManager();
     //Initalize texture manager
     TextureManager::initalizeTextureManager();
+    SoundManager::initalizeSoundManager();
 }
 
 Editor::~Editor()

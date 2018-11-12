@@ -26,8 +26,6 @@ SDL_Renderer* GraphicsEngine::activeRenderer = NULL;
 
 LTexture GraphicsEngine::frameBuffer = LTexture();
 
-Mix_Chunk *testSound = NULL;
-
 const bool GraphicsEngine::initSDL() {
     //Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
@@ -44,7 +42,7 @@ const bool GraphicsEngine::initSDL() {
         printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
         return false;
     }
-    testSound = Mix_LoadWAV("21_sound_effects_and_music/high.wav");
+
     return true;
 }
 

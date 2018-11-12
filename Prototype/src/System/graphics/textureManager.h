@@ -39,6 +39,8 @@ public:
     };
 
     static void initalizeTextureManager();
+    //Should only be closed when application exits
+    static void closeTextureManager();
 
     //Loads textures into tileset
     //Path must refer to a 512*512 png image.
@@ -62,8 +64,6 @@ public:
     //Current tilemap
     static TileMap tileMap;
 
-    //Should only be closed when application exits
-    static void closeTextureManager();
 
 private:
     //Filepaths of all the tilemaps

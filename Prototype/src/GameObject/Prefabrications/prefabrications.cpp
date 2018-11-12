@@ -10,6 +10,7 @@
 #include "GameObject\Component\gameplay\splash.h"
 #include "GameObject\Component\gameplay\beam.h"
 #include "GameObject\Component\gameplay\interactable\Container.h"
+#include "System\sound\soundManager.h"
 
 Character::Character() : Prefabrication("character")
 {
@@ -30,7 +31,7 @@ GameObject * Character::instantiate() const
     g->getComponent<PolygonCollider>()->addToMask(0);
     g->getComponent<Position>()->position = Point(50, 50);
     g->addComponent<Animator>()->addClip(AnimationClip{ "idle", 16, 21, 7 });
-    g->getComponent<Animator>()->addClip(AnimationClip{ "running", 0, 4, 3 });
+    g->getComponent<Animator>()->addClip(AnimationClip{ "running", 0, 4, 3, { {1, SoundManager::FOOTSTEP} } });
     g->getComponent<Animator>()->addClip(AnimationClip{ "falling", 32, 33, 7 });
     return g;
 }

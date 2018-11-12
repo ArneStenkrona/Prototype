@@ -6,6 +6,7 @@
 #include "System\GUI\Window\lwindow.h"
 #include "System\GUI\Window\EditorWindow.h"
 
+//Oversees the graphics
 class GraphicsEngine {
 public:
     static bool initializeGraphicsEngine();
