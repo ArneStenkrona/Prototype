@@ -10,6 +10,8 @@ public:
         LASER,
         THUD,
         FOOTSTEP,
+        GlASS_CRACKING,
+        GlASS_SHATTER,
         TOTAL_SOUNDS
     };
 

@@ -36,7 +36,14 @@ void Container::rayHit(RayCastHit * hit)
             sprite->setTileIndex(indx + 1);
             if (indx + 1 == 4) {
                 collider->setPolygon(Rectangular(Point(8, 25), 16, 7));
+                SoundManager::getClip(SoundManager::GlASS_SHATTER)->play();
             }
+            else {
+                SoundManager::getClip(SoundManager::GlASS_CRACKING)->play();
+            }
+        }
+        else {
+            SoundManager::getClip(SoundManager::THUD)->play();
         }
     }
 }

@@ -3,7 +3,9 @@
 const std::string SoundManager::soundPaths[SoundManager::TOTAL_SOUNDS] = {"Assets/Sound/default/arugh.wav",
                                                                           "Assets/Sound/prt/laser.wav",
                                                                           "Assets/Sound/prt/thud.wav",
-                                                                          "Assets/Sound/prt/footstep.wav" };
+                                                                          "Assets/Sound/prt/footstep.wav",
+                                                                          "Assets/Sound/prt/glass_cracking.wav",
+                                                                          "Assets/Sound/prt/glass_shatter.wav" };
 std::vector<SoundClip*> SoundManager::soundClips;
 
 void SoundManager::initalizeSoundManager()
