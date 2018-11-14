@@ -200,13 +200,13 @@ bool segmentIntersectRectangle(double a_rectangleMinX,
 set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*>* returnColliders, Point a, Point b)
 {
     bool quadrants[] = { false,false,false,false };
-    quadrants[0] = segmentIntersectRectangle(position.x, position.y, position.x + (bounds.x / 2), position.y + (bounds.y / 2),
+    quadrants[0] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y, position.x + (bounds.x / 2), position.y + (bounds.y / 2),
         a.x, a.y, b.x, b.y);
-    quadrants[1] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y, position.x + bounds.x, position.y + (bounds.y / 2),
+    quadrants[1] = segmentIntersectRectangle(position.x, position.y, position.x + (bounds.x / 2), position.y + (bounds.y / 2),
         a.x, a.y, b.x, b.y);
-    quadrants[2] = segmentIntersectRectangle(position.x, position.y + (bounds.y / 2), position.x + (bounds.x / 2), position.y + bounds.y,
+    quadrants[2] = segmentIntersectRectangle(position.x, position.y + (bounds.y / 2), position.x + (bounds.x / 2), position.y + (bounds.y / 2),
         a.x, a.y, b.x, b.y);
-    quadrants[3] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y + (bounds.y / 2), position.x + bounds.x, position.y + bounds.y,
+    quadrants[3] = segmentIntersectRectangle(position.x + (bounds.x / 2), position.y + (bounds.y / 2), position.x + (bounds.x / 2), position.y + (bounds.y / 2),
         a.x, a.y, b.x, b.y);
 
     if (nodes[0] != nullptr) {
