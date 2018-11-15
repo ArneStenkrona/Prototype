@@ -9,7 +9,7 @@ public:
     Camera(GameObject *_object);
     Point velocity;
     void start();
-    void update();
+    void lateUpdate();
     void updateComponents();
 
     void setTarget(GameObject *targetObject);

@@ -16,7 +16,7 @@ void Camera::start()
 {
 }
 
-void Camera::update()
+void Camera::lateUpdate()
 {
     double posX;
     double posY;
