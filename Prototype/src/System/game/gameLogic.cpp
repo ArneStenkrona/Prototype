@@ -32,10 +32,15 @@ Room * getRoom()
 }
 
 
-void updateGameLogic()
+void updateGameLoop()
 {
+    GraphicsEngine::clearWindow();
     drawBackground();
     GameObject::updateAll();
+    updatePhysics();
+    GameObject::lateUpdateAll();
+    GraphicsEngine::renderGraphics();
+    updateInputManager();
 }
 
 void drawBackground()
@@ -92,11 +97,8 @@ void gameLoop() {
     //While games is running
     while (!gameWindow->hasExited()) {
         capTimer.start();
-        GraphicsEngine::clearWindow();
-        updateGameLogic();
-        updatePhysics();
-        GraphicsEngine::renderGraphics();
-        updateInputManager();
+        updateGameLoop();
+
         //drawQuadTree(); //This will not work until this is put in GraphicsEngine
 
         //If frame finished early

@@ -23,6 +23,6 @@ void closeScene();
 
 void gameLoop();
 
-void updateGameLogic();
+void updateGameLoop();
 
 void closeGameLogic();

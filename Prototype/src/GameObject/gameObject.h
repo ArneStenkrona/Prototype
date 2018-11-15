@@ -18,11 +18,16 @@ public:
     //Destructor deletes all components
     ~GameObject();
 
-    //Calls start() for all objects in all_gameobjects
+    //Calls start() for all objects in all_gameobjects *NOTE* Should not be public, preferably the caller should be friend of GameObject
     static void startAll();
-    //Call awake() for all objects in just_activated_gameobjects
-    //and update() and lateUpdate() for all active objects in all_gameObjects
+    //Call onActivate() for all objects in just_activated_gameobjects
+    //Call onDeactivate() for all objects in just_deactivated_gameobjects
+    //and update() lateUpdate() for all active objects in all_gameObjects *NOTE* Should not be public, preferably the caller should be friend of GameObject
     static void updateAll();
+    //Call lateUpdate() for all active objects in all_gameObjects
+    //Should be called after physics calculations *NOTE* Should not be public, preferably the caller should be friend of GameObject
+    static void lateUpdateAll();
+
 
     //Gets component of specified type. Returns null if no such component exists
     //Returns null if T is not a component
