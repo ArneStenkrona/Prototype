@@ -12,7 +12,7 @@
 class Room {
 public:
 
-    Room(const std::string _file_path);
+    Room(const std::string _file_path, SoundManager::MUSIC _music = SoundManager::DEFAULT_MUSIC);
     ~Room();
 
     //loads the matrix from .txt file

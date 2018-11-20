@@ -21,8 +21,8 @@
         ( std::ostringstream() << std::dec << x ) ).str()
 
 
-Room::Room(const string _file_path) 
-    : file_path(_file_path), _width(-1), _height(-1), music(SoundManager::WINDOW_MUSIC)
+Room::Room(const string _file_path, SoundManager::MUSIC _music) 
+    : file_path(_file_path), _width(-1), _height(-1), music(_music)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
