@@ -8,7 +8,7 @@ and learning experience.
 This repository is based on a visual studio project. While
 you could get it to run without VS studio, using it will
 save a lot of headache.
-Prototype utilizes the SDL library.
+Prototype utilizes the SDL library. It also uses SDL_mixer for sound.
 
 
 Structure:
