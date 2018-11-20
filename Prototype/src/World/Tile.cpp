@@ -57,7 +57,7 @@ GameObject* Tile::gameObjectFromTile(int x, int y) const
 
     if (hasCollider()) {
         obj->addComponent<PolygonCollider>()->setPolygon(polygon.value());
-        obj->addComponent<Material>()->soundMap = { {"lsr", SoundManager::THUD} };
+        obj->addComponent<Material>()->soundMap = { {"lsr", SoundManager::THUD_SOUND} };
     }
 
     return obj;

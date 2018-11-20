@@ -1,4 +1,5 @@
 #pragma once
+
 //Starts up SDL and creates window
 bool init();
 

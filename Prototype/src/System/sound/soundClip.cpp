@@ -1,12 +1,13 @@
 #include "soundClip.h"
 
 SoundClip::SoundClip(std::string _filePath)
+    : path(_filePath)
 {
     //Load sound effects
-    chunk = Mix_LoadWAV(_filePath.c_str());
+    chunk = Mix_LoadWAV(path.c_str());
     if (chunk == NULL)
     {
-        printf("Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+        printf("Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError());
     }
 }
 

@@ -119,6 +119,6 @@ string Editor::getFilePath(bool requireExistingFile)
 void Editor::loadFile(const std::string& path)
 {
     activeRoom = new Room(path);
-    activeRoom->readFromFile();
+    activeRoom->load();
     editorWindow->setRoom(activeRoom);
 }

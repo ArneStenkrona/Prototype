@@ -25,7 +25,7 @@ void Scene::setRoom(Room *room)
         CURRENT_ROOM->unload();
     }
     CURRENT_ROOM = room;
-    room->readFromFile();
+    room->load();
 
     //Sets the bounds of the collider quadTree to room dimensions
     setQuadBounds(room->getDimensions());

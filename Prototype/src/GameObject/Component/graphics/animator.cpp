@@ -36,7 +36,7 @@ void Animator::update()
         }
         //Play sound if any
         if (frameFactorCounter == 0 && currentClip->sounds.find(sprite->tileIndex) != currentClip->sounds.end()) {
-            SoundManager::getClip(currentClip->sounds[sprite->tileIndex])->play();
+            SoundManager::getSound(currentClip->sounds[sprite->tileIndex])->play();
         }
         frameFactorCounter++;
     }

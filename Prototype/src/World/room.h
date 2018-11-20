@@ -7,6 +7,7 @@
 #include "System/graphics/textureManager.h"
 #include "World/Tile.h"
 #include "System\graphics\parallaxBackground.h"
+#include "System\sound\soundManager.h"
 
 class Room {
 public:
@@ -16,7 +17,7 @@ public:
 
     //loads the matrix from .txt file
     //Very important that the grid in the .txt file is rectangular
-    void readFromFile();
+    void load();
     //unloads the matrix
     void unload();
     //Saves the room
@@ -70,5 +71,10 @@ private:
     //If room is not loaded these will be negative
     double _width;
     double _height;
+
+    //Music to be played in room
+    SoundManager::MUSIC music;
+
+    void readFromFile();
 
 };

@@ -181,6 +181,4 @@ void Polyshape::setDimensions()
     effectiveOrigin = Point(minX,minY);
     _width = std::abs(maxX - minX);
     _height = std::abs(maxY - minY);
-
-
 }

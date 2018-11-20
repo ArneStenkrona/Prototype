@@ -21,7 +21,8 @@
         ( std::ostringstream() << std::dec << x ) ).str()
 
 
-Room::Room(const string _file_path) : file_path(_file_path), _width(-1), _height(-1)
+Room::Room(const string _file_path) 
+    : file_path(_file_path), _width(-1), _height(-1), music(SoundManager::WINDOW_MUSIC)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
@@ -33,123 +34,10 @@ Room::~Room()
     parallaxBackground = NULL;
 }
 
-void Room::readFromFile()
+void Room::load()
 {
-    string roomData;
-    ifstream infile;
-    infile.open(file_path);
-    //reads texture and position data
-    if (infile.is_open())
-    {
-        string line;
-
-        getline(infile, line);
-        tileMapIndex = toDigit(line[0]);
-        TextureManager::loadTileSet(static_cast<TextureManager::TILEMAPS>(tileMapIndex));
-
-        getline(infile, line);
-        backgroundIndex = toDigit(line[0]);
-        parallaxBackground->addBackground(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][0]);
-        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 1);
-        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][2], 4);
-        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][3], 8);
-        
-        getline(infile, line);
-        double posX = atof(line.c_str());
-        getline(infile, line);
-        double posY = atof(line.c_str());
-        position = Point(posX, posY);
-    }
-
-    //Dimensions of the room
-    int sizeX = 0;
-    int sizeY = 0;
-
-    if (infile.is_open())
-    {
-        string line;
-
-        while (getline(infile, line))
-        {
-            roomData += line + '\n';
-            sizeY++;
-        }
-        infile.close();
-    }
-    //Loop to first linebreak to get x dimension of room
-    int index = 0;
-    while (roomData[index] != '\n') {
-        if (roomData[index] == ']') {
-            sizeX++;
-        }
-        index++;
-    }
-    //Resize matrix so that it can hold the room
-    tileGameObjectMatrix.resize(sizeX);
-    dynamicGameObjectMatrix.resize(sizeX);
-    tileMatrix.resize(sizeX);
-    for (int i = 0; i < sizeX; i++) {
-        tileGameObjectMatrix[i].resize(sizeY, NULL);
-        dynamicGameObjectMatrix[i].resize(sizeY, NULL);
-        tileMatrix[i].resize(sizeY, NULL);
-    }
-    //Traverses the room and creates tiles
-    int x = 0;
-    int y = 0;
-    //Temporarily tores variables from file
-    bool isTile;
-    int tileIndex;
-    bool hasCollider;
-    int rotation;
-    bool flipH, flipV;
-    int objectIndex; 
-
-    std::optional<Polyshape> polygon;
-    //buffer to store variable
-    vector<string> buffer;
-
-    buffer = brokenStringSplitter(roomData, '\n');
-    buffer.pop_back();
-
-    for (int i = 0; i < buffer.size(); i++) {
-        //separate by each tile
-        vector<string> tileBuffer = brokenStringSplitter(buffer[i], ']');
-        tileBuffer.pop_back();
-        for (int j = 0; j < tileBuffer.size(); j++) {
-            if (tileBuffer[j][0] != 'N') {
-
-                //separate each data point
-                vector<string> dataPoints = brokenStringSplitter(tileBuffer[j], '|');
-
-                //Assign variables
-                if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
-                tileIndex = std::stoi(dataPoints[0]);
-                rotation = std::stoi(dataPoints[1]);
-                flipH = dataPoints[2][0] != 'F';
-                flipV = dataPoints[2][1] != 'F';
-                hasCollider = dataPoints[3][0] != 'N';
-
-                if (hasCollider) {
-                    polygon = Polyshape::parsePolygon(dataPoints[3]);
-                }
-                else {
-                    polygon = {};
-                }
-
-                objectIndex = std::stoi(dataPoints[4]);
-
-                tileMatrix[x][y] = new Tile(tileIndex, rotation,
-                                            flipH, flipV, polygon, objectIndex);
-            }
-            x++;
-        }
-        y++;
-        x = 0;
-    }
-
-    _width = sizeX * Tile::TILE_SIZE;
-    _height = sizeY * Tile::TILE_SIZE;
-    parallaxBackground->setOrigin(Point(0,0));// _width / 2, _height / 2));
+    readFromFile();
+    SoundManager::playMusic(music);
 }
 
 void Room::unload()
@@ -310,4 +198,123 @@ void Room::getDimensions(int & x, int & y)
 {
     x = static_cast<int>(tileMatrix.size());
     y = static_cast<int>(tileMatrix[0].size());
+}
+
+void Room::readFromFile()
+{
+    string roomData;
+    ifstream infile;
+    infile.open(file_path);
+    //reads texture and position data
+    if (infile.is_open())
+    {
+        string line;
+
+        getline(infile, line);
+        tileMapIndex = toDigit(line[0]);
+        TextureManager::loadTileSet(static_cast<TextureManager::TILEMAPS>(tileMapIndex));
+
+        getline(infile, line);
+        backgroundIndex = toDigit(line[0]);
+        parallaxBackground->addBackground(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][0]);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 1);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][2], 4);
+        parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][3], 8);
+
+        getline(infile, line);
+        double posX = atof(line.c_str());
+        getline(infile, line);
+        double posY = atof(line.c_str());
+        position = Point(posX, posY);
+    }
+
+    //Dimensions of the room
+    int sizeX = 0;
+    int sizeY = 0;
+
+    if (infile.is_open())
+    {
+        string line;
+
+        while (getline(infile, line))
+        {
+            roomData += line + '\n';
+            sizeY++;
+        }
+        infile.close();
+    }
+    //Loop to first linebreak to get x dimension of room
+    int index = 0;
+    while (roomData[index] != '\n') {
+        if (roomData[index] == ']') {
+            sizeX++;
+        }
+        index++;
+    }
+    //Resize matrix so that it can hold the room
+    tileGameObjectMatrix.resize(sizeX);
+    dynamicGameObjectMatrix.resize(sizeX);
+    tileMatrix.resize(sizeX);
+    for (int i = 0; i < sizeX; i++) {
+        tileGameObjectMatrix[i].resize(sizeY, NULL);
+        dynamicGameObjectMatrix[i].resize(sizeY, NULL);
+        tileMatrix[i].resize(sizeY, NULL);
+    }
+    //Traverses the room and creates tiles
+    int x = 0;
+    int y = 0;
+    //Temporarily tores variables from file
+    bool isTile;
+    int tileIndex;
+    bool hasCollider;
+    int rotation;
+    bool flipH, flipV;
+    int objectIndex;
+
+    std::optional<Polyshape> polygon;
+    //buffer to store variable
+    vector<string> buffer;
+
+    buffer = brokenStringSplitter(roomData, '\n');
+    buffer.pop_back();
+
+    for (int i = 0; i < buffer.size(); i++) {
+        //separate by each tile
+        vector<string> tileBuffer = brokenStringSplitter(buffer[i], ']');
+        tileBuffer.pop_back();
+        for (int j = 0; j < tileBuffer.size(); j++) {
+            if (tileBuffer[j][0] != 'N') {
+
+                //separate each data point
+                vector<string> dataPoints = brokenStringSplitter(tileBuffer[j], '|');
+
+                //Assign variables
+                if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
+                tileIndex = std::stoi(dataPoints[0]);
+                rotation = std::stoi(dataPoints[1]);
+                flipH = dataPoints[2][0] != 'F';
+                flipV = dataPoints[2][1] != 'F';
+                hasCollider = dataPoints[3][0] != 'N';
+
+                if (hasCollider) {
+                    polygon = Polyshape::parsePolygon(dataPoints[3]);
+                }
+                else {
+                    polygon = {};
+                }
+
+                objectIndex = std::stoi(dataPoints[4]);
+
+                tileMatrix[x][y] = new Tile(tileIndex, rotation,
+                    flipH, flipV, polygon, objectIndex);
+            }
+            x++;
+        }
+        y++;
+        x = 0;
+    }
+
+    _width = sizeX * Tile::TILE_SIZE;
+    _height = sizeY * Tile::TILE_SIZE;
+    parallaxBackground->setOrigin(Point(0, 0));// _width / 2, _height / 2));
 }

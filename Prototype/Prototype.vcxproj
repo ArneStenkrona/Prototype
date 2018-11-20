@@ -71,16 +71,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\include\msvc;$(ProjectDir)\src;$(ProjectDir)\include\SDL;$(ProjectDir)\include\GL;$(ProjectDir)\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)\src;$(ProjectDir)\include\msvc;$(ProjectDir)\include\SDL;$(ProjectDir)\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -233,6 +233,7 @@
     <ClInclude Include="src\System\Physics\collision.h" />
     <ClInclude Include="src\System\Physics\physicsEngine.h" />
     <ClInclude Include="src\System\Physics\rayCastHit.h" />
+    <ClInclude Include="src\System\sound\musicClip.h" />
     <ClInclude Include="src\System\sound\soundClip.h" />
     <ClInclude Include="src\System\sound\soundManager.h" />
     <ClInclude Include="src\tools\stringTools.h" />
@@ -320,6 +321,7 @@
     <ClCompile Include="src\System\Physics\collision.cpp" />
     <ClCompile Include="src\System\Physics\physicsEngine.cpp" />
     <ClCompile Include="src\System\Physics\rayCastHit.cpp" />
+    <ClCompile Include="src\System\sound\musicClip.cpp" />
     <ClCompile Include="src\System\sound\soundClip.cpp" />
     <ClCompile Include="src\System\sound\soundManager.cpp" />
     <ClCompile Include="src\tools\stringTools.cpp" />

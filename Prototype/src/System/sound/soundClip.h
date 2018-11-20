@@ -12,4 +12,6 @@ public:
 
 private:
     Mix_Chunk *chunk;
+    //path where sound is stored
+    const std::string path;
 };
