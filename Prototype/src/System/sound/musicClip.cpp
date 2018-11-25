@@ -179,7 +179,7 @@ bool MusicClip::initialize()
     OutputAudioSpec.callback = AudioCallback;
 
     // Load the SoundFont from a file
-    g_TinySoundFont = tsf_load_filename("Assets/Sound/sound_fonts/8bitsf.SF2");
+    g_TinySoundFont = tsf_load_filename("Assets/Sound/sound_fonts/PRT.SF2");
     if (!g_TinySoundFont)
     {
         fprintf(stderr, "Could not load SoundFont\n");

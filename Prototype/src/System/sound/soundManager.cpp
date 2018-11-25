@@ -7,8 +7,9 @@ const std::string SoundManager::soundPaths[SoundManager::TOTAL_SOUNDS] = {"Asset
                                                                           "Assets/Sound/sound/prt/glass_shatter.wav" };
 std::vector<SoundClip*> SoundManager::soundClips;
 
-const std::string SoundManager::musicPaths[SoundManager::TOTAL_MUSIC] = { "Assets/Sound/music/default/Untitled.mid",
-                                                                          "Assets/Sound/music/prt/window.mid" };
+const std::string SoundManager::musicPaths[SoundManager::TOTAL_MUSIC] = { "Assets/Sound/music/default/untitled.mid",
+                                                                          "Assets/Sound/music/prt/window.mid",
+                                                                          "Assets/Sound/music/prt/lab.mid" };
 std::vector<MusicClip*> SoundManager::musicClips;
 
 

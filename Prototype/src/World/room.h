@@ -12,7 +12,7 @@
 class Room {
 public:
 
-    Room(const std::string _file_path, SoundManager::MUSIC _music = SoundManager::DEFAULT_MUSIC);
+    Room(const std::string _file_path, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC);
     ~Room();
 
     //loads the matrix from .txt file
@@ -53,6 +53,8 @@ public:
 
     //Sets x and y to the length of the tile vectors
     void getDimensions(int &x, int &y);
+
+    inline void playMusic() const { SoundManager::playMusic(music); }
 
 private:
     //File path of the room data

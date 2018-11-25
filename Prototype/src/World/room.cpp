@@ -37,7 +37,6 @@ Room::~Room()
 void Room::load()
 {
     readFromFile();
-    SoundManager::playMusic(music);
 }
 
 void Room::unload()
