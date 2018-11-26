@@ -20,6 +20,7 @@ public:
         DEFAULT_MUSIC,
         WINDOW_MUSIC,
         LAB_MUSIC,
+        EDITOR_MUSIC,
         TOTAL_MUSIC
     };
 

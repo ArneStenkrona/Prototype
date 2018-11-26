@@ -14,6 +14,8 @@ public:
     std::string getInput();
 
 private:
+    const UIPromptListener* listener;
+
     //Textbox containing input
     UITextBox* textBox;
     //label of prompt

@@ -9,7 +9,8 @@ std::vector<SoundClip*> SoundManager::soundClips;
 
 const std::string SoundManager::musicPaths[SoundManager::TOTAL_MUSIC] = { "Assets/Sound/music/default/untitled.mid",
                                                                           "Assets/Sound/music/prt/window.mid",
-                                                                          "Assets/Sound/music/prt/lab.mid" };
+                                                                          "Assets/Sound/music/prt/lab.mid",
+                                                                          "Assets/Sound/music/editor/editor.mid" };
 std::vector<MusicClip*> SoundManager::musicClips;
 
 

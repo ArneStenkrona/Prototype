@@ -39,6 +39,7 @@ void Editor::run()
 
 
     if (openFile()) {
+        //SoundManager::playMusic(SoundManager::EDITOR_MUSIC);
         while (!editorWindow->hasExited()) {
             capTimer.start();
 

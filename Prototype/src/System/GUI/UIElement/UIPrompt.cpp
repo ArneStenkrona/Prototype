@@ -20,7 +20,9 @@ private:
 
 
 UIPrompt::UIPrompt(UIPromptListener * _listener, int _positionX, int _positionY, int _width, int _height, int _layer, std::string _label)
-    :UIMovable(_positionX, _positionY, _width, _height, _layer), label(_label), textBox(new UITextBox(0, 0, width - 8, _layer))
+    :UIMovable(_positionX, _positionY, _width, _height, _layer), 
+     label(_label), textBox(new UITextBox(0, 0, width - 8, _layer)),
+     listener(_listener)
 {
     attach(new UIButton(new OkListener(), 50, 50, 40, 20, 0, "OK"), ALIGN_DOWN, -30, -5);
     attach(new UIButton(new CancelListener(_listener), 50, 50, 40, 20, 0, "Cancel"), ALIGN_DOWN, 30, -5);
@@ -59,6 +61,7 @@ UIPromptListener::UIPromptListener(std::string _label)
 void UIPromptListener::cancel()
 {
     delete (prompt);
+    prompt = NULL;
 }
 
 void UIPromptListener::ok()
