@@ -30,23 +30,13 @@ void UISelector::getRotationAndFlip(int & rot, bool & h, bool & v)
     v = flipV;
 }
 
-
-void UISelector::derivedUpdate()
-{
-}
-
 void UISelector::setSelected(int i)
 {
     selectedIndex = i;
-    derivedSetSelected(i);
 
     rotation = 0;
     flipH = false;
     flipV = false;
-}
-
-void UISelector::derivedSetSelected(int i)
-{
 }
 
 void UISelector::renderSelected(int x, int y, Color color)
@@ -78,8 +68,6 @@ void UISelector::moveIndices(int dx, int dy)
 
 void UISelector::update()
 {
-    derivedUpdate();
-
     if (getActiveSelector() == this) {
         if (getKeyDown(INPUT_KEY_R))
             rotation = (rotation + 1) % 4;

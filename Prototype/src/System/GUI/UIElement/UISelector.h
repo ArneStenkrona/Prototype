@@ -41,10 +41,6 @@ protected:
     bool flipH, flipV;
     //selected UISelectable
     void setSelected(int i);
-    //Called after setSelected()
-    virtual void derivedSetSelected(int i);
-    //updates before update()
-    virtual void derivedUpdate();
     //Checks if element is selected
     inline bool isSelected() const { return selected; }
 
