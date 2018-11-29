@@ -6,7 +6,7 @@
 UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer, 
                                        unsigned int _columns, unsigned int _rows,
                                        Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8, "COLLIDERS")
+    : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8, "COLLIDERS", _selectedColor, _hoverColor)
 {
     selectables.resize(columns);
     for (int i = 0; i < columns; i++) {
@@ -14,7 +14,7 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
         for (int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableCollider(this, positionX + (i * Tile::TILE_SIZE), 
                                                          LABEL_HEIGHT + positionY + (j * Tile::TILE_SIZE),
-                                                         layer + 1, i + (indexLimitX * j), _selectedColor, _hoverColor);
+                                                         layer + 1, i + (indexLimitX * j));
         }
     }
 }

@@ -7,14 +7,15 @@
 #include "World\Tile.h"
 
 UISelectableTile::UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
-                                   int _index, Color _selectedColor, Color _hoverColor)
-    : UISelectable(_selector, _posX, _posY, Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, _index, _selectedColor, _hoverColor)
+                                   int _index)
+    : UISelectable(_selector, _posX, _posY, Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, _index)
 {
 }
 
-void UISelectableTile::derivedRender()
+void UISelectableTile::render()
 {
-        TextureManager::tileMap.texture.renderTile(positionX, positionY, index,
-            1, 1, false, false,
-            0, 16, 16);
+    TextureManager::tileMap.texture.renderTile(positionX, positionY, index + selector->getOffset(),
+                                                                     1, 1, false, false,
+                                                                     0, 16, 16);
+    UISelectable::render();
 }

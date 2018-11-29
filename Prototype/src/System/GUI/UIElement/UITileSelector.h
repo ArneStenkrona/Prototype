@@ -2,6 +2,7 @@
 #include "UISelectableTile.h"
 #include "UISelector.h"
 #include <vector>
+#include <tuple>
 
 class UITileSelector : public UISelector {
 public:
@@ -14,8 +15,13 @@ public:
     //Renders the selected at position (x, y)
     void renderSelected(int x, int y, Color color = COLOR_WHITE);
 protected:
-    //void update();
 private:
-    //How many tiles should be selected *NOTE* currently not implemented
+    //How many tiles should be selected
     unsigned int tileDim;
+
+    const Color hoverColor;
+    const Color selectedColor;
+
+    void update();
+    void render();
 };

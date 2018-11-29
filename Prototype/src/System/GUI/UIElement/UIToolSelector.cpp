@@ -6,7 +6,7 @@ const std::map<UIToolSelector::TOOL, std::string> UIToolSelector::toolDictionary
 
 UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer, 
                                Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, 1, TOTAL_TOOLS, 1, TOTAL_TOOLS, "TOOLS")
+    : UISelector(_posx, _posy, _layer, 1, TOTAL_TOOLS, 1, TOTAL_TOOLS, "TOOLS", _selectedColor, _hoverColor)
 {
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
@@ -15,8 +15,7 @@ UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer,
             selectables[i][j] = new UISelectableTool(this,
                 positionX + (i * 32),
                 LABEL_HEIGHT + positionY + (j * 32),
-                layer + 1, i + (indexLimitX * j),
-                _selectedColor, _hoverColor);
+                layer + 1, i + (indexLimitX * j));
         }
     }
 }

@@ -7,9 +7,13 @@ UISelector* UISelector::activeSelector = NULL;
 UISelector::UISelector(int _posx, int _posy, int _layer, 
                        unsigned int _columns, unsigned int _rows,
                        unsigned int _indexLimitX, unsigned int _indexLimitY,
-                       const std::string _label)
-    : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, LABEL_HEIGHT + Tile::TILE_SIZE * _rows, _layer, false), columns(_columns), rows(_rows),
-      indexLimitX(_indexLimitX), indexLimity(_indexLimitY), label(_label)
+                       const std::string _label,
+                       Color _selectedColor, Color _hoverColor)
+    : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, 
+      LABEL_HEIGHT + Tile::TILE_SIZE * _rows, _layer, false), 
+      columns(_columns), rows(_rows),
+      indexLimitX(_indexLimitX), indexLimitY(_indexLimitY), label(_label), hoverIndex(-1),
+      selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
     activeSelector = this;
 }
@@ -57,17 +61,24 @@ void UISelector::setActive()
 
 void UISelector::moveIndices(int dx, int dy)
 {
-    if (indX + columns + dx <= indexLimitX && indX + dx >= 0) indX += dx;
-    if (indY + rows + dy <= indexLimity && indY + dy >= 0) indY += dy;
-    for (int i = 0; i < columns; i++) {
+    //if (offsetX + columns + dx <= indexLimitX && offsetX + dx >= 0) offsetX += dx;
+    //if (offsetY + rows + dy <= indexLimitY && offsetY + dy >= 0) offsetY += dy;
+
+    if ((offset % (int)indexLimitX) + columns + dx <= indexLimitX &&
+        (offset % (int)indexLimitX) + dx >= 0) offset += dx;
+    if ((offset / (int)indexLimitY) + rows + dy <= indexLimitY &&
+        (offset / (int)indexLimitX) + dy >= 0) offset += indexLimitX * dy;
+    /*for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            selectables[i][j]->setIndex(indX + i + (indexLimitX * (indY + j)));
+            selectables[i][j]->setSelectableIndex(offsetX + i + (indexLimitX * (offsetY + j)));
         }
-    }
+    }*/
 }
 
 void UISelector::update()
 {
+    hoverIndex = -1;
+
     if (getActiveSelector() == this) {
         if (getKeyDown(INPUT_KEY_R))
             rotation = (rotation + 1) % 4;
@@ -105,6 +116,7 @@ void UISelector::render()
     UIElement::drawSquare(width, 16, COLOR_BLACK, SOLID_SQUARE, ALIGN_UP);
     UIElement::renderTextBackdrop(label, COLOR_WHITE, ALIGN_UP, 0, 2, COLOR_DARK_GREY);
 
-    if (isSelected())
+    if (isSelected()) {
         UIElement::drawSquare(width, height - LABEL_HEIGHT, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_DOWN, 0);
+    }
 }

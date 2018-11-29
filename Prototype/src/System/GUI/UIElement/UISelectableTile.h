@@ -7,7 +7,10 @@ class UITileSelector;
 class UISelectableTile : public UISelectable {
 public:
     UISelectableTile(UITileSelector* _selector, int _posX, int _posY, unsigned int _layer,
-        int _index, Color _selectedColor = COLOR_GREEN, Color _hoverColor = COLOR_CYAN);
+        int _index);
+
+
+
 private:
-    void derivedRender();
+    void render();
 };
