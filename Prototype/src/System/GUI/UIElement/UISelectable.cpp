@@ -52,10 +52,4 @@ void UISelectable::onDeselect()
 }
 
 void UISelectable::update() {
-    /*if (selector->getSelectedIndex() == index) {
-        currentColor = selectedColor;
-    }
-    else {
-        currentColor = COLOR_NONE;
-    }*/
 }

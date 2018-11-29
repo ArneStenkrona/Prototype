@@ -9,6 +9,7 @@
 #include "rectangle.h"
 #include <SDL_image.h>
 #include "System\graphics\graphicsEngine.h"
+#include <math.h> 
 
 std::vector<Polyshape> Polyshape::basicPolygons = { 
     Rectangular(Point(0, 0), 32, 32),
@@ -141,8 +142,14 @@ void Polyshape::renderPolygon(int x, int y, Color color)
 {
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
     for (int i = 0; i < vertices.size(); i++) {
-        SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), vertices[i].x + x, vertices[i].y + y,
-                vertices[(i + 1) % vertices.size()].x + x, vertices[(i + 1) % vertices.size()].y + y);
+        //Looks wierd but makes sure polygons are drawned contained within its dimensions
+        int a = (abs(vertices[i].x) >= (int)(_width) ? vertices[i].x - 1 : vertices[i].x) + x;
+        int b = (abs(vertices[i].y) >= (int)(_height) ? vertices[i].y - 1 : vertices[i].y) + y;
+        int c = (abs(vertices[(i + 1) % vertices.size()].x) >= (int)_width ?
+                 vertices[(i + 1) % vertices.size()].x - 1 : vertices[(i + 1) % vertices.size()].x) + x;
+        int d = (abs(vertices[(i + 1) % vertices.size()].y) >= (int)_height ?
+            vertices[(i + 1) % vertices.size()].y - 1 : vertices[(i + 1) % vertices.size()].y) + y;
+        SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), a, b, c, d);
     }
 }
 
