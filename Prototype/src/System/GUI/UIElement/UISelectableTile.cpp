@@ -17,5 +17,12 @@ void UISelectableTile::render()
     TextureManager::tileMap.texture.renderTile(positionX, positionY, index + selector->getOffset(),
                                                                      1, 1, false, false,
                                                                      0, 16, 16);
-    UISelectable::render();
+    Color borderColor = ((UITileSelector*)selector)->withinHover(index) ? selector->getHoverColor() :
+        (((UITileSelector*)selector)->withinSelection(index + selector->getOffset()) ?
+         selector->getSelectedColor() : COLOR_NONE);
+
+    UIElement::drawSquare(width, height, borderColor, OUTLINE_SQUARE);
+
+    if (!selector->isActive())
+        UIElement::drawSquare(width, height, { 255,255,255,40 });
 }

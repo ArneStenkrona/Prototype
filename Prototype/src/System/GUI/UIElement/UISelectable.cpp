@@ -38,7 +38,7 @@ void UISelectable::onMouseOver()
     }
     else {
     }
-    selector->hoverIndex = index;
+    selector->setHoverIndex(index);
 }
 
 void UISelectable::onSelect()

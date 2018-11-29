@@ -22,6 +22,9 @@ public:
 
     void getRotationAndFlip(int &rot, bool &h, bool &v);
 
+    inline Color getSelectedColor() const { return selectedColor; }
+    inline Color getHoverColor() const { return hoverColor; }
+
     //Renders the selected at position (x, y)
     virtual void renderSelected(int x, int y, Color color);
 
@@ -47,10 +50,12 @@ protected:
     //Transformations of selected
     int rotation;
     bool flipH, flipV;
-    //selected UISelectable
-    void setSelected(int i);
+    //set selected UISelectable
+    virtual void setSelected(int i);
     //Checks if element is selected
     inline bool isSelected() const { return selected; }
+   
+    virtual inline void setHoverIndex(int i) { hoverIndex = i; }
 
 
     void onSelect();
@@ -59,6 +64,7 @@ protected:
 
     void update();
     void render();
+
 
 private:
     static UISelector* activeSelector;

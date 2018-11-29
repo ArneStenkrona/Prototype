@@ -39,17 +39,63 @@ void UITileSelector::renderSelected(int x, int y, Color color)
                                                    color);
 }
 
+bool UITileSelector::withinSelection(int idx)
+{
+    return selectedIndices.find(idx) != selectedIndices.end();
+}
+
+bool UITileSelector::withinHover(int idx)
+{
+    return hoverIndices.find(idx) != hoverIndices.end();
+}
+
+void UITileSelector::updateSelectedIndices()
+{
+    selectedIndices.clear();
+    for (int i = 0; i < tileDim; i++) {
+        for (int j = 0; j < tileDim; j++) {
+            selectedIndices.insert(selectedIndex + i + j * indexLimitX);
+        }
+    }
+}
+
+void UITileSelector::updateHoverIndices()
+{
+    hoverIndices.clear();
+    for (int i = 0; i < tileDim; i++) {
+        for (int j = 0; j < tileDim; j++) {
+            hoverIndices.insert(hoverIndex + i + j * indexLimitX);
+        }
+    }
+}
+
 void UITileSelector::update()
 {
     UISelector::update();
-    if (getKeyDown(INPUT_KEY_KP_MINUS) && tileDim > 1)
+    if (getKeyDown(INPUT_KEY_KP_MINUS) && tileDim > 1) {
         tileDim--;
-    if (getKeyDown(INPUT_KEY_KP_PLUS) && tileDim < std::min(rows, columns))
+        updateSelectedIndices();
+    }
+    if (getKeyDown(INPUT_KEY_KP_PLUS) && tileDim < std::min(rows, columns)) {
         tileDim++;
+        updateSelectedIndices();
+    }
 }
 
 void UITileSelector::render()
 {
     UISelector::render();
 
+}
+
+void UITileSelector::setSelected(int i)
+{
+    UISelector::setSelected(i);
+    updateSelectedIndices();
+}
+
+void UITileSelector::setHoverIndex(int i)
+{
+    UISelector::setHoverIndex(i);
+    updateHoverIndices();
 }
