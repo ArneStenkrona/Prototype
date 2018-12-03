@@ -41,6 +41,11 @@ void UISelectable::onMouseOver()
     selector->setHoverIndex(index);
 }
 
+void UISelectable::onMouseLeft()
+{
+    selector->setHoverIndex(-1);
+}
+
 void UISelectable::onSelect()
 {
     selector->selected = true;

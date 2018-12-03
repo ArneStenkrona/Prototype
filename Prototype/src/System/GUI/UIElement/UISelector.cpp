@@ -61,24 +61,14 @@ void UISelector::setActive()
 
 void UISelector::moveIndices(int dx, int dy)
 {
-    //if (offsetX + columns + dx <= indexLimitX && offsetX + dx >= 0) offsetX += dx;
-    //if (offsetY + rows + dy <= indexLimitY && offsetY + dy >= 0) offsetY += dy;
-
     if ((offset % (int)indexLimitX) + columns + dx <= indexLimitX &&
         (offset % (int)indexLimitX) + dx >= 0) offset += dx;
     if ((offset / (int)indexLimitY) + rows + dy <= indexLimitY &&
         (offset / (int)indexLimitX) + dy >= 0) offset += indexLimitX * dy;
-    /*for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++) {
-            selectables[i][j]->setSelectableIndex(offsetX + i + (indexLimitX * (offsetY + j)));
-        }
-    }*/
 }
 
 void UISelector::update()
 {
-    hoverIndex = -1;
-
     if (getActiveSelector() == this) {
         if (getKeyDown(INPUT_KEY_R))
             rotation = (rotation + 1) % 4;

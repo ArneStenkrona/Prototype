@@ -19,6 +19,7 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                                                     layer + 1, i + (indexLimitX * j));
         }
     }
+    updateSelectedIndices();
 }
 
 Tile * UITileSelector::getTile() const
@@ -49,6 +50,72 @@ bool UITileSelector::withinHover(int idx)
     return hoverIndices.find(idx) != hoverIndices.end();
 }
 
+bool UITileSelector::getBorderColorAndType(int index, Color & c, int & b)
+{
+    int i; //Either hoverIndex or selectedIndex
+    int j; 
+    if (withinHover(index)) {
+        c = hoverColor;
+        i = hoverIndex;
+        j = index;
+    }
+    else if (withinSelection(index + getOffset())) {
+        c = selectedColor;
+        i = selectedIndex;
+        j = index + getOffset();
+    }
+    else {
+        return false;
+    }
+
+    //Full border
+    if (tileDim == 1) {
+        b = 0;
+        return true;
+    }
+    //Topleft border
+    if (j == i) {
+        b = 1;
+        return true;
+    }
+    //Topright border
+    if (j == i + tileDim - 1) {
+        b = 2;
+        return true;
+    }
+    //Bottomright border
+    if (j == i + (tileDim - 1) + ((tileDim - 1) * indexLimitX)) {
+        b = 3;
+        return true;
+    }
+    //Bottomleft border
+    if (j == i + ((tileDim - 1) * indexLimitX)) {
+        b = 4;
+        return true;
+    }
+    //Top border
+    if (j < i + tileDim - 1) {
+        b = 5;
+        return true;
+    }
+    //Right border
+    if (j % indexLimitX == (i + tileDim - 1) % indexLimitX) {
+        b = 6;
+        return true;
+    }
+    //Bottom border
+    if (j / indexLimitX == (i / indexLimitX) + tileDim - 1) {
+        b = 7;
+        return true;
+    }
+    //Left border
+    if (j % indexLimitX == i % indexLimitX) {
+        b = 8;
+        return true;
+    }
+    return false;
+}
+
 void UITileSelector::updateSelectedIndices()
 {
     selectedIndices.clear();
@@ -67,6 +134,11 @@ void UITileSelector::updateHoverIndices()
             hoverIndices.insert(hoverIndex + i + j * indexLimitX);
         }
     }
+}
+
+void UITileSelector::clearHoverIndices()
+{
+    hoverIndices.clear();
 }
 
 void UITileSelector::update()

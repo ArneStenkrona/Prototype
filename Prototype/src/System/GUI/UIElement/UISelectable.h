@@ -29,6 +29,8 @@ protected:
     //called if mouse is over
     void onMouseOver();
 
+    void onMouseLeft();
+
     void render();
 private:
 
