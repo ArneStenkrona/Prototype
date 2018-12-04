@@ -138,7 +138,7 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     SDL_Point pivot = { pivotX, pivotY };
     
     if (mirrorH && mirrorV)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 90, &pivot, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 180, &pivot, SDL_FLIP_NONE);
     else if (mirrorH)
         SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_HORIZONTAL);
     else if (mirrorV)

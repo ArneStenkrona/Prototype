@@ -52,15 +52,21 @@ std::vector<std::vector<Tile*>> UITileSelector::getTiles() const
                 iy = temp;
             }
 
-            int i2 = i;
-            int j2 = j;
-            if ((flipH && rotation % 2 == 0) || (flipV && rotation % 2 == 1))
-                i2 = tileDim - 1 - i;
-            if ((flipV && rotation % 2 == 0) || (flipH && rotation % 2 == 1))
-                j2 = tileDim - 1 - j;
+            if (rotation % 2 == 0) {
+                if (flipH)
+                    ix = tileDim - 1 - ix;
+                if (flipV)
+                    iy = tileDim - 1 - iy;
+            }
+            else {
+                if (flipV)
+                    ix = tileDim - 1 - ix;
+                if (flipH)
+                    iy = tileDim - 1 - iy;
+            }
 
             Tile *tile;
-            tile = new Tile(selectedIndex + i2 + (indexLimitX * j2),
+            tile = new Tile(selectedIndex + i + (indexLimitX * j),
                             rotation, flipH, flipV);
             tiles[ix][iy] = tile;
         }
