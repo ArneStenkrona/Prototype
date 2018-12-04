@@ -116,7 +116,7 @@ void LTexture::renderEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point *
 
 void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heightFactor, 
                           bool mirrorH, bool mirrorV, double rotation, int pivotX, int pivotY,
-                          Color color) const
+                          Color color, bool scaleIndices) const
 {
     SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
     SDL_SetTextureAlphaMod(mTexture, color.a);
@@ -128,9 +128,10 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
 
     SDL_Rect renderQuad = { x, y, Tile::TILE_SIZE * widthFactor, Tile::TILE_SIZE * heightFactor };
     //corrected index
-    int ix = tileIndex * widthFactor;
+    int ix = scaleIndices ? tileIndex * widthFactor : tileIndex;
+    int iy = scaleIndices ? heightFactor : 1;
     SDL_Rect tileRect = { (ix % tilesPerRow) * Tile::TILE_SIZE,
-                          (ix / tilesPerRow) * heightFactor * Tile::TILE_SIZE, 
+                          (ix / tilesPerRow) * iy * Tile::TILE_SIZE, 
                           Tile::TILE_SIZE * widthFactor, 
                            Tile::TILE_SIZE * heightFactor };
 

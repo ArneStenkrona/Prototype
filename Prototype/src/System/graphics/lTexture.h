@@ -32,9 +32,12 @@ public:
     //Renders the tile in the texture given by the tileQuad
     //x and y is the position
     //widthFactor and heightFactor determine how many tiles to take
+    //mirrorH and mirrorV determines if the tile should be flipped horizontally or vertically
+    //rotation, pivotX, and pivotY determines how the tile should be rotated
+    //scaleIndices determines if widthFactor and heightFactor should change indexing
     void renderTile(int x, int y, int tileIndex, int widthFactor = 1, int heightFactor = 1, 
                     bool mirrorH = false, bool mirrorV = false, double rotation = 0, int pivotX = 0, int pivotY = 0,
-                    Color color = COLOR_WHITE) const;
+                    Color color = COLOR_WHITE, bool scaleIndices = true) const;
 
 
     void renderText(int x, int y, std::string text) const;

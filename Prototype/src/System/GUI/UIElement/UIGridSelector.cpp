@@ -125,11 +125,18 @@ void UIGridSelector::setElement(int x, int y)
     //*NOTE* Tools should be defined by enum for clariy
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
-        if (s == &tileSelector)
-            room->setTile(x, y, tileSelector.getTile());
+        if (s == &tileSelector) {
+            std::vector<std::vector<Tile*>> tiles = tileSelector.getTiles();
+            for (int i = 0; i < tiles.size(); i++) {
+                for (int j = 0; j < tiles[i].size(); j++) {
+                    room->setTile(x + i, y + j, tiles[i][j]);
+                }
+            }
+        }
 
         if (s == &colliderSelector) {
-            Tile* t = room->getTile(x, y);
+            Tile* t = room->getTile(x, y); 
+            
             std::optional<Polyshape> p = colliderSelector.getPolygon();
             if (t)
                 t->setPolygon(p);

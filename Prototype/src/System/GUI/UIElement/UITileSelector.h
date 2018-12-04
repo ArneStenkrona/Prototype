@@ -2,7 +2,7 @@
 #include "UISelectableTile.h"
 #include "UISelector.h"
 #include <set>
-
+#include <vector>
 class UITileSelector : public UISelector {
 public:
     UITileSelector(int _posx, int _posy, int _layer,
@@ -11,6 +11,8 @@ public:
 
     //Creates and returns a tile based on selected
     Tile* getTile() const;
+    //Creates and returns a matrix of tiles based on selection
+    std::vector<std::vector<Tile*>> getTiles() const;
     //Renders the selected at position (x, y)
     void renderSelected(int x, int y, Color color = COLOR_WHITE);
 

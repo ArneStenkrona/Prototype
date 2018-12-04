@@ -2,6 +2,7 @@
 #include "System\IO\inputManager.h"
 #include "System\graphics\textureManager.h"
 #include <algorithm> 
+#include <iostream>
 
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows,
@@ -32,12 +33,49 @@ Tile * UITileSelector::getTile() const
     return tile;
 }
 
+std::vector<std::vector<Tile*>> UITileSelector::getTiles() const
+{
+    std::vector<std::vector<Tile*>> tiles;
+
+    tiles.resize(tileDim);
+
+    for (int i = 0; i < tileDim; i++) {
+        tiles[i].resize(tileDim);
+    }
+    for (int i = 0; i < tileDim; i++) {
+        for (int j = 0; j < tileDim; j++) {
+            int ix = i;
+            int iy = j;
+            for (int r = 0; r < rotation; r++) {
+                int temp = ix;
+                ix = (tileDim - 1) - iy;
+                iy = temp;
+            }
+
+            int i2 = i;
+            int j2 = j;
+            if ((flipH && rotation % 2 == 0) || (flipV && rotation % 2 == 1))
+                i2 = tileDim - 1 - i;
+            if ((flipV && rotation % 2 == 0) || (flipH && rotation % 2 == 1))
+                j2 = tileDim - 1 - j;
+
+            Tile *tile;
+            tile = new Tile(selectedIndex + i2 + (indexLimitX * j2),
+                            rotation, flipH, flipV);
+            tiles[ix][iy] = tile;
+        }
+    }
+    return tiles;
+}
+
 void UITileSelector::renderSelected(int x, int y, Color color)
 {
-        TextureManager::tileMap.texture.renderTile(x, y, selectedIndex,
-                                                   1, 1, flipH, flipV,
-                                                   rotation * 90, 16, 16,
-                                                   color);
+    TextureManager::tileMap.texture.renderTile(x, y, selectedIndex,
+                                               tileDim, tileDim, flipH, flipV,
+                                               rotation * 90, 
+                                               (tileDim * Tile::TILE_SIZE) / 2 , 
+                                               (tileDim * Tile::TILE_SIZE) / 2,
+                                               color, false);
 }
 
 bool UITileSelector::withinSelection(int idx)
@@ -162,12 +200,20 @@ void UITileSelector::render()
 
 void UITileSelector::setSelected(int i)
 {
+    int diffX = indexLimitX - (i % indexLimitX) - tileDim;
+    if (diffX < 0) i += diffX;
+    int diffY = indexLimitY - (i / indexLimitX) - tileDim;
+    if (diffY < 0) i += diffY * indexLimitX;
     UISelector::setSelected(i);
     updateSelectedIndices();
 }
 
 void UITileSelector::setHoverIndex(int i)
 {
+    int diffX = indexLimitX - ((i + offset) % indexLimitX) - tileDim;
+    if (diffX < 0) i += diffX;
+    int diffY = indexLimitY - ((i + offset) / indexLimitX) - tileDim;
+    if (diffY < 0) i += diffY * indexLimitX;
     UISelector::setHoverIndex(i);
     updateHoverIndices();
 }
