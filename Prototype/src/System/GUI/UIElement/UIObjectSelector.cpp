@@ -27,4 +27,5 @@ void UIObjectSelector::renderSelected(int x, int y, Color color)
                                                                    1, 1, flipH, flipV,
                                                                    rotation * 90, 16, 16,
                                                                    color);
+        UISelector::renderSelected(x, y, COLOR_PINK);
 }

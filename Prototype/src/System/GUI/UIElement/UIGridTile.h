@@ -14,9 +14,6 @@ public:
 private:
     unsigned int indX, indY;
 
-    //border colors
-    unsigned char r, g, b, a;
-
     void render();
     //called if mouse is over
     void onMouseOver();

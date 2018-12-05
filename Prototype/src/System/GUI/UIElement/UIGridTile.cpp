@@ -24,11 +24,15 @@ void UIGridTile::render()
             break;
         case UIToolSelector::DELETE_TOOL:
             TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, 1, 1, 1, false, false, 0, 0, 0, { 255, 255, 255, 160 });
+            UIElement::drawSquare(width, height, COLOR_RED, OUTLINE_SQUARE);
             break;
         }
     }
+    else {
+        UIElement::drawSquare(width, height, {0xFF,0xFF,0xFF,0x08}, OUTLINE_SQUARE);
 
-    UIElement::drawSquare(width, height, { r, g, b, a }, OUTLINE_SQUARE);
+    }
+
 }
 
 void UIGridTile::onMouseOver()
@@ -38,10 +42,6 @@ void UIGridTile::onMouseOver()
     if (getKey(MOUSE_LEFT)) {
         selector->setElement(indX, indY);
     }
-    r = 0xff;
-    g = 0x00;
-    b = 0x00;
-    a = 0xff;
 }
 
 void UIGridTile::onMouseLeft()
@@ -51,10 +51,6 @@ void UIGridTile::onMouseLeft()
 
 void UIGridTile::update()
 {
-    r = 0x00;
-    g = 0x00;
-    b = 0x00;
-    a = 0x40;
 }
 
 void UIGridTile::onSelect()

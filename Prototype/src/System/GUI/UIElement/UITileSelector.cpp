@@ -3,6 +3,7 @@
 #include "System\graphics\textureManager.h"
 #include <algorithm> 
 #include <iostream>
+#include "System\graphics\graphicsEngine.h"
 
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows,
@@ -82,6 +83,10 @@ void UITileSelector::renderSelected(int x, int y, Color color)
                                                (tileDim * Tile::TILE_SIZE) / 2 , 
                                                (tileDim * Tile::TILE_SIZE) / 2,
                                                color, false);
+
+    SDL_Rect rect = { x, y, tileDim * Tile::TILE_SIZE, tileDim * Tile::TILE_SIZE };
+    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 0xFF, 0x00, 0x00, 0xFF);
+    SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &rect);
 }
 
 bool UITileSelector::withinSelection(int idx)
@@ -188,13 +193,15 @@ void UITileSelector::clearHoverIndices()
 void UITileSelector::update()
 {
     UISelector::update();
-    if (getKeyDown(INPUT_KEY_KP_MINUS) && tileDim > 1) {
-        tileDim--;
-        updateSelectedIndices();
-    }
-    if (getKeyDown(INPUT_KEY_KP_PLUS) && tileDim < std::min(rows, columns)) {
-        tileDim++;
-        updateSelectedIndices();
+    if (getActiveSelector() == this) {
+        if (getKeyDown(INPUT_KEY_KP_MINUS) && tileDim > 1) {
+            tileDim--;
+            updateSelectedIndices();
+        }
+        if (getKeyDown(INPUT_KEY_KP_PLUS) && tileDim < std::min(rows, columns)) {
+            tileDim++;
+            updateSelectedIndices();
+        }
     }
 }
 
