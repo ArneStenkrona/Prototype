@@ -7,7 +7,7 @@
 UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
                               unsigned int _columns, unsigned int _rows,
                               Color _selectedColor, Color _hoverColor)
-    : UISelector(_posx, _posy, _layer, _columns, _rows, 16, 16, "TILES", _selectedColor, _hoverColor), tileDim(1),
+    : UISelector(_posx, _posy, _layer, _columns, _rows, Tile::TILES_PER_ROW, Tile::TILES_PER_COLUMN, "TILES", _selectedColor, _hoverColor), tileDim(1),
       selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
     selectables.resize(columns + 1);

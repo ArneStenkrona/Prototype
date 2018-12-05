@@ -17,7 +17,9 @@ void UISelectableTile::render()
 {
     TextureManager::tileMap.texture.renderTile(positionX, positionY, index + selector->getOffset(),
                                                                      1, 1, false, false,
-                                                                     0, 16, 16);
+                                                                     0, 
+                                                                     Tile::TILE_SIZE / 2, 
+                                                                     Tile::TILE_SIZE / 2);
     Color borderColor;
     int borderType;
 
