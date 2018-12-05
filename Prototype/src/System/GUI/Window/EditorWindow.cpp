@@ -21,9 +21,23 @@ private:
     Editor* editor;
 };
 
+class UINewFilePromptListener : public UIPromptListener {
+public:
+    UINewFilePromptListener() 
+        : UIPromptListener("FILENAME: ")
+          {}
+
+    void ok() {
+        UIPromptListener::ok();
+        Room("Assets/Rooms/" + input + ".room", 64, 64);
+    }
+  
+private:
+};
+
 EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
-    buttons{ UIButton(new UIPromptListener("FILENAME: "), 0, 0, 70, 20, 1, "NEW FILE") ,
+    buttons{ UIButton(new UINewFilePromptListener(), 0, 0, 70, 20, 1, "NEW FILE") ,
              UIButton(new UISaveFileListener(editor), 70, 0, 30, 20, 1,"SAVE")}
 {
 }

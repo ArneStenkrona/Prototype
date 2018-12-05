@@ -11,8 +11,13 @@
 
 class Room {
 public:
-
+    //Creates a room object that is loaded from existing file
     Room(const std::string _file_path, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC);
+
+    //Creates a room object and a new room file with dimensions x,y
+    Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC,
+        int _tileMapIndex = 0, int _backgroundIndex = 0);
+
     ~Room();
 
     //loads the matrix from .txt file
@@ -24,7 +29,6 @@ public:
     void saveToFile(const std::string &path);
     //Saves the room, with default argument being the file_path variable.
     void saveToFile();
-
 
 
     void renderBackground(Point position);

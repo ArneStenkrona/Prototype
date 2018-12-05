@@ -3,7 +3,15 @@
 #include "System\IO\inputManager.h"
 
 class OkListener : public UIActionListener {
+public:
+    OkListener(UIPromptListener * _pl) :
+        pl(_pl) {}
 
+    void actionPerformed(UIEvent* e) {
+        pl->ok();
+    }
+private:
+    UIPromptListener* pl;
 };
 
 class CancelListener : public UIActionListener {
@@ -24,7 +32,7 @@ UIPrompt::UIPrompt(UIPromptListener * _listener, int _positionX, int _positionY,
      label(_label), textBox(new UITextBox(0, 0, width - 8, _layer)),
      listener(_listener)
 {
-    attach(new UIButton(new OkListener(), 50, 50, 40, 20, 0, "OK"), ALIGN_DOWN, -30, -5);
+    attach(new UIButton(new OkListener(_listener), 50, 50, 40, 20, 0, "OK"), ALIGN_DOWN, -30, -5);
     attach(new UIButton(new CancelListener(_listener), 50, 50, 40, 20, 0, "Cancel"), ALIGN_DOWN, 30, -5);
 
     attach(textBox, ALIGN_UP, 0, 20);
@@ -68,6 +76,7 @@ void UIPromptListener::ok()
 {
     input = prompt->getInput();
     delete (prompt);
+    prompt = NULL;
 }
 
 void UIPromptListener::actionPerformed(UIEvent * e)

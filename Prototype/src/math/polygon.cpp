@@ -123,6 +123,7 @@ Polyshape Polyshape::parsePolygon(std::string s)
     std::vector<Point> points;
     std::vector<std::string> pointStrings = stringSplitter(s, ')');
     for (int i = 0; i < pointStrings.size(); i++) {
+
         pointStrings[i].erase(0,1);
         std::vector<std::string> doubles = stringSplitter(pointStrings[i], ',');
         points.push_back(Point(atof(doubles[0].c_str()), atof(doubles[1].c_str())));
@@ -142,7 +143,7 @@ void Polyshape::renderPolygon(int x, int y, Color color)
 {
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
     for (int i = 0; i < vertices.size(); i++) {
-        //Looks wierd but makes sure polygons are drawned contained within its dimensions
+        //Weird code that makes sure polygons are drawn contained within its dimensions
         int a = (abs(vertices[i].x) >= (int)(_width) ? vertices[i].x - 1 : vertices[i].x) + x;
         int b = (abs(vertices[i].y) >= (int)(_height) ? vertices[i].y - 1 : vertices[i].y) + y;
         int c = (abs(vertices[(i + 1) % vertices.size()].x) >= (int)_width ?

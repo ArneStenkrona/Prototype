@@ -33,10 +33,10 @@ public:
     //Closes prompt
     void cancel();
     //Closes prompt and retrieves input
-    void ok();
+    virtual void ok();
 
     void actionPerformed(UIEvent* e);
-private:
+protected:
     UIPrompt* prompt;
     //Label of the prompt
     std::string label;

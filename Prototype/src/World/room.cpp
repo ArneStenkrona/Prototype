@@ -27,6 +27,21 @@ Room::Room(const string _file_path, SoundManager::MUSIC _music)
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
 
+Room::Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music,
+      int _tileMapIndex, int _backgroundIndex)
+    : file_path(_file_path), _width(-1), _height(-1), 
+      music(_music), tileMapIndex(_tileMapIndex), backgroundIndex(_backgroundIndex)
+{
+    parallaxBackground = new ParallaxBackground(Point::empty);
+
+    tileMatrix.resize(x);
+    for (int i = 0; i < x; i++) {
+        tileMatrix[i].resize(y, NULL);
+    }
+
+    saveToFile();
+}
+
 Room::~Room()
 {
     unload();
@@ -87,23 +102,23 @@ void Room::saveToFile(const std::string &path)
             if (tileMatrix[x][y] != NULL) {
                 buffer += "["; // START OF TILE
 
-                buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "| "; //Tile texture index
+                buffer += std::to_string(tileMatrix[x][y]->getIndex()) + "|"; //Tile texture index
 
-                buffer += std::to_string(tileMatrix[x][y]->getRotation()) + "| "; //Rotation
+                buffer += std::to_string(tileMatrix[x][y]->getRotation()) + "|"; //Rotation
 
                 //FLIP
                 bool flipH, flipV;
                 tileMatrix[x][y]->getFlip(flipH, flipV);
                 buffer += BOOL_STR(flipH);
                 buffer += BOOL_STR(flipV); 
-                buffer += +"| ";
+                buffer += +"|";
 
 
                 //Gets all the points of collider if one is present
                 if (tileMatrix[x][y]->hasCollider()) {
                     buffer += "<";
                     for (int i = 0; i < tileMatrix[x][y]->getPolygon()->numberOfVertices; i++) {
-                        buffer += "(" + std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].x) + ", ";
+                        buffer += "(" + std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].x) + ",";
                         buffer += std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].y) + ")";
                     }
                     buffer += ">";
@@ -111,7 +126,7 @@ void Room::saveToFile(const std::string &path)
                 else {
                     buffer += "N"; //Notifies lack of collider
                 }
-                buffer += +"| ";
+                buffer += +"|";
 
                 buffer += std::to_string(tileMatrix[x][y]->getObject());
 
@@ -145,7 +160,14 @@ Point Room::getPosition()
 
 void Room::instantiate()
 {
+
+    tileGameObjectMatrix.resize(tileMatrix.size());
+    dynamicGameObjectMatrix.resize(tileMatrix.size());
+
     for (int x = 0; x < tileMatrix.size(); x++) {
+        tileGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
+        dynamicGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
+
         for (int y = 0; y < tileMatrix[x].size(); y++) {
             if (tileMatrix[x][y] != NULL) {
                 tileGameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
@@ -157,7 +179,9 @@ void Room::instantiate()
 
 void Room::deInstantiate()
 {
-    for (int x = 0; x < tileGameObjectMatrix.size(); x++) {
+    dynamicGameObjectMatrix.clear();
+    tileGameObjectMatrix.clear();
+    /*for (int x = 0; x < tileGameObjectMatrix.size(); x++) {
         for (int y = 0; y < tileGameObjectMatrix[x].size(); y++) {
             delete tileGameObjectMatrix[x][y];
             tileGameObjectMatrix[x][y] = nullptr;
@@ -166,7 +190,8 @@ void Room::deInstantiate()
         }
     }
     //Shrink vector
-    tileGameObjectMatrix.resize(0);
+    dynamicGameObjectMatrix.resize(0);
+    tileGameObjectMatrix.resize(0);*/
 }
 
 Tile * Room::getTile(int x, int y)
@@ -251,12 +276,12 @@ void Room::readFromFile()
         index++;
     }
     //Resize matrix so that it can hold the room
-    tileGameObjectMatrix.resize(sizeX);
-    dynamicGameObjectMatrix.resize(sizeX);
+    //tileGameObjectMatrix.resize(sizeX);
+    //dynamicGameObjectMatrix.resize(sizeX);
     tileMatrix.resize(sizeX);
     for (int i = 0; i < sizeX; i++) {
-        tileGameObjectMatrix[i].resize(sizeY, NULL);
-        dynamicGameObjectMatrix[i].resize(sizeY, NULL);
+        //tileGameObjectMatrix[i].resize(sizeY, NULL);
+        //dynamicGameObjectMatrix[i].resize(sizeY, NULL);
         tileMatrix[i].resize(sizeY, NULL);
     }
     //Traverses the room and creates tiles
@@ -274,18 +299,16 @@ void Room::readFromFile()
     //buffer to store variable
     vector<string> buffer;
 
-    buffer = brokenStringSplitter(roomData, '\n');
-    buffer.pop_back();
+    buffer = stringSplitter(roomData, '\n');
 
     for (int i = 0; i < buffer.size(); i++) {
         //separate by each tile
-        vector<string> tileBuffer = brokenStringSplitter(buffer[i], ']');
-        tileBuffer.pop_back();
+        vector<string> tileBuffer = stringSplitter(buffer[i], ']');
         for (int j = 0; j < tileBuffer.size(); j++) {
-            if (tileBuffer[j][0] != 'N') {
+            if (tileBuffer[j][1] != 'N') {
 
                 //separate each data point
-                vector<string> dataPoints = brokenStringSplitter(tileBuffer[j], '|');
+                vector<string> dataPoints = stringSplitter(tileBuffer[j], '|');
 
                 //Assign variables
                 if (dataPoints[0][0] == '[') dataPoints[0].erase(0, 1);
@@ -293,6 +316,7 @@ void Room::readFromFile()
                 rotation = std::stoi(dataPoints[1]);
                 flipH = dataPoints[2][0] != 'F';
                 flipV = dataPoints[2][1] != 'F';
+                trim(dataPoints[3]);
                 hasCollider = dataPoints[3][0] != 'N';
 
                 if (hasCollider) {
@@ -315,5 +339,5 @@ void Room::readFromFile()
 
     _width = sizeX * Tile::TILE_SIZE;
     _height = sizeY * Tile::TILE_SIZE;
-    parallaxBackground->setOrigin(Point(0, 0));// _width / 2, _height / 2));
+    parallaxBackground->setOrigin(Point(0, 0));
 }
