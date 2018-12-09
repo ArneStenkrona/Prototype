@@ -11,6 +11,7 @@ Container::Container(GameObject * _object) : Component(_object)
     collider = requireComponent<PolygonCollider>();
 
     sprite->texture = &TextureManager::spriteSheets[TextureManager::OBJECTS_1];
+    sprite->setWidthHeight(2, 2);
 
     collider->setStatic(true);
     collider->setPolygon(Rectangular(Point(8, 8), 16, 24));

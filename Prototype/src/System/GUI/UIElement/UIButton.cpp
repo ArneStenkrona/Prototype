@@ -12,7 +12,7 @@ UIButton::UIButton(UIActionListener* _listener, int _positionX, int _positionY, 
 UIButton::~UIButton()
 {
     delete listener;
-    listener = 0;
+    listener = nullptr;
 }
 
 void UIButton::sendEvent()

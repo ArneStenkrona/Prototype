@@ -12,8 +12,8 @@ using namespace::std;
 vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();
 
 //Screen dimension constants
-const float GraphicsEngine::SCALE_X = 2;
-const float GraphicsEngine::SCALE_Y = 2;
+const float GraphicsEngine::SCALE_X = 3;
+const float GraphicsEngine::SCALE_Y = 3;
 const int GraphicsEngine::SCREEN_WIDTH = GraphicsEngine::SCALE_X * 512;
 const int GraphicsEngine::SCREEN_HEIGHT = GraphicsEngine::SCALE_Y * 288;
 //Frame rate related
@@ -63,8 +63,8 @@ LWindow * GraphicsEngine::createGameWindow()
 EditorWindow * GraphicsEngine::createEditorWindow(Editor *editor)
 {
     delete(activeWindow);
-    EditorWindow* win = new EditorWindow(editor, SCREEN_WIDTH + (7 * Tile::TILE_SIZE * SCALE_X), 
-                                         SCREEN_HEIGHT + (3 * Tile::TILE_SIZE * SCALE_Y), 
+    EditorWindow* win = new EditorWindow(editor, SCREEN_WIDTH + (8 * Tile::TILE_SIZE * SCALE_X), 
+                                         SCREEN_HEIGHT + (4 * Tile::TILE_SIZE * SCALE_Y), 
                                          SCALE_X, SCALE_Y, NULL);
     activeWindow = win;
     activeRenderer = activeWindow->getRenderer();

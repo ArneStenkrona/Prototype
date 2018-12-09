@@ -9,13 +9,13 @@ public:
     //The listener is destroyed when UIButton is destroyed
     UIButton(UIActionListener* _listener, int _positionX, int _positionY, int _width, int _height,
              int _layer, std::string _text);
-    ~UIButton();
+    virtual ~UIButton();
  
 protected:
     const std::string text;
     
     //Generates and sends an event to owner
-    //Event does not survive the generateEvent function call
+    //Event does not survive the sendEvent function call
     virtual void sendEvent();
 
 private:

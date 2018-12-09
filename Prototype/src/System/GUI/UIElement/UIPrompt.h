@@ -9,7 +9,6 @@ class UIPrompt : public UIMovable {
 public:
     UIPrompt(UIPromptListener* _listener, int _positionX, int _positionY, int _width, int _height,
         int _layer, std::string _label);
-    ~UIPrompt();
 
     std::string getInput();
 

@@ -38,7 +38,6 @@ void Movement::onCollisionExit()
 {
 }
 
-
 void Movement::start()
 {
 }

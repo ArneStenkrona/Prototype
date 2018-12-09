@@ -24,9 +24,10 @@ void Debug_scene0::setUpScene()
     Scene::setUpScene();
 
     GameObject *c = Character().instantiate();
-
     GameObject *weapon = new GameObject();
     weapon->addComponent<Weapon>()->setOwner(c);
+    //c->getComponent<Weapon>()->setOwner(weapon);
+
 
     GameObject *camera = new GameObject();
     camera->addComponent<Camera>()->setTarget(c);

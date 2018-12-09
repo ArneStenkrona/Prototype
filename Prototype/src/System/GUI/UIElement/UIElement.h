@@ -28,7 +28,7 @@ public:
     // _tangible - determines if the element can be interacted with
     // _visible - determines if the element should be rendered
     UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _tangible, bool _visible = true);
-    ~UIElement();
+    virtual ~UIElement();
 
     int positionX, positionY;
     int width, height;

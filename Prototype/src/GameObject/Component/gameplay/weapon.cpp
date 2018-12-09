@@ -5,6 +5,7 @@
 #include "System\Physics\physicsEngine.h"
 #include "GameObject\objectPool.h"
 #include "System\sound\soundManager.h"
+#include "movement.h"
 
 Weapon::Weapon(GameObject * _object) : Component(_object)
 {
@@ -17,7 +18,7 @@ Weapon::Weapon(GameObject * _object) : Component(_object)
 
     sprite->texture = &TextureManager::spriteSheets[TextureManager::PRT];
     sprite->setTileIndex(240);
-    //sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
+    sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
     animator->addClip(AnimationClip{ "idle", 240, 243, 7 });
     animator->addClip(AnimationClip{ "shoot", 244, 246, 7, {{244, SoundManager::LASER_SOUND}} });
 }
@@ -37,7 +38,7 @@ void Weapon::lateUpdate()
     //Update position and rotation
     int x, y;
     getMouseWorldCoordinates(x, y);
-    Point direction = (renderer->getCameraPosition() + Point(x, y) - (ownerPosition->position + Point(16, 12))).normalized();
+    Point direction = (Renderer::getCameraPosition() + Point(x, y) - (ownerPosition->position + Point(16, 12))).normalized();
     if (direction.x < 0) {
         sprite->setMirror(false, true);
     }
@@ -92,5 +93,5 @@ void Weapon::setOwner(GameObject* owner)
     ownerPosition = owner->getComponent<Position>();
     ownerVelocity = owner->getComponent<Velocity>();
     int ownerLayer = owner->getComponent<Renderer>()->getRenderLayer();
-    renderer->setRenderLayer((ownerLayer > 0 ? ownerLayer - 1 : ownerLayer                                     ));
+    renderer->setRenderLayer((ownerLayer > 0 ? ownerLayer - 1 : ownerLayer));
 }

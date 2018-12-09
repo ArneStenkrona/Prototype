@@ -8,6 +8,8 @@ UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer,
                                Color _selectedColor, Color _hoverColor)
     : UISelector(_posx, _posy, _layer, 1, TOTAL_TOOLS, 1, TOTAL_TOOLS, "TOOLS", _selectedColor, _hoverColor)
 {
+    width = 32 * columns;
+    height = LABEL_HEIGHT + 32 * rows;
     selectables.resize(columns + 1);
     for (int i = 0; i < columns; i++) {
         selectables[i].resize(rows);

@@ -12,18 +12,18 @@
 #include <math.h> 
 
 std::vector<Polyshape> Polyshape::basicPolygons = { 
-    Rectangular(Point(0, 0), 32, 32),
-    Triangle(Point(0, 0), Point(32, 32), Point(0, 32)),
-    Triangle(Point(32, 0), Point(32, 32), Point(0, 32)),
-    Triangle(Point(0, 0), Point(32, 0), Point(0, 32)),
-    Triangle(Point(32, 0), Point(32, 32), Point(0, 0)),
-    Rectangular(Point(24, 0), Point(32, 0), Point(32, 32), Point(24, 32)),
-    Rectangular(Point(0, 0), Point(8, 0), Point(8, 32), Point(0, 32)),
-    Triangle(Point(0, 16), Point(32, 32), Point(0, 32)),
-    Rectangular(Point(24, 22), Point(32, 22), Point(32, 32), Point(8, 32)),
-    Triangle(Point(0, 22), Point(16, 32), Point(32, 32)),
-    Triangle(Point(0, 32.75), Point(32, 8), Point(32, 32)),
-    Triangle(Point(0, 8), Point(32, 0), Point(32, 32))
+    Rectangular(Point(0, 0), Tile::TILE_SIZE, Tile::TILE_SIZE),
+    Triangle(Point(0, 0), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(0, Tile::TILE_SIZE)),
+    Triangle(Point(Tile::TILE_SIZE, 0), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(0, Tile::TILE_SIZE)),
+    Triangle(Point(0, 0), Point(Tile::TILE_SIZE, 0), Point(0, Tile::TILE_SIZE)),
+    Triangle(Point(Tile::TILE_SIZE, 0), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(0, 0)),
+    Rectangular(Point(Tile::TILE_SIZE - (Tile::TILE_SIZE / 4), 0), Point(Tile::TILE_SIZE, 0), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(Tile::TILE_SIZE - (Tile::TILE_SIZE / 4), Tile::TILE_SIZE)),
+    Rectangular(Point(0, 0), Point((Tile::TILE_SIZE / 4), 0), Point((Tile::TILE_SIZE / 4), Tile::TILE_SIZE), Point(0, Tile::TILE_SIZE)),
+    Triangle(Point(0, Tile::TILE_SIZE / 2), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(0, Tile::TILE_SIZE)),
+    Rectangular(Point(Tile::TILE_SIZE - (Tile::TILE_SIZE / 4), Tile::TILE_SIZE - (Tile::TILE_SIZE / 4) - Tile::TILE_SIZE / 16), Point(Tile::TILE_SIZE, 22), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(Tile::TILE_SIZE / 4, Tile::TILE_SIZE)),
+    Triangle(Point(0, Tile::TILE_SIZE - (Tile::TILE_SIZE / 4) - Tile::TILE_SIZE / 16), Point(Tile::TILE_SIZE / 2, Tile::TILE_SIZE), Point(Tile::TILE_SIZE, Tile::TILE_SIZE)),
+    Triangle(Point(0,  Tile::TILE_SIZE + 0.75), Point(Tile::TILE_SIZE,  Tile::TILE_SIZE / 4), Point(Tile::TILE_SIZE,  Tile::TILE_SIZE)),
+    Triangle(Point(0,  Tile::TILE_SIZE / 4), Point(Tile::TILE_SIZE, 0), Point(Tile::TILE_SIZE,  Tile::TILE_SIZE))
 };
 
 Polyshape::~Polyshape()
@@ -115,7 +115,7 @@ Polyshape Polyshape::mirror(bool horizontal, bool vertical, Point offset)
 
 Polyshape Polyshape::parsePolygon(std::string s)
 {
-    if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, 32.0), Point(32.0, 32.0), Point(32.0, 0.0));
+    if (s == "B") return Rectangular(Point(0.0, 0.0), Point(0.0, Tile::TILE_SIZE), Point(Tile::TILE_SIZE, Tile::TILE_SIZE), Point(Tile::TILE_SIZE, 0.0));
     Polyshape polygon;
 
     s.erase(0,1);

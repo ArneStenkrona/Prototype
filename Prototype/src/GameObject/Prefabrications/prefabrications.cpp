@@ -21,7 +21,7 @@ GameObject * Character::instantiate() const
     GameObject* g = new GameObject(name);
 
     g->addComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
-    g->getComponent<Sprite>()->setWidthHeight(1, 2);
+    g->getComponent<Sprite>()->setWidthHeight(2, 4);
     g->getComponent<Sprite>()->setRenderOffset(0, -24);
     g->addComponent<SpriteRenderer>()->setRenderLayer(2);
     g->addComponent<Movement>();
@@ -45,7 +45,7 @@ GameObject * MuzzleFlash::instantiate() const
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>();
     g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
-    //sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
+    g->getComponent<Sprite>()->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
     return g;
 }
 
@@ -58,7 +58,7 @@ GameObject * Shrapnel::instantiate() const
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>()->setClip({ "shrapnel", 227, 229, 3 });
     g->getComponent<Sprite>()->texture = &TextureManager::spriteSheets[TextureManager::PRT];
-    //sprite->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
+    g->getComponent<Sprite>()->setWidthHeight(2, 2); //uncomment if tile-size is set to 16x16
     return g;
 }
 

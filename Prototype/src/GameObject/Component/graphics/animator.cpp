@@ -65,7 +65,9 @@ void Animator::setSpeedFactor(double factor)
 void Animator::playClip(string clipName, bool transition, bool restart)
 {
     if (!restart && clipName == currentClip->name) return;
-        queuedClip = &animationClips[clipName];
+
+    queuedClip = &animationClips[clipName];
+
     if (transition) {
         transitionFrames = (currentClip->endIndex - sprite->tileIndex) * currentClip->frameFactor;
         inTransition = true;

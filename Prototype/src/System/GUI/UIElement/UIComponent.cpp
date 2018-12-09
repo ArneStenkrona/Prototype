@@ -6,8 +6,12 @@ UIComponent::UIComponent(int _posx, int _posy, int _width, int _height, int _lay
 {
 }
 
+UIComponent::~UIComponent()
+{
+}
+
 void UIComponent::onMouseOver()
 {
-    if (panel)
+    if (panel != nullptr)
         panel->onMouseOver();
 }

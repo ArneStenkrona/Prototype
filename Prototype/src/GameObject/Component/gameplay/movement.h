@@ -30,7 +30,6 @@ private:
     Velocity *velocity;
     Sprite *sprite;
     Animator *animator;
-    Weapon* weapon;
 
     //states for state machine
     //this behaviour should be delegated to an animation data-structure

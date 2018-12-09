@@ -9,8 +9,9 @@ UIPanel::UIPanel(int _positionX, int _positionY, int _width, int _height, int _l
 UIPanel::~UIPanel()
 {
     for (UIComponent* c : attached) {
-        delete (c);
+        delete(c);
     }
+    attached.clear();
 }
 
 void UIPanel::attach(UIComponent * c, Alignment a, int offsetX, int offsetY)

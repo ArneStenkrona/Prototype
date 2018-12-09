@@ -6,7 +6,7 @@
 #include "World\objects\object.h"
 #include <iostream>
 
-const unsigned int Tile::TILE_SIZE = 32;
+const unsigned int Tile::TILE_SIZE = 16;
 //This is assuming a tilesheet is 512x512 pixels
 const unsigned int Tile::TILES_PER_ROW = 512 / Tile::TILE_SIZE;
 const unsigned int Tile::TILES_PER_COLUMN = 512 / Tile::TILE_SIZE;

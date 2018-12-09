@@ -39,10 +39,6 @@ UIPrompt::UIPrompt(UIPromptListener * _listener, int _positionX, int _positionY,
     UIElement::setSelected(this);
 }
 
-UIPrompt::~UIPrompt()
-{
-}
-
 std::string UIPrompt::getInput()
 {
     return textBox->getInput();

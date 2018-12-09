@@ -29,14 +29,13 @@ void TextureManager::initalizeTextureManager()
         background_layer_textures.push_back(std::vector<LTexture>());
         //Right now a background layer is limited to 5 parallax layers because of this for loop
         //This loop needs to be replaced by something more clever
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j < 3; j++) {
             background_layer_textures[i].push_back(LTexture());
         }
     }
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][0].loadFromFile("Assets/textures/Backgrounds/purple background2.png", GraphicsEngine::getActiveRenderer());
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][1].loadFromFile("Assets/textures/Backgrounds/plx0.png", GraphicsEngine::getActiveRenderer());
     background_layer_textures[DEFAULT_BACKGROUND_LAYER][2].loadFromFile("Assets/textures/Backgrounds/plx1.png", GraphicsEngine::getActiveRenderer());
-    background_layer_textures[DEFAULT_BACKGROUND_LAYER][3].loadFromFile("Assets/textures/Backgrounds/plx2.png", GraphicsEngine::getActiveRenderer());
 
     for (int i = 0; i < TOTAL_SPRITE_SHEETS; i++) {
         spriteSheets.push_back(LTexture());

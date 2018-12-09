@@ -12,7 +12,7 @@ public:
 
 protected:
     //To be called in derived classes instead of update
-    virtual void derivedUpdate();
+    void derivedUpdate();
 
 private:
     //Denotes if the movable is currently being dragged

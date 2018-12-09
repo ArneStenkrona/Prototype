@@ -14,7 +14,7 @@ public:
     void renderParallaxLayers(Point position);
     void setDepthOfField(double d);
 
-    void addLayer(LTexture *l, double depth);
+    void addLayer(LTexture *l, double depth, bool fixVertical = false);
 
     void addBackground(LTexture *bg);
 
@@ -26,9 +26,9 @@ private:
 
     //Background that will be rendered first and without parallax scrolling
     LTexture *background;
-    //Tuple consisting of parallax layers and their respective depths
+    //Tuple consisting of LTexture: parallax layers, double: layer depth:, bool: fix vertical movement
     //Sorted in descending order
-    vector<tuple<LTexture*, double>> parallaxLayers;
+    vector<tuple<LTexture*, double, bool>> parallaxLayers;
 
     double depthOfField;
 };

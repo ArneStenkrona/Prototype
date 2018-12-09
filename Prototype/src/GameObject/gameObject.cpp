@@ -49,6 +49,28 @@ void GameObject::updateAll()
         if (obj->active) obj->update();
     }
 
+    /*for each (GameObject* obj in just_activated_gameObjects)
+    {
+        if (obj->active) obj->onActivate();
+    }
+    //Empty list after all objects has called activate method
+    just_activated_gameObjects.clear();
+
+    for each (GameObject* obj in just_deactivated_gameObjects)
+    {
+        if (obj->active) obj->onDeactivate();
+    }
+    //Empty list after all objects has called activate method
+    just_deactivated_gameObjects.clear();*/
+}
+
+void GameObject::lateUpdateAll()
+{
+    for each (GameObject *obj in all_gameObjects)
+    {
+        if (obj->active) obj->lateUpdate();
+    }
+
     for each (GameObject* obj in just_activated_gameObjects)
     {
         if (obj->active) obj->onActivate();
@@ -62,14 +84,6 @@ void GameObject::updateAll()
     }
     //Empty list after all objects has called activate method
     just_deactivated_gameObjects.clear();
-}
-
-void GameObject::lateUpdateAll()
-{
-    for each (GameObject *obj in all_gameObjects)
-    {
-        if (obj->active) obj->lateUpdate();
-    }
 }
 
 void GameObject::setActive(bool b)

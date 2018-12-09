@@ -25,7 +25,7 @@ UIElement::~UIElement()
 {
     if (selectedElement == this)
         selectedElement = nullptr;
-    if (lastMouseOverElement == this)
+    if (lastMouseOverElement == this) 
         lastMouseOverElement = nullptr;
 
     vector<UIElement*>::iterator it = allUIElements[layer].begin();
@@ -73,8 +73,9 @@ void UIElement::updateUIElements()
         if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
             setSelected(mouseOverElement);
         }
-        if (mouseOverElement != lastMouseOverElement && lastMouseOverElement)
+        if (mouseOverElement != lastMouseOverElement && lastMouseOverElement != nullptr) {
             lastMouseOverElement->onMouseLeft();
+        }
         mouseOverElement->onMouseOver();
         lastMouseOverElement = mouseOverElement;
     }
