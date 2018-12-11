@@ -48,7 +48,6 @@ const bool GraphicsEngine::initSDL() {
 
 bool GraphicsEngine::initializeGraphicsEngine()
 {
-
     return initSDL();
 }
 

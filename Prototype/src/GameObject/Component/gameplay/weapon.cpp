@@ -61,7 +61,7 @@ void Weapon::lateUpdate()
         Point origin = position->position + (13 * direction) + Point(19, 16);
         Point end = position->position + (700 * direction) + Point(19, 16);
         RayCastHit* hit;
-        if (raycast(origin, end, hit, 0, "lsr")) {
+        if (PhysicsEngine::raycast(origin, end, hit, 0, "lsr")) {
             end = hit->getIntersection();
             Point n = hit->getNormal();
             ObjectPool::instantiate("shrapnel", { end.x, end.y - 16, n.toAngle(), 0, 16 });

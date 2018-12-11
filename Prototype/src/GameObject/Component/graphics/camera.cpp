@@ -23,7 +23,7 @@ void Camera::lateUpdate()
 
     Point targetPos = targetPosition->position + targetBounds * 0.5;
 
-    Room *room = getRoom();
+    Room *room = GameLogic::getRoom();
     Point roomPos = room->getPosition();
     Point roomDimensions = room->getDimensions();
 

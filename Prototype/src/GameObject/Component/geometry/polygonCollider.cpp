@@ -14,12 +14,13 @@ PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isS
     polygon = Rectangular(Point::empty, 32.0, 32.0);
 
     //Add to physics engine list of all hitboxes
-    ALL_COLLIDERS.push_back(this);
+    PhysicsEngine::ALL_COLLIDERS.push_back(this);
 }
 
 PolygonCollider::~PolygonCollider()
 {
-    ALL_COLLIDERS.remove(this);
+    PhysicsEngine::ALL_COLLIDERS.remove(this);
+    PhysicsEngine::removeFromAllMaskLayers(this);
 }
 
 void PolygonCollider::start()
@@ -232,12 +233,12 @@ vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonC
 
 void PolygonCollider::addToMask(unsigned int maskLayer)
 {
-    addToMaskLayer(this, maskLayer);
+    PhysicsEngine::addToMaskLayer(this, maskLayer);
 }
 
 void PolygonCollider::removeFromMask(unsigned int maskLayer)
 {
-    removeFromMaskLayer(this, maskLayer);
+    PhysicsEngine::removeFromMaskLayer(this, maskLayer);
 }
 
 

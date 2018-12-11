@@ -11,24 +11,22 @@
 #include <set>
 #include "tools\timeMacros.h"
 
-//All existing hitboxes, both active and inactive
-list<PolygonCollider*> ALL_COLLIDERS = list<PolygonCollider*>();
-//All active hitboxes
-//list<PolygonCollider*> activeColliders = list<PolygonCollider*>();
 
-//Collisions from this frame
-set<tuple<PolygonCollider*, PolygonCollider*>> currentCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
-//Collisions from previous frame
-set<tuple<PolygonCollider*, PolygonCollider*>> previousCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
+list<PolygonCollider*> PhysicsEngine::ALL_COLLIDERS = list<PolygonCollider*>();
+
+
+set<tuple<PolygonCollider*, PolygonCollider*>> PhysicsEngine::currentCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
+
+set<tuple<PolygonCollider*, PolygonCollider*>> PhysicsEngine::previousCollisions = set<tuple<PolygonCollider*, PolygonCollider*>>();
 
 //QuadTree to reduce unnecessary physics calculations
 //Argument for bounds should be dependent on room size
-QuadTree quad = QuadTree(0, Point(0, 0), Point(GraphicsEngine::SCREEN_WIDTH * 2, GraphicsEngine::SCREEN_HEIGHT * 2));
+QuadTree PhysicsEngine::quad = QuadTree(0, Point(0, 0), Point(GraphicsEngine::SCREEN_WIDTH * 2, GraphicsEngine::SCREEN_HEIGHT * 2));
 
-vector<set<PolygonCollider*>> mask = vector<set<PolygonCollider*>>();
+vector<set<PolygonCollider*>> PhysicsEngine::mask = vector<set<PolygonCollider*>>();
 
 //Updates the quad tree with all active hitboxes
-void updateQuad() {
+void PhysicsEngine::updateQuad() {
 
     //Clear previous frame
     quad.clear();
@@ -41,14 +39,21 @@ void updateQuad() {
     }
 }
 
-void updatePhysics()
+void PhysicsEngine::resetPhysics()
+{
+    PhysicsEngine::previousCollisions.clear();
+    PhysicsEngine::currentCollisions.clear();
+    quad.clear();
+}
+
+void PhysicsEngine::updatePhysics()
 {
     updateQuad();
     performHitdetection();
 }
 
 
-void performHitdetection() {
+void PhysicsEngine::performHitdetection() {
 
     for each (PolygonCollider *b in ALL_COLLIDERS)
     {
@@ -85,35 +90,42 @@ void performHitdetection() {
     currentCollisions.clear();
 }
 
-void setQuadBounds(Point _bounds)
+void PhysicsEngine::setQuadBounds(Point _bounds)
 {
     quad.setBounds(_bounds);
 }
 
-void drawQuadTree()
+void PhysicsEngine::drawQuadTree()
 {
     quad.draw();
 }
 
-void addToMaskLayer(PolygonCollider * col, unsigned int maskLayer)
+void PhysicsEngine::addToMaskLayer(PolygonCollider * col, unsigned int maskLayer)
 {
     if (maskLayer >= mask.size()) mask.resize(maskLayer + 1);
     mask[maskLayer].insert(col);
 }
 
-void removeFromMaskLayer(PolygonCollider * col, unsigned int maskLayer)
+void PhysicsEngine::removeFromMaskLayer(PolygonCollider * col, unsigned int maskLayer)
 {
     if (maskLayer < mask.size())
         mask[maskLayer].erase(col);
 }
 
-bool raycast(Point a, Point b, int maskLayer, std::string message)
+void PhysicsEngine::removeFromAllMaskLayers(PolygonCollider * col)
+{
+    for (set<PolygonCollider*> s : mask) {
+        s.erase(col);
+    }
+}
+
+bool PhysicsEngine::raycast(Point a, Point b, int maskLayer, std::string message)
 {
     RayCastHit* out;
     return raycast(a, b, out, maskLayer, message);
 }
 
-bool raycast(Point a, Point b, RayCastHit* &out, int maskLayer, std::string message)
+bool PhysicsEngine::raycast(Point a, Point b, RayCastHit* &out, int maskLayer, std::string message)
 {
     RayCastHit* hit;
     set<PolygonCollider*> returnColliders;

@@ -9,6 +9,7 @@ public:
 
     //Initalize parent gameobject
     Component(GameObject *_object);
+    virtual ~Component();
 
     //To be called on initialization in game.
     virtual void start();

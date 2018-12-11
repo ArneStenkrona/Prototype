@@ -10,6 +10,7 @@
 #include "GameObject\Component\gameplay\splash.h"
 #include "GameObject\Component\gameplay\beam.h"
 #include "GameObject\Component\gameplay\interactable\Container.h"
+#include "GameObject\Component\gameplay\interactable\Door.h"
 #include "System\sound\soundManager.h"
 
 Character::Character() : Prefabrication("character")
@@ -81,5 +82,16 @@ GameObject * GlassContainer::instantiate() const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Container>();
+    return g;
+}
+
+DoorPrefab::DoorPrefab() : Prefabrication("doorContainer")
+{
+}
+
+GameObject * DoorPrefab::instantiate() const
+{
+    GameObject* g = new GameObject(name);
+    g->addComponent<Door>()->setPath("Assets/Rooms/a.room");
     return g;
 }

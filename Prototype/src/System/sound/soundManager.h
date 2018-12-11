@@ -30,11 +30,13 @@ public:
 
     inline static SoundClip* getSound(SOUNDS sound) { return soundClips[sound]; }
 
-    inline static void playMusic(MUSIC music) { musicClips[music]->play(); }
+    static void playMusic(MUSIC music);
 
 private:
     static const std::string soundPaths[TOTAL_SOUNDS];
     static std::vector<SoundClip*> soundClips;
     static const std::string musicPaths[TOTAL_MUSIC];
     static std::vector<MusicClip*> musicClips;
+
+    static MUSIC currentMusic;
 };

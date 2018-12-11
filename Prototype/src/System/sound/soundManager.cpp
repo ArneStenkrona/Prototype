@@ -13,6 +13,7 @@ const std::string SoundManager::musicPaths[SoundManager::TOTAL_MUSIC] = { "Asset
                                                                           "Assets/Sound/music/editor/editor.mid" };
 std::vector<MusicClip*> SoundManager::musicClips;
 
+SoundManager::MUSIC SoundManager::currentMusic = TOTAL_MUSIC;
 
 void SoundManager::initalizeSoundManager()
 {
@@ -32,4 +33,19 @@ void SoundManager::closeSoundManager()
 {
     soundClips.clear();
     musicClips.clear();
+}
+
+void SoundManager::playMusic(MUSIC music)
+{
+    if (music == TOTAL_MUSIC) {
+        musicClips[currentMusic]->stop();
+    }
+    if (music == currentMusic) {
+        return;
+    }
+    else {
+        musicClips[currentMusic]->stop();
+        musicClips[music]->play();
+    }
+    currentMusic = music;
 }

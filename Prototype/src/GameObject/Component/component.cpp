@@ -5,6 +5,10 @@ Component::Component(GameObject *_object)
     object = _object;
 }
 
+Component::~Component()
+{
+}
+
 void Component::start()
 {
 }

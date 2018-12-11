@@ -46,7 +46,7 @@ void Movement::update()
 {
     Point origin = position->position + Point(3, 39.7);
 
-    grounded = raycast(origin, origin  + Point(26, 2), 0) || raycast(origin + Point(26, 0), origin + Point(-26, 2), 0);
+    grounded = PhysicsEngine::raycast(origin, origin  + Point(26, 2), 0) || PhysicsEngine::raycast(origin + Point(26, 0), origin + Point(-26, 2), 0);
 
     //Initalize direction vector to 0,0
     Point direction = Point();

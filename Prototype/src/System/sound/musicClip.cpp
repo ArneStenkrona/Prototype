@@ -21,11 +21,9 @@ MusicClip::MusicClip(std::string _filePath)
 {
     //Load music
     music = tml_load_filename(_filePath.c_str());
-    //music = Mix_LoadMUS(path.c_str());
     if (music == NULL)
     {
-        printf("Failed to load midi file");
-        //printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError());
+        printf(("Failed to load midi file " + _filePath).c_str());
     }
 }
 

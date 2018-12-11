@@ -90,6 +90,6 @@ void Tile::renderTile(int x, int y)
     //Render object
     if (objectIndex >= 0)
         TextureManager::spriteSheets[TextureManager::OBJECT_ICONS].renderTile(x, y, objectIndex,
-                                                                              1, 1, false, false,
-                                                                              0, 16, 16);
+                                                                              2, 2, false, false,
+                                                                              0, TILE_SIZE / 2, TILE_SIZE / 2);
 }

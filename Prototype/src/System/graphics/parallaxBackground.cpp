@@ -7,6 +7,7 @@ ParallaxBackground::ParallaxBackground(Point _origin): origin(_origin), depthOfF
 
 ParallaxBackground::~ParallaxBackground()
 {
+    parallaxLayers.clear();
 }
 
 void ParallaxBackground::renderParallaxLayers(Point position)

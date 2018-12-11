@@ -34,7 +34,7 @@ int main(int argc, char *args[])
     else {
     }
     if (MessageBoxA(NULL, "Open editor?", "Choose mode", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDNO) {
-        gameLoop();
+        GameLogic::gameLoop();
     }
     else {
         Editor().run();

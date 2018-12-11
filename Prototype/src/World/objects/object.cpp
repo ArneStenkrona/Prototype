@@ -1,7 +1,9 @@
 #include "object.h"
 #include "GameObject\Prefabrications\prefabrications.h"
+#include "System\graphics\textureManager.h"
 
-const Object Object::objects[256] = { Object(new GlassContainer())
+const Object Object::objects[256] = { Object(new GlassContainer()),
+                                      Object(new DoorPrefab())
 };
 
 GameObject * Object::instantiate() const

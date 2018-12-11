@@ -13,16 +13,36 @@ The list of responsibilites is a bit convoluted as of now, I will work to correc
 #include "SDL_image.h"
 #include "System/GUI/Window/lwindow.h"
 
-//Gets the current room in game
-Room *getRoom();
+class Scene;
+class GameLogic {
+public:
+    //Gets the current room in game
+    static Room *getRoom();
+    //Makes sure that the room is set after the current iteration of the gameloop
+    static void queueRoom(Room* room);
 
-//Sets the current scene in the game
-void setScene();
-//Closes the current scene by removing all gameObjects
-void closeScene();
+    //Sets the current scene in the game
+    static void setScene();
+    //Closes the current scene by removing all gameObjects
+    static void closeScene();
 
-void gameLoop();
+    static void gameLoop();
 
-void updateGameLoop();
+    static void updateGameLoop();
 
-void closeGameLogic();
+    static void closeGameLogic();
+private:
+    //Current frame of the game
+    static long currentFrame;
+    //Main window for the game
+    static LWindow *gameWindow;
+    //The current scene in game
+    static Scene *currentScene;
+    //Room to be set. Null if no room is queued
+    static Room* queuedRoom;
+
+    //Sets the current room in game
+    static void setRoom();
+    //Draw the background for the room
+    static void drawBackground();
+};

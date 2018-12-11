@@ -22,7 +22,7 @@
 
 
 Room::Room(const string _file_path, SoundManager::MUSIC _music) 
-    : file_path(_file_path), _width(-1), _height(-1), music(_music)
+    : file_path(_file_path), _width(-1), _height(-1), music(_music), instantiated(false)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
@@ -30,7 +30,8 @@ Room::Room(const string _file_path, SoundManager::MUSIC _music)
 Room::Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music,
       int _tileMapIndex, int _backgroundIndex)
     : file_path(_file_path), _width(-1), _height(-1), 
-      music(_music), tileMapIndex(_tileMapIndex), backgroundIndex(_backgroundIndex)
+      music(_music), tileMapIndex(_tileMapIndex), 
+      backgroundIndex(_backgroundIndex), instantiated(false)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 
@@ -45,8 +46,10 @@ Room::Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _musi
 Room::~Room()
 {
     unload();
-    delete(parallaxBackground);
-    parallaxBackground = NULL;
+    if (parallaxBackground) {
+        delete(parallaxBackground);
+        parallaxBackground = NULL;
+    }
 }
 
 void Room::load()
@@ -56,7 +59,7 @@ void Room::load()
 
 void Room::unload()
 {
-    deInstantiate();
+    deinstantiate();
 
     for (int x = 0; x < tileMatrix.size(); x++) {
         for (int y = 0; y < tileMatrix[x].size(); y++) {
@@ -168,27 +171,45 @@ Point Room::getPosition()
 
 void Room::instantiate()
 {
+    if (!instantiated) {
+        tileGameObjectMatrix.resize(tileMatrix.size());
+        dynamicGameObjectMatrix.resize(tileMatrix.size());
 
-    tileGameObjectMatrix.resize(tileMatrix.size());
-    dynamicGameObjectMatrix.resize(tileMatrix.size());
+        for (int x = 0; x < tileMatrix.size(); x++) {
+            tileGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
+            dynamicGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
 
-    for (int x = 0; x < tileMatrix.size(); x++) {
-        tileGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
-        dynamicGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
-
-        for (int y = 0; y < tileMatrix[x].size(); y++) {
-            if (tileMatrix[x][y] != NULL) {
-                tileGameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
-                dynamicGameObjectMatrix[x][y] = tileMatrix[x][y]->instantiateObject(x, y);
+            for (int y = 0; y < tileMatrix[x].size(); y++) {
+                if (tileMatrix[x][y] != NULL) {
+                    tileGameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
+                    dynamicGameObjectMatrix[x][y] = tileMatrix[x][y]->instantiateObject(x, y);
+                }
             }
         }
     }
+    instantiated = true;
 }
 
-void Room::deInstantiate()
+void Room::deinstantiate()
 {
+
+    for (int x = 0; x < tileGameObjectMatrix.size(); x++) {
+        for (int y = 0; y < tileGameObjectMatrix[x].size(); y++) {
+            if (tileGameObjectMatrix[x][y] != NULL) {
+                delete tileGameObjectMatrix[x][y];
+            }
+        }
+    }
+    for (int x = 0; x < dynamicGameObjectMatrix.size(); x++) {
+        for (int y = 0; y < dynamicGameObjectMatrix[x].size(); y++) {
+            if (dynamicGameObjectMatrix[x][y] != NULL) {
+                delete dynamicGameObjectMatrix[x][y];
+            }
+        }
+    }
     dynamicGameObjectMatrix.clear();
     tileGameObjectMatrix.clear();
+    instantiated = false;
 }
 
 Tile * Room::getTile(int x, int y)

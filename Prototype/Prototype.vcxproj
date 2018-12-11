@@ -158,6 +158,7 @@
     <ClInclude Include="src\GameObject\Component\environment\material.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\beam.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\interactable\Container.h" />
+    <ClInclude Include="src\GameObject\Component\gameplay\interactable\Door.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\splash.h" />
     <ClInclude Include="src\GameObject\Component\gameplay\weapon.h" />
     <ClInclude Include="src\GameObject\Component\graphics\lineRenderer.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="src\GameObject\Component\environment\material.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\beam.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\interactable\Container.cpp" />
+    <ClCompile Include="src\GameObject\Component\gameplay\interactable\Door.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\splash.cpp" />
     <ClCompile Include="src\GameObject\Component\gameplay\weapon.cpp" />
     <ClCompile Include="src\GameObject\Component\graphics\lineRenderer.cpp" />

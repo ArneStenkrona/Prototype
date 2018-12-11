@@ -30,3 +30,9 @@ public:
     GlassContainer();
     GameObject* instantiate() const;
 };
+
+class DoorPrefab : public Prefabrication {
+public:
+    DoorPrefab();
+    GameObject* instantiate() const;
+};

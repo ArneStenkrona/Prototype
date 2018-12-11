@@ -50,7 +50,7 @@ public:
     //Instantiates room by creating gameObjects
     void instantiate();
     //Removes gameObjects
-    void deInstantiate();
+    void deinstantiate();
 
     Tile *getTile(int x, int y);
     void setTile(int x, int y, Tile *tile);
@@ -66,6 +66,9 @@ private:
 
     int tileMapIndex;
     int backgroundIndex;
+
+    //Keeps track of the instantiation status
+    bool instantiated;
 
     //Background texture of this room
     //LTexture *background;

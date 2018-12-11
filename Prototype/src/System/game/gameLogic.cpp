@@ -13,37 +13,43 @@
 #include <sstream>
 #include <iostream>
 
-//The current scene in game
-Scene *currentScene;
+long GameLogic::currentFrame = 0;
+LWindow* GameLogic::gameWindow = nullptr;
+Scene* GameLogic::currentScene = nullptr;
+Room* GameLogic::queuedRoom = nullptr;
 
-//Draws the background
-void drawBackground();
-
-//Main window for the game
-LWindow *gameWindow;
-
-//Current frame of the game
-long currentFrame;
-
-Room * getRoom()
+Room * GameLogic::getRoom()
 {
     //return CURRENT_ROOM;
     return currentScene->getRoom();
 }
 
+void GameLogic::queueRoom(Room * room)
+{
+    queuedRoom = room;
+}
 
-void updateGameLoop()
+void GameLogic::setRoom()
+{
+    currentScene->setRoom(queuedRoom);
+    PhysicsEngine::resetPhysics();
+    queuedRoom = nullptr;
+    GameObject::startAll();
+}
+
+
+void GameLogic::updateGameLoop()
 {
     GraphicsEngine::clearWindow();
     drawBackground();
     GameObject::updateAll();
-    updatePhysics();
+    PhysicsEngine::updatePhysics();
     GameObject::lateUpdateAll();
     GraphicsEngine::renderGraphics();
     updateInputManager();
 }
 
-void drawBackground()
+void GameLogic::drawBackground()
 {
     if (currentScene != NULL) {
         currentScene->getRoom()->renderBackground(Renderer::getCameraPosition());
@@ -51,26 +57,26 @@ void drawBackground()
 }
 
 
-void closeGameLogic() {
+void GameLogic::closeGameLogic() {
     closeScene();
     delete(gameWindow);
     gameWindow = NULL;
 }
 
-void setScene()
+void GameLogic::setScene()
 {
     currentScene = new Debug_scene0();
     currentScene->setUpScene();
     GameObject::startAll();
 }
 
-void closeScene()
+void GameLogic::closeScene()
 {
     delete(currentScene);
     currentScene = NULL;
 }
 
-void gameLoop() {
+void GameLogic::gameLoop() {
 
     gameWindow = GraphicsEngine::createGameWindow();
 
@@ -96,10 +102,10 @@ void gameLoop() {
 
     //While games is running
     while (!gameWindow->hasExited()) {
+        if (queuedRoom)
+            setRoom();
         capTimer.start();
         updateGameLoop();
-
-        //drawQuadTree(); //This will not work until this is put in GraphicsEngine
 
         //If frame finished early
         int frameTicks = capTimer.getMicroSeconds();
