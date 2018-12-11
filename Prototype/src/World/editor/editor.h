@@ -14,6 +14,8 @@ public:
     void run();
 
     void save();
+    
+    void setRoom(Room *room);
 private:
     EditorWindow *editorWindow;
 

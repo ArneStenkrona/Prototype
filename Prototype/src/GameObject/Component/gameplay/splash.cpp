@@ -11,7 +11,7 @@ Splash::Splash(GameObject * _object) : Component(_object), clipName("flash")
     animator = requireComponent<Animator>();
     renderer = requireComponent<SpriteRenderer>();
 
-    animator->addClip({ clipName, 224, 225, 3 });
+    animator->addClip({ clipName, 224, 225, 1 });
     animator->addClip({ "none", 255, 255, 0 });
 }
 

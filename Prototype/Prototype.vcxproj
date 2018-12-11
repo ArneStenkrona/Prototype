@@ -236,6 +236,7 @@
     <ClInclude Include="src\System\sound\musicClip.h" />
     <ClInclude Include="src\System\sound\soundClip.h" />
     <ClInclude Include="src\System\sound\soundManager.h" />
+    <ClInclude Include="src\tools\fileTools.h" />
     <ClInclude Include="src\tools\stringTools.h" />
     <ClInclude Include="src\tools\timeMacros.h" />
     <ClInclude Include="src\World\editor\editor.h" />

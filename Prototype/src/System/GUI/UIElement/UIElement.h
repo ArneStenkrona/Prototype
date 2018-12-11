@@ -91,4 +91,5 @@ private:
     static unsigned int NumberOfElements;
 
     static UIElement* lastMouseOverElement;
+    static UIElement* mouseOverElement;
 };

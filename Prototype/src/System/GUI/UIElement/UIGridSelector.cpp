@@ -95,6 +95,13 @@ void UIGridSelector::onMouseOver()
 
 void UIGridSelector::setRoom(Room* _room)
 {
+    for (int i = 0; i < columns; i++) {
+        for (int j = 0; j < rows; j++) {
+            delete(tiles[i][j]);
+            tiles[i][j] = NULL;
+        }
+    }
+
     if (!_room) return;
     room = _room;
     int x = 0;

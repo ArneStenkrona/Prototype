@@ -7,13 +7,18 @@
 #include "System\GUI\UIElement\UIPrompt.h"
 #include "System\GUI\UIElement\UIActionListener.h"
 #include "World\editor\editor.h"
+#include "tools\fileTools.h"
+#define WIN32_LEAN_AND_MEAN
+#include "windows.h"
+
 const int EditorWindow::gridSize = 32;
 
 class UISaveFileListener : public UIActionListener {
 public:
-    UISaveFileListener(Editor* _editor) {
-        editor = _editor;
-    }
+    UISaveFileListener(Editor* _editor)
+    : editor(_editor)
+    {}
+
     void actionPerformed(UIEvent* e) {
         editor->save();
     }
@@ -23,21 +28,37 @@ private:
 
 class UINewFilePromptListener : public UIPromptListener {
 public:
-    UINewFilePromptListener() 
-        : UIPromptListener("FILENAME: ")
-          {}
+    UINewFilePromptListener(Editor* _editor)
+        : UIPromptListener("FILENAME: "), editor(_editor)
+    {}
+
 
     void ok() {
         UIPromptListener::ok();
-        Room("Assets/Rooms/" + input + ".room", 64, 64);
+
+        bool b = true;
+
+        if (fileExists("Assets/Rooms/" + input + ".room")) {
+            if (!(MessageBoxA(NULL, 
+                (input + ".room" + " already exists. \n Do you wish to overwrite the existing file?").c_str(),
+                "Confirm Overwrite", 
+                MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES)) {
+                b = false;
+            }
+        }
+        if (b) {
+            Room* room = new Room("Assets/Rooms/" + input + ".room", 64, 64);
+            editor->setRoom(room);
+        }
     }
   
 private:
+    Editor* editor;
 };
 
 EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
-    buttons{ UIButton(new UINewFilePromptListener(), 0, 0, 70, 20, 1, "NEW FILE") ,
+    buttons{ UIButton(new UINewFilePromptListener(editor), 0, 0, 70, 20, 1, "NEW FILE") ,
              UIButton(new UISaveFileListener(editor), 70, 0, 30, 20, 1,"SAVE")}
 {
 }

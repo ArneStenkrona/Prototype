@@ -60,7 +60,7 @@ void Editor::run()
             LWindow::updateAll();
 
         }   
-        if (MessageBoxA(NULL, "Save?", "Choose mode", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
+        if (MessageBoxA(NULL, "Do you wish to save?", "Save", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
             save();
         }
     }
@@ -69,6 +69,17 @@ void Editor::run()
 void Editor::save()
 {
     activeRoom->saveToFile(getFilePath(false));
+}
+
+void Editor::setRoom(Room *room)
+{
+    if (activeRoom) {
+        activeRoom->unload();
+        delete(activeRoom);
+    }
+    activeRoom = room;
+    activeRoom->load();
+    editorWindow->setRoom(activeRoom);
 }
 
 bool Editor::openFile()

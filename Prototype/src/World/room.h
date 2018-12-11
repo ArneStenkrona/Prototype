@@ -62,7 +62,7 @@ public:
 
 private:
     //File path of the room data
-    std::string file_path;
+    const std::string file_path;
 
     int tileMapIndex;
     int backgroundIndex;

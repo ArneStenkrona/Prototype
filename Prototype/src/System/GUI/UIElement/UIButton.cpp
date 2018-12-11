@@ -1,6 +1,7 @@
 #include "UIButton.h"
 #include "System\IO\inputManager.h"
 #include "UIEvent.h"
+#include <iostream>
 
 UIButton::UIButton(UIActionListener* _listener, int _positionX, int _positionY, int _width, int _height,
                    int _layer, std::string _text)
@@ -30,6 +31,7 @@ void UIButton::onMouseOver()
         holdClick = true;
     }
     if (getKeyUp(MOUSE_LEFT)) {
+        std::cout << "BUTTON: " << this << std::endl;
         sendEvent();
     }
 }

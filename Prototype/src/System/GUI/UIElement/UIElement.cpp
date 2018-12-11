@@ -5,6 +5,7 @@
 
 std::vector<std::vector<UIElement*>> UIElement::allUIElements = std::vector<std::vector<UIElement*>>();
 UIElement* UIElement::selectedElement = nullptr;
+UIElement* UIElement::mouseOverElement = nullptr;
 UIElement* UIElement::lastMouseOverElement = nullptr;
 unsigned int UIElement::NumberOfElements = 0;
 
@@ -23,11 +24,6 @@ UIElement::UIElement(int _posx, int _posy, int _width, int _height,
 
 UIElement::~UIElement()
 {
-    if (selectedElement == this)
-        selectedElement = nullptr;
-    if (lastMouseOverElement == this) 
-        lastMouseOverElement = nullptr;
-
     vector<UIElement*>::iterator it = allUIElements[layer].begin();
 
     while (it != allUIElements[layer].end()) {
@@ -38,6 +34,13 @@ UIElement::~UIElement()
             break;
         }
         else ++it;
+    }
+    if (selectedElement == this)
+        selectedElement = nullptr;
+    if (mouseOverElement == this)
+        mouseOverElement = nullptr;
+    if (lastMouseOverElement == this) {
+        lastMouseOverElement = nullptr;
     }
 }
 
@@ -50,13 +53,14 @@ inline bool pointWithin(int px, int py, int posx, int posy,
 
 void UIElement::updateUIElements()
 {
+
     //Element that mouse is over, if visible
     //If mouse is over more than one element it
     //will prioritize lowest layer number
     //If more than one have the lowest layer number
     //one of them will be picked according to
     //iterator order
-    UIElement* mouseOverElement = nullptr;
+    mouseOverElement = nullptr;
     for (std::vector<UIElement*> s : allUIElements) {
         for (UIElement* e : s) {
             e->update();

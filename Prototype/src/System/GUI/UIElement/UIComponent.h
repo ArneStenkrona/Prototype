@@ -7,8 +7,6 @@ class UIComponent : public UIElement {
 public:
     UIComponent(int _posx, int _posy, int _width, int _height, int _layer);
 
-    ~UIComponent();
-
 protected:
     void onMouseOver();
 private:
