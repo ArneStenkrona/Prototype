@@ -1,4 +1,5 @@
 #include "soundManager.h"
+#include <iostream>
 const std::string SoundManager::soundPaths[SoundManager::TOTAL_SOUNDS] = {"Assets/Sound/sound/default/arugh.wav",
                                                                           "Assets/Sound/sound/prt/laser.wav",
                                                                           "Assets/Sound/sound/prt/thud.wav",
@@ -44,7 +45,8 @@ void SoundManager::playMusic(MUSIC music)
         return;
     }
     else {
-        musicClips[currentMusic]->stop();
+        if (currentMusic < TOTAL_MUSIC)
+            musicClips[currentMusic]->stop();
         musicClips[music]->play();
     }
     currentMusic = music;

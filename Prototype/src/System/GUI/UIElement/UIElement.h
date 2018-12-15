@@ -58,6 +58,8 @@ protected:
     bool visible;
 
     virtual void render();
+    //called if mouse enters
+    virtual void onMouseEnter();
     //called if mouse is over
     virtual void onMouseOver();
     //called if mouse leaves

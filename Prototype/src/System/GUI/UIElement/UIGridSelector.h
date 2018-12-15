@@ -9,6 +9,7 @@
 #include "UIBorder.h"
 #include "UIInfoBox.h"
 
+class UIObjectPlacementListener;
 //Bad name for class, should be something like "UIEditor"
 //because of big responsibility and also because it doesn't inherit from UISelector
 class UIGridSelector : public UIElement {
@@ -32,6 +33,8 @@ private:
     UIObjectSelector objectSelector;
     UIToolSelector toolSelector;
 
+    UIObjectPlacementListener* objectPlacementListener;
+
     UIInfoBox infoBox;
 
     std::vector<std::vector<UIGridTile*>> tiles;
@@ -54,6 +57,13 @@ private:
     //Sets element from active selector at position (x, y)
     void setElement(int x, int y);
     
+    //Sets selected tile at position (x, y)
+    void setTile(int x, int y);
+    //Sets selected collider at position (x, y)
+    void setCollider(int x, int y);
+    //Sets selected object at position (x, y)
+    void setObject(int x, int y);
+
     void setActiveTileCoordinates(int x, int y);
 
     friend class UIGridTile;

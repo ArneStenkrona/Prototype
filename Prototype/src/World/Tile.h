@@ -25,7 +25,8 @@ public:
     inline void getFlip(bool &_flipH, bool &_flipV) { _flipH = flipH; _flipV = flipV; }
 
     inline int getObject() const { return objectIndex; }
-    inline void setObject(int index) { objectIndex = index; }
+    //Sets the object index
+    void setObject(int index);
 
     GameObject* gameObjectFromTile(int x, int y) const;
     //Instantiates the object contained by this tile, if any, else returns null
@@ -41,6 +42,8 @@ private:
     std::optional<Polyshape> polygon;
     //Index of object to be instantiated, as defined in object.h, -1 if not present;
     int objectIndex;
+    //Parameters sent to the object when instantiated
+    std::vector<std::string> objectParameters;
     //multiples of 90 degree rotation
     int rotation;
     bool flipH;

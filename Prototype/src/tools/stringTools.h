@@ -4,6 +4,7 @@
 #include <algorithm> 
 #include <cctype>
 #include <locale>
+#include <numeric>
 
 //tools used for manipulating strings
 
@@ -28,4 +29,9 @@ static inline void rtrim(std::string &s) {
 static inline void trim(std::string &s) {
     ltrim(s);
     rtrim(s);
+}
+
+static inline std::string flattenStringVector(std::vector<std::string> v) {
+    std::string s;
+    return accumulate(begin(v), end(v), s);
 }

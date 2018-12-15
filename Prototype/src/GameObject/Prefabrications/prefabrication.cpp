@@ -5,7 +5,7 @@ Prefabrication::Prefabrication(std::string _name)
 {
 }
 
-GameObject * Prefabrication::instantiate() const
+GameObject * Prefabrication::instantiate(std::string parameters) const
 {
     return new GameObject(name);
 }

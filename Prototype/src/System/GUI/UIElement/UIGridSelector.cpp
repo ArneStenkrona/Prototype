@@ -6,6 +6,30 @@
 #include "World\Tile.h"
 #include "UIButton.h"
 #include <optional>
+#include "System\GUI\UIElement\UIMultiPrompt.h"
+
+class UIObjectPlacementListener : public UIMultiPromptListener {
+public:
+    UIObjectPlacementListener()
+        : UIMultiPromptListener("OBJECT PARAMETERS: ", {})
+    {}
+
+    void ok() {
+
+    }
+
+    void onNotify() {
+        if (prompt && UIElement::getSelected() != prompt) {
+            cancel();
+        }
+    }
+
+    void setParameters(std::vector<std::string> _parameters) {
+        labels = _parameters;
+    }
+
+private:
+};
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
@@ -23,13 +47,15 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     border{ UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                      0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2),
             UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
-                     GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)}
-
+                     GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)},
+    objectPlacementListener(new UIObjectPlacementListener())
 {
     setRoom(room);
     setSelected(&tileSelector);
     setSelected(this);
 }
+
+
 
 UIGridSelector::~UIGridSelector()
 {
@@ -129,7 +155,6 @@ void UIGridSelector::setElement(int x, int y)
 {
     UISelector* s = UISelector::getActiveSelector();
 
-    //*NOTE* Tools should be defined by enum for clariy
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
         if (s == &tileSelector) {
@@ -155,9 +180,14 @@ void UIGridSelector::setElement(int x, int y)
         }
         if (s == &objectSelector) {
             Tile* t = room->getTile(x, y);
-            if (t)
+            if (t) {
+                objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
+                objectPlacementListener->actionPerformed(NULL);
                 t->setObject(objectSelector.getSelectedIndex());
+            }
             else {
+                objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
+                objectPlacementListener->actionPerformed(NULL);
                 t = new Tile();
                 t->setObject(objectSelector.getSelectedIndex());
                 room->setTile(x, y, t);
@@ -168,6 +198,78 @@ void UIGridSelector::setElement(int x, int y)
         room->setTile(x, y, NULL);
 
         break;
+    }
+}
+
+void UIGridSelector::setTile(int x, int y)
+{
+    switch (toolSelector.getSelectedIndex()) {
+    case UIToolSelector::PLACE_TOOL:
+        {
+            std::vector<std::vector<Tile*>> tiles = tileSelector.getTiles();
+            for (int i = 0; i < tiles.size(); i++) {
+                for (int j = 0; j < tiles[i].size(); j++) {
+                    room->setTile(x + i, y + j, tiles[i][j]);
+                }
+            }
+            break;
+        }
+    case UIToolSelector::DELETE_TOOL: 
+        {
+            room->setTile(x, y, NULL);
+            break;
+        }
+    }
+}
+
+void UIGridSelector::setCollider(int x, int y)
+{
+    switch (toolSelector.getSelectedIndex()) {
+    case UIToolSelector::PLACE_TOOL:
+        {
+            Tile* t = room->getTile(x, y);
+
+            std::optional<Polyshape> p = colliderSelector.getPolygon();
+            if (t)
+                t->setPolygon(p);
+            else {
+                t = new Tile();
+                t->setPolygon(p);
+                room->setTile(x, y, t);
+            }
+        }
+    case UIToolSelector::DELETE_TOOL:
+        {
+            room->setTile(x, y, NULL);
+            break;
+        }
+    }
+}
+
+void UIGridSelector::setObject(int x, int y)
+{
+    switch (toolSelector.getSelectedIndex()) {
+    case UIToolSelector::PLACE_TOOL:
+    {
+        Tile* t = room->getTile(x, y);
+        if (t) {
+            objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
+            objectPlacementListener->actionPerformed(NULL);
+            t->setObject(objectSelector.getSelectedIndex());
+        }
+        else {
+            objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
+            objectPlacementListener->actionPerformed(NULL);
+            t = new Tile();
+            t->setObject(objectSelector.getSelectedIndex());
+            room->setTile(x, y, t);
+        }
+    }
+    case UIToolSelector::DELETE_TOOL:
+        {
+            room->setTile(x, y, NULL);
+            break;
+        }
     }
 }
 

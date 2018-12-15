@@ -1,14 +1,15 @@
 #include "object.h"
 #include "GameObject\Prefabrications\prefabrications.h"
 #include "System\graphics\textureManager.h"
+#include "tools\stringTools.h"
 
 const Object Object::objects[256] = { Object(new GlassContainer()),
-                                      Object(new DoorPrefab())
+                                      Object(new DoorPrefab(), {"Door ID","Destination filepath"})
 };
 
-GameObject * Object::instantiate() const
+GameObject * Object::instantiate(std::vector<std::string> parameters) const
 {
-    return prefab->instantiate();
+    return prefab->instantiate(flattenStringVector(parameters));
 }
 
 Object::~Object()
@@ -21,7 +22,7 @@ Object::Object()
 {
 }
 
-Object::Object(Prefabrication* _prefab)
+Object::Object(Prefabrication* _prefab, std::vector<std::string> _parameterNames)
     : prefab(_prefab)
 {
 }

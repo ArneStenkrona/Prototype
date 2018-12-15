@@ -17,7 +17,7 @@ Character::Character() : Prefabrication("character")
 {
 }
 
-GameObject * Character::instantiate() const
+GameObject * Character::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
 
@@ -41,7 +41,7 @@ MuzzleFlash::MuzzleFlash() : Prefabrication("flash")
 {
 }
 
-GameObject * MuzzleFlash::instantiate() const
+GameObject * MuzzleFlash::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>();
@@ -54,7 +54,7 @@ Shrapnel::Shrapnel() : Prefabrication("shrapnel")
 {
 }
 
-GameObject * Shrapnel::instantiate() const
+GameObject * Shrapnel::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Splash>()->setClip({ "shrapnel", 227, 229, 3 });
@@ -67,7 +67,7 @@ LaserBeam::LaserBeam() : Prefabrication("beam")
 {
 }
 
-GameObject * LaserBeam::instantiate() const
+GameObject * LaserBeam::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Beam>();
@@ -78,7 +78,7 @@ GlassContainer::GlassContainer() : Prefabrication("glassContainer")
 {
 }
 
-GameObject * GlassContainer::instantiate() const
+GameObject * GlassContainer::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Container>();
@@ -89,7 +89,7 @@ DoorPrefab::DoorPrefab() : Prefabrication("doorContainer")
 {
 }
 
-GameObject * DoorPrefab::instantiate() const
+GameObject * DoorPrefab::instantiate(std::string parameters) const
 {
     GameObject* g = new GameObject(name);
     g->addComponent<Door>()->setPath("Assets/Rooms/a.room");

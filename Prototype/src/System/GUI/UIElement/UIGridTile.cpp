@@ -28,6 +28,7 @@ void UIGridTile::render()
             break;
         }
     }
+
     else {
         UIElement::drawSquare(width, height, {0xFF,0xFF,0xFF,0x08}, OUTLINE_SQUARE);
 
@@ -35,12 +36,41 @@ void UIGridTile::render()
 
 }
 
-void UIGridTile::onMouseOver()
+void UIGridTile::onMouseEnter()
 {
     selector->setActiveTileCoordinates(indX, indY);
 
-    if (getKey(MOUSE_LEFT)) {
-        selector->setElement(indX, indY);
+    UISelector* s = UISelector::getActiveSelector();
+
+    if (dynamic_cast<UITileSelector*>(s)) {
+        if (getKey(MOUSE_LEFT))
+            selector->setTile(indX, indY);
+    }
+
+    if (dynamic_cast<UIColliderSelector*>(s)) {
+        if (getKey(MOUSE_LEFT))
+            selector->setCollider(indX, indY);
+    }
+}
+
+void UIGridTile::onMouseOver()
+{
+
+    UISelector* s = UISelector::getActiveSelector();
+
+    if (dynamic_cast<UITileSelector*>(s)) {
+        if (getKeyDown(MOUSE_LEFT))
+            selector->setTile(indX, indY);
+    }
+
+    if (dynamic_cast<UIColliderSelector*>(s)) {
+        if (getKeyDown(MOUSE_LEFT))
+            selector->setCollider(indX, indY);
+    }
+
+    if (dynamic_cast<UIObjectSelector*>(s)) {
+        if (getKeyDown(MOUSE_LEFT))
+            selector->setObject(indX, indY);
     }
 }
 

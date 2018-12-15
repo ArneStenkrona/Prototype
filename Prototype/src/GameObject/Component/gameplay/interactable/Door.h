@@ -19,4 +19,8 @@ private:
 
     PolygonCollider* collider;
     void onCollisionEnter(Collision *collision);
+
+    //The door number identifies this door within the room
+    //Value of -1 indicates a non-functioning door
+    int doorNumber;
 };

@@ -172,17 +172,11 @@ Point Room::getPosition()
 void Room::instantiate()
 {
     if (!instantiated) {
-        tileGameObjectMatrix.resize(tileMatrix.size());
-        dynamicGameObjectMatrix.resize(tileMatrix.size());
-
         for (int x = 0; x < tileMatrix.size(); x++) {
-            tileGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
-            dynamicGameObjectMatrix[x].resize(tileMatrix[x].size(), NULL);
-
             for (int y = 0; y < tileMatrix[x].size(); y++) {
                 if (tileMatrix[x][y] != NULL) {
-                    tileGameObjectMatrix[x][y] = tileMatrix[x][y]->gameObjectFromTile(x, y);
-                    dynamicGameObjectMatrix[x][y] = tileMatrix[x][y]->instantiateObject(x, y);
+                    tileGameObjects.push_back(tileMatrix[x][y]->gameObjectFromTile(x, y));
+                    dynamicGameObjects.push_back(tileMatrix[x][y]->instantiateObject(x, y));
                 }
             }
         }
@@ -192,23 +186,14 @@ void Room::instantiate()
 
 void Room::deinstantiate()
 {
-
-    for (int x = 0; x < tileGameObjectMatrix.size(); x++) {
-        for (int y = 0; y < tileGameObjectMatrix[x].size(); y++) {
-            if (tileGameObjectMatrix[x][y] != NULL) {
-                delete tileGameObjectMatrix[x][y];
-            }
-        }
+    for (GameObject* g : tileGameObjects) {
+        delete g;
     }
-    for (int x = 0; x < dynamicGameObjectMatrix.size(); x++) {
-        for (int y = 0; y < dynamicGameObjectMatrix[x].size(); y++) {
-            if (dynamicGameObjectMatrix[x][y] != NULL) {
-                delete dynamicGameObjectMatrix[x][y];
-            }
-        }
+    for (GameObject* g : dynamicGameObjects) {
+        delete g;
     }
-    dynamicGameObjectMatrix.clear();
-    tileGameObjectMatrix.clear();
+    dynamicGameObjects.clear();
+    tileGameObjects.clear();
     instantiated = false;
 }
 

@@ -28,6 +28,12 @@ UISelector::~UISelector()
     }
 }
 
+int UISelector::getSelectedIndex() const
+{
+
+    return selectedIndex;
+}
+
 void UISelector::getRotationAndFlip(int & rot, bool & h, bool & v)
 {
     rot = rotation;

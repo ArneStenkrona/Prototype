@@ -4,7 +4,7 @@
 class Prefabrication {
 public:
     Prefabrication(std::string _name);
-    virtual GameObject* instantiate() const;
+    virtual GameObject* instantiate(std::string parameters = "") const;
 protected:
     std::string name;
 };

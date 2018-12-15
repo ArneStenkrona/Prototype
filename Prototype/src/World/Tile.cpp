@@ -40,6 +40,11 @@ int Tile::getIndex()
     return tileIndex;
 }
 
+void Tile::setObject(int index)
+{
+    objectIndex = index; 
+}
+
 GameObject* Tile::gameObjectFromTile(int x, int y) const
 {
     GameObject *obj = new GameObject();
@@ -66,7 +71,7 @@ GameObject* Tile::gameObjectFromTile(int x, int y) const
 GameObject* Tile::instantiateObject(int x, int y) const
 {
     if (objectIndex >= 0) {
-        GameObject* g = Object::objects[objectIndex].instantiate();
+        GameObject* g = Object::objects[objectIndex].instantiate(objectParameters);
         if (g->hasComponent<Position>())
             g->getComponent<Position>()->position = Point(x * Tile::TILE_SIZE, y * Tile::TILE_SIZE);
         return g;

@@ -40,9 +40,9 @@ public:
     Point getPosition();
 
     //Tile GameObject matrix
-    vector<vector<GameObject*>> tileGameObjectMatrix;
+    vector<GameObject*> tileGameObjects;
     //Dynamic GameObject matrix
-    vector<vector<GameObject*>> dynamicGameObjectMatrix;
+    vector<GameObject*> dynamicGameObjects;
 
     //Tile info matrix
     vector<vector<Tile*>> tileMatrix;
@@ -85,5 +85,9 @@ private:
     SoundManager::MUSIC music;
 
     void readFromFile();
+
+    //Door contained in this room
+    //A door number maps to a door in another room denoted by the room path and its door number
+    std::map<int, std::tuple<std::string, int>> doors;
 
 };

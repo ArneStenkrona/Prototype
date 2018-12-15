@@ -73,6 +73,8 @@ void UIElement::updateUIElements()
             }
         }
     }
+
+    //Call mouse over functions
     if (mouseOverElement != nullptr) {
         if (getKeyDown(MOUSE_LEFT) || getKeyDown(MOUSE_RIGHT)) {
             setSelected(mouseOverElement);
@@ -80,8 +82,13 @@ void UIElement::updateUIElements()
         if (mouseOverElement != lastMouseOverElement && lastMouseOverElement != nullptr) {
             lastMouseOverElement->onMouseLeft();
         }
-        mouseOverElement->onMouseOver();
-        lastMouseOverElement = mouseOverElement;
+        //Check if mouse over element was deleted in setSeleceted() or onMouseLeft()
+        if (mouseOverElement) {
+            if (mouseOverElement != lastMouseOverElement)
+                mouseOverElement->onMouseEnter();
+            mouseOverElement->onMouseOver();
+            lastMouseOverElement = mouseOverElement;
+        }
     }
 }
 
@@ -103,9 +110,14 @@ inline void UIElement::setSelected(UIElement * element)
         selectedElement->onDeselect();
     selectedElement = element;
     selectedElement->onSelect();
+    UIActionListener::notifyAll();
 }
 
 void UIElement::render()
+{
+}
+
+void UIElement::onMouseEnter()
 {
 }
 

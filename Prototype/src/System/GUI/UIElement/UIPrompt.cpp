@@ -2,29 +2,7 @@
 #include "UIActionListener.h"
 #include "System\IO\inputManager.h"
 
-class OkListener : public UIActionListener {
-public:
-    OkListener(UIPromptListener * _pl) :
-        pl(_pl) {}
 
-    void actionPerformed(UIEvent* e) {
-        pl->ok();
-    }
-private:
-    UIPromptListener* pl;
-};
-
-class CancelListener : public UIActionListener {
-public:
-    CancelListener(UIPromptListener * _pl) :
-    pl(_pl) {}
-
-    void actionPerformed(UIEvent* e) {
-        pl->cancel();
-    }
-private:
-    UIPromptListener* pl;
-};
 
 
 UIPrompt::UIPrompt(UIPromptListener * _listener, int _positionX, int _positionY, int _width, int _height, int _layer, std::string _label)
@@ -82,4 +60,12 @@ void UIPromptListener::actionPerformed(UIEvent * e)
     else {
         prompt = new UIPrompt(this, 50, 50, 150, 70, 0, label);
     }
+}
+
+void UIPrompt::OkListener::actionPerformed(UIEvent* e) {
+    pl->ok();
+}
+
+void UIPrompt::CancelListener::actionPerformed(UIEvent* e) {
+    pl->cancel();
 }

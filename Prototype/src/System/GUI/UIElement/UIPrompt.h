@@ -22,6 +22,27 @@ private:
 
     void render();
     void derivedUpdate();
+
+    class OkListener : public UIActionListener {
+        public:
+            OkListener(UIPromptListener * _pl) :
+                pl(_pl) {}
+
+            void actionPerformed(UIEvent* e);
+        private:
+            UIPromptListener* pl;
+    };
+
+    class CancelListener : public UIActionListener {
+        public:
+            CancelListener(UIPromptListener * _pl) :
+                pl(_pl) {}
+
+            void actionPerformed(UIEvent* e);
+        private:
+            UIPromptListener* pl;
+    };
+
 };
 
 //Attach to button to instantiate a prompt on buttonpress 
