@@ -1,8 +1,5 @@
 #include "lwindow.h"
 #include "System\IO\inputManager.h"
-#include <GL/glew.h>
-#include <SDL_opengl.h>
-#include "System\graphics\opengl\GLutility.h"
 
 LWindow::LWindow(int _screen_width, int _screen_height, 
                int _scale_x, int _scale_y): gWindow(NULL), mRenderer(NULL),
