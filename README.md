@@ -7,9 +7,6 @@ and learning experience.
 It is written in C++ and makes us of [SDL](https://www.libsdl.org/
 ).
 
-## Pictures
-![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample1.PNG)
-![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample2.PNG)
 
 ## Getting Started
 
@@ -48,3 +45,6 @@ As of yet, I, Arne Stenkrona, am sole contributor to the repository.
 
 * **Arne Stenkrona** 
 
+## Pictures
+![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample1.PNG)
+![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample2.PNG)
