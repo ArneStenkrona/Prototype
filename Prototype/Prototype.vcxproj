@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\include;$(ProjectDir)\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -80,7 +80,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include;C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\include;$(ProjectDir)\include\TinySoundFont;$(ProjectDir)\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
