@@ -126,36 +126,6 @@
     <ClInclude Include="src\GameObject\Component\geometry\rotation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SDL2_GFX\SDL2_rotozoom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\rendererGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\vertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\indexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\shaderGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\vertexArray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\vertexBufferLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\GLutility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\textureGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\graphics\opengl\frameBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObject\Component\gameplay\weapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -396,33 +366,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject\Component\geometry\rotation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SDL2_GFX\SDL2_rotozoom.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\rendererGL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\vertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\indexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\shaderGL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\VertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\GLutility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\textureGL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\graphics\opengl\frameBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject\Component\gameplay\weapon.cpp">

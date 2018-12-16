@@ -166,7 +166,6 @@
     <ClInclude Include="src\GameObject\Prefabrications\prefabrication.h" />
     <ClInclude Include="src\GameObject\objectPool.h" />
     <ClInclude Include="src\GameObject\Prefabrications\prefabrications.h" />
-    <ClInclude Include="src\SDL2_GFX\SDL2_rotozoom.h" />
     <ClInclude Include="src\data_structures\quadTree.h" />
     <ClInclude Include="src\GameObject\Component\component.h" />
     <ClInclude Include="src\GameObject\Component\geometry\polygonCollider.h" />
@@ -191,15 +190,6 @@
     <ClInclude Include="src\System\graphics\color.h" />
     <ClInclude Include="src\System\graphics\graphicsEngine.h" />
     <ClInclude Include="src\System\graphics\lTexture.h" />
-    <ClInclude Include="src\System\graphics\opengl\frameBuffer.h" />
-    <ClInclude Include="src\System\graphics\opengl\GLutility.h" />
-    <ClInclude Include="src\System\graphics\opengl\indexBuffer.h" />
-    <ClInclude Include="src\System\graphics\opengl\rendererGL.h" />
-    <ClInclude Include="src\System\graphics\opengl\shaderGL.h" />
-    <ClInclude Include="src\System\graphics\opengl\textureGL.h" />
-    <ClInclude Include="src\System\graphics\opengl\vertexArray.h" />
-    <ClInclude Include="src\System\graphics\opengl\vertexBuffer.h" />
-    <ClInclude Include="src\System\graphics\opengl\vertexBufferLayout.h" />
     <ClInclude Include="src\System\graphics\parallaxBackground.h" />
     <ClInclude Include="src\System\graphics\textureManager.h" />
     <ClInclude Include="src\System\graphics\TileMap.h" />
@@ -259,7 +249,6 @@
     <ClCompile Include="src\GameObject\Prefabrications\prefabrication.cpp" />
     <ClCompile Include="src\GameObject\objectPool.cpp" />
     <ClCompile Include="src\GameObject\Prefabrications\prefabrications.cpp" />
-    <ClCompile Include="src\SDL2_GFX\SDL2_rotozoom.c" />
     <ClCompile Include="src\data_structures\quadTree.cpp" />
     <ClCompile Include="src\GameObject\Component\component.cpp" />
     <ClCompile Include="src\GameObject\Component\geometry\polygonCollider.cpp" />
@@ -283,14 +272,6 @@
     <ClCompile Include="src\System\graphics\animationClip.cpp" />
     <ClCompile Include="src\System\graphics\graphicsEngine.cpp" />
     <ClCompile Include="src\System\graphics\lTexture.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\frameBuffer.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\GLutility.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\indexBuffer.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\rendererGL.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\shaderGL.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\textureGL.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\VertexArray.cpp" />
-    <ClCompile Include="src\System\graphics\opengl\vertexBuffer.cpp" />
     <ClCompile Include="src\System\graphics\parallaxBackground.cpp" />
     <ClCompile Include="src\System\graphics\textureManager.cpp" />
     <ClCompile Include="src\System\graphics\TileMap.cpp" />
