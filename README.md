@@ -6,6 +6,11 @@ and learning experience.
 
 It is written in C++ and makes us of [SDL](https://www.libsdl.org/
 ).
+
+## Pictures
+![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample1.PNG)
+![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample2.PNG)
+
 ## Getting Started
 
 Clone the repository containing the Visual Studio project and open the solution using Visual Studio 2017.
