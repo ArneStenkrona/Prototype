@@ -140,8 +140,8 @@ bool LineSegementsIntersect(Point p, Point p2, Point q, Point q2,
 {
     Point r = p2 - p;
     Point s = q2 - q;
-    double rxs = r.cross(s);
-    double qpxr = (q - p).cross(r);
+    double rxs = r.antidot(s);
+    double qpxr = (q - p).antidot(r);
 
     // If r x s = 0 and (q - p) x r = 0, then the two lines are collinear.
     if (abs(rxs) < 0.00000001 && abs(qpxr) < 0.00000001)
@@ -163,11 +163,11 @@ bool LineSegementsIntersect(Point p, Point p2, Point q, Point q2,
         return false;
 
     // t = (q - p) x s / (r x s)
-    double t = (q - p).cross(s) / rxs;
+    double t = (q - p).antidot(s) / rxs;
 
     // u = (q - p) x r / (r x s)
 
-    double u = (q - p).cross(r) / rxs;
+    double u = (q - p).antidot(r) / rxs;
 
     // 4. If r x s != 0 and 0 <= t <= 1 and 0 <= u <= 1
     // the two line segments meet at the point p + t r = q + u s.
