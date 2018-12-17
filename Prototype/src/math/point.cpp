@@ -127,7 +127,7 @@ double Point::antidot(const Point & other) const
     return x * other.y - y * other.x;
 }
 
-constexpr int radToDeg(float rad) { return rad * (180 / M_PI); }
+constexpr double radToDeg(double rad) { return rad * (180 / M_PI); }
 double Point::toAngle() const
 {
     if (x == 0.0 && y == 0.0) return 0;

@@ -136,7 +136,7 @@ namespace pointTest {
 
                 Assert::AreEqual(a * c + b * d, dot);
             }
-            TEST_METHOD(test_crossProduct) {
+            TEST_METHOD(test_antidotProduct) {
                 double a = 234;
                 double b = 325;
                 double c = 657;
@@ -147,6 +147,11 @@ namespace pointTest {
                 double antidot = p.antidot(q);
 
                 Assert::AreEqual(a * d - b * c, antidot);
+            }
+
+            TEST_METHOD(test_toAngle) {
+                Point p = Point(33, 2);
+                Assert::AreEqual(3.46823, p.toAngle(), 0.0001);
             }
     };
 
