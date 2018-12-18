@@ -8,7 +8,7 @@ Door::Door(GameObject * _object)
 {
     collider = requireComponent<PolygonCollider>();
     collider->setStatic(true);
-    collider->setPolygon(Rectangular(Point(0, 0), 32, 32));
+    collider->setPolygon(Polyshape(32, 32, Point(0, 0)));
 }
 
 void Door::updateComponents()

@@ -28,7 +28,7 @@ GameObject * Character::instantiate(std::string parameters) const
     g->addComponent<Movement>();
 
     g->addComponent<PolygonCollider>()->setStatic(false);
-    g->getComponent<PolygonCollider>()->setPolygon(Rectangular(Point(3, 0), 26, 39.7));
+    g->getComponent<PolygonCollider>()->setPolygon(Polyshape(26, 39.7, Point(3, 0)));
     g->getComponent<PolygonCollider>()->addToMask(0);
     g->getComponent<Position>()->position = Point(50, 50);
     g->addComponent<Animator>()->addClip(AnimationClip{ "idle", 16, 21, 7 });

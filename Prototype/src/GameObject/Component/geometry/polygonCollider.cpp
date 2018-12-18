@@ -5,13 +5,12 @@
 #include <algorithm>
 #include <cmath>
 
-PolygonCollider::PolygonCollider(GameObject * _object) : Component(_object), isStatic(true), isActive(true)
+PolygonCollider::PolygonCollider(GameObject * _object) 
+    : Component(_object), isStatic(true), isActive(true),
+    polygon(Polyshape(Tile::TILE_SIZE, Tile::TILE_SIZE, Point::empty))
 {
     position = requireComponent<Position>();
     velocity = requireComponent<Velocity>();
-     
-    //Default shape
-    polygon = Rectangular(Point::empty, 32.0, 32.0);
 
     //Add to physics engine list of all hitboxes
     PhysicsEngine::ALL_COLLIDERS.push_back(this);

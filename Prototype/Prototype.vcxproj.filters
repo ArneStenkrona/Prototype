@@ -57,9 +57,6 @@
     <ClInclude Include="src\GameObject\Component\geometry\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\math\rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObject\Component\graphics\sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,9 +67,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\World\room.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tools\stringTools.h">
@@ -299,9 +293,6 @@
     <ClCompile Include="src\GameObject\Component\geometry\position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\math\rectangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObject\Component\graphics\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -312,9 +303,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\World\room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\math\triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tools\stringTools.cpp">

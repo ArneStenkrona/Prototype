@@ -181,8 +181,6 @@
     <ClInclude Include="src\GameObject\Component\gameplay\movement.h" />
     <ClInclude Include="src\math\point.h" />
     <ClInclude Include="src\math\polygon.h" />
-    <ClInclude Include="src\math\rectangle.h" />
-    <ClInclude Include="src\math\triangle.h" />
     <ClInclude Include="src\System\game\gameLogic.h" />
     <ClInclude Include="src\System\game\scene\debug_scenes\debug_scene0.h" />
     <ClInclude Include="src\System\game\scene\scene.h" />
@@ -264,8 +262,6 @@
     <ClCompile Include="src\GameObject\Component\gameplay\movement.cpp" />
     <ClCompile Include="src\math\point.cpp" />
     <ClCompile Include="src\math\polygon.cpp" />
-    <ClCompile Include="src\math\rectangle.cpp" />
-    <ClCompile Include="src\math\triangle.cpp" />
     <ClCompile Include="src\System\game\gameLogic.cpp" />
     <ClCompile Include="src\System\game\scene\debug_scenes\debug_scene0.cpp" />
     <ClCompile Include="src\System\game\scene\scene.cpp" />

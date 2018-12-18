@@ -14,7 +14,7 @@ Container::Container(GameObject * _object) : Component(_object)
     sprite->setWidthHeight(2, 2);
 
     collider->setStatic(true);
-    collider->setPolygon(Rectangular(Point(8, 8), 16, 24));
+    collider->setPolygon(Polyshape(16, 24, Point(8, 8)));
 }
 
 void Container::updateComponents()
@@ -36,7 +36,7 @@ void Container::rayHit(RayCastHit * hit)
         if (indx < 4) {
             sprite->setTileIndex(indx + 1);
             if (indx + 1 == 4) {
-                collider->setPolygon(Rectangular(Point(8, 25), 16, 7));
+                collider->setPolygon(Polyshape(16, 7, Point(8, 25)));
                 SoundManager::getSound(SoundManager::GlASS_SHATTER_SOUND)->play();
             }
             else {

@@ -5,7 +5,6 @@
 #include "System\sound\soundManager.h"
 #include <sstream>
 #include <algorithm>
-#include "math\rectangle.h"
 #include "math\lTimer.h"
 #include <iostream>
 

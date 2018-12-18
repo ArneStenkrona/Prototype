@@ -1,7 +1,6 @@
 #pragma once
 #include "../component.h"
 #include "math/polygon.h"
-#include "math/rectangle.h"
 #include "velocity.h"
 #include "System/game/gameLogic.h"
 #include <vector>
@@ -20,8 +19,8 @@ public:
     void updateComponents();
 
     //getters for the dimensions of the shape
-    inline double getWidth() const { return polygon._width; }
-    inline double getHeight() const { return polygon._height; }
+    inline double getWidth() const { return polygon.width; }
+    inline double getHeight() const { return polygon.height; }
     //getter for position
     inline Point getPosition() const { return position->position; }
 

@@ -1,7 +1,6 @@
 #include "CppUnitTest.h"
 #include "../../Prototype/src/math/point.h"
 #include "../../Prototype/src/math/point.cpp"
-#include <iostream>
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace pointTest {

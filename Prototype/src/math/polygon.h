@@ -9,6 +9,10 @@
 //Vertices are point relative to the position of the gameObject which contains this polygon
 class Polyshape {
 public:
+    Polyshape();
+    Polyshape(std::vector<Point> _vertices);
+    Polyshape(std::initializer_list<Point> _vertices);
+    Polyshape(double _width, double _height, Point a = Point(0, 0));
     ~Polyshape();
     //These should not be public, or at least not mutable
     std::vector<Point> vertices;
@@ -16,8 +20,8 @@ public:
 
     //Dimensions of the shape
     //Really shouldn't be public
-    double _width;
-    double _height;
+    double width;
+    double height;
     //Returns the distance between this polygon and a point
     double distanceTo(Point p);
 

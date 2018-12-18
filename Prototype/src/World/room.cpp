@@ -9,8 +9,6 @@
 #include <sstream>
 #include "System/graphics/textureManager.h"
 #include "GameObject/Component/geometry/polygonCollider.h"
-#include "math/rectangle.h"
-#include "math/triangle.h"
 #include "tools/stringTools.h"
 #include <algorithm>
 #include <optional>
