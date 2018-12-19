@@ -24,11 +24,6 @@ std::vector<Polyshape> Polyshape::basicPolygons = {
     Polyshape({Point(0,  Tile::TILE_SIZE / 4), Point(Tile::TILE_SIZE, 0), Point(Tile::TILE_SIZE,  Tile::TILE_SIZE)})
 };
 
-Polyshape::Polyshape()
-{
-    std::cout << "ARGH BAD" << std::endl;
-}
-
 Polyshape::Polyshape(std::vector<Point> _vertices)
     : vertices(_vertices)
 {

@@ -9,7 +9,6 @@
 //Vertices are point relative to the position of the gameObject which contains this polygon
 class Polyshape {
 public:
-    Polyshape();
     Polyshape(std::vector<Point> _vertices);
     Polyshape(std::initializer_list<Point> _vertices);
     Polyshape(double _width, double _height, Point a = Point(0, 0));
