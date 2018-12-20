@@ -237,6 +237,7 @@ void UIGridSelector::setCollider(int x, int y)
                 t->setPolygon(p);
                 room->setTile(x, y, t);
             }
+            break;
         }
     case UIToolSelector::DELETE_TOOL:
         {
@@ -264,6 +265,7 @@ void UIGridSelector::setObject(int x, int y)
             t->setObject(objectSelector.getSelectedIndex());
             room->setTile(x, y, t);
         }
+        break;
     }
     case UIToolSelector::DELETE_TOOL:
         {

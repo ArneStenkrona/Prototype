@@ -6,7 +6,6 @@ namespace polygonTest {
 
     TEST_CLASS(polygonTest) {
         public:
-            TEST_METHOD(test_addOperator) {
-            }
+        
     };
 }
