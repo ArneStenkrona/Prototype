@@ -32,6 +32,7 @@ proper view of the file hierarchy. The game will run more slowly if solution is 
 ## Built With
 
 * [SDL](https://www.libsdl.org/) - Layer for graphics, sound and multimedia
+* [SDL_mixer](https://www.libsdl.org/projects/SDL_mixer/) - Sound effects and audio playback
 * [Tiny Soundfont](https://github.com/schellingb/TinySoundFont) - Used in soundfont rendering and midi playback
 
 Both these dependencies are included in the repository. However, there is no gaurantee that I've provided the latest versions.
