@@ -50,8 +50,6 @@ To run the tests, open the solution in *Visual Studio*
 * [SDL_mixer](https://www.libsdl.org/projects/SDL_mixer/) - Sound effects and audio playback
 * [Tiny Soundfont](https://github.com/schellingb/TinySoundFont) - Used in soundfont rendering and midi playback
 
-Both these dependencies are included in the repository. However, there is no gaurantee that I've provided the latest versions.
-
 ## Contributing
 
 As of yet, I, Arne Stenkrona, am sole contributor to the repository.
