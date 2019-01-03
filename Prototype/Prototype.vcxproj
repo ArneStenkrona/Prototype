@@ -327,6 +327,7 @@
     <Text Include="..\..\..\..\..\Downloads\imgui-master\imgui-master\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Rooms\TEST.room" />
     <None Include="Assets\shaders\Basic.shader" />
     <None Include="Assets\shaders\TextureShader.shader" />
     <None Include="lib\windows\x64\SDL2_mixer.def" />

@@ -492,6 +492,7 @@
     <None Include="lib\windows\x64\SDL2_mixer.def">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Assets\Rooms\TEST.room" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\windows\x86\glew32.lib" />
