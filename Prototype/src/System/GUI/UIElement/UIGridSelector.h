@@ -54,8 +54,6 @@ private:
     void onMouseOver();
 
     void renderRoom();
-    //Sets element from active selector at position (x, y)
-    void setElement(int x, int y);
     
     //Sets selected tile at position (x, y)
     void setTile(int x, int y);

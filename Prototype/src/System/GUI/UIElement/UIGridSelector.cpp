@@ -39,13 +39,13 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     toolSelector(UIToolSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + (6 * Tile::TILE_SIZE),
                  0, _layer)),
     objectSelector(UIObjectSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                  ( 2 * UISelector::LABEL_HEIGHT) + (6 + 4) * Tile::TILE_SIZE, _layer, 6, 4)),
+                  ( 2 * UISelector::LABEL_HEIGHT) + (6 + 4) * Tile::TILE_SIZE, _layer, 6, 5)),
     colliderSelector(UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                      UISelector::LABEL_HEIGHT + 6 * Tile::TILE_SIZE, _layer, 6, 4)),
     tileSelector(UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                  0, _layer, 6, 6)),
     border{ UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                     0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2),
+                     0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2, COLOR_DARK_GREY),
             UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
                      GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)},
     objectPlacementListener(new UIObjectPlacementListener())
@@ -149,56 +149,6 @@ void UIGridSelector::getActiveTileCoordinates(int & x, int & y)
 {
     x = tilePosX;
     y = tilePosY;
-}
-
-void UIGridSelector::setElement(int x, int y)
-{
-    UISelector* s = UISelector::getActiveSelector();
-
-    switch (toolSelector.getSelectedIndex()) {
-    case UIToolSelector::PLACE_TOOL:
-        if (s == &tileSelector) {
-            std::vector<std::vector<Tile*>> tiles = tileSelector.getTiles();
-            for (int i = 0; i < tiles.size(); i++) {
-                for (int j = 0; j < tiles[i].size(); j++) {
-                    room->setTile(x + i, y + j, tiles[i][j]);
-                }
-            }
-        }
-
-        if (s == &colliderSelector) {
-            Tile* t = room->getTile(x, y); 
-            
-            std::optional<Polyshape> p = colliderSelector.getPolygon();
-            if (t)
-                t->setPolygon(p);
-            else {
-                t = new Tile();
-                t->setPolygon(p);
-                room->setTile(x, y, t);
-            }
-        }
-        if (s == &objectSelector) {
-            Tile* t = room->getTile(x, y);
-            if (t) {
-                objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
-                objectPlacementListener->actionPerformed(NULL);
-                t->setObject(objectSelector.getSelectedIndex());
-            }
-            else {
-                objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
-                objectPlacementListener->actionPerformed(NULL);
-                t = new Tile();
-                t->setObject(objectSelector.getSelectedIndex());
-                room->setTile(x, y, t);
-            }
-        }
-        break;
-    case UIToolSelector::DELETE_TOOL:
-        room->setTile(x, y, NULL);
-
-        break;
-    }
 }
 
 void UIGridSelector::setTile(int x, int y)
