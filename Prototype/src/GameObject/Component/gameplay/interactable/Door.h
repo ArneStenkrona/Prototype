@@ -10,7 +10,7 @@ public:
 
     //Sets filepath to the room the door leads to
     void setPath(std::string path) { roomFilePath = path; }
-    void setDestination(Point _destination) { destination = _destination; }
+    void setDestination(int x, int y) { destX = x; destY = y; }
     void setPolygon(Polyshape p);
 
 
@@ -18,7 +18,7 @@ private:
     //Filepath to the room the door leads to;
     std::string roomFilePath;
     //Destination coordinates
-    Point destination;
+    int destX, destY;
 
     PolygonCollider* collider;
     void onCollisionEnter(Collision *collision);

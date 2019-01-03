@@ -96,9 +96,9 @@ GameObject * DoorPrefab::instantiate(std::vector<std::string> parameters) const
     //Path
     d->setPath("Assets/Rooms/" + parameters[0]);
     //Destination
-    double x = Tile::TILE_SIZE * std::stoi(parameters[1]);
-    double y = Tile::TILE_SIZE * std::stoi(parameters[2]);
-    d->setDestination(Point(x,y));
+    int x = parameters[1].empty() ? INT_MIN : std::stoi(parameters[1]);
+    int y = parameters[2].empty() ? INT_MIN : std::stoi(parameters[2]);
+    d->setDestination(x, y);
     //Dimensions
     double w = Tile::TILE_SIZE * std::stoi(parameters[3]);
     double h = Tile::TILE_SIZE * std::stoi(parameters[4]);

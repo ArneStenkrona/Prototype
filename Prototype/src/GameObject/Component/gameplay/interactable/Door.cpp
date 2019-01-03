@@ -4,7 +4,7 @@
 #include "System\game\gameLogic.h"
 
 Door::Door(GameObject * _object)
-    :Component(_object)
+    :Component(_object), destX(INT_MIN), destY(INT_MIN)
 {
     collider = requireComponent<PolygonCollider>();
     collider->setStatic(true);
@@ -29,7 +29,13 @@ void Door::onCollisionEnter(Collision * collision)
         GameLogic::queueRoom(new Room(roomFilePath));
         Position *p = collision->getOtherCollider()->getGameObject()->getComponent<Position>();
         if (p) {
-            p->position = destination;
+            Point pos = p->position;
+            //If coordinates are larger than some really small value, use existing
+            if (destX > -256 * 256 * 256)
+                pos.x = Tile::TILE_SIZE * destX;
+            if (destY > -256 * 256 * 256)
+                pos.y = Tile::TILE_SIZE * destY;
+            p->position = pos;
         }
     }
 }
