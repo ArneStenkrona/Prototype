@@ -40,9 +40,10 @@ int Tile::getIndex()
     return tileIndex;
 }
 
-void Tile::setObject(int index)
+void Tile::setObject(int index, std::vector<std::string> parameters)
 {
     objectIndex = index; 
+    objectParameters = parameters;
 }
 
 GameObject* Tile::gameObjectFromTile(int x, int y) const

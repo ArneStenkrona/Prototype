@@ -207,6 +207,17 @@ Tile * Room::getTile(int x, int y)
     }
 }
 
+Tile * Room::getOrCreateTile(int x, int y)
+{
+    Tile* t = getTile(x, y);
+    //If no tile exists, create one
+    if (!t) {
+        t = new Tile();
+        setTile(x, y, t);
+    }
+    return t;
+}
+
 void Room::setTile(int x, int y, Tile *tile)
 {
 

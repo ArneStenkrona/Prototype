@@ -10,25 +10,46 @@
 
 class UIObjectPlacementListener : public UIMultiPromptListener {
 public:
-    UIObjectPlacementListener()
-        : UIMultiPromptListener("OBJECT PARAMETERS: ", {})
+    UIObjectPlacementListener(Room *_room)
+        : UIMultiPromptListener("OBJECT PARAMETERS: ", {}), objectIndex(-1), 
+          room(_room), x(-1), y(-1)
     {}
 
     void ok() {
-
+        UIMultiPromptListener::ok();
+        if (objectIndex != -1) {
+            room->getOrCreateTile(x, y)->setObject(objectIndex, input);
+        }
     }
 
     void onNotify() {
         if (prompt && !prompt->isSelected()) {
             cancel();
+            objectIndex = -1;
+            x = -1;
+            y = -1;
         }
     }
 
-    void setParameters(std::vector<std::string> _parameters) {
+    void setPlacement(std::vector<std::string> _parameters, int index, int _x, int _y) {
         labels = _parameters;
+        objectIndex = index;
+        x = _x;
+        y = _y;
+    }
+
+    void setRoom(Room *_room) {
+        objectIndex = -1;
+        x = -1;
+        y = -1;
+        room = _room;
     }
 
 private:
+    int objectIndex;
+    //Coordinates of object placement
+    int x, y;
+    Room *room;
 };
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
@@ -48,7 +69,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
                      0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, _layer + 2, COLOR_DARK_GREY),
             UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
                      GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)},
-    objectPlacementListener(new UIObjectPlacementListener())
+    objectPlacementListener(new UIObjectPlacementListener(room))
 {
     setRoom(room);
     setSelected(&tileSelector);
@@ -143,6 +164,8 @@ void UIGridSelector::setRoom(Room* _room)
             tiles[i][j] = new UIGridTile(this, layer - 1, i, j);
         }
     }
+
+    objectPlacementListener->setRoom(room);
 }
 
 void UIGridSelector::getActiveTileCoordinates(int & x, int & y)
@@ -177,16 +200,8 @@ void UIGridSelector::setCollider(int x, int y)
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
         {
-            Tile* t = room->getTile(x, y);
-
             std::optional<Polyshape> p = colliderSelector.getPolygon();
-            if (t)
-                t->setPolygon(p);
-            else {
-                t = new Tile();
-                t->setPolygon(p);
-                room->setTile(x, y, t);
-            }
+            room->getOrCreateTile(x, y)->setPolygon(p);
             break;
         }
     case UIToolSelector::DELETE_TOOL:
@@ -202,20 +217,16 @@ void UIGridSelector::setObject(int x, int y)
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
     {
-        Tile* t = room->getTile(x, y);
-        //If no tile exists, create one
-        if (!t) {
-            t = new Tile();
-            room->setTile(x, y, t);
-        }
         //Prompt users for parameters
         int index = objectSelector.getSelectedIndex();
         std::vector<std::string> params = Object::objects[index].getParameterNames();
         if (!params.empty()) {
-            objectPlacementListener->setParameters(params);
+            objectPlacementListener->setPlacement(params, index, x, y);
             objectPlacementListener->actionPerformed(NULL);
         }
-        t->setObject(objectSelector.getSelectedIndex());
+        else {
+            room->getOrCreateTile(x, y)->setObject(objectSelector.getSelectedIndex());
+        }
         break;
     }
     case UIToolSelector::DELETE_TOOL:

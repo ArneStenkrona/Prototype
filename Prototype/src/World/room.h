@@ -52,7 +52,11 @@ public:
     //Removes gameObjects
     void deinstantiate();
 
+    //Gets tile at position (x, y) in room, may return null
     Tile *getTile(int x, int y);
+    //Gets tile at position (x, y) in room. If null, creates and return new tile
+    Tile *getOrCreateTile(int x, int y);
+    //Sets tile at position (x, y) in room
     void setTile(int x, int y, Tile *tile);
 
     //Sets x and y to the length of the tile vectors

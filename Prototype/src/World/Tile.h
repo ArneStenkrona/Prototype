@@ -26,7 +26,7 @@ public:
 
     inline int getObject() const { return objectIndex; }
     //Sets the object index
-    void setObject(int index);
+    void setObject(int index, std::vector<std::string> parameters = {});
 
     GameObject* gameObjectFromTile(int x, int y) const;
     //Instantiates the object contained by this tile, if any, else returns null
