@@ -13,7 +13,14 @@ public:
 
     void run();
 
+    //Asks user for pre-existing file
+    //returns true if success
+    bool openFile(bool requireExistingFile = true);
+
+    //Saves active room to rooms current file path
     void save();
+    //Saves active room to file path specified by the user
+    void saveAs();
     
     void setRoom(Room *room);
 private:
@@ -23,10 +30,6 @@ private:
 
     //The room currently being edited;
     Room *activeRoom;
-
-    //Asks user for new or pre-existing file
-    //returns true if success
-    bool openFile();
 
     //Opens a windows api dialog to find a filepath.
     string getFilePath(bool requireExistingPath);

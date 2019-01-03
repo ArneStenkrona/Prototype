@@ -13,10 +13,23 @@
 
 const int EditorWindow::gridSize = 32;
 
+class UISaveFileAsListener : public UIActionListener {
+public:
+    UISaveFileAsListener(Editor* _editor)
+    : editor(_editor)
+    {}
+
+    void actionPerformed(UIEvent* e) {
+        editor->saveAs();
+    }
+private:
+    Editor* editor;
+};
+
 class UISaveFileListener : public UIActionListener {
 public:
     UISaveFileListener(Editor* _editor)
-    : editor(_editor)
+        : editor(_editor)
     {}
 
     void actionPerformed(UIEvent* e) {
@@ -56,10 +69,25 @@ private:
     Editor* editor;
 };
 
+class UIOpenFileListener : public UIActionListener {
+public:
+    UIOpenFileListener(Editor* _editor)
+        : editor(_editor)
+    {}
+
+    void actionPerformed(UIEvent* e) {
+        editor->openFile();
+    }
+private:
+    Editor* editor;
+};
+
 EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
     buttons{ UIButton(new UINewFilePromptListener(editor), 0, 0, 70, 20, 1, "NEW FILE") ,
-             UIButton(new UISaveFileListener(editor), 70, 0, 30, 20, 1,"SAVE")}
+             UIButton(new UIOpenFileListener(editor), 70, 0, 70, 20, 1, "OPEN FILE"),
+             UIButton(new UISaveFileListener(editor), 70 + 70, 0, 40, 20, 1, "SAVE"),
+             UIButton(new UISaveFileAsListener(editor), 70 + 70 + 40, 0, 50, 20, 1,"SAVE AS")}
 {
 }
 

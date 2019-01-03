@@ -60,12 +60,17 @@ void Editor::run()
 
         }   
         if (MessageBoxA(NULL, "Do you wish to save?", "Save", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
-            save();
+            saveAs();
         }
     }
 }
 
 void Editor::save()
+{
+    activeRoom->saveToFile();
+}
+
+void Editor::saveAs()
 {
     activeRoom->saveToFile(getFilePath(false));
 }
@@ -81,9 +86,9 @@ void Editor::setRoom(Room *room)
     editorWindow->setRoom(activeRoom);
 }
 
-bool Editor::openFile()
+bool Editor::openFile(bool requireExistingFile)
 {
-        currentPath = getFilePath(true);
+        currentPath = getFilePath(requireExistingFile);
         if (currentPath.length() > 0) {
             loadFile(currentPath);
             return true;

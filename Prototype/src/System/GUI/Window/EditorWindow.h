@@ -27,7 +27,9 @@ private:
 
     static enum BUTTONS {
         NEW_FILE_BUTTON,
+        OPEN_FILE_BUTTON,
         SAVE_BUTTON,
+        SAVE_AS_BUTTON,
         TOTAL_BUTTONS
     };
     UIButton buttons[TOTAL_BUTTONS];
