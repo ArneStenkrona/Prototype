@@ -30,7 +30,7 @@ void Door::onCollisionEnter(Collision * collision)
         Position *p = collision->getOtherCollider()->getGameObject()->getComponent<Position>();
         if (p) {
             Point pos = p->position;
-            //If coordinates are larger than some really small value, use existing
+            //If coordinates are less than some really small value, use existing coordinate
             if (destX > -256 * 256 * 256)
                 pos.x = Tile::TILE_SIZE * destX;
             if (destY > -256 * 256 * 256)
