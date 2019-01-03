@@ -22,5 +22,4 @@ private:
 
     PolygonCollider* collider;
     void onCollisionEnter(Collision *collision);
-
 };
