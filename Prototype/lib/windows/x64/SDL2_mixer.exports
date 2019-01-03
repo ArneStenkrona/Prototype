@@ -1,0 +1,109 @@
+Microsoft (R) COFF/PE Dumper Version 14.15.26730.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file SDL2_mixer.dll
+
+File Type: DLL
+
+  Section contains the following exports for SDL2_mixer.dll
+
+    00000000 characteristics
+    5BD9C387 time date stamp Wed Oct 31 16:00:23 2018
+        0.00 version
+           1 ordinal base
+          75 number of functions
+          75 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00008E60 Mix_AllocateChannels
+          2    1 00007770 Mix_ChannelFinished
+          3    2 00008B70 Mix_CloseAudio
+          4    3 0000AA00 Mix_EachSoundFont
+          5    4 000077C0 Mix_ExpireChannel
+          6    5 000081C0 Mix_FadeInChannelTimed
+          7    6 0000A310 Mix_FadeInMusic
+          8    7 0000A0D0 Mix_FadeInMusicPos
+          9    8 00007DF0 Mix_FadeOutChannel
+         10    9 00007ED0 Mix_FadeOutGroup
+         11    A 0000A500 Mix_FadeOutMusic
+         12    B 00007F40 Mix_FadingChannel
+         13    C 0000A600 Mix_FadingMusic
+         14    D 00007610 Mix_FreeChunk
+         15    E 0000A000 Mix_FreeMusic
+         16    F 00008390 Mix_GetChunk
+         17   10 00006B70 Mix_GetChunkDecoder
+         18   11 00009410 Mix_GetMusicDecoder
+         19   12 00007760 Mix_GetMusicHookData
+         20   13 0000A080 Mix_GetMusicType
+         21   14 00006B60 Mix_GetNumChunkDecoders
+         22   15 00009400 Mix_GetNumMusicDecoders
+         23   16 0000A950 Mix_GetSoundFonts
+         24   17 0000A7D0 Mix_GetSynchroValue
+         25   18 00008650 Mix_GroupAvailable
+         26   19 00008570 Mix_GroupChannel
+         27   1A 000085D0 Mix_GroupChannels
+         28   1B 000086A0 Mix_GroupCount
+         29   1C 00008780 Mix_GroupNewer
+         30   1D 00008700 Mix_GroupOldest
+         31   1E 00007CC0 Mix_HaltChannel
+         32   1F 00007D90 Mix_HaltGroup
+         33   20 0000A4C0 Mix_HaltMusic
+         34   21 00006BA0 Mix_HasChunkDecoder
+         35   22 00007700 Mix_HookMusic
+         36   23 00009440 Mix_HookMusicFinished
+         37   24 00006CB0 Mix_Init
+         38   25 00006C90 Mix_Linked_Version
+         39   26 00009BF0 Mix_LoadMUS
+         40   27 00009920 Mix_LoadMUSType_RW
+         41   28 00009FF0 Mix_LoadMUS_RW
+         42   29 00006EB0 Mix_LoadWAV_RW
+         43   2A 00008E30 Mix_OpenAudio
+         44   2B 00008C50 Mix_OpenAudioDevice
+         45   2C 000083C0 Mix_Pause
+         46   2D 0000A630 Mix_PauseMusic
+         47   2E 00008500 Mix_Paused
+         48   2F 0000A700 Mix_PausedMusic
+         49   30 00008000 Mix_PlayChannelTimed
+         50   31 0000A320 Mix_PlayMusic
+         51   32 00007F70 Mix_Playing
+         52   33 0000A710 Mix_PlayingMusic
+         53   34 00006E70 Mix_QuerySpec
+         54   35 000075A0 Mix_QuickLoad_RAW
+         55   36 000074F0 Mix_QuickLoad_WAV
+         56   37 00006E60 Mix_Quit
+         57   38 00008920 Mix_RegisterEffect
+         58   39 000077A0 Mix_ReserveChannels
+         59   3A 00008440 Mix_Resume
+         60   3B 0000A690 Mix_ResumeMusic
+         61   3C 0000A6F0 Mix_RewindMusic
+         62   3D 00004AE0 Mix_SetDistance
+         63   3E 0000A740 Mix_SetMusicCMD
+         64   3F 0000A330 Mix_SetMusicPosition
+         65   40 00005840 Mix_SetPanning
+         66   41 00004BD0 Mix_SetPosition
+         67   42 000076C0 Mix_SetPostMix
+         68   43 00005A60 Mix_SetReverseStereo
+         69   44 0000A8F0 Mix_SetSoundFonts
+         70   45 0000A7C0 Mix_SetSynchroValue
+         71   46 00008B40 Mix_UnregisterAllEffects
+         72   47 00008AA0 Mix_UnregisterEffect
+         73   48 00007870 Mix_Volume
+         74   49 00007CA0 Mix_VolumeChunk
+         75   4A 0000A3D0 Mix_VolumeMusic
+
+  Summary
+
+        1000 .CRT
+        2000 .bss
+        1000 .data
+        1000 .edata
+        2000 .idata
+        2000 .pdata
+        4000 .rdata
+        1000 .reloc
+        1000 .rsrc
+       16000 .text
+        1000 .tls
+        1000 .xdata
