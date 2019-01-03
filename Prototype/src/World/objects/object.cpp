@@ -4,7 +4,11 @@
 #include "tools\stringTools.h"
 
 const Object Object::objects[256] = { Object("CONTAINER", new GlassContainer()),
-                                      Object("DOOR", new DoorPrefab(), {"DESTINATION FILEPATH", "DESTINATION COORDINATE X", "DESTINATION COORDINATE Y"})
+                                      Object("DOOR", new DoorPrefab(), {"DESTINATION FILEPATH",
+                                                                        "DESTINATION COORDINATE X", 
+                                                                        "DESTINATION COORDINATE Y",
+                                                                        "WIDTH",
+                                                                        "HEIGHT"})
 };
 
 GameObject * Object::instantiate(std::vector<std::string> parameters) const

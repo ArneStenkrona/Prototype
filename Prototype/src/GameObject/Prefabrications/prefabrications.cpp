@@ -93,9 +93,15 @@ GameObject * DoorPrefab::instantiate(std::vector<std::string> parameters) const
 {
     GameObject* g = new GameObject(name);
     Door *d = g->addComponent<Door>();
+    //Path
     d->setPath("Assets/Rooms/" + parameters[0]);
+    //Destination
     double x = Tile::TILE_SIZE * std::stoi(parameters[1]);
     double y = Tile::TILE_SIZE * std::stoi(parameters[2]);
     d->setDestination(Point(x,y));
+    //Dimensions
+    double w = Tile::TILE_SIZE * std::stoi(parameters[3]);
+    double h = Tile::TILE_SIZE * std::stoi(parameters[4]);
+    d->setPolygon(Polyshape(w, h));
     return g;
 }
