@@ -31,9 +31,14 @@ public:
     static void updateGameLoop();
 
     static void closeGameLogic();
+
+    inline static bool getRoomChange() { return roomChange; }
 private:
     //Current frame of the game
     static long currentFrame;
+
+    //True during the first frame of a new room
+    static bool roomChange;
     //Main window for the game
     static LWindow *gameWindow;
     //The current scene in game

@@ -14,6 +14,7 @@
 #include <iostream>
 
 long GameLogic::currentFrame = 0;
+bool GameLogic::roomChange = false;
 LWindow* GameLogic::gameWindow = nullptr;
 Scene* GameLogic::currentScene = nullptr;
 Room* GameLogic::queuedRoom = nullptr;
@@ -35,6 +36,7 @@ void GameLogic::setRoom()
     PhysicsEngine::resetPhysics();
     queuedRoom = nullptr;
     GameObject::startAll();
+    roomChange = true;
 }
 
 
@@ -76,6 +78,8 @@ void GameLogic::closeScene()
     currentScene = NULL;
 }
 
+
+
 void GameLogic::gameLoop() {
 
     gameWindow = GraphicsEngine::createGameWindow();
@@ -106,6 +110,7 @@ void GameLogic::gameLoop() {
             setRoom();
         capTimer.start();
         updateGameLoop();
+        roomChange = false;
 
         //If frame finished early
         int frameTicks = capTimer.getMicroSeconds();

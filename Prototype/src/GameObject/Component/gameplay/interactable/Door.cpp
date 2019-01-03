@@ -25,7 +25,7 @@ void Door::setPolygon(Polyshape p)
 
 void Door::onCollisionEnter(Collision * collision)
 {
-    if (collision->collisionTime > 0) {
+    if (!GameLogic::getRoomChange()) {
         GameLogic::queueRoom(new Room(roomFilePath));
         Position *p = collision->getOtherCollider()->getGameObject()->getComponent<Position>();
         if (p) {
