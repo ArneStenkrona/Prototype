@@ -10,6 +10,9 @@ public:
     //Predefined
     static const Object objects[256];
 
+    //Name of the object
+    const std::string name;
+
     //Instantiate prefab
     //A parameter vector can be provided
     //The vector will be flattened to a single string and sent to the prefab
@@ -21,8 +24,7 @@ public:
 
     ~Object();
 private:
-    Object(Prefabrication* _prefab, std::vector<std::string> _parameterNames = {});
-    Object();
+    Object(std::string _name = "NULL", Prefabrication* _prefab = new Prefabrication("NULL"), std::vector<std::string> _parameterNames = {});
     Prefabrication* prefab;
 
     //Vector of all parameters

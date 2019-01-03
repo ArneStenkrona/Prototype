@@ -32,6 +32,7 @@ public:
     }
 
     void setPlacement(std::vector<std::string> _parameters, int index, int _x, int _y) {
+        label = Object::objects[index].name + " PARAMETERS: ";
         labels = _parameters;
         objectIndex = index;
         x = _x;

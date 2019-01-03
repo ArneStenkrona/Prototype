@@ -36,7 +36,7 @@ void UIMultiPrompt::render()
     UIElement::renderText(label, { 255,255,255,255 }, ALIGN_UP, 0, 2);
 
     for (int i = 0; i < labels.size(); i++) {
-        UIElement::renderText(labels[i], { 255,255,255,255 }, ALIGN_UP, 0, 16 + i * 32);
+        UIElement::renderText(labels[i] + ": ", { 255,255,255,255 }, ALIGN_UPPER_LEFT, 5, 16 + i * 32);
     }
 
     if (isSelected())

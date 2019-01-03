@@ -493,4 +493,7 @@
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\windows\x86\glew32.lib" />
+  </ItemGroup>
 </Project>

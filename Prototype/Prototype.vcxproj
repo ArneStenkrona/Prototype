@@ -331,6 +331,9 @@
     <None Include="Assets\shaders\TextureShader.shader" />
     <None Include="lib\windows\x64\SDL2_mixer.def" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\windows\x86\glew32.lib" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

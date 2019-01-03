@@ -3,8 +3,8 @@
 #include "System\graphics\textureManager.h"
 #include "tools\stringTools.h"
 
-const Object Object::objects[256] = { Object(new GlassContainer()),
-                                      Object(new DoorPrefab(), {"DOOR ID","DESTINATION FILEPATH"})
+const Object Object::objects[256] = { Object("CONTAINER", new GlassContainer()),
+                                      Object("DOOR", new DoorPrefab(), {"DOOR ID","DESTINATION FILEPATH"})
 };
 
 GameObject * Object::instantiate(std::vector<std::string> parameters) const
@@ -17,12 +17,7 @@ Object::~Object()
     delete prefab;
 }
 
-Object::Object()
-    : prefab(new Prefabrication("NULL"))
-{
-}
-
-Object::Object(Prefabrication* _prefab, std::vector<std::string> _parameterNames)
-    : prefab(_prefab), parameterNames(_parameterNames)
+Object::Object(std::string _name, Prefabrication* _prefab, std::vector<std::string> _parameterNames)
+    : name(_name), prefab(_prefab), parameterNames(_parameterNames)
 {
 }
