@@ -89,9 +89,4 @@ private:
     SoundManager::MUSIC music;
 
     void readFromFile();
-
-    //Door contained in this room
-    //A door number maps to a door in another room denoted by the room path and its door number
-    std::map<int, std::tuple<std::string, int>> doors;
-
 };

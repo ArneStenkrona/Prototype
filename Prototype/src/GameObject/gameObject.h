@@ -112,7 +112,7 @@ protected:
 };
 
 
-//Here instead of .cpp file due to being a template function
+//Get component of component type T. If none is present, null is return
 template<class T>
 T * GameObject::getComponent()
 {
@@ -131,7 +131,7 @@ T * GameObject::getComponent()
     return NULL;
 }
 
-//Here instead of .cpp file due to being a template function
+//Adds component of type T. If one is already present it is replaced
 template<class T>
 T * GameObject::addComponent()
 {
@@ -152,6 +152,7 @@ T * GameObject::addComponent()
     return component;
 }
 
+//Removes component of type T.
 template<class T>
 void * GameObject::removeComponent()
 {
@@ -183,6 +184,7 @@ void * GameObject::removeComponent()
     return 0;
 }
 
+//Checks if gameObject has component of type T.
 template<class T>
 bool GameObject::hasComponent()
 {

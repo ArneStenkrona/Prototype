@@ -181,7 +181,9 @@ void Room::instantiate()
         for (int x = 0; x < tileMatrix.size(); x++) {
             for (int y = 0; y < tileMatrix[x].size(); y++) {
                 if (tileMatrix[x][y] != NULL) {
+                    //Create Tile
                     tileGameObjects.push_back(tileMatrix[x][y]->gameObjectFromTile(x, y));
+                    //Create Object
                     dynamicGameObjects.push_back(tileMatrix[x][y]->instantiateObject(x, y));
                 }
             }

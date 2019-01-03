@@ -92,7 +92,10 @@ DoorPrefab::DoorPrefab() : Prefabrication("doorContainer")
 GameObject * DoorPrefab::instantiate(std::vector<std::string> parameters) const
 {
     GameObject* g = new GameObject(name);
-    printf(parameters[1].c_str());
-    g->addComponent<Door>()->setPath("Assets/Rooms/" + parameters[1]);
+    Door *d = g->addComponent<Door>();
+    d->setPath("Assets/Rooms/" + parameters[0]);
+    double x = Tile::TILE_SIZE * std::stoi(parameters[1]);
+    double y = Tile::TILE_SIZE * std::stoi(parameters[2]);
+    d->setDestination(Point(x,y));
     return g;
 }

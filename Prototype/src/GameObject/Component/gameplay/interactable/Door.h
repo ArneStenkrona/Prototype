@@ -10,17 +10,17 @@ public:
 
     //Sets filepath to the room the door leads to
     void setPath(std::string path) { roomFilePath = path; }
+    void setDestination(Point _destination) { destination = _destination; }
     void setPolygon(Polyshape p);
 
 
 private:
     //Filepath to the room the door leads to;
     std::string roomFilePath;
+    //Destination coordinates
+    Point destination;
 
     PolygonCollider* collider;
     void onCollisionEnter(Collision *collision);
 
-    //The door number identifies this door within the room
-    //Value of -1 indicates a non-functioning door
-    int doorNumber;
 };
