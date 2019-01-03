@@ -9,7 +9,7 @@ const Object Object::objects[256] = { Object("CONTAINER", new GlassContainer()),
 
 GameObject * Object::instantiate(std::vector<std::string> parameters) const
 {
-    return prefab->instantiate(flattenStringVector(parameters));
+    return prefab->instantiate(parameters);
 }
 
 Object::~Object()
