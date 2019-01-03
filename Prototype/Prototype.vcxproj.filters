@@ -489,5 +489,8 @@
   <ItemGroup>
     <None Include="Assets\shaders\Basic.shader" />
     <None Include="Assets\shaders\TextureShader.shader" />
+    <None Include="lib\windows\x64\SDL2_mixer.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
