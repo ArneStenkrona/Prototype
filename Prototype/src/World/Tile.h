@@ -9,7 +9,8 @@
 */
 class Tile {
 public:
-    Tile(int _tileIndex = -1, int _rotation = 0, bool _flipH = false, bool _flipV = false, std::optional<Polyshape> _polygon = {}, int _objectIndex = -1);
+    Tile(int _tileIndex = -1, int _rotation = 0, bool _flipH = false, bool _flipV = false, 
+        std::optional<Polyshape> _polygon = {}, int _objectIndex = -1, std::vector<std::string> _objectparameters = {});
 
     ~Tile();
 
@@ -27,6 +28,8 @@ public:
     inline int getObject() const { return objectIndex; }
     //Sets the object index
     void setObject(int index, std::vector<std::string> parameters = {});
+    
+    std::vector<std::string> getObjectParameters() const { return objectParameters; }
 
     GameObject* gameObjectFromTile(int x, int y) const;
     //Instantiates the object contained by this tile, if any, else returns null

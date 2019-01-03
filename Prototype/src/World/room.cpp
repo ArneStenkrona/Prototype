@@ -12,6 +12,7 @@
 #include "tools/stringTools.h"
 #include <algorithm>
 #include <optional>
+#include "World\objects\object.h"
 
 #define toDigit(c) (c-'0')
 #define BOOL_STR(b) (b?"T":"F")
@@ -132,7 +133,14 @@ void Room::saveToFile(const std::string &path)
                     }
                     buffer += +"|";
 
-                    buffer += std::to_string(tileMatrix[x][y]->getObject());
+                    //Object index and possible object parameters
+                    int objectIndex = tileMatrix[x][y]->getObject();
+                    buffer += std::to_string(objectIndex);
+                    if (objectIndex > -1) {
+                        for (std::string parameter : tileMatrix[x][y]->getObjectParameters()) {
+                            buffer += "," + parameter;
+                        }
+                    }
 
                     buffer += "]"; // END OF TILE
                 }
@@ -337,10 +345,16 @@ void Room::readFromFile()
                         polygon = {};
                     }
 
-                    objectIndex = std::stoi(dataPoints[4]);
+                    //Object and possible parameters
+                    std::vector<std::string> obj = stringSplitter(dataPoints[4], ',');
+                    objectIndex = std::stoi(obj[0]);
+                    std::vector<std::string> parameters;
+                    for (int k = 1; k < obj.size(); k++) {
+                        parameters.push_back(obj[k]);
+                    }
 
                     tileMatrix[x][y] = new Tile(tileIndex, rotation,
-                        flipH, flipV, polygon, objectIndex);
+                        flipH, flipV, polygon, objectIndex, parameters);
                 }
                 x++;
             }

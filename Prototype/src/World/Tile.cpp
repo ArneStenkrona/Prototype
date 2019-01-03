@@ -12,9 +12,9 @@ const unsigned int Tile::TILES_PER_ROW = 512 / Tile::TILE_SIZE;
 const unsigned int Tile::TILES_PER_COLUMN = 512 / Tile::TILE_SIZE;
 
 Tile::Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV, 
-                                            std::optional<Polyshape> _polygon, int _objectIndex)
+           std::optional<Polyshape> _polygon, int _objectIndex, std::vector<std::string> _objectparameters)
     : tileIndex(_tileIndex), polygon(_polygon), rotation(_rotation),
-    flipH(_flipH), flipV(_flipV), objectIndex(_objectIndex)
+    flipH(_flipH), flipV(_flipV), objectIndex(_objectIndex), objectParameters(_objectparameters)
 {
 }
 
