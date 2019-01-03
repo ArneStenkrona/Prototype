@@ -19,7 +19,7 @@ public:
     }
 
     void onNotify() {
-        if (prompt && UIElement::getSelected() != prompt) {
+        if (prompt && !prompt->isSelected()) {
             cancel();
         }
     }
@@ -45,7 +45,7 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
     tileSelector(UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
                  0, _layer, 6, 6)),
     border{ UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                     0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y + 300, _layer + 2, COLOR_DARK_GREY),
+                     0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, _layer + 2, COLOR_DARK_GREY),
             UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
                      GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)},
     objectPlacementListener(new UIObjectPlacementListener())

@@ -80,7 +80,7 @@ void UIElement::updateUIElements()
             setSelected(mouseOverElement);
         }
         if (mouseOverElement != lastMouseOverElement && lastMouseOverElement != nullptr) {
-            lastMouseOverElement->onMouseLeft();
+            lastMouseOverElement->onMouseExit();
         }
         //Check if mouse over element was deleted in setSeleceted() or onMouseLeft()
         if (mouseOverElement) {
@@ -125,7 +125,7 @@ void UIElement::onMouseOver()
 {
 }
 
-void UIElement::onMouseLeft()
+void UIElement::onMouseExit()
 {
 }
 

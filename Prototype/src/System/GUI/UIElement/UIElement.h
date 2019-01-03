@@ -63,7 +63,7 @@ protected:
     //called if mouse is over
     virtual void onMouseOver();
     //called if mouse leaves
-    virtual void onMouseLeft();
+    virtual void onMouseExit();
     //called if selected
     virtual void onSelect();
     //called if deselected

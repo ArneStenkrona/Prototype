@@ -25,7 +25,7 @@ private:
 
     //mouse is over
     bool mouseOver;
-    //Click is held while mouse over
+    //User has initiated click on button
     bool holdClick;
 
     UIActionListener* listener;

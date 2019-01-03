@@ -57,6 +57,7 @@ public:
     virtual void ok();
 
     void actionPerformed(UIEvent* e);
+
 protected:
     UIMultiPrompt* prompt;
     //Label of the prompt
