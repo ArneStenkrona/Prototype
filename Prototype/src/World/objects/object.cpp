@@ -4,7 +4,7 @@
 #include "tools\stringTools.h"
 
 const Object Object::objects[256] = { Object(new GlassContainer()),
-                                      Object(new DoorPrefab(), {"Door ID","Destination filepath"})
+                                      Object(new DoorPrefab(), {"DOOR ID","DESTINATION FILEPATH"})
 };
 
 GameObject * Object::instantiate(std::vector<std::string> parameters) const
@@ -23,6 +23,6 @@ Object::Object()
 }
 
 Object::Object(Prefabrication* _prefab, std::vector<std::string> _parameterNames)
-    : prefab(_prefab)
+    : prefab(_prefab), parameterNames(_parameterNames)
 {
 }

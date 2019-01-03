@@ -203,18 +203,19 @@ void UIGridSelector::setObject(int x, int y)
     case UIToolSelector::PLACE_TOOL:
     {
         Tile* t = room->getTile(x, y);
-        if (t) {
-            objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
-            objectPlacementListener->actionPerformed(NULL);
-            t->setObject(objectSelector.getSelectedIndex());
-        }
-        else {
-            objectPlacementListener->setParameters({ "TEST0", "TEST1", "TEST2" });
-            objectPlacementListener->actionPerformed(NULL);
+        //If no tile exists, create one
+        if (!t) {
             t = new Tile();
-            t->setObject(objectSelector.getSelectedIndex());
             room->setTile(x, y, t);
         }
+        //Prompt users for parameters
+        int index = objectSelector.getSelectedIndex();
+        std::vector<std::string> params = Object::objects[index].getParameterNames();
+        if (!params.empty()) {
+            objectPlacementListener->setParameters(params);
+            objectPlacementListener->actionPerformed(NULL);
+        }
+        t->setObject(objectSelector.getSelectedIndex());
         break;
     }
     case UIToolSelector::DELETE_TOOL:
