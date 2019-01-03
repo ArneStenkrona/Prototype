@@ -9,25 +9,40 @@ It is written in C++ and makes us of [SDL](https://www.libsdl.org/).
 
 ## Getting Started
 
-Clone the repository containing the Visual Studio project and open the solution using Visual Studio 2017.
-Example:
+Clone the repository and open the solution in *Visual Studio 2017*. 
+This can be done directly in *Visual Studio*
+
+* Open Visual Studio 2017
+
+* Using the tabs, navigate into File->Open->Open From Source Control
+
+* In the Team Explorer panel, find the clone option and enter the repository URL
+
+* Open the solution and set the platform to preferred architecture
+
+Alternatively, the repository can be cloned in the command line
 
 ```
-Open Visual Studio 2017
+ $ git clone https://github.com/ArneStenkrona/Prototype.git
 ```
-```
-Navigate, using the tabs, into File->Open->Open From Source Control
-```
-```
-In the Team Explorer panel, find the clone option and enter the repository URL
-```
-```
-Open the solution and set the platform to x86
-```
+The solution can then be opened in *Visual Studio*.
 
 It is also recommended to set the solution explorer to 'Show All Files' to get a
 proper view of the file hierarchy. The game will run more slowly if solution is set to
 'debug'. Set solution to 'release' if performance is slow.
+
+## Testing
+
+Testing is done with a Visual Studio Unit Test Project. This project is found in the folder *Prototype Test*. 
+To run the tests, open the solution in *Visual Studio*
+
+* Open Visual Studio 2017
+
+* Using the tabs, navigate into Test->Test Settings->Default Processor Architecture->[Current Solution Platform]
+
+* navigate to Test Explorer
+
+* Select Run All to run all tests
 
 ## Built With
 
