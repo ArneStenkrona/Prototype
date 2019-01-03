@@ -26,16 +26,6 @@ void Door::setPolygon(Polyshape p)
 void Door::onCollisionEnter(Collision * collision)
 {
     if (!GameLogic::getRoomChange()) {
-        GameLogic::queueRoom(new Room(roomFilePath));
-        Position *p = collision->getOtherCollider()->getGameObject()->getComponent<Position>();
-        if (p) {
-            Point pos = p->position;
-            //If coordinates are less than some really small value, use existing coordinate
-            if (destX > -256 * 256 * 256)
-                pos.x = Tile::TILE_SIZE * destX;
-            if (destY > -256 * 256 * 256)
-                pos.y = Tile::TILE_SIZE * destY;
-            p->position = pos;
-        }
+        GameLogic::queueRoom(new Room(roomFilePath), destX, destY, collision->getOtherCollider()->getGameObject());
     }
 }

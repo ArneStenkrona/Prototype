@@ -19,7 +19,7 @@ public:
     //Gets the current room in game
     static Room *getRoom();
     //Makes sure that the room is set after the current iteration of the gameloop
-    static void queueRoom(Room* room);
+    static void queueRoom(Room* room, int destX, int destY, GameObject* _enterer);
 
     //Sets the current scene in the game
     static void setScene();
@@ -36,15 +36,18 @@ public:
 private:
     //Current frame of the game
     static long currentFrame;
-
-    //True during the first frame of a new room
-    static bool roomChange;
     //Main window for the game
     static LWindow *gameWindow;
     //The current scene in game
     static Scene *currentScene;
     //Room to be set. Null if no room is queued
     static Room* queuedRoom;
+    //Destination coordinates in the queued room
+    static Point destinationCoordinates;
+    //Object entering queued room
+    static GameObject * enterer;
+    //True during the first frame of a new room
+    static bool roomChange;
 
     //Sets the current room in game
     static void setRoom();

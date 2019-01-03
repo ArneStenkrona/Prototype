@@ -14,10 +14,12 @@
 #include <iostream>
 
 long GameLogic::currentFrame = 0;
-bool GameLogic::roomChange = false;
 LWindow* GameLogic::gameWindow = nullptr;
 Scene* GameLogic::currentScene = nullptr;
 Room* GameLogic::queuedRoom = nullptr;
+bool GameLogic::roomChange = false;
+Point GameLogic::destinationCoordinates = Point(0,0);
+GameObject * GameLogic::enterer = nullptr;
 
 Room * GameLogic::getRoom()
 {
@@ -25,18 +27,34 @@ Room * GameLogic::getRoom()
     return currentScene->getRoom();
 }
 
-void GameLogic::queueRoom(Room * room)
+void GameLogic::queueRoom(Room * room, int destX, int destY, GameObject *_enterer)
 {
     queuedRoom = room;
+    destinationCoordinates = Point(destX, destY);
+    enterer = _enterer;
 }
 
 void GameLogic::setRoom()
 {
     currentScene->setRoom(queuedRoom);
     PhysicsEngine::resetPhysics();
+
+    Position *p = enterer->getComponent<Position>();
+    if (p) {
+        Point pos = p->position;
+        //If coordinates are less than some really small value, use existing coordinate
+        if (destinationCoordinates.x > -256 * 256 * 256)
+            pos.x = Tile::TILE_SIZE * destinationCoordinates.x;
+        if (destinationCoordinates.y > -256 * 256 * 256)
+            pos.y = Tile::TILE_SIZE * destinationCoordinates.y;
+        p->position = pos;
+    }
+
     queuedRoom = nullptr;
-    GameObject::startAll();
+    destinationCoordinates = Point(0,0);
+    enterer = nullptr;
     roomChange = true;
+    GameObject::startAll();
 }
 
 
