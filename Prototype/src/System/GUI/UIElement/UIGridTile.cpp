@@ -74,7 +74,7 @@ void UIGridTile::onMouseOver()
     }
 }
 
-void UIGridTile::onMouseLeft()
+void UIGridTile::onMouseExit()
 {
     selector->setActiveTileCoordinates(-1, -1);
 }

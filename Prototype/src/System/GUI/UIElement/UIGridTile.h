@@ -20,7 +20,7 @@ private:
     //called if mouse is over
     void onMouseOver();
     //called if mouse leaves
-    void onMouseLeft();
+    void onMouseExit();
     //unconditional update
     void update();
     void onSelect();

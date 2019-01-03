@@ -51,7 +51,6 @@ private:
     unsigned int columns, rows;
     void render();
     void update();
-    void onMouseOver();
 
     void renderRoom();
     
