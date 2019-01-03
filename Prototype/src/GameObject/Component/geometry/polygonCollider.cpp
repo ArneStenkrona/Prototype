@@ -76,54 +76,53 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
         //Time of collision, where 0.0 is the beginning of the frame and 1.0 is the end
         double collisionTime = 1.0;
 
-        if (checkCollision(a, get<1>(col), collisionNormal, collisionTime)) {
-            //Check if A is actually approaching other collider
-            if (a->relativeVelocity(get<1>(col)).normalized().dot(collisionNormal) < 0.000001) {
-                //Velocity required to reach collision
-                const Point velC = a->velocity->velocity * collisionTime;
-                //Overlapping velocity
-                const Point overVel = a->velocity->velocity - velC;
+        //Check if collision happened
+        if (!checkCollision(a, get<1>(col), collisionNormal, collisionTime)) continue;
+        //Check if A is actually approaching other collider
+        if (a->relativeVelocity(get<1>(col)).normalized().dot(collisionNormal) >= 0.000001) continue;
+        //Velocity required to reach collision
+        const Point velC = a->velocity->velocity * collisionTime;
+        //Overlapping velocity
+        const Point overVel = a->velocity->velocity - velC;
 
-                const Point correctedVelocity = a->velocity->velocity - collisionNormal * overVel.dot(collisionNormal);
+        const Point correctedVelocity = a->velocity->velocity - collisionNormal * overVel.dot(collisionNormal);
 
-                //Is it a vertex to vertex collision?
-                bool vToV = false;
-                for (int i = 0; i < a->polygon.numberOfVertices; i++) {
-                    Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
-                    for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
-                        Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
+        //Is it a vertex to vertex collision?
+        bool vToV = false;
+        for (int i = 0; i < a->polygon.numberOfVertices; i++) {
+            Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
+            for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
+                Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
 
-                        if ((aVertex).distanceTo(bVertex) < 0.01) {
-                            for (int k = 0; k < a->polygon.numberOfVertices; k++) {
-                                if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
-                                    vToV = true;
-                                }
-                            }
+                if ((aVertex).distanceTo(bVertex) < 0.01) {
+                    for (int k = 0; k < a->polygon.numberOfVertices; k++) {
+                        if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
+                            vToV = true;
                         }
                     }
                 }
-
-                Collision *collision = new Collision(a, get<1>(col), collisionNormal, collisionTime);
-                collisions.push_back(collision);
-                if (!get<1>(col)->getTrigger() && !vToV) {
-                    if (collisionTime < 0.0) {
-                        a->position->position -= collisionNormal * collisionTime;// -0.01 * a->velocity->velocity.normalized();
-                        const Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
-                        a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
-                    }
-                    else {
-                        a->velocity->velocity = correctedVelocity;
-
-                        //const Point perpNormal(-collisionNormal.y, collisionNormal.x);
-                        //a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
-                    }
-                }
-                else if (!get<1>(col)->getTrigger() && collisionTime < 0.0) {
-                    a->position->position -= collisionNormal * collisionTime - 0.01 * a->velocity->velocity.normalized();
-                    const Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
-                    a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
-                }
             }
+        }
+
+        Collision *collision = new Collision(a, get<1>(col), collisionNormal, collisionTime);
+        collisions.push_back(collision);
+        if (!get<1>(col)->getTrigger() && !vToV) {
+            if (collisionTime < 0.0) {
+                a->position->position -= collisionNormal * collisionTime;// -0.01 * a->velocity->velocity.normalized();
+                const Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
+                a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
+            }
+            else {
+                a->velocity->velocity = correctedVelocity;
+
+                //const Point perpNormal(-collisionNormal.y, collisionNormal.x);
+                //a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
+            }
+        }
+        else if (!get<1>(col)->getTrigger() && collisionTime < 0.0) {
+            a->position->position -= collisionNormal * collisionTime - 0.01 * a->velocity->velocity.normalized();
+            const Point perpNormal = Point(-collisionNormal.y, collisionNormal.x);
+            a->velocity->velocity = a->velocity->velocity.dot(perpNormal) * perpNormal;
         }
     }
     return collisions;
@@ -183,7 +182,9 @@ vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonC
 {
     vector<RayCastHit*> hits;
 
-    for each (PolygonCollider* col in colliders ){
+    for each (PolygonCollider* col in colliders){
+        if (col->getTrigger()) continue;
+
         const Point * colV = &col->polygon.vertices[0];
         int aNum = col->polygon.numberOfVertices;
         const Point offset = col->position->position;
