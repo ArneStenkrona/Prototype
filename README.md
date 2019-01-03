@@ -4,7 +4,7 @@ Prototype is a simple 2D game engine. As of yet it is in a very
 rudimentary stage. This project is solely developed as a hobby 
 and learning experience.
 
-It is written in C++ and makes us of [SDL](https://www.libsdl.org/).
+It is written in C++ and uses [SDL](https://www.libsdl.org/).
 
 
 ## Getting Started
