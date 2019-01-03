@@ -30,12 +30,17 @@ public:
     //returns true if active and gameObject is active
     inline bool getActive() const { return isActive && object->getActive(); }
     //sets active
-    void setActive(bool b);
+    inline void setActive(bool b) { isActive = b; }
 
-    //returns true if active and gameObject is active
+    //returns true if static
     inline bool getStatic() const { return isStatic; }
     //sets static
-    void setStatic(bool b);
+    inline void setStatic(bool b) { isStatic = b; }
+
+    //returns true if trigger
+    inline bool getTrigger() const { return isTrigger; }
+    //sets trigger
+    inline void setTrigger(bool b) { isTrigger = b; }
 
     //Set the polygon used for hit detection
     void setPolygon(Polyshape _polygon);
@@ -71,10 +76,12 @@ private:
     //Returns velocity relative to other
     Point relativeVelocity(PolygonCollider *other) const;
     
-    //Determines wether the hitbox is active
+    //Determines if the collider is active
     bool isActive;
-    //Determines if the hitbox has velocity, and therefore will be affected by response
+    //Determines if the collider has velocity, and therefore will be affected by response
     bool isStatic;
+    //Determines if the collider is onlt trigger, i.e. gives no physical response
+    bool isTrigger;
 
     //Position and velocity components
     Position *position;
