@@ -1,3 +1,5 @@
+![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prototypeLogo.PNG)
+
 # Prototype
 
 Prototype is a simple 2D game engine. As of yet it is in a very 
