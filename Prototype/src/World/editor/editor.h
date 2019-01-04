@@ -41,7 +41,7 @@ private:
     //Returns true if success
     bool loadFile(const std::string& path);
 
-    static enum FILE_FLAG {
+    enum FILE_FLAG {
         NO_FILE = 0,
         INVALID_FILE = 1,
         SUCCESS_FILE = 2,
