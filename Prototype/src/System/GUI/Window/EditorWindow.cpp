@@ -13,8 +13,6 @@
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 
-const int EditorWindow::gridSize = 32;
-
 class UISaveFileAsListener : public UIActionListener {
 public:
     UISaveFileAsListener(Editor* _editor)
@@ -111,18 +109,3 @@ void EditorWindow::setRoom(Room * room)
     activeRoom = room;
     gridSelector.setRoom(room);
 }
-
-
-void EditorWindow::drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    SDL_Rect outlineRect = { x, y, gridSize, gridSize };
-    SDL_SetRenderDrawColor(mRenderer, r,g,b,a);
-    SDL_RenderDrawRect(mRenderer, &outlineRect);
-}
-
-void EditorWindow::drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
-{
-    SDL_Rect fillRect = { x, y, gridSize, gridSize };
-    SDL_SetRenderDrawColor(mRenderer, r, g, b, a);
-    SDL_RenderFillRect(mRenderer, &fillRect);
-}
-

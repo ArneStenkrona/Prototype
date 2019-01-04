@@ -23,7 +23,6 @@ private:
     Editor *editor;
     //Room in the editor
     Room *activeRoom;
-    static const int gridSize;
 
     static enum BUTTONS {
         NEW_FILE_BUTTON,
@@ -35,7 +34,4 @@ private:
     UIButton buttons[TOTAL_BUTTONS];
 
     UIGridSelector gridSelector;
-
-    void drawOutlineSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-    void drawSolidSquare(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 };
