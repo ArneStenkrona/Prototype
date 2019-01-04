@@ -12,19 +12,19 @@ class TextureManager {
 
 public:
 
-    static enum BACKGROUND_TEXTURE_NAMES
+    enum BACKGROUND_TEXTURE_NAMES
     {
         DEFAULT_BACKGROUND_LAYER,
         TOTAL_BACKGROUND_TEXTURES
     };
 
     //Corresponds to mapPaths
-    static enum TILEMAPS {
+    enum TILEMAPS {
         LAB_MAP,
         TOTAL_MAPS
     };
 
-    static enum SPRITE_SHEETS {
+    enum SPRITE_SHEETS {
         PRT,
         OBJECTS_1,
         OBJECT_ICONS,
@@ -32,7 +32,7 @@ public:
         TOTAL_SPRITE_SHEETS
     };
 
-    static enum FONT_TEXTURES
+    enum FONT_TEXTURES
     {
         FONT1,
         TOTAL_FONTS

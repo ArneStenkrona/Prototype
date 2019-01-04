@@ -5,7 +5,7 @@
 
 class SoundManager {
 public:
-    static enum SOUNDS
+    enum SOUNDS
     {
         DEFAULT_SOUND,
         LASER_SOUND,
@@ -15,7 +15,7 @@ public:
         GlASS_SHATTER_SOUND,
         TOTAL_SOUNDS
     };
-    static enum MUSIC
+    enum MUSIC
     {
         DEFAULT_MUSIC,
         WINDOW_MUSIC,

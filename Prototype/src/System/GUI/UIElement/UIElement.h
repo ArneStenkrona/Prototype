@@ -4,7 +4,7 @@
 #include <set>
 #include "System\graphics\color.h"
 
-static enum Alignment {
+enum Alignment {
     ALIGN_UP,
     ALIGN_DOWN,
     ALIGN_LEFT,
@@ -16,7 +16,7 @@ static enum Alignment {
     ALIGN_LOWER_RIGHT,
     ALIGN_NONE
 };
-static enum Fill_Type {
+enum Fill_Type {
     SOLID,
     OUTLINE
 };

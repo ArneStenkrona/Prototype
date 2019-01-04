@@ -24,7 +24,7 @@ private:
     //Room in the editor
     Room *activeRoom;
 
-    static enum BUTTONS {
+    enum BUTTONS {
         NEW_FILE_BUTTON,
         OPEN_FILE_BUTTON,
         SAVE_BUTTON,
