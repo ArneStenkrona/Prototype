@@ -95,16 +95,16 @@ Point Point::normalized() const
 Point Point::rotate(double angle, Point pivot)
 {
     Point p = Point(x, y);
-    float s = sin(angle*PI / 180);
-    float c = cos(angle*PI / 180);
+    double s = sin(angle*PI / 180);
+    double c = cos(angle*PI / 180);
 
     // translate point back to origin:
     p.x -= pivot.x;
     p.y -= pivot.y;
 
     // rotate point
-    float xnew = p.x * c - p.y * s;
-    float ynew = p.x * s + p.y * c;
+    double xnew = p.x * c - p.y * s;
+    double ynew = p.x * s + p.y * c;
 
     // translate point back:
     p.x = xnew + pivot.x;
