@@ -46,8 +46,8 @@ void getMouseCoordinates(int& x, int& y)
 void getMouseWorldCoordinates(int& x, int& y)
 {
     SDL_GetMouseState(&x, &y);
-    x /= GraphicsEngine::SCALE_X;
-    y /= GraphicsEngine::SCALE_Y;
+    x = (int)(x / GraphicsEngine::SCALE_X);
+    y = (int)(y /GraphicsEngine::SCALE_Y);
 }
 
 std::string getInputBuffer()
