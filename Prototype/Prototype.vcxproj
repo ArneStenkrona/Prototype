@@ -204,6 +204,7 @@
     <ClInclude Include="src\System\GUI\UIElement\UIBorder.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIButton.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIActionListener.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIButtonBase.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIComponent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIEvent.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIInfoBox.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="src\System\GUI\UIElement\UIObjectSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPanel.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPrompt.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIRadioButton.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectable.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableCollider.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelectableObject.h" />
@@ -284,6 +286,7 @@
     <ClCompile Include="src\System\GUI\UIElement\UIBorder.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIButton.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIActionListener.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIButtonBase.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIEvent.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIInfoBox.cpp" />
@@ -292,6 +295,7 @@
     <ClCompile Include="src\System\GUI\UIElement\UIObjectSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPanel.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPrompt.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIRadioButton.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableCollider.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelectableObject.cpp" />

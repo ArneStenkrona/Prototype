@@ -16,9 +16,9 @@ static enum Alignment {
     ALIGN_LOWER_RIGHT,
     ALIGN_NONE
 };
-static enum Square_type {
-    SOLID_SQUARE,
-    OUTLINE_SQUARE
+static enum Fill_Type {
+    SOLID,
+    OUTLINE
 };
 class UIElement {
 public:
@@ -75,7 +75,10 @@ protected:
     //returns alignment offset parameters
     void getAlignmentOffset(Alignment align, int _width, int _height, int &alignx, int &aligny) const;
     //Draws square at position of UIElement
-    void drawSquare(int _width, int _height, Color color, Square_type type = SOLID_SQUARE, 
+    void drawSquare(int _width, int _height, Color color, Fill_Type type = SOLID, 
+                    Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
+
+    void drawCircle(int diameter, Color color, Fill_Type type = SOLID,
                     Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
 
     //Renders text at position

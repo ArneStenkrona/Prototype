@@ -40,7 +40,7 @@ void UIMultiPrompt::render()
     }
 
     if (isSelected())
-        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE);
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE);
 }
 
 void UIMultiPrompt::derivedUpdate()

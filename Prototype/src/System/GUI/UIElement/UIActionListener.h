@@ -16,6 +16,7 @@ public:
     virtual void windowActivated(UIEvent* e);
     virtual void windowDeactivated(UIEvent* e);
     virtual void windowClosed(UIEvent* e);
+    //Called when selected UIElement is changed
     virtual void onNotify();
 
 protected:
@@ -23,7 +24,7 @@ protected:
 private:
 
     static std::set<UIActionListener*> allListeners;
-
+    //Calls onNotify in all action listeners
     static void notifyAll();
     friend class UIElement;
 };

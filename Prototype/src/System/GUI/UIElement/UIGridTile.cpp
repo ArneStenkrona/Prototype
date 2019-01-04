@@ -30,7 +30,7 @@ void UIGridTile::render()
     }
 
     else {
-        UIElement::drawSquare(width, height, {0xFF,0xFF,0xFF,0x08}, OUTLINE_SQUARE);
+        UIElement::drawSquare(width, height, {0xFF,0xFF,0xFF,0x08}, OUTLINE);
 
     }
 

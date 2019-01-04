@@ -28,7 +28,7 @@ void UIPrompt::render()
     UIElement::renderText(label, { 255,255,255,255 }, ALIGN_UP, 0, 2);
 
     if (isSelected())
-        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE);
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE);
 }
 
 void UIPrompt::derivedUpdate()

@@ -29,7 +29,7 @@ void UISelectableTile::render()
         switch (borderType)
         {
         case 0:
-            UIElement::drawSquare(width, height, borderColor, OUTLINE_SQUARE);
+            UIElement::drawSquare(width, height, borderColor, OUTLINE);
             break;
         case 1: 
             SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(),

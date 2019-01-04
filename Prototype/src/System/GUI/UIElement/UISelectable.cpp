@@ -23,7 +23,7 @@ void UISelectable::render()
     Color borderColor = mouseOver() ? selector->hoverColor :
         (selector->getSelectedIndex() == index + selector->offset ? selector->selectedColor : COLOR_NONE);
 
-    UIElement::drawSquare(width, height, borderColor, OUTLINE_SQUARE);
+    UIElement::drawSquare(width, height, borderColor, OUTLINE);
 
     if (!selector->isActive())
         UIElement::drawSquare(width, height, { 255,255,255,40 });

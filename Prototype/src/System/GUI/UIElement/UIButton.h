@@ -1,9 +1,8 @@
 #pragma once
-#include "UIComponent.h"
+#include "UIButtonBase.h"
 #include <string>
-#include "UIActionListener.h"
 
-class UIButton : public UIComponent {
+class UIButton : public UIButtonBase {
 public:
     //Creates an instance of UIButton with listener _listener.
     //The listener is destroyed when UIButton is destroyed
@@ -12,21 +11,9 @@ public:
     virtual ~UIButton();
  
 protected:
-    const std::string text;
-    
-    //Generates and sends an event to owner
-    //Event does not survive the sendEvent function call
-    virtual void sendEvent();
 
 private:
-    void onMouseOver();
-    void update();
     void render();
-
-    //mouse is over
-    bool mouseOver;
-    //User has initiated click on button
-    bool holdClick;
 
     UIActionListener* listener;
 };

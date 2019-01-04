@@ -87,7 +87,7 @@ void UIGridSelector::render()
 {
     renderRoom();
     if (isSelected())
-        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE_SQUARE, ALIGN_CENTER);
+        UIElement::drawSquare(width, height, { 66, 134, 244, 255 }, OUTLINE, ALIGN_CENTER);
 
 }
 

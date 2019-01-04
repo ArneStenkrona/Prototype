@@ -28,6 +28,6 @@ void UIToolSelector::update()
 
 void UIToolSelector::render()
 {
-    UIElement::drawSquare(width, 16, COLOR_BLACK, SOLID_SQUARE, ALIGN_UP);
+    UIElement::drawSquare(width, 16, COLOR_BLACK, SOLID, ALIGN_UP);
     UIElement::renderTextBackdrop(getLabel(), COLOR_WHITE, ALIGN_UP, 0, 2, COLOR_DARK_GREY);
 }

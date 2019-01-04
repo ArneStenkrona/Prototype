@@ -12,13 +12,13 @@ UISelectableTool::UISelectableTool(UIToolSelector * _selector, int _posX, int _p
 void UISelectableTool::render()
 {
 
-    UIElement::drawSquare(width, height, COLOR_PINK, SOLID_SQUARE, ALIGN_CENTER);
-    UIElement::drawSquare(width, height, COLOR_BLACK, SOLID_SQUARE, ALIGN_CENTER);
+    UIElement::drawSquare(width, height, COLOR_PINK, SOLID, ALIGN_CENTER);
+    UIElement::drawSquare(width, height, COLOR_BLACK, SOLID, ALIGN_CENTER);
     TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, index, 2, 2);
 
     Color borderColor = mouseOver() ? selector->hoverColor :
         (selector->getSelectedIndex() == index + selector->offset ? selector->selectedColor : COLOR_NONE);
-    UIElement::drawSquare(width, height, borderColor, OUTLINE_SQUARE);
+    UIElement::drawSquare(width, height, borderColor, OUTLINE);
 
 }
 
