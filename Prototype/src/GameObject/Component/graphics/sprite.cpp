@@ -28,16 +28,16 @@ void Sprite::setWidthHeight(int width, int height)
 
 void Sprite::renderSprite(int x, int y)
 {
-    renderSprite(x, y, 0, Point(0,0));
+    renderSprite(x, y, 0, 0, 0);
 
 }
 
-void Sprite::renderSprite(int x, int y, double rotation, Point pivot)
+void Sprite::renderSprite(int x, int y, double rotation, int pivotX, int pivotY)
 {
     if (tileIndex == -1)
         texture->render((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY);
     else
-        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, rotation, pivot.x, pivot.y);
+        texture->renderTile((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY, tileIndex, widthFactor, heightFactor, mirrorH, mirrorV, rotation, pivotX, pivotY);
 }
 
 void Sprite::setRenderOffset(int x, int y)

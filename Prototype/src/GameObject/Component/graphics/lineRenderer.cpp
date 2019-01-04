@@ -18,13 +18,13 @@ void LineRenderer::render()
             Point offset = Point((i - thickness / 2), 0);
             Point st = start + offset;
             Point en = end + offset;
-            SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), st.x, st.y, en.x, en.y);
+            SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), round(st.x), round(st.y), round(en.x), round(en.y));
         }
         for (int i = 0; i < thickness; i++) {
             Point offset = Point(0, (i - thickness / 2));
             Point st = start + offset;
             Point en = end + offset;
-            SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), st.x, st.y, en.x, en.y);
+            SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), round(st.x), round(st.y), round(en.x), round(en.y));
         }
     }
     else {

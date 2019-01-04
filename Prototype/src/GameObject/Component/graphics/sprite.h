@@ -23,7 +23,7 @@ public:
     void setWidthHeight(int width, int height);
 
     void renderSprite(int x, int y);
-    void renderSprite(int x, int y, double rotation, Point pivot);
+    void renderSprite(int x, int y, double rotation, int pivotX, int pivotY);
 
     void setRenderOffset(int x, int y);
 

@@ -29,7 +29,7 @@ void SpriteRenderer::render()
     if (cameraPosition != nullptr) {
         Point renderPosition = position->position - cameraPosition->position;
         if (rotation)
-            sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation, rotation->pivot);
+            sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation, rotation->pivot.x, rotation->pivot.y);
         else sprite->renderSprite(renderPosition.x, renderPosition.y);
     }
     else {
