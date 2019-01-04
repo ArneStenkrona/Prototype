@@ -54,22 +54,27 @@ private:
 };
 
 UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
-    :UIElement(_posx, _posy, GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-        GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
+    :UIElement(_posx, _posy, (int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
+        (int)(GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y),
         _layer + 4, true),
-    room(_room), infoBox(UIInfoBox(this, 0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, 32 * 5, 32 * 3, _layer, "INFO: ")),
-    toolSelector(UIToolSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + (6 * Tile::TILE_SIZE),
+    room(_room), infoBox(UIInfoBox(this, 0, (int)(GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y), 32 * 5, 32 * 3, _layer, "INFO: ")),
+    toolSelector(UIToolSelector((int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X) + (6 * Tile::TILE_SIZE),
                  0, _layer)),
-    objectSelector(UIObjectSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+
+    objectSelector(UIObjectSelector((int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
                   ( 2 * UISelector::LABEL_HEIGHT) + (6 + 4) * Tile::TILE_SIZE, _layer, 6, 5)),
-    colliderSelector(UIColliderSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+
+    colliderSelector(UIColliderSelector((int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
                      UISelector::LABEL_HEIGHT + 6 * Tile::TILE_SIZE, _layer, 6, 4)),
-    tileSelector(UITileSelector(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
+
+    tileSelector(UITileSelector((int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
                  0, _layer, 6, 6)),
-    border{ UIBorder(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X,
-                     0, 500, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y, _layer + 2, COLOR_DARK_GREY),
-            UIBorder(0, GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y,
-                     GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X + 500, 300, _layer + 2)},
+
+    border{ UIBorder((int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
+                     0, 500, (int)(GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y), _layer + 2, COLOR_DARK_GREY),
+            UIBorder(0, (int)(GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y),
+                     (int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X) + 500, 300, _layer + 2)},
+
     objectPlacementListener(new UIObjectPlacementListener(room))
 {
     setRoom(room);

@@ -13,7 +13,7 @@ class Editor;
 class EditorWindow : public LWindow {
 public:
     EditorWindow(Editor* _editor, int _screen_width, int _screen_height,
-        int _scale_x, int _scale_y, Room *_activeRoom);
+        float _scale_x, float _scale_y, Room *_activeRoom);
 
     void update();
 

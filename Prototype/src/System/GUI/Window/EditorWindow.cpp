@@ -85,7 +85,7 @@ private:
     Editor* editor;
 };
 
-EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, int _scale_x, int _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
+EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, float _scale_x, float _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
     _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
     buttons{ UIButton(new UINewFilePromptListener(editor), 0, 0, 70, 20, 1, "NEW FILE") ,
              UIButton(new UIOpenFileListener(editor), 70, 0, 70, 20, 1, "OPEN FILE"),
