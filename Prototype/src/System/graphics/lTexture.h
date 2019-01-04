@@ -65,5 +65,5 @@ private:
     int mHeight;
 
     //How many tiles can be fitted per row
-    unsigned int tilesPerRow;
+    size_t tilesPerRow;
 };

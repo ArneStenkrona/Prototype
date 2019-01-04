@@ -31,7 +31,7 @@ void UIObjectSelector::renderSelected(int x, int y, Color color)
                                                                    rotation * 90, Tile::TILE_SIZE / 2, Tile::TILE_SIZE / 2,
                                                                    color);
         Color c = COLOR_PINK;
-        SDL_Rect rect = { x, y, Tile::TILE_SIZE, Tile::TILE_SIZE };
+        SDL_Rect rect = { x, y, (int)Tile::TILE_SIZE, (int)Tile::TILE_SIZE };
         SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), c.r, c.g, c.b, c.a);
         SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &rect);
 }

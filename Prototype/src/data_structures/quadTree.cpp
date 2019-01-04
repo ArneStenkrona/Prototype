@@ -283,7 +283,7 @@ void QuadTree::draw()
 {
     Point camPos = Renderer::getCameraPosition();
     
-    SDL_Rect outlineRect = { position.x - camPos.x, position.y - camPos.y, bounds.x, bounds.y };
+    SDL_Rect outlineRect = { (int)(position.x - camPos.x), (int)(position.y - camPos.y), (int)bounds.x, (int)bounds.y };
 
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 0x00, 0x00, 0xFF, 0x00);
     SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &outlineRect);

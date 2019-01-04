@@ -136,14 +136,14 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
         y > GraphicsEngine::getActiveWindow()->getHeight() / GraphicsEngine::SCALE_Y ||
         x + Tile::TILE_SIZE * widthFactor < 0 || y + Tile::TILE_SIZE * heightFactor < 0) return;
 
-    SDL_Rect renderQuad = { x, y, Tile::TILE_SIZE * widthFactor, Tile::TILE_SIZE * heightFactor };
+    SDL_Rect renderQuad = { x, y, (int)Tile::TILE_SIZE * widthFactor, (int)Tile::TILE_SIZE * heightFactor };
     //corrected index
     int ix = scaleIndices ? tileIndex * widthFactor : tileIndex;
     int iy = scaleIndices ? heightFactor : 1;
-    SDL_Rect tileRect = { (ix % tilesPerRow) * Tile::TILE_SIZE,
-                          (ix / tilesPerRow) * iy * Tile::TILE_SIZE, 
-                          Tile::TILE_SIZE * widthFactor, 
-                           Tile::TILE_SIZE * heightFactor };
+    SDL_Rect tileRect = { (ix % (int)tilesPerRow) * (int)Tile::TILE_SIZE,
+                          (ix / (int)tilesPerRow) * iy * (int)Tile::TILE_SIZE,
+                          (int)Tile::TILE_SIZE * widthFactor, 
+                          (int)Tile::TILE_SIZE * heightFactor };
 
     SDL_Point pivot = { pivotX, pivotY };
     

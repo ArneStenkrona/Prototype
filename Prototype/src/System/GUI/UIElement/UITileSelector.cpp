@@ -84,7 +84,7 @@ void UITileSelector::renderSelected(int x, int y, Color color)
                                                (tileDim * Tile::TILE_SIZE) / 2,
                                                color, false);
 
-    SDL_Rect rect = { x, y, tileDim * Tile::TILE_SIZE, tileDim * Tile::TILE_SIZE };
+    SDL_Rect rect = { x, y, (int)tileDim * (int)Tile::TILE_SIZE, (int)tileDim * (int)Tile::TILE_SIZE };
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &rect);
 }

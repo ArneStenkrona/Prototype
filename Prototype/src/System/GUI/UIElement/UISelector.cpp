@@ -52,7 +52,7 @@ void UISelector::setSelected(int i)
 
 void UISelector::renderSelected(int x, int y, Color color)
 {
-    SDL_Rect rect = { x, y, Tile::TILE_SIZE, Tile::TILE_SIZE };
+    SDL_Rect rect = { x, y, (int)Tile::TILE_SIZE, (int)Tile::TILE_SIZE };
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
     SDL_RenderDrawRect(GraphicsEngine::getActiveRenderer(), &rect);
 }

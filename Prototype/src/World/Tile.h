@@ -14,9 +14,9 @@ public:
 
     ~Tile();
 
-    static const unsigned int TILE_SIZE;
-    static const unsigned int TILES_PER_ROW;
-    static const unsigned int TILES_PER_COLUMN;
+    static const size_t TILE_SIZE;
+    static const size_t TILES_PER_ROW;
+    static const size_t TILES_PER_COLUMN;
 
     bool hasCollider() const;
     void setPolygon(std::optional<Polyshape> p) { polygon = p; };

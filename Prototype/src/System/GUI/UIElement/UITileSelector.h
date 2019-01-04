@@ -21,7 +21,7 @@ public:
 protected:
 private:
     //How many tiles should be selected
-    unsigned int tileDim;
+    size_t tileDim;
     std::set<int> selectedIndices;
     std::set<int> hoverIndices;
 
