@@ -17,11 +17,13 @@ public:
     UIGridSelector(Room* _room, int _posx, int _posy, int _layer);
     ~UIGridSelector();
 
+    //Set room to _room. If null is provided, no room is set
     void setRoom(Room* _room);
 
     //Checks if gridselector is selected
     inline bool isSelected() const { return selected || UIElement::isSelected(); }
-
+    //Gets coordniates of the tile that mouse is currently over.
+    //Coordinates may be set to (-1, -1) if not applicable 
     void getActiveTileCoordinates(int &x, int &y);
 
     inline UIToolSelector::TOOL getTool() const { return (UIToolSelector::TOOL)toolSelector.getSelectedIndex(); }

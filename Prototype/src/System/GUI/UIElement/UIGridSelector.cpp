@@ -158,6 +158,8 @@ void UIGridSelector::setRoom(Room* _room)
             tiles[i][j] = new UIGridTile(this, layer - 1, i, j);
         }
     }
+    roomPosX = 0;
+    roomPosY = 0;
 
     objectPlacementListener->setRoom(room);
 }
