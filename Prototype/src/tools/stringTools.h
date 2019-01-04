@@ -35,3 +35,12 @@ static inline std::string flattenStringVector(std::vector<std::string> v) {
     std::string s;
     return accumulate(begin(v), end(v), s);
 }
+
+static inline bool hasEnding(std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
+    }
+    else {
+        return false;
+    }
+}

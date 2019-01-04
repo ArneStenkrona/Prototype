@@ -7,7 +7,9 @@
 #include "System\GUI\UIElement\UIPrompt.h"
 #include "System\GUI\UIElement\UIActionListener.h"
 #include "World\editor\editor.h"
+#include "System\GUI\UIElement\UIMultiPrompt.h"
 #include "tools\fileTools.h"
+#include "tools\stringTools.h"
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 
@@ -39,28 +41,30 @@ private:
     Editor* editor;
 };
 
-class UINewFilePromptListener : public UIPromptListener {
+class UINewFilePromptListener : public UIMultiPromptListener {
 public:
     UINewFilePromptListener(Editor* _editor)
-        : UIPromptListener("FILENAME: "), editor(_editor)
+        : UIMultiPromptListener("NEW ROOM", { "FILENAME", "ROOM WIDTH", "ROOM HEIGHT" }), editor(_editor)
     {}
 
 
     void ok() {
-        UIPromptListener::ok();
+        UIMultiPromptListener::ok();
 
         bool b = true;
 
-        if (fileExists("Assets/Rooms/" + input + ".room")) {
+        std::string fileName = hasEnding(input[0], ".room") ? input[0] : input[0] + ".room";
+
+        if (fileExists("Assets/Rooms/" + fileName)) {
             if (!(MessageBoxA(NULL, 
-                (input + ".room" + " already exists. \n Do you wish to overwrite the existing file?").c_str(),
+                (fileName + " already exists. \n Do you wish to overwrite the existing file?").c_str(),
                 "Confirm Overwrite", 
                 MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES)) {
                 b = false;
             }
         }
         if (b) {
-            Room* room = new Room("Assets/Rooms/" + input + ".room", 64, 64);
+            Room* room = new Room("Assets/Rooms/" + fileName, std::stoi(input[1]), std::stoi(input[2]));
             editor->setRoom(room);
         }
     }
