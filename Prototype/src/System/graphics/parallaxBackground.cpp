@@ -23,7 +23,7 @@ void ParallaxBackground::renderParallaxLayers(Point position)
         else {
             renderPosition = (origin - position) * (1 / (get<1>(layer) * depthOfField));
         }
-        get<0>(layer)->render(renderPosition.x, renderPosition.y);
+        get<0>(layer)->render((int)renderPosition.x, (int)renderPosition.y);
     }
 }
 

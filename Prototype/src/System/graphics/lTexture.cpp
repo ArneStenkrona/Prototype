@@ -132,8 +132,8 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     SDL_SetTextureAlphaMod(mTexture, color.a);
 
     //Check if visible in viewport
-    if (x > GraphicsEngine::getActiveWindow()->getWidth() / (float)GraphicsEngine::SCALE_X || 
-        y > GraphicsEngine::getActiveWindow()->getHeight() / (float)GraphicsEngine::SCALE_Y ||
+    if (x > GraphicsEngine::getActiveWindow()->getWidth() / GraphicsEngine::SCALE_X || 
+        y > GraphicsEngine::getActiveWindow()->getHeight() / GraphicsEngine::SCALE_Y ||
         x + Tile::TILE_SIZE * widthFactor < 0 || y + Tile::TILE_SIZE * heightFactor < 0) return;
 
     SDL_Rect renderQuad = { x, y, (int)Tile::TILE_SIZE * widthFactor, (int)Tile::TILE_SIZE * heightFactor };

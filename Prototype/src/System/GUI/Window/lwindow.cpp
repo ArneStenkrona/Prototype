@@ -2,7 +2,7 @@
 #include "System\IO\inputManager.h"
 
 LWindow::LWindow(int _screen_width, int _screen_height, 
-               int _scale_x, int _scale_y): gWindow(NULL), mRenderer(NULL),
+               float _scale_x, float _scale_y): gWindow(NULL), mRenderer(NULL),
                                         screen_width(_screen_width), screen_height(_screen_height),
                                         scale_x(_scale_x), scale_y(_scale_y),
                                         mouseOver(false),

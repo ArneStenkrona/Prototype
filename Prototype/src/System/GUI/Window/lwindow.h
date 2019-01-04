@@ -17,7 +17,7 @@ using namespace::std;
 class LWindow {
 public:
     LWindow(int _screen_width, int _screen_height, 
-           int _scale_x, int _scale_y);
+           float _scale_x, float _scale_y);
     ~LWindow();
 
     //Updates all windows
@@ -57,8 +57,8 @@ protected:
     //Screen dimension constants, though I might remove this if I set window to resizable
     const unsigned int screen_width;
     const unsigned int screen_height;
-    const unsigned int scale_x;
-    const unsigned int scale_y;
+    const float scale_x;
+    const float scale_y;
 
     //Sets referenced variables to window coordinates
     void getPos(int *x, int *y);
