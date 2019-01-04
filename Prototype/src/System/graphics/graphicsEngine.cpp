@@ -12,8 +12,8 @@ using namespace::std;
 vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();
 
 //Screen dimension constants
-const float GraphicsEngine::SCALE_X = 3;
-const float GraphicsEngine::SCALE_Y = 3;
+const int GraphicsEngine::SCALE_X = 3;
+const int GraphicsEngine::SCALE_Y = 3;
 const int GraphicsEngine::SCREEN_WIDTH = GraphicsEngine::SCALE_X * 512;
 const int GraphicsEngine::SCREEN_HEIGHT = GraphicsEngine::SCALE_Y * 288;
 //Frame rate related

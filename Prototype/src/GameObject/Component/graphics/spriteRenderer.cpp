@@ -29,8 +29,8 @@ void SpriteRenderer::render()
     if (cameraPosition != nullptr) {
         Point renderPosition = position->position - cameraPosition->position;
         if (rotation)
-            sprite->renderSprite(renderPosition.x, renderPosition.y, rotation->rotation, rotation->pivot.x, rotation->pivot.y);
-        else sprite->renderSprite(renderPosition.x, renderPosition.y);
+            sprite->renderSprite((int)renderPosition.x, (int)renderPosition.y, rotation->rotation, (int)rotation->pivot.x, (int)rotation->pivot.y);
+        else sprite->renderSprite((int)renderPosition.x, (int)renderPosition.y);
     }
     else {
         std::cout << "No camera has been set for rendering" << std::endl;

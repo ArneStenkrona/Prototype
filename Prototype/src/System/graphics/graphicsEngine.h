@@ -23,10 +23,10 @@ public:
     inline static LWindow* getActiveWindow() { return activeWindow; }
 
     //Screen dimension constants
+    static const int SCALE_X;
+    static const int SCALE_Y;
     static const int SCREEN_WIDTH;
     static const int SCREEN_HEIGHT;
-    static const float SCALE_X;
-    static const float SCALE_Y;
 
     //Frame rate related
     static const int SCREEN_FPS;
