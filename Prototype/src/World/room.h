@@ -22,7 +22,7 @@ public:
 
     //loads the matrix from .txt file
     //Very important that the grid in the .txt file is rectangular
-    void load();
+    bool load();
     //unloads the matrix
     void unload();
     //Saves the room
@@ -88,5 +88,5 @@ private:
     //Music to be played in room
     SoundManager::MUSIC music;
 
-    void readFromFile();
+    bool readFromFile();
 };

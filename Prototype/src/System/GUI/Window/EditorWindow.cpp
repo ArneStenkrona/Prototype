@@ -78,7 +78,8 @@ public:
     {}
 
     void actionPerformed(UIEvent* e) {
-        editor->openFile();
+        if (!editor->openFile())
+            std::cout << "Invalid File" << std::endl;
     }
 private:
     Editor* editor;

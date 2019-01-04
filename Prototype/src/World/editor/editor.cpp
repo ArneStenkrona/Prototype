@@ -36,9 +36,12 @@ void Editor::run()
     fpsTimer.start();
 
 
+    FILE_FLAG openFlag = INVALID_FILE;
+    while (openFlag == INVALID_FILE) {
+        openFlag = openFile();
+    } 
 
-    if (openFile()) {
-        //SoundManager::playMusic(SoundManager::EDITOR_MUSIC);
+    if (openFlag == SUCCESS_FILE) {
         while (!editorWindow->hasExited()) {
             capTimer.start();
 
@@ -58,7 +61,7 @@ void Editor::run()
             }
             LWindow::updateAll();
 
-        }   
+        }
         if (MessageBoxA(NULL, "Do you wish to save?", "Save", MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
             saveAs();
         }
@@ -86,15 +89,14 @@ void Editor::setRoom(Room *room)
     editorWindow->setRoom(activeRoom);
 }
 
-bool Editor::openFile(bool requireExistingFile)
+Editor::FILE_FLAG Editor::openFile(bool requireExistingFile)
 {
-        currentPath = getFilePath(requireExistingFile);
-        if (currentPath.length() > 0) {
-            loadFile(currentPath);
-            return true;
-        }
-        else
-            return false;
+    currentPath = getFilePath(requireExistingFile);
+    if (currentPath.length() > 0) {
+        return loadFile(currentPath) ? SUCCESS_FILE : INVALID_FILE;
+    }
+    else
+        return NO_FILE;
 }
 
 string Editor::getFilePath(bool requireExistingFile)
@@ -132,9 +134,16 @@ string Editor::getFilePath(bool requireExistingFile)
     
 }
 
-void Editor::loadFile(const std::string& path)
+bool Editor::loadFile(const std::string& path)
 {
-    activeRoom = new Room(path);
-    activeRoom->load();
-    editorWindow->setRoom(activeRoom);
+    Room *r = new Room(path);
+    if (r->load()) {
+        activeRoom = r;;
+        editorWindow->setRoom(activeRoom);
+        return true;
+    }
+    else {
+        delete(r);
+        return false;
+    }
 }

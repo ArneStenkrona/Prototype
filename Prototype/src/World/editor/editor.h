@@ -6,6 +6,7 @@
 #include "World/room.h"
 #include "math\polygon.h"
 
+
 class Editor {
 public:
     Editor();
@@ -14,14 +15,17 @@ public:
     void run();
 
     //Asks user for pre-existing file
-    //returns true if success
-    bool openFile(bool requireExistingFile = true);
+    //Returns NO_FILE if no file was specified (User canceled)
+    //Returns INVALID_FILE if file was invalid
+    //Returns SUCCESS_FILE if success
+    enum FILE_FLAG;
+    FILE_FLAG openFile(bool requireExistingFile = true);
 
     //Saves active room to rooms current file path
     void save();
     //Saves active room to file path specified by the user
     void saveAs();
-    
+    //Sets active room to room.
     void setRoom(Room *room);
 private:
     EditorWindow *editorWindow;
@@ -33,5 +37,13 @@ private:
 
     //Opens a windows api dialog to find a filepath.
     string getFilePath(bool requireExistingPath);
-    void loadFile(const std::string& path);
+    //Attempt to load file at path
+    //Returns true if success
+    bool loadFile(const std::string& path);
+
+    static enum FILE_FLAG {
+        NO_FILE = 0,
+        INVALID_FILE = 1,
+        SUCCESS_FILE = 2,
+    };
 };
