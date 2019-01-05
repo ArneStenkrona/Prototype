@@ -92,7 +92,7 @@ void UISelectableTile::render()
         UIElement::drawSquare(width, height, { 255,255,255,40 });
 }
 
-void UISelectableTile::onMouseLeft()
+void UISelectableTile::onMouseExit()
 {
     UISelectable::onMouseLeft();
     ((UITileSelector*)selector)->clearHoverIndices();

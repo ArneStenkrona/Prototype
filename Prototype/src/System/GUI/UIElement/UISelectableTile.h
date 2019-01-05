@@ -13,5 +13,5 @@ public:
 
 private:
     void render();
-    void onMouseLeft();
+    void onMouseExit();
 };
