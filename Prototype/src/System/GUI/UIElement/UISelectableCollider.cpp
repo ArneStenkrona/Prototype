@@ -12,7 +12,7 @@ UISelectableCollider::UISelectableCollider(UISelector * _selector, int _posX, in
 void UISelectableCollider::render()
 {
     UIElement::drawSquare(width, height, { 0, 0, 0, 255 });
-    if (Polyshape::basicPolygons.size() > index + selector->getOffset()) 
+    if ((signed)Polyshape::basicPolygons.size() > index + selector->getOffset()) 
         Polyshape::basicPolygons[index + selector->getOffset()].renderPolygon(positionX, positionY);
     UISelectable::render();
 }

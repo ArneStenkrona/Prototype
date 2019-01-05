@@ -36,8 +36,8 @@ protected:
 
     //All UISelectables in layout
     std::vector<std::vector<UISelectable*>> selectables;
-    //Selected index
-    int selectedIndex;
+    //Index of selected selectable
+    unsigned int selectedIndex;
     //Index of selectable with mouse over. -1 if not applicable
     int hoverIndex;
     //columns and rows in layout

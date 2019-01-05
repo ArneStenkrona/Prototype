@@ -13,7 +13,8 @@ UISelector::UISelector(int _posx, int _posy, int _layer,
     : UIElement(_posx, _posy, Tile::TILE_SIZE * _columns, 
       LABEL_HEIGHT + Tile::TILE_SIZE * _rows, _layer, false), 
       columns(_columns), rows(_rows),
-      indexLimitX(_indexLimitX), indexLimitY(_indexLimitY), label(_label), hoverIndex(-1),
+      indexLimitX(_indexLimitX), indexLimitY(_indexLimitY), label(_label), 
+      selectedIndex(0), hoverIndex(-1),
       selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
     activeSelector = this;
@@ -21,8 +22,8 @@ UISelector::UISelector(int _posx, int _posy, int _layer,
 
 UISelector::~UISelector()
 {
-    for (int i = 0; i < selectables.size(); i++) {
-        for (int j = 0; j < selectables[i].size(); j++) {
+    for (unsigned int i = 0; i < selectables.size(); i++) {
+        for (unsigned int j = 0; j < selectables[i].size(); j++) {
             delete(selectables[i][j]);
         }
     }

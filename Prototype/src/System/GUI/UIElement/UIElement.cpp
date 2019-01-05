@@ -10,7 +10,7 @@ UIElement* UIElement::lastMouseOverElement = nullptr;
 unsigned int UIElement::NumberOfElements = 0;
 
 UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
-                    int _layer, bool _tangible, bool _visible)
+                    unsigned int _layer, bool _tangible, bool _visible)
     : positionX(_posx), positionY(_posy), width(_width), height(_height), 
       layer(_layer), tangible(_tangible), visible(_visible), ID(NumberOfElements)
 {

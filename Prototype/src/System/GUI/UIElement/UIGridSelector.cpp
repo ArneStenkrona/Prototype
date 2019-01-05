@@ -99,8 +99,8 @@ void UIGridSelector::render()
 void UIGridSelector::renderRoom()
 {
     room->renderBackground(Point(-roomPosX, -roomPosY));
-    for (int x = 0; x < room->tileMatrix.size(); x++) {
-        for (int y = 0; y < room->tileMatrix[x].size(); y++) {
+    for (unsigned int x = 0; x < room->tileMatrix.size(); x++) {
+        for (unsigned int y = 0; y < room->tileMatrix[x].size(); y++) {
             if (room->tileMatrix[x][y] != NULL) {
                 room->tileMatrix[x][y]->renderTile((x * Tile::TILE_SIZE) + roomPosX, (y * Tile::TILE_SIZE) + roomPosY);
             }
@@ -130,8 +130,8 @@ void UIGridSelector::update()
         roomPosX += dX;
         roomPosY += dY;
     }
-    for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++) {
+    for (unsigned int i = 0; i < columns; i++) {
+        for (unsigned int j = 0; j < rows; j++) {
             tiles[i][j]->updatePosition();
 
         }
@@ -141,8 +141,8 @@ void UIGridSelector::update()
 
 void UIGridSelector::setRoom(Room* _room)
 {
-    for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++) {
+    for (unsigned int i = 0; i < columns; i++) {
+        for (unsigned int j = 0; j < rows; j++) {
             delete(tiles[i][j]);
             tiles[i][j] = NULL;
         }
@@ -157,9 +157,9 @@ void UIGridSelector::setRoom(Room* _room)
     rows = y;
 
     tiles.resize(columns + 1);
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         tiles[i].resize(rows);
-        for (int j = 0; j < rows; j++) {
+        for (unsigned int j = 0; j < rows; j++) {
             tiles[i][j] = new UIGridTile(this, layer - 1, i, j);
         }
     }
@@ -181,8 +181,8 @@ void UIGridSelector::setTile(int x, int y)
     case UIToolSelector::PLACE_TOOL:
         {
             std::vector<std::vector<Tile*>> tiles = tileSelector.getTiles();
-            for (int i = 0; i < tiles.size(); i++) {
-                for (int j = 0; j < tiles[i].size(); j++) {
+            for (unsigned int i = 0; i < tiles.size(); i++) {
+                for (unsigned  int j = 0; j < tiles[i].size(); j++) {
                     room->setTile(x + i, y + j, tiles[i][j]);
                 }
             }

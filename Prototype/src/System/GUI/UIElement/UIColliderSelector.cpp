@@ -9,9 +9,9 @@ UIColliderSelector::UIColliderSelector(int _posx, int _posy, int _layer,
     : UISelector(_posx, _posy, _layer, _columns, _rows, 8, 8, "COLLIDERS", _selectedColor, _hoverColor)
 {
     selectables.resize(columns);
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
-        for (int j = 0; j < rows; j++) {
+        for (unsigned int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableCollider(this, positionX + (i * Tile::TILE_SIZE), 
                                                          LABEL_HEIGHT + positionY + (j * Tile::TILE_SIZE),
                                                          layer + 1, i + (indexLimitX * j));

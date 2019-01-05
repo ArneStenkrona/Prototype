@@ -27,7 +27,7 @@ public:
     // _layer - layer of the element, affects rendering order
     // _tangible - determines if the element can be interacted with
     // _visible - determines if the element should be rendered
-    UIElement(int _posx, int _posy, int _width, int _height, int _layer, bool _tangible, bool _visible = true);
+    UIElement(int _posx, int _posy, int _width, int _height, unsigned int _layer, bool _tangible, bool _visible = true);
     virtual ~UIElement();
 
     int positionX, positionY;
@@ -51,7 +51,7 @@ protected:
     //Identifies the element
     const unsigned int ID;
     //The layer this element belongs to
-    int layer;
+    unsigned int layer;
     //If the element can be clicked/hovered over
     bool tangible;
     //If the element should be rendered
