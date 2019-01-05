@@ -11,9 +11,9 @@ UIToolSelector::UIToolSelector(int _posx, int _posy, int _layer,
     width = 32 * columns;
     height = LABEL_HEIGHT + 32 * rows;
     selectables.resize(columns + 1);
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
-        for (int j = 0; j < rows; j++) {
+        for (unsigned int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableTool(this,
                 positionX + (i * 32),
                 LABEL_HEIGHT + positionY + (j * 32),

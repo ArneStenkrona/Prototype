@@ -102,7 +102,7 @@ bool UITileSelector::withinHover(int idx)
 bool UITileSelector::getBorderColorAndType(int index, Color & c, int & b)
 {
     int i; //Either hoverIndex or selectedIndex
-    int j; 
+    unsigned int j; 
     if (withinHover(index)) {
         c = hoverColor;
         i = hoverIndex;
@@ -168,8 +168,8 @@ bool UITileSelector::getBorderColorAndType(int index, Color & c, int & b)
 void UITileSelector::updateSelectedIndices()
 {
     selectedIndices.clear();
-    for (int i = 0; i < tileDim; i++) {
-        for (int j = 0; j < tileDim; j++) {
+    for (unsigned int i = 0; i < tileDim; i++) {
+        for (unsigned int j = 0; j < tileDim; j++) {
             selectedIndices.insert(selectedIndex + i + j * indexLimitX);
         }
     }
@@ -178,8 +178,8 @@ void UITileSelector::updateSelectedIndices()
 void UITileSelector::updateHoverIndices()
 {
     hoverIndices.clear();
-    for (int i = 0; i < tileDim; i++) {
-        for (int j = 0; j < tileDim; j++) {
+    for (unsigned int i = 0; i < tileDim; i++) {
+        for (unsigned int j = 0; j < tileDim; j++) {
             hoverIndices.insert(hoverIndex + i + j * indexLimitX);
         }
     }
