@@ -36,13 +36,13 @@ public:
 
 private:
     //Max objects per node level
-    int Max_Objects = 20;
+    size_t Max_Objects = 20;
     //Max number of levels
-    int Max_Levels = 5;
+    size_t Max_Levels = 5;
 
     //int recompile;
 
-    int level;
+    unsigned int level;
     set<PolygonCollider*> colliders;
     //position is the position of this node, bounds are the dimensions
     Point position, bounds;

@@ -14,13 +14,13 @@ void LineRenderer::render()
         Point start = a - cameraPos;
         Point end = b - cameraPos;
         SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), m_r, m_g, m_b, m_a);
-        for (int i = 0; i < thickness; i++) {
+        for (unsigned int i = 0; i < thickness; i++) {
             Point offset = Point((i - thickness / 2), 0);
             Point st = start + offset;
             Point en = end + offset;
             SDL_RenderDrawLine(GraphicsEngine::getActiveRenderer(), (int)st.x, (int)st.y, (int)en.x, (int)en.y);
         }
-        for (int i = 0; i < thickness; i++) {
+        for (unsigned int i = 0; i < thickness; i++) {
             Point offset = Point(0, (i - thickness / 2));
             Point st = start + offset;
             Point en = end + offset;

@@ -54,7 +54,7 @@ Polyshape::~Polyshape()
 double Polyshape::distanceTo(Point p)
 {
     double d = DBL_MAX;
-    for (int i = 0; i < numberOfVertices - 1; i++) {
+    for (unsigned int i = 0; i < numberOfVertices - 1; i++) {
         double r = Point(vertices[i + 1] - vertices[i]).dot(Point(p - vertices[i]));
 
         r /= Point(p - vertices[i]).magnitude();
@@ -77,7 +77,7 @@ Point Polyshape::geometricCenter()
 {
     double sumX = 0.0;
     double sumY = 0.0;
-    for (int i = 0; i < vertices.size(); i++) {
+    for (unsigned int i = 0; i < vertices.size(); i++) {
         sumX += vertices[i].x;
         sumY += vertices[i].y;
     }
@@ -92,7 +92,7 @@ Point Polyshape::center()
     double highestY = vertices[0].y;
     double lowestY = vertices[0].y;
 
-    for (int i = 0; i < vertices.size(); i++) {
+    for (unsigned int i = 0; i < vertices.size(); i++) {
         leftMostX = std::min(leftMostX, vertices[i].x);
         rightMostX = std::max(rightMostX, vertices[i].x);
         highestY = std::min(highestY, vertices[i].y);
@@ -112,7 +112,7 @@ Polyshape Polyshape::rotate(double angle, Point pivot)
 {
     Polyshape pg = *this;
 
-    for (int i = 0; i < pg.vertices.size(); i++) {
+    for (unsigned int i = 0; i < pg.vertices.size(); i++) {
         pg.vertices[i] = pg.vertices[i].rotate(angle, pivot);
     }
 
@@ -123,7 +123,7 @@ Polyshape Polyshape::mirror(bool horizontal, bool vertical, Point offset)
 {
     Polyshape pg = *this;
 
-    for (int i = 0; i < pg.vertices.size(); i++) {
+    for (unsigned int i = 0; i < pg.vertices.size(); i++) {
         if (horizontal)
             pg.vertices[i].x = offset.x - pg.vertices[i].x;
         if (vertical)
@@ -141,7 +141,7 @@ Polyshape Polyshape::parsePolygon(std::string s)
     s.pop_back();
     std::vector<Point> points;
     std::vector<std::string> pointStrings = stringSplitter(s, ')');
-    for (int i = 0; i < pointStrings.size(); i++) {
+    for (unsigned int i = 0; i < pointStrings.size(); i++) {
 
         pointStrings[i].erase(0,1);
         std::vector<std::string> doubles = stringSplitter(pointStrings[i], ',');
@@ -153,7 +153,7 @@ Polyshape Polyshape::parsePolygon(std::string s)
 void Polyshape::renderPolygon(int x, int y, Color color)
 {
     SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
-    for (int i = 0; i < vertices.size(); i++) {
+    for (unsigned int i = 0; i < vertices.size(); i++) {
         //Weird code that makes sure polygons are drawn contained within its dimensions
         int a = (int)(abs(vertices[i].x) >= (int)(width) ? vertices[i].x - 1 : vertices[i].x) + x;
         int b = (int)(abs(vertices[i].y) >= (int)(height) ? vertices[i].y - 1 : vertices[i].y) + y;
@@ -169,7 +169,7 @@ std::string Polyshape::toString()
 {
     std::string s = "<";
 
-    for (int i = 0; i < vertices.size(); i++) {
+    for (unsigned int i = 0; i < vertices.size(); i++) {
         s += vertices[i].toString() + ",";
     }
     s += ">";
@@ -182,7 +182,7 @@ void Polyshape::setDimensions()
     double minX = vertices[0].x, maxX = vertices[0].x;
     double minY = vertices[0].y, maxY = vertices[0].y;
 
-    for (int i = 0; i < numberOfVertices; i++) {     
+    for (unsigned int i = 0; i < numberOfVertices; i++) {     
             minX = std::min(minX, vertices[i].x);
             maxX = std::max(maxX, vertices[i].x);
             minY = std::min(minY, vertices[i].y);

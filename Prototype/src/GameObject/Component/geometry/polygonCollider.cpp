@@ -89,13 +89,13 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
 
         //Is it a vertex to vertex collision?
         bool vToV = false;
-        for (int i = 0; i < a->polygon.numberOfVertices; i++) {
+        for (unsigned int i = 0; i < a->polygon.numberOfVertices; i++) {
             Point aVertex = a->polygon.vertices[i] + a->position->position + velC;
-            for (int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
+            for (unsigned int j = 0; j < get<1>(col)->polygon.numberOfVertices; j++) {
                 Point bVertex = get<1>(col)->polygon.vertices[j] + get<1>(col)->position->position;
 
                 if ((aVertex).distanceTo(bVertex) < 0.01) {
-                    for (int k = 0; k < a->polygon.numberOfVertices; k++) {
+                    for (unsigned int k = 0; k < a->polygon.numberOfVertices; k++) {
                         if (k != i && (get<1>(col)->polygon.distanceTo(a->polygon.vertices[k] + a->position->position + velC - get<1>(col)->position->position)) >= 0.0001) {
                             vToV = true;
                         }
@@ -198,14 +198,10 @@ vector<RayCastHit*> PolygonCollider::checkRayCast(Point a, Point b, set<PolygonC
         for (int i = 0; i < aNum; i++) {
             Point colA = colV[i] + offset;
             Point colB = colV[(i + 1) % aNum] + offset;
-            double ix, iy;
+
             Point in;
             if (LineSegementsIntersect(a, b, colA, colB, &in, true)) {
-            //if (lineIntersect(colA.x, colA.y, colB.x, colB.y,
-                //a.x, a.y, b.x, b.y, ix, iy)) {
                 intersected = true;
-                //Point in = Point(ix, iy);
-
                 double dist = in.distanceTo(a);
                 if (dist < minDistance) {
                     minDistance = dist;

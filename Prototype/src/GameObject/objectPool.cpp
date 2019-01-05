@@ -45,7 +45,7 @@ void ObjectPool::repool(GameObject* obj)
 
 void ObjectPool::addToPool(Prefabrication* obj, unsigned int amount)
 {
-    for (int i = 0; i < amount; i++) {
+    for (unsigned int i = 0; i < amount; i++) {
         GameObject* ob = obj->instantiate();
         ob->setActive(false);
         pool[ob->getName()].push_back(ob);
