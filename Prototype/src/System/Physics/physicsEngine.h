@@ -23,6 +23,9 @@ public:
     static void removeFromMaskLayer(PolygonCollider* col, unsigned int maskLayer);
     static void removeFromAllMaskLayers(PolygonCollider* col);
 
+    //Send ray from a to b
+    //Mask layer can be used to ignore colliders, -1 indicates no mask layer
+    //Message is sent to collided object
     //Returns true if hit, out can be used for querying hit information
     static bool raycast(Point a, Point b, int maskLayer = -1, std::string message = "");
     static bool raycast(Point a, Point b, RayCastHit* &out, int maskLayer = -1, std::string message = "");

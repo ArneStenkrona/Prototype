@@ -127,12 +127,10 @@ bool PhysicsEngine::raycast(Point a, Point b, int maskLayer, std::string message
 
 bool PhysicsEngine::raycast(Point a, Point b, RayCastHit* &out, int maskLayer, std::string message)
 {
-    RayCastHit* hit;
     set<PolygonCollider*> returnColliders;
     quad.retrieve(&returnColliders, a, b);
-    //cout << returnColliders.size() << " | " << ALL_COLLIDERS.size() << endl;
 
-    if (maskLayer >= 0 && maskLayer < mask.size()) {
+    if (maskLayer >= 0 && maskLayer < (int)mask.size()) {
         for each (PolygonCollider *c in mask[maskLayer]) {
             returnColliders.erase(c);
         }

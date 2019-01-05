@@ -60,8 +60,8 @@ void Room::unload()
 {
     deinstantiate();
 
-    for (int x = 0; x < tileMatrix.size(); x++) {
-        for (int y = 0; y < tileMatrix[x].size(); y++) {
+    for (unsigned int x = 0; x < tileMatrix.size(); x++) {
+        for (unsigned int y = 0; y < tileMatrix[x].size(); y++) {
             delete tileMatrix[x][y];
             tileMatrix[x][y] = nullptr;
         }
@@ -101,8 +101,8 @@ void Room::saveToFile(const std::string &path)
 
 
         //tiles
-        for (int y = 0; y < tileMatrix[0].size(); y++) {
-            for (int x = 0; x < tileMatrix.size(); x++) {
+        for (unsigned int y = 0; y < tileMatrix[0].size(); y++) {
+            for (unsigned int x = 0; x < tileMatrix.size(); x++) {
 
                 if (tileMatrix[x][y] != NULL) {
                     buffer += "["; // START OF TILE
@@ -122,7 +122,7 @@ void Room::saveToFile(const std::string &path)
                     //Gets all the points of collider if one is present
                     if (tileMatrix[x][y]->hasCollider()) {
                         buffer += "<";
-                        for (int i = 0; i < tileMatrix[x][y]->getPolygon()->numberOfVertices; i++) {
+                        for (unsigned int i = 0; i < tileMatrix[x][y]->getPolygon()->numberOfVertices; i++) {
                             buffer += "(" + std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].x) + ",";
                             buffer += std::to_string(tileMatrix[x][y]->getPolygon()->vertices[i].y) + ")";
                         }
@@ -178,8 +178,8 @@ Point Room::getPosition()
 void Room::instantiate()
 {
     if (!instantiated) {
-        for (int x = 0; x < tileMatrix.size(); x++) {
-            for (int y = 0; y < tileMatrix[x].size(); y++) {
+        for (unsigned int x = 0; x < tileMatrix.size(); x++) {
+            for (unsigned int y = 0; y < tileMatrix[x].size(); y++) {
                 if (tileMatrix[x][y] != NULL) {
                     //Create Tile
                     tileGameObjects.push_back(tileMatrix[x][y]->gameObjectFromTile(x, y));
@@ -207,7 +207,7 @@ void Room::deinstantiate()
 
 Tile * Room::getTile(int x, int y)
 {
-    if (x >= 0 && x < tileMatrix.size() && y >= 0 && y < tileMatrix[x].size()) {
+    if (x >= 0 && x < (signed)tileMatrix.size() && y >= 0 && y < (signed)tileMatrix[x].size()) {
         return tileMatrix[x][y];
     }
     else {
@@ -231,7 +231,7 @@ Tile * Room::getOrCreateTile(int x, int y)
 void Room::setTile(int x, int y, Tile *tile)
 {
 
-    if(x >= 0 && x < tileMatrix.size() && y >= 0 && y < tileMatrix[x].size()) {
+    if(x >= 0 && x < (signed)tileMatrix.size() && y >= 0 && y < (signed)tileMatrix[x].size()) {
         delete(tileMatrix[x][y]);
         tileMatrix[x][y] = tile;
     } else {
@@ -305,8 +305,7 @@ bool Room::readFromFile()
             //Traverses the room and creates tiles
             int x = 0;
             int y = 0;
-            //Temporarily tores variables from file
-            bool isTile;
+
             int tileIndex;
             bool hasCollider;
             int rotation;
@@ -319,10 +318,10 @@ bool Room::readFromFile()
 
             buffer = stringSplitter(roomData, '\n');
 
-            for (int i = 0; i < buffer.size(); i++) {
+            for (unsigned int i = 0; i < buffer.size(); i++) {
                 //separate by each tile
                 vector<string> tileBuffer = stringSplitter(buffer.at(i), ']');
-                for (int j = 0; j < tileBuffer.size(); j++) {
+                for (unsigned int j = 0; j < tileBuffer.size(); j++) {
                     if (tileBuffer.at(j).at(1) != 'N') {
 
                         //separate each data point
@@ -348,7 +347,7 @@ bool Room::readFromFile()
                         std::vector<std::string> obj = stringSplitter(dataPoints.at(4), ',');
                         objectIndex = std::stoi(obj.at(0));
                         std::vector<std::string> parameters;
-                        for (int k = 1; k < obj.size(); k++) {
+                        for (unsigned int k = 1; k < obj.size(); k++) {
                             parameters.push_back(obj.at(k));
                         }
 

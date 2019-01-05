@@ -18,7 +18,12 @@ public:
     //Returns NO_FILE if no file was specified (User canceled)
     //Returns INVALID_FILE if file was invalid
     //Returns SUCCESS_FILE if success
-    enum FILE_FLAG;
+    enum FILE_FLAG {
+        NO_FILE = 0,
+        INVALID_FILE = 1,
+        SUCCESS_FILE = 2,
+    };
+
     FILE_FLAG openFile(bool requireExistingFile = true);
 
     //Saves active room to rooms current file path
@@ -41,9 +46,5 @@ private:
     //Returns true if success
     bool loadFile(const std::string& path);
 
-    enum FILE_FLAG {
-        NO_FILE = 0,
-        INVALID_FILE = 1,
-        SUCCESS_FILE = 2,
-    };
+
 };

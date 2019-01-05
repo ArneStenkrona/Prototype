@@ -27,8 +27,6 @@ void Editor::run()
 {
     //Main loop flag
     bool quit = false;
-    //Event handler
-    SDL_Event e;
     //The frames per second timer
     LTimer fpsTimer;
     //The frames per second cap timer

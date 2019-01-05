@@ -84,12 +84,12 @@ long LTimer::getMicroSeconds()
         if (mPaused)
         {
             //Return the number of ticks when the timer was paused
-            time = mPausedTicks;
+            time = (long)mPausedTicks;
         }
         else
         {
             //Return the current time minus the start time
-            time = getCurrentMicroSeconds() - mStartTicks;
+            time = (long)(getCurrentMicroSeconds() - mStartTicks);
         }
     }
 
