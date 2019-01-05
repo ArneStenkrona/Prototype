@@ -16,7 +16,7 @@ public:
     inline static UISelector* getActiveSelector() { return activeSelector; }
     inline bool isActive() const { return activeSelector == this; }
     int getSelectedIndex() const;
-    inline int getOffset() const { return offset; }
+    inline unsigned int getOffset() const { return offset; }
 
     inline std::string getLabel() const { return label; }
 
@@ -44,7 +44,7 @@ protected:
     unsigned int columns, rows;
 
     //index offset
-    int offset;
+    unsigned int offset;
     //Dimensions of the data structure that index is pointing at
     const unsigned int indexLimitX, indexLimitY;
     //Transformations of selected

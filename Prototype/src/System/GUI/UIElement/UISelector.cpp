@@ -72,10 +72,10 @@ void UISelector::setActive()
 
 void UISelector::moveIndices(int dx, int dy)
 {
-    if ((offset % (int)indexLimitX) + columns + dx <= indexLimitX &&
-        (offset % (int)indexLimitX) + dx >= 0) offset += dx;
-    if ((offset / (int)indexLimitY) + rows + dy <= indexLimitY &&
-        (offset / (int)indexLimitX) + dy >= 0) offset += indexLimitX * dy;
+    if ((int)(offset % indexLimitX) + columns + dx <= indexLimitX &&
+        (int)(offset % indexLimitX) + dx >= 0) offset += dx;
+    if ((int)(offset / indexLimitY) + rows + dy <= indexLimitY &&
+        (int)(offset / indexLimitX) + dy >= 0) offset += indexLimitX * dy;
 }
 
 void UISelector::update()

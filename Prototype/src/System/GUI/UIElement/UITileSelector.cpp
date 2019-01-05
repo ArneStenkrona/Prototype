@@ -12,9 +12,9 @@ UITileSelector::UITileSelector(int _posx, int _posy, int _layer,
       selectedColor(_selectedColor), hoverColor(_hoverColor)
 {
     selectables.resize(columns + 1);
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
-        for (int j = 0; j < rows; j++) {
+        for (unsigned int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableTile(this, 
                                                     positionX + (i * Tile::TILE_SIZE), 
                                                     LABEL_HEIGHT + positionY + (j * Tile::TILE_SIZE),
@@ -40,11 +40,11 @@ std::vector<std::vector<Tile*>> UITileSelector::getTiles() const
 
     tiles.resize(tileDim);
 
-    for (int i = 0; i < tileDim; i++) {
+    for (unsigned int i = 0; i < tileDim; i++) {
         tiles[i].resize(tileDim);
     }
-    for (int i = 0; i < tileDim; i++) {
-        for (int j = 0; j < tileDim; j++) {
+    for (unsigned int i = 0; i < tileDim; i++) {
+        for (unsigned int j = 0; j < tileDim; j++) {
             int ix = i;
             int iy = j;
             for (int r = 0; r < rotation; r++) {
