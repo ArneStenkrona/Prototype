@@ -8,9 +8,9 @@ UIObjectSelector::UIObjectSelector(int _posx, int _posy, int _layer, unsigned in
     :UISelector(_posx, _posy, _layer, _columns, _rows, Tile::TILES_PER_ROW, Tile::TILES_PER_COLUMN, "OBJECTS", _selectedColor, _hoverColor)
 {
     selectables.resize(columns + 1);
-    for (int i = 0; i < columns; i++) {
+    for (unsigned int i = 0; i < columns; i++) {
         selectables[i].resize(rows);
-        for (int j = 0; j < rows; j++) {
+        for (unsigned int j = 0; j < rows; j++) {
             selectables[i][j] = new UISelectableObject(this,
                                                        positionX + (i * Tile::TILE_SIZE),
                                                        LABEL_HEIGHT + positionY + (j * Tile::TILE_SIZE),

@@ -70,12 +70,12 @@ EditorWindow * GraphicsEngine::createEditorWindow(Editor *editor)
     return win;
 }
 
-void GraphicsEngine::addToRenderQueue(Renderer *r, int layer) {
+void GraphicsEngine::addToRenderQueue(Renderer *r, unsigned int layer) {
     if (renderQueue.size() < layer + 1) renderQueue.resize(layer + 1);
     renderQueue[layer].insert(r);
 }
 
-void GraphicsEngine::removeFromRenderQueue(Renderer * r, int layer)
+void GraphicsEngine::removeFromRenderQueue(Renderer * r, unsigned int layer)
 {
     if (renderQueue.size() > layer)
         renderQueue[layer].erase(r);

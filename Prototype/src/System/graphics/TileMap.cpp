@@ -13,11 +13,11 @@ using namespace::std;
 TileMap::TileMap(): colliderMatrix(vector<vector<optional<Polyshape>>>())
 {
     colliderMatrix.resize(Tile::TILES_PER_ROW);
-    for (int i = 0; i < colliderMatrix.size(); i++) {
+    for (unsigned int i = 0; i < colliderMatrix.size(); i++) {
         colliderMatrix[i].resize(Tile::TILES_PER_COLUMN);
     }
-    for (int i = 0; i < colliderMatrix.size(); i++) {
-        for (int j = 0; j < colliderMatrix[i].size(); j++) {
+    for (unsigned int i = 0; i < colliderMatrix.size(); i++) {
+        for (unsigned int j = 0; j < colliderMatrix[i].size(); j++) {
             colliderMatrix[i][j] = {};
         }
     }
@@ -57,7 +57,7 @@ void TileMap::loadFromFile(string texturePath, string colliderPath)
 
         buffer = stringSplitter(roomData, '\n');
 
-        for (int i = 0; i < buffer.size(); i++) {
+        for (unsigned int i = 0; i < buffer.size(); i++) {
             vector<string> dataPoints = stringSplitter(buffer[i], '|');
             int col = std::stoi(dataPoints[0]);
             int row = std::stoi(dataPoints[1]);

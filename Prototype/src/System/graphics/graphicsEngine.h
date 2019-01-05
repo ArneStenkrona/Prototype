@@ -16,8 +16,8 @@ public:
     static EditorWindow* createEditorWindow(Editor *editor);
 
     //Renderers will render layer by layer
-    static void addToRenderQueue(Renderer *r, int layer);
-    static void removeFromRenderQueue(Renderer *r, int layer);
+    static void addToRenderQueue(Renderer *r, unsigned int layer);
+    static void removeFromRenderQueue(Renderer *r, unsigned int layer);
 
     static SDL_Renderer* getActiveRenderer();
     inline static LWindow* getActiveWindow() { return activeWindow; }

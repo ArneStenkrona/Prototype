@@ -7,11 +7,11 @@ UIMultiPrompt::UIMultiPrompt(UIMultiPromptListener* _listener, int _positionX, i
     label(_label), labels(_labels),
     listener(_listener)
 {
-    for (int i = 0; i < labels.size(); i++) {
+    for (unsigned int i = 0; i < labels.size(); i++) {
         textBoxes.push_back(new UITextBox(0, 0, width - 8, _layer));
     }
 
-    for (int i = 0; i < textBoxes.size(); i++) {
+    for (unsigned int i = 0; i < textBoxes.size(); i++) {
         attach(textBoxes[i], ALIGN_UP, 0, 32 * i + 28);
     }
 
@@ -35,7 +35,7 @@ void UIMultiPrompt::render()
     UIElement::drawSquare(width, height, { 0,0,0,255 });
     UIElement::renderText(label, { 255,255,255,255 }, ALIGN_UP, 0, 2);
 
-    for (int i = 0; i < labels.size(); i++) {
+    for (unsigned int i = 0; i < labels.size(); i++) {
         UIElement::renderText(labels[i] + ": ", { 255,255,255,255 }, ALIGN_UPPER_LEFT, 5, 16 + i * 32);
     }
 

@@ -40,7 +40,7 @@ void UIPanel::toggleSelected()
 {
     if (attached.empty()) return;
     int index = 0;
-    for (int i = 0; i < attached.size(); i++) {
+    for (unsigned int i = 0; i < attached.size(); i++) {
         if (attached[i] == UIElement::getSelected()) {
             index = i + 1;
             index = index % attached.size();
