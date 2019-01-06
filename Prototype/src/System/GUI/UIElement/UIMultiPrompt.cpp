@@ -65,7 +65,7 @@ void UIMultiPromptListener::ok()
     prompt = NULL;
 }
 
-void UIMultiPromptListener::actionPerformed(UIEvent * e)
+void UIMultiPromptListener::actionPerformed(UIEvent*)
 {
     if (prompt)
         UIElement::setSelected(prompt);
@@ -74,10 +74,10 @@ void UIMultiPromptListener::actionPerformed(UIEvent * e)
     }
 }
 
-void UIMultiPrompt::OkListener::actionPerformed(UIEvent* e) {
+void UIMultiPrompt::OkListener::actionPerformed(UIEvent*) {
     pl->ok();
 }
 
-void UIMultiPrompt::CancelListener::actionPerformed(UIEvent* e) {
+void UIMultiPrompt::CancelListener::actionPerformed(UIEvent*) {
     pl->cancel();
 }

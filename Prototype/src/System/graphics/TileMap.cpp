@@ -39,7 +39,6 @@ void TileMap::loadFromFile(string texturePath, string colliderPath)
     //reads texture and position data
     if (infile.is_open())
     {
-        string line;
 
         if (infile.is_open())
         {

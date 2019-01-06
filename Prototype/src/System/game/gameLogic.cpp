@@ -102,8 +102,6 @@ void GameLogic::gameLoop() {
 
     gameWindow = GraphicsEngine::createGameWindow();
 
-    //Main loop flag
-    bool quit = false;
     //The frames per second timer
     LTimer fpsTimer;
     //The frames per second cap timer

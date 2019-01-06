@@ -53,7 +53,7 @@ void UIPromptListener::ok()
     prompt = NULL;
 }
 
-void UIPromptListener::actionPerformed(UIEvent * e)
+void UIPromptListener::actionPerformed(UIEvent*)
 {
     if (prompt)
         UIElement::setSelected(prompt);
@@ -62,10 +62,10 @@ void UIPromptListener::actionPerformed(UIEvent * e)
     }
 }
 
-void UIPrompt::OkListener::actionPerformed(UIEvent* e) {
+void UIPrompt::OkListener::actionPerformed(UIEvent*) {
     pl->ok();
 }
 
-void UIPrompt::CancelListener::actionPerformed(UIEvent* e) {
+void UIPrompt::CancelListener::actionPerformed(UIEvent*) {
     pl->cancel();
 }

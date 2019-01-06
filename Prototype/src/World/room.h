@@ -31,7 +31,7 @@ public:
     void saveToFile();
 
 
-    void renderBackground(Point position);
+    void renderBackground(Point _position);
 
     //Gets a point representing the width and height of this room
     Point getDimensions();

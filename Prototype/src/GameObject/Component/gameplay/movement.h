@@ -14,8 +14,6 @@ public:
     void start();
     void update();
     void updateComponents();
-    void onCollisionEnter(Collision *collision);
-    void onColliding(Collision *collision);
     void onCollisionExit();
 
     //Maximum speed (compares to velocity.magnitude())

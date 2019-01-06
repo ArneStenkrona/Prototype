@@ -123,7 +123,7 @@ bool UITileSelector::getBorderColorAndType(int index, Color & c, int & b)
         return true;
     }
     //Topleft border
-    if (j == i) {
+    if ((signed)j == i) {
         b = 1;
         return true;
     }

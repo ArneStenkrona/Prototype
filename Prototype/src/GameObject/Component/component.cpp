@@ -33,11 +33,11 @@ void Component::updateComponents()
 {
 }
 
-void Component::onCollisionEnter(Collision *collision)
+void Component::onCollisionEnter(Collision * /* collision */ )
 {
 }
 
-void Component::onColliding(Collision *collision)
+void Component::onColliding(Collision * /* collision */)
 {
 }
 
@@ -45,7 +45,7 @@ void Component::onCollisionExit()
 {
 }
 
-void Component::rayHit(RayCastHit * hit)
+void Component::rayHit(RayCastHit * /* hit */)
 {
 }
 

@@ -211,10 +211,10 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*>* returnColliders
 
     if (nodes[0] != nullptr) {
         for (int i = 0; i < 4; i++) {
-            if (true || quadrants[i])
-            {
+            //if (true || quadrants[i])
+            //{
                 nodes[i]->retrieve(returnColliders, a, b);
-            }
+            //}
         }
     }
       

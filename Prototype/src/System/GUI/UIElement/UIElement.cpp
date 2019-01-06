@@ -206,7 +206,7 @@ void UIElement::drawSquare(int _width, int _height, Color color, Fill_Type type,
     }
 }
 
-void UIElement::drawCircle(int diameter, Color color, Fill_Type type, Alignment align, int offsetX, int offsetY) const
+void UIElement::drawCircle(int diameter, Color color, Fill_Type /* type */, Alignment align, int offsetX, int offsetY) const
 {
     int radius = diameter / 2;
     int alignX, alignY = 0;
@@ -219,6 +219,9 @@ void UIElement::drawCircle(int diameter, Color color, Fill_Type type, Alignment 
     int32_t ty = 1;
     int32_t err = tx - (radius << 1); // shifting bits left by 1 effectively
                                   // doubles the value. == tx - diameter
+
+    /*TODO: add logic for fill type*/
+
     while (x >= y)
     {
         //  Each of the following renders an octant of the circle

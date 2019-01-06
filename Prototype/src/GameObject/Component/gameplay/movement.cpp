@@ -26,14 +26,6 @@ void Movement::updateComponents()
     animator = (object->hasComponent<Animator>()) ? object->getComponent<Animator>() : animator;
 }
 
-void Movement::onCollisionEnter(Collision * collision)
-{
-}
-
-void Movement::onColliding(Collision *collision)
-{
-}
-
 void Movement::onCollisionExit()
 {
 }

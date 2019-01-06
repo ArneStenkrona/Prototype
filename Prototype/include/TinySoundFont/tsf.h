@@ -41,6 +41,7 @@
    USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
+#pragma warning disable warning-list //<--- This line is not part of the original source distribution of TinySoundFont
 
 #ifndef TSF_INCLUDE_TSF_INL
 #define TSF_INCLUDE_TSF_INL
@@ -58,6 +59,7 @@ extern "C" {
 #else
 #define TSFDEF extern
 #endif
+
 
 // The load functions will return a pointer to a struct tsf which all functions
 // thereafter take as the first parameter.

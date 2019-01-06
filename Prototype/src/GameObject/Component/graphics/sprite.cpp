@@ -51,7 +51,3 @@ void Sprite::setMirror(bool horizontal, bool vertical)
     mirrorH = horizontal;
     mirrorV = vertical;
 }
-
-void Sprite::rayHit(RayCastHit * hit)
-{ 
-}

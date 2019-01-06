@@ -160,9 +160,9 @@ void Room::saveToFile(const std::string &path)
     }
 }
 
-void Room::renderBackground(Point position)
+void Room::renderBackground(Point _position)
 {
-    parallaxBackground->renderParallaxLayers(position);
+    parallaxBackground->renderParallaxLayers(_position);
 }
 
 Point Room::getDimensions()

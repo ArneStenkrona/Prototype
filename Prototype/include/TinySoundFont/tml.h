@@ -35,6 +35,8 @@
 
 */
 
+#pragma warning disable warning-list //<--- This line is not part of the original source distribution of TinySoundFont
+
 #ifndef TML_INCLUDE_TML_INL
 #define TML_INCLUDE_TML_INL
 

@@ -69,7 +69,6 @@ vector<Collision*> PolygonCollider::calculateCollision(PolygonCollider * a, set<
         return get<0>(t1) < get<0>(t2);
     });
 
-    int i = 0;
     for each (tuple<double, PolygonCollider*> col in possibleCollisions) {
         //Normal of the plane of b that a collides with
         Point collisionNormal;

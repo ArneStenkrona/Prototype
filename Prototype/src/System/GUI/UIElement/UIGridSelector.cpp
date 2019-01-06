@@ -180,10 +180,10 @@ void UIGridSelector::setTile(int x, int y)
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
         {
-            std::vector<std::vector<Tile*>> tiles = tileSelector.getTiles();
-            for (unsigned int i = 0; i < tiles.size(); i++) {
-                for (unsigned  int j = 0; j < tiles[i].size(); j++) {
-                    room->setTile(x + i, y + j, tiles[i][j]);
+            std::vector<std::vector<Tile*>> selectedTiles = tileSelector.getTiles();
+            for (unsigned int i = 0; i < selectedTiles.size(); i++) {
+                for (unsigned  int j = 0; j < selectedTiles[i].size(); j++) {
+                    room->setTile(x + i, y + j, selectedTiles[i][j]);
                 }
             }
             break;

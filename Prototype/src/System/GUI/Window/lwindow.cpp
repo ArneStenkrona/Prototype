@@ -78,7 +78,7 @@ void LWindow::present()
 
 void LWindow::pollEvent(SDL_Event e)
 {
-        if (e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
+        if ((SDL_EventType)e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
         {
             switch (e.window.event)
             {

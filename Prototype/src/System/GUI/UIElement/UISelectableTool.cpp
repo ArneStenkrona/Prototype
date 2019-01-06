@@ -17,7 +17,7 @@ void UISelectableTool::render()
     TextureManager::spriteSheets[TextureManager::TOOL_ICONS].renderTile(positionX, positionY, index, 2, 2);
 
     Color borderColor = mouseOver() ? selector->hoverColor :
-        (selector->getSelectedIndex() == index + selector->offset ? selector->selectedColor : COLOR_NONE);
+        (selector->getSelectedIndex() == (int)(index + selector->getOffset()) ? selector->selectedColor : COLOR_NONE);
     UIElement::drawSquare(width, height, borderColor, OUTLINE);
 
 }

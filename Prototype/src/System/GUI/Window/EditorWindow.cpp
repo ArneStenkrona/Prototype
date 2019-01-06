@@ -19,7 +19,7 @@ public:
     : editor(_editor)
     {}
 
-    void actionPerformed(UIEvent* e) {
+    void actionPerformed(UIEvent*) {
         editor->saveAs();
     }
 private:
@@ -32,7 +32,7 @@ public:
         : editor(_editor)
     {}
 
-    void actionPerformed(UIEvent* e) {
+    void actionPerformed(UIEvent*) {
         editor->save();
     }
 private:
@@ -77,7 +77,7 @@ public:
         : editor(_editor)
     {}
 
-    void actionPerformed(UIEvent* e) {
+    void actionPerformed(UIEvent*) {
         if (!editor->openFile())
             std::cout << "Invalid File" << std::endl;
     }
