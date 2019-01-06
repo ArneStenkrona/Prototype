@@ -4,9 +4,9 @@
 #include <iostream>
 #include "System\GUI\Window\EditorWindow.h"
 #include "World\Tile.h"
-#include "UIButton.h"
+#include "UIPanel\UIComponent\UIButton.h"
 #include <optional>
-#include "System\GUI\UIElement\UIMultiPrompt.h"
+#include "System\GUI\UIElement\UIPanel\UIPanel\UIMultiPrompt.h"
 
 class UIObjectPlacementListener : public UIMultiPromptListener {
 public:

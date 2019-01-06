@@ -27,11 +27,11 @@ public:
     // _layer - layer of the element, affects rendering order
     // _tangible - determines if the element can be interacted with
     // _visible - determines if the element should be rendered
-    UIElement(int _posx, int _posy, int _width, int _height, unsigned int _layer, bool _tangible, bool _visible = true);
+    UIElement(int _posx, int _posy, unsigned int _width, unsigned int _height, unsigned int _layer, bool _tangible, bool _visible = true);
     virtual ~UIElement();
 
     int positionX, positionY;
-    int width, height;
+    const unsigned int width, height;
     //Updates the state of all UIElements
     static void updateUIElements();
     //Renders all UIElements
@@ -75,10 +75,10 @@ protected:
     //returns alignment offset parameters
     void getAlignmentOffset(Alignment align, int _width, int _height, int &alignx, int &aligny) const;
     //Draws square at position of UIElement
-    void drawSquare(int _width, int _height, Color color, Fill_Type type = SOLID, 
+    void drawSquare(int _width, int _height, Color color = { 255,255,255,255 }, Fill_Type type = SOLID,
                     Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
 
-    void drawCircle(int diameter, Color color, Fill_Type type = SOLID,
+    void drawCircle(int diameter, Color color = { 255,255,255,255 }, Fill_Type type = SOLID,
                     Alignment align = ALIGN_NONE, int offsetX = 0, int offsetY = 0) const;
 
     //Renders text at position

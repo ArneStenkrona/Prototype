@@ -2,12 +2,12 @@
 #include "UIElement.h"
 #include "UIGridTile.h"
 #include "World\room.h"
-#include "UITileSelector.h"
-#include "UIColliderSelector.h"
-#include "UIObjectSelector.h"
-#include "UIToolSelector.h"
+#include "UISelect\UISelector\UITileSelector.h"
+#include "UISelect\UISelector\UIColliderSelector.h"
+#include "UISelect\UISelector\UIObjectSelector.h"
+#include "UISelect\UISelector\UIToolSelector.h"
 #include "UIBorder.h"
-#include "UIInfoBox.h"
+#include "UIPanel\UIPanel\UIInfoBox.h"
 
 class UIObjectPlacementListener;
 //Bad name for class, should be something like "UIEditor"

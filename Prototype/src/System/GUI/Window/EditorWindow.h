@@ -2,9 +2,9 @@
 #include "lwindow.h"
 #include <vector>
 #include "World\room.h"
-#include "System\GUI\UIElement\UITileSelector.h"
+#include "System\GUI\UIElement\UISelect\UISelector\UITileSelector.h"
 #include "System\GUI\UIElement\UIGridSelector.h"
-#include "System\GUI\UIElement\UIButton.h"
+#include "System\GUI\UIElement\UIPanel\UIComponent\UIButton.h"
 
 /*
     This class represents the main viewport in editing mode.

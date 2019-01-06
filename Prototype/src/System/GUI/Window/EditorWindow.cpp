@@ -2,12 +2,12 @@
 #include "System\IO\inputManager.h"
 #include <iostream>
 #include "System\graphics\textureManager.h"
-#include "System\GUI\UIElement\UITileSelector.h"
+#include "System\GUI\UIElement\UISelect\UISelector\UITileSelector.h"
 #include "System\graphics\graphicsEngine.h"
-#include "System\GUI\UIElement\UIPrompt.h"
-#include "System\GUI\UIElement\UIActionListener.h"
+#include "System\GUI\UIElement\UIPanel\UIPanel\UIPrompt.h"
+#include "System\GUI\UIElement\UIEvent\UIActionListener.h"
 #include "World\editor\editor.h"
-#include "System\GUI\UIElement\UIMultiPrompt.h"
+#include "System\GUI\UIElement\UIPanel\UIPanel\UIMultiPrompt.h"
 #include "tools\fileTools.h"
 #include "tools\stringTools.h"
 #define WIN32_LEAN_AND_MEAN

@@ -9,7 +9,7 @@ UIElement* UIElement::mouseOverElement = nullptr;
 UIElement* UIElement::lastMouseOverElement = nullptr;
 unsigned int UIElement::NumberOfElements = 0;
 
-UIElement::UIElement(int _posx, int _posy, int _width, int _height, 
+UIElement::UIElement(int _posx, int _posy, unsigned int _width, unsigned int _height,
                     unsigned int _layer, bool _tangible, bool _visible)
     : positionX(_posx), positionY(_posy), width(_width), height(_height), 
       layer(_layer), tangible(_tangible), visible(_visible), ID(NumberOfElements)
@@ -206,45 +206,50 @@ void UIElement::drawSquare(int _width, int _height, Color color, Fill_Type type,
     }
 }
 
-void UIElement::drawCircle(int diameter, Color color, Fill_Type /* type */, Alignment align, int offsetX, int offsetY) const
+//Courtesy of https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
+//Slightly modified
+void UIElement::drawCircle(int diameter, Color color, Fill_Type type , Alignment align, int offsetX, int offsetY) const
 {
+
     int radius = diameter / 2;
-    int alignX, alignY = 0;
-    getAlignmentOffset(align, diameter, diameter, alignX, alignY);
-    SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
+    for (int r = (type == SOLID ? 1 : radius); r <= radius; r++) {
+        int alignX, alignY = 0;
+        getAlignmentOffset(align, diameter, diameter, alignX, alignY);
+        SDL_SetRenderDrawColor(GraphicsEngine::getActiveRenderer(), color.r, color.g, color.b, color.a);
 
-    int32_t x = radius - 1;
-    int32_t y = 0;
-    int32_t tx = 1;
-    int32_t ty = 1;
-    int32_t err = tx - (radius << 1); // shifting bits left by 1 effectively
-                                  // doubles the value. == tx - diameter
+        int32_t x = r - 1;
+        int32_t y = 0;
+        int32_t tx = 1;
+        int32_t ty = 1;
+        int32_t err = tx - (r << 1); // shifting bits left by 1 effectively
+                                      // doubles the value. == tx - diameter
 
-    /*TODO: add logic for fill type*/
+        /*TODO: add logic for fill type*/
 
-    while (x >= y)
-    {
-        //  Each of the following renders an octant of the circle
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX + x, positionY + alignY + offsetY - y);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX + x, positionY + alignY + offsetY + y);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX - x, positionY + alignY + offsetY - y);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX - x, positionY + alignY + offsetY + y);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX + y, positionY + alignY + offsetY - x);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX + y, positionY + alignY + offsetY + x);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX - y, positionY + alignY + offsetY - x);
-        SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), positionX + alignX + offsetX - y, positionY + alignY + offsetY + x);
-
-        if (err <= 0)
+        while (x >= y)
         {
-            y++;
-            err += ty;
-            ty += 2;
-        }
-        if (err > 0)
-        {
-            x--;
-            tx += 2;
-            err += tx - (radius << 1);
+            //  Each of the following renders an octant of the circle
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX + x, radius + positionY + alignY + offsetY - y);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX + x, radius + positionY + alignY + offsetY + y);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX - x, radius + positionY + alignY + offsetY - y);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX - x, radius + positionY + alignY + offsetY + y);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX + y, radius + positionY + alignY + offsetY - x);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX + y, radius + positionY + alignY + offsetY + x);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX - y, radius + positionY + alignY + offsetY - x);
+            SDL_RenderDrawPoint(GraphicsEngine::getActiveRenderer(), radius + positionX + alignX + offsetX - y, radius + positionY + alignY + offsetY + x);
+
+            if (err <= 0)
+            {
+                y++;
+                err += ty;
+                ty += 2;
+            }
+            if (err >= 0)
+            {
+                x--;
+                tx += 2;
+                err += tx - (radius << 1);
+            }
         }
     }
 }

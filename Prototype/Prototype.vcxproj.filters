@@ -162,73 +162,16 @@
     <ClInclude Include="src\tools\timeMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIActionListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\System\GUI\UIElement\UIBorder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIColliderSelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\System\GUI\UIElement\UIElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\System\GUI\UIElement\UIGridTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIMovable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIPrompt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectableCollider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectableTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UITileSelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIPanel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UITextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIObjectSelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIToolSelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UISelectableTool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIInfoBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\System\sound\soundClip.h">
@@ -249,13 +192,70 @@
     <ClInclude Include="src\GameObject\Component\gameplay\interactable\Door.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIMultiPrompt.h">
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UISelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIRadioButton.h">
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\GUI\UIElement\UIButtonBase.h">
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UIToolSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UITileSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UIColliderSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UIObjectSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIPrompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIMovable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIMultiPrompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIButtonBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIInfoBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UITextBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIRadioButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIEvent\UIActionListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GUI\UIElement\UIEvent\UIEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -401,73 +401,16 @@
     <ClCompile Include="src\tools\timeMacros.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIActionListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIBorder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIColliderSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\GUI\UIElement\UIGridTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIMovable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIPrompt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectableCollider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectableTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UITileSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIPanel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UITextBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectableObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIObjectSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIToolSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UISelectableTool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIInfoBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\System\sound\soundClip.cpp">
@@ -485,13 +428,70 @@
     <ClCompile Include="src\GameObject\Component\gameplay\interactable\Door.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIMultiPrompt.cpp">
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UISelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIRadioButton.cpp">
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GUI\UIElement\UIButtonBase.cpp">
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UITileSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UIToolSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UIColliderSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UIObjectSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIMovable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIMultiPrompt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIPrompt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIButtonBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIPanel\UIInfoBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UIRadioButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UITextBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIEvent\UIActionListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GUI\UIElement\UIEvent\UIEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
