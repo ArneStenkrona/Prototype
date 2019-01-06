@@ -25,8 +25,6 @@ Editor::~Editor()
 
 void Editor::run()
 {
-    //Main loop flag
-    bool quit = false;
     //The frames per second timer
     LTimer fpsTimer;
     //The frames per second cap timer

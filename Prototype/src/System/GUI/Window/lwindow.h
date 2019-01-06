@@ -46,7 +46,7 @@ public:
     void present();
 
 protected:
-    int windowID;
+    unsigned int windowID;
 
     SDL_Window* gWindow;
     //The surface contained by the window

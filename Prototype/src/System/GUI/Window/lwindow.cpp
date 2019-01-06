@@ -78,7 +78,7 @@ void LWindow::present()
 
 void LWindow::pollEvent(SDL_Event e)
 {
-        if ((SDL_EventType)e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
+        if (e.type == SDL_WINDOWEVENT && e.window.windowID == windowID)
         {
             switch (e.window.event)
             {
@@ -143,7 +143,7 @@ bool LWindow::init()
         return false;
     }
 
-        windowID = SDL_GetWindowID(gWindow);
+    windowID = SDL_GetWindowID(gWindow);
     //Initialize renderer color
     SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     //Enable alpha in draw mode

@@ -35,7 +35,9 @@
 
 */
 
-#pragma warning disable warning-list //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(push) //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(disable:4201) //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(disable:4244) //<--- This line is not part of the original source distribution of TinySoundFont
 
 #ifndef TML_INCLUDE_TML_INL
 #define TML_INCLUDE_TML_INL
@@ -514,3 +516,5 @@ TMLDEF void tml_free(tml_message* f)
 #endif
 
 #endif //TML_IMPLEMENTATION
+
+#pragma warning(pop) //<--- This line is not part of the original source distribution of TinySoundFont

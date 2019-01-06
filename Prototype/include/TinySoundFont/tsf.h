@@ -41,7 +41,10 @@
    USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#pragma warning disable warning-list //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(push) //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(disable:4201) //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(disable:4244) //<--- This line is not part of the original source distribution of TinySoundFont
+#pragma warning(disable:4701) //<--- This line is not part of the original source distribution of TinySoundFont
 
 #ifndef TSF_INCLUDE_TSF_INL
 #define TSF_INCLUDE_TSF_INL
@@ -1663,3 +1666,5 @@ TSFDEF float tsf_channel_get_tuning(tsf* f, int channel)
 #endif
 
 #endif //TSF_IMPLEMENTATION
+
+#pragma warning(pop) //<--- This line is not part of the original source distribution of TinySoundFont
