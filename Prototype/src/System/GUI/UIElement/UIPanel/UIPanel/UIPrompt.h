@@ -4,7 +4,7 @@
 #include "..\UIComponent\UITextBox.h"
 #include "..\..\UIEvent\UIActionListener.h"
 #include <string>
-
+/*
 class UIPromptListener;
 class UIPrompt : public UIMovable {
 public:
@@ -64,3 +64,4 @@ protected:
     //Input from the prompt
     std::string input;
 };
+*/

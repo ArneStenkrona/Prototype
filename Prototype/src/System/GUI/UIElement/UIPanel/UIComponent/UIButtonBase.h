@@ -30,9 +30,4 @@ private:
     virtual void onMouseOver();
     virtual void update();
     virtual void render() = 0;
-
-    //Generates and sends an event to owner
-    //Event does not survive the sendEvent function call
-    virtual void sendEvent();
-
 };

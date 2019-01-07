@@ -2,9 +2,7 @@
 #include "..\..\UIEvent\UIActionListener.h"
 #include "System\IO\inputManager.h"
 
-
-
-
+/*
 UIPrompt::UIPrompt(UIPromptListener * _listener, int _positionX, int _positionY, int _width, int _height, int _layer, std::string _label)
     :UIMovable(_positionX, _positionY, _width, _height, _layer), 
      label(_label), textBox(new UITextBox(0, 0, width - 8, _layer)),
@@ -69,3 +67,4 @@ void UIPrompt::OkListener::actionPerformed(UIEvent*) {
 void UIPrompt::CancelListener::actionPerformed(UIEvent*) {
     pl->cancel();
 }
+*/

@@ -1,0 +1,37 @@
+Folder,Files,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+Total,158,9902,7358,4492,761,1677,44,867,5610,16,74
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src,158,9902,7358,4492,761,1677,44,867,5610,16,74
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject,46,2571,1906,1168,194,449,14,216,1562,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component,36,1923,1436,891,134,339,12,148,1064,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component\environment,2,37,28,12,2,8,0,1,5,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component\gameplay,12,617,513,323,36,85,2,19,102,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component\gameplay\interactable,4,136,111,64,4,22,0,3,19,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component\geometry,8,595,409,274,73,114,7,72,604,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Component\graphics,12,562,415,247,21,109,0,38,240,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Factories,2,9,7,1,0,1,0,1,11,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\GameObject\Prefabrications,4,168,140,97,7,25,2,3,17,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System,89,5232,3933,2354,368,878,18,421,2653,10,51
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI,56,3158,2457,1405,255,521,8,180,1046,3,4
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement,52,2744,2138,1224,223,453,8,153,936,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UIEvent,4,94,68,33,1,21,5,5,51,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UIPanel,20,795,597,360,39,153,1,45,254,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UIPanel\UIComponent,10,289,214,124,13,53,1,22,141,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UIPanel\UIPanel,10,506,383,236,26,100,0,23,113,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UISelect,20,999,804,425,96,153,1,42,259,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UISelect\UISelectable,10,330,271,119,17,52,0,7,42,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\UIElement\UISelect\UISelector,10,669,533,306,79,101,1,35,217,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\GUI\Window,4,414,319,181,32,68,0,27,110,3,4
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\IO,2,247,205,135,6,28,0,14,96,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\Physics,6,295,207,124,19,61,0,27,173,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\game,6,318,218,134,10,55,0,45,262,7,47
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\game\scene,4,116,78,41,1,23,0,15,77,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\game\scene\debug_scenes,2,54,39,18,0,12,0,3,13,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\graphics,13,825,580,400,46,146,0,99,576,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\System\sound,6,389,266,156,32,67,10,56,500,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\World,8,887,634,412,74,151,7,102,594,4,13
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\World\editor,2,196,141,90,16,34,2,21,127,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\World\objects,2,65,39,20,1,13,0,13,84,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\data_structures,2,426,319,205,57,63,3,44,304,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\main,2,56,43,18,4,7,1,6,46,2,10
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\math,6,619,437,287,51,109,1,73,416,0,0
+C:\Users\Arne Stenkrona\Source\Repos\Prototype\Prototype\Prototype\src\tools,5,111,86,48,13,20,0,5,35,0,0

@@ -11,11 +11,10 @@ UIMultiPrompt::UIMultiPrompt(UIMultiPromptListener* _listener, int _positionX, i
     listener(_listener)
 {
     for (unsigned int i = 0; i < labels.size(); i++) {
-        textBoxes.push_back(new UITextBox(0, 0, width - 8, _layer));
-    }
-
-    for (unsigned int i = 0; i < textBoxes.size(); i++) {
-        attach(textBoxes[i], ALIGN_UP, 0, 32 * i + 28);
+        UIinputListener* lis = new UIinputListener();
+        UITextBox* box = new UITextBox(0, 0, width - 8, _layer, lis);
+        inputs.push_back(lis);
+        attach(box, ALIGN_UP, 0, 32 * i + 28);
     }
 
     attach(new UIButton(new OkListener(_listener), 50, 50, 40, 20, 0, "OK"), ALIGN_DOWN, -30, -5);
@@ -26,10 +25,9 @@ std::vector<std::string> UIMultiPrompt::getInput()
 {
     std::vector<std::string> vec = {};
 
-    for (UITextBox* b : textBoxes) {
-        vec.push_back(b->getInput());
+    for (UIinputListener* l : inputs) {
+        vec.push_back(l->getInput());
     }
-
     return vec;
 }
 
@@ -48,6 +46,14 @@ void UIMultiPrompt::render()
 
 void UIMultiPrompt::derivedUpdate()
 {
+}
+
+void UIMultiPrompt::OkListener::actionPerformed(UIEvent*) {
+    pl->ok();
+}
+
+void UIMultiPrompt::CancelListener::actionPerformed(UIEvent*) {
+    pl->cancel();
 }
 
 UIMultiPromptListener::UIMultiPromptListener(std::string _label, std::vector<std::string> _labels)
@@ -75,12 +81,4 @@ void UIMultiPromptListener::actionPerformed(UIEvent*)
     else {
         prompt = new UIMultiPrompt(this, 50, 50, 150, 0, label, labels);
     }
-}
-
-void UIMultiPrompt::OkListener::actionPerformed(UIEvent*) {
-    pl->ok();
-}
-
-void UIMultiPrompt::CancelListener::actionPerformed(UIEvent*) {
-    pl->cancel();
 }

@@ -4,8 +4,8 @@
 
 UIButtonBase::UIButtonBase(UIActionListener * _listener, int _positionX, int _positionY, 
                            unsigned int _width, unsigned int _height, int _layer, std::string _text)
-    :UIComponent(_positionX, _positionY, _width, _height, _layer),
-     text(_text), listener(_listener), holdClick(false)
+    :UIComponent(_positionX, _positionY, _width, _height, _layer, _listener),
+     text(_text), holdClick(false)
 {
 }
 
@@ -13,15 +13,6 @@ UIButtonBase::~UIButtonBase()
 {
     delete listener;
     listener = nullptr;
-}
-
-void UIButtonBase::sendEvent()
-{
-    //Check if listener is present
-    if (!listener) return;
-    UIEvent* e = new UIEvent();
-    listener->actionPerformed(e);
-    delete e;
 }
 
 void UIButtonBase::onMouseOver()

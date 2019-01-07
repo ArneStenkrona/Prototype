@@ -1,8 +1,8 @@
 #include "UITextBox.h"
 #include "System\IO\inputManager.h"
 
-UITextBox::UITextBox(int _positionX, int _positionY, int _length, int _layer)
-    : UIComponent(_positionX, _positionY, _length, 16, _layer)
+UITextBox::UITextBox(int _positionX, int _positionY, int _length, int _layer, UIActionListener* _listener)
+    : UIComponent(_positionX, _positionY, _length, 16, _layer, _listener)
 {
 }
 
@@ -21,6 +21,8 @@ void UITextBox::render()
 
 void UITextBox::update()
 {
-    if (isSelected())
+    if (isSelected()) {
         modifyStringFromInput(input);
+        sendEvent(input);
+    }
 }

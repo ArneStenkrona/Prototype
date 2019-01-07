@@ -14,6 +14,4 @@ protected:
 
 private:
     void render();
-
-    UIActionListener* listener;
 };

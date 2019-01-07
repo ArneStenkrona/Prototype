@@ -4,6 +4,24 @@
 #include "..\..\UIEvent\UIActionListener.h"
 #include <string>
 #include <vector>
+#include <tuple>
+
+//Listens for input from input methods
+//Input methods may send an event containing the input as a message
+class UIinputListener : public UIActionListener {
+public:
+    UIinputListener() {}
+    ~UIinputListener() {}
+    std::string getInput() {
+        return input;
+    }
+    void actionPerformed(UIEvent* e) {
+        input = e->getMessage();
+    }
+
+private:
+    std::string input;
+};
 
 class UIMultiPromptListener;
 class UIMultiPrompt : public UIMovable {
@@ -11,6 +29,7 @@ public:
     UIMultiPrompt(UIMultiPromptListener* _listener, int _positionX, int _positionY, int _width,
         int _layer, std::string _label, std::vector<std::string> _labels);
     std::vector<std::string> getInput();
+
 private:
     UIMultiPromptListener* listener;
 
@@ -18,8 +37,9 @@ private:
     std::string label;
     //label of textfields
     std::vector<std::string> labels;
-    //Textbox containing input
-    std::vector<UITextBox*> textBoxes;
+
+    //Provides access to user input through listeners
+    std::vector<UIinputListener*> inputs;
 
     void render();
     void derivedUpdate();

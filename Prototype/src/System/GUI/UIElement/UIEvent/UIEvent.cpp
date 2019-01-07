@@ -1,6 +1,7 @@
 #include "UIEvent.h"
 
-UIEvent::UIEvent()
+UIEvent::UIEvent(std::string _message)
+    :message(_message)
 {
 }
 
