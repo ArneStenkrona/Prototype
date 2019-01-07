@@ -42,7 +42,10 @@ private:
 class UINewFilePromptListener : public UIMultiPromptListener {
 public:
     UINewFilePromptListener(Editor* _editor)
-        : UIMultiPromptListener("NEW ROOM", { "FILENAME", "ROOM WIDTH", "ROOM HEIGHT" }), editor(_editor)
+        : UIMultiPromptListener("NEW ROOM", { "FILENAME", "ROOM WIDTH", "ROOM HEIGHT", 
+                                              "LEFT PADDING", "RIGHT PADDNIG", 
+                                              "TOP PADDING", "BOTTOM PADDING" }), 
+          editor(_editor)
     {}
 
 
@@ -62,7 +65,8 @@ public:
             }
         }
         if (b) {
-            Room* room = new Room("Assets/Rooms/" + fileName, std::stoi(input[1]), std::stoi(input[2]));
+            Room* room = new Room("Assets/Rooms/" + fileName, std::stoi(input[1]), std::stoi(input[2]),
+                                  std::stoi(input[3]), std::stoi(input[4]), std::stoi(input[5]), std::stoi(input[6]));
             editor->setRoom(room);
         }
     }

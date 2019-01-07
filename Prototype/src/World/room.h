@@ -15,9 +15,11 @@ public:
     Room(const std::string _file_path, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC);
 
     //Creates a room object and a new room file with dimensions x,y
-    Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC,
+    Room(const std::string _file_path, int x, int y,
+        unsigned int _padddingLeft = 0, unsigned int _paddingRight = 0, 
+        unsigned int _paddingTop = 0, unsigned int _paddingBottom = 0, 
         int _tileMapIndex = 0, int _backgroundIndex = 0, 
-        unsigned int _padddingLeft = 0, unsigned int _paddingRight = 0, unsigned int _paddingTop = 0, unsigned int _paddingBottom = 0);
+        SoundManager::MUSIC _music = SoundManager::LAB_MUSIC);
 
     ~Room();
 

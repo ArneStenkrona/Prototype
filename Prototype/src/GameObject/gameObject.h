@@ -118,7 +118,7 @@ T * GameObject::getComponent()
 {
     if (!std::is_base_of<Component, T>::value) {
         throw std::invalid_argument("Expected Component Type");
-        return NULL;
+        //return NULL; //Unreachable
     }
 
     for each  (Component *t in components)

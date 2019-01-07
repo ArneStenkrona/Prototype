@@ -26,9 +26,11 @@ Room::Room(const string _file_path, SoundManager::MUSIC _music)
     parallaxBackground = new ParallaxBackground(Point::empty);
 }
 
-Room::Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music,
-      int _tileMapIndex, int _backgroundIndex,
-      unsigned int _padddingLeft, unsigned int _paddingRight, unsigned int _paddingTop, unsigned int _paddingBottom)
+Room::Room(const std::string _file_path, int x, int y,
+           unsigned int _padddingLeft, unsigned int _paddingRight, 
+           unsigned int _paddingTop, unsigned int _paddingBottom, 
+           int _tileMapIndex, int _backgroundIndex,
+           SoundManager::MUSIC _music)
     : file_path(_file_path), _width(-1), _height(-1), 
       music(_music), tileMapIndex(_tileMapIndex), 
       backgroundIndex(_backgroundIndex), instantiated(false),
@@ -84,14 +86,11 @@ void Room::saveToFile(const std::string &path)
 {
     //opens filestream
     ofstream outFile;
-
     outFile.open(path);
 
     if (outFile.is_open()) {
-
         //Declares output buffer
         string buffer;
-
         //Saves info to buffer
         //tilemap
         buffer += std::to_string(tileMapIndex);
@@ -101,7 +100,11 @@ void Room::saveToFile(const std::string &path)
         buffer += "\n";
         //world position
         buffer += std::to_string(position.x) + "\n" + std::to_string(position.y) + "\n";
-
+        //Padding
+        buffer += std::to_string(paddingLeft)   + "\n" +
+                  std::to_string(paddingRight)  + "\n" +
+                  std::to_string(paddingTop)    + "\n" +
+                  std::to_string(paddingBottom) + "\n";
 
         //tiles
         for (unsigned int y = 0; y < tileMatrix[0].size(); y++) {
@@ -259,24 +262,32 @@ bool Room::readFromFile()
         if (infile.is_open())
         {
             string line;
-
+            //Tilemap
             getline(infile, line);
             tileMapIndex = toDigit(line[0]);
             TextureManager::loadTileSet(static_cast<TextureManager::TILEMAPS>(tileMapIndex));
-
+            //Background index
             getline(infile, line);
             backgroundIndex = toDigit(line[0]);
             parallaxBackground = new ParallaxBackground(Point::empty);
             parallaxBackground->addBackground(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][0]);
             parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][1], 6, true);
             parallaxBackground->addLayer(&TextureManager::background_layer_textures[(static_cast<TextureManager::BACKGROUND_TEXTURE_NAMES>(backgroundIndex))][2], 4, true);
-
+            //Position
             getline(infile, line);
             double posX = atof(line.c_str());
             getline(infile, line);
             double posY = atof(line.c_str());
             position = Point(posX, posY);
-
+            //Padding
+            getline(infile, line);
+            paddingLeft = stoi(line.c_str());
+            getline(infile, line);
+            paddingRight = stoi(line.c_str());
+            getline(infile, line);
+            paddingTop = stoi(line.c_str());
+            getline(infile, line);
+            paddingBottom = stoi(line.c_str());
             //Dimensions of the room
             int sizeX = 0;
             int sizeY = 0;

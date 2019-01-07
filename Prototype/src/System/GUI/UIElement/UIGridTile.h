@@ -13,6 +13,8 @@ public:
 
 private:
     unsigned int indX, indY;
+    //Is the tile going to be unseen ingame due to room padding?
+    bool padded;
 
     void render();
     //called if mouse enters

@@ -1,12 +1,20 @@
 #include "UIGridTile.h"
 #include "UIGridSelector.h"
 #include "System\IO\inputManager.h"
+#include <iostream>
 
 UIGridTile::UIGridTile(UIGridSelector * _selector, int _layer, unsigned int _indX, unsigned int _indY)
     : UIElement(_selector->positionX + indX * Tile::TILE_SIZE, _selector->positionY + indY * Tile::TILE_SIZE, 
                 Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, true),
-                indX(_indX), indY(_indY), selector(_selector)
+                indX(_indX), indY(_indY), selector(_selector), padded(false)
 {
+    unsigned int left, right, top, bottom;
+    selector->room->getPadding(left, right, top, bottom);
+    unsigned int columns = selector->columns;
+    unsigned int rows = selector->rows;
+    if (indX < left || indX >= columns - right ||
+        indY < top || indY >= rows - bottom)
+        padded = true;
 }
 
 void UIGridTile::updatePosition()
@@ -31,8 +39,9 @@ void UIGridTile::render()
 
     else {
         UIElement::drawSquare(width, height, {0xFF,0xFF,0xFF,0x08}, OUTLINE);
-
     }
+    if (padded)
+        UIElement::drawSquare(width, height, { 0x60,0x20,0x10,0x50 }, SOLID);
 
 }
 
