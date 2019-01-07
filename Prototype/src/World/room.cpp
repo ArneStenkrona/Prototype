@@ -27,10 +27,13 @@ Room::Room(const string _file_path, SoundManager::MUSIC _music)
 }
 
 Room::Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music,
-      int _tileMapIndex, int _backgroundIndex)
+      int _tileMapIndex, int _backgroundIndex,
+      unsigned int _padddingLeft, unsigned int _paddingRight, unsigned int _paddingTop, unsigned int _paddingBottom)
     : file_path(_file_path), _width(-1), _height(-1), 
       music(_music), tileMapIndex(_tileMapIndex), 
-      backgroundIndex(_backgroundIndex), instantiated(false)
+      backgroundIndex(_backgroundIndex), instantiated(false),
+      paddingLeft(_padddingLeft), paddingRight(_paddingRight),
+      paddingTop(_paddingTop), paddingBottom(_paddingBottom)
 {
     parallaxBackground = new ParallaxBackground(Point::empty);
 

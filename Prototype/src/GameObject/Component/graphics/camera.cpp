@@ -26,24 +26,28 @@ void Camera::lateUpdate()
     Room *room = GameLogic::getRoom();
     Point roomPos = room->getPosition();
     Point roomDimensions = room->getDimensions();
+    unsigned int left, right, top, bottom;
+    room->getPadding(left, right, top, bottom);
 
-    if (targetPos.x + screenOffset.x > roomDimensions.x + roomPos.x) {
-
-        posX = roomDimensions.x + roomPos.x - 2 * screenOffset.x;
+    //Prevent camera from going to far to the right (positive dx)
+    if (targetPos.x + screenOffset.x > roomPos.x + roomDimensions.x - right * Tile::TILE_SIZE) {
+        posX = roomDimensions.x + roomPos.x - 2 * screenOffset.x - right * Tile::TILE_SIZE;
     }
-    else if (targetPos.x - screenOffset.x < roomPos.x) {
-        posX = roomPos.x;
+    //Prevent camera from going to far to the left (negative dx)
+    else if (targetPos.x - screenOffset.x < roomPos.x + left * Tile::TILE_SIZE) {
+        posX = roomPos.x + left * Tile::TILE_SIZE;
     }
     else {
         posX = targetPos.x - screenOffset.x;
     }
+    //Prevent camera from going to far down (positive dy)
+    if (targetPos.y + screenOffset.y > roomPos.y + roomDimensions.y - bottom * Tile::TILE_SIZE) {
 
-    if (targetPos.y + screenOffset.y > roomDimensions.y + roomPos.y) {
-
-        posY = roomDimensions.y + roomPos.y - 2 * screenOffset.y;
+        posY = roomDimensions.y + roomPos.y - 2 * screenOffset.y - bottom * Tile::TILE_SIZE;
     }
-    else if (targetPos.y - screenOffset.y < roomPos.y) {
-        posY = roomPos.y;
+    //Prevent camera from going to far up (negative dy)
+    else if (targetPos.y - screenOffset.y < roomPos.y + top * Tile::TILE_SIZE) {
+        posY = roomPos.y + top * Tile::TILE_SIZE;
     }
     else {
         posY = targetPos.y - screenOffset.y;

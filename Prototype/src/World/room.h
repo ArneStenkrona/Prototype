@@ -16,7 +16,8 @@ public:
 
     //Creates a room object and a new room file with dimensions x,y
     Room(const std::string _file_path, int x, int y, SoundManager::MUSIC _music = SoundManager::LAB_MUSIC,
-        int _tileMapIndex = 0, int _backgroundIndex = 0);
+        int _tileMapIndex = 0, int _backgroundIndex = 0, 
+        unsigned int _padddingLeft = 0, unsigned int _paddingRight = 0, unsigned int _paddingTop = 0, unsigned int _paddingBottom = 0);
 
     ~Room();
 
@@ -33,11 +34,16 @@ public:
 
     void renderBackground(Point _position);
 
-    //Gets a point representing the width and height of this room
-    Point getDimensions();
-
     //Get position of room
     Point getPosition();
+    //Gets a point representing the width and height of this room
+    Point getDimensions();
+    //Gets the padding of the room
+    //Padding determines how many tiles that will not be visible to the player
+    //I.e. how many rows/columns of tiles that the camera will be prevented from reaching
+    inline void getPadding(unsigned int &left, unsigned int &right, unsigned int &top, unsigned int &bottom) 
+                { left = paddingLeft; right = paddingRight; top = paddingTop; bottom = paddingBottom; }
+
 
     //Tile GameObject matrix
     vector<GameObject*> tileGameObjects;
@@ -84,6 +90,12 @@ private:
     //If room is not loaded these will be negative
     double _width;
     double _height;
+    //Padding determines how many tiles that will not be visible to the player
+    //I.e. how many rows/columns of tiles that the camera will be prevented from reaching
+    unsigned int paddingLeft;
+    unsigned int paddingRight;
+    unsigned int paddingTop;
+    unsigned int paddingBottom;
 
     //Music to be played in room
     SoundManager::MUSIC music;
