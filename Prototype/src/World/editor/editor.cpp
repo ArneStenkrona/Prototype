@@ -52,7 +52,8 @@ void Editor::run()
             else {
                 if (frameTicks > GraphicsEngine::MICROSECONDS_PER_FRAME + 1) {
                     float fps = 1000000.f / frameTicks;
-                    std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+                    printf(("FPS LOW: " + std::to_string(fps) + ". Expected: " + std::to_string(GraphicsEngine::SCREEN_FPS) + "\n").c_str());
+                    //std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
                 }
             }
             LWindow::updateAll();

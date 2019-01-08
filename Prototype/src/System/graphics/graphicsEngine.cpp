@@ -14,8 +14,10 @@ vector<set<Renderer*>> GraphicsEngine::renderQueue = vector<set<Renderer*>>();
 //Screen dimension constants
 const float GraphicsEngine::SCALE_X = 3;
 const float GraphicsEngine::SCALE_Y = 3;
-const int GraphicsEngine::SCREEN_WIDTH = (int)(GraphicsEngine::SCALE_X * 512);
-const int GraphicsEngine::SCREEN_HEIGHT = (int)(GraphicsEngine::SCALE_Y * 288);
+const int GraphicsEngine::LOGICAL_WIDTH = 512;
+const int GraphicsEngine::LOGICAL_HEIGHT = 288;
+const int GraphicsEngine::SCREEN_WIDTH = (int)(GraphicsEngine::SCALE_X * GraphicsEngine::LOGICAL_WIDTH);
+const int GraphicsEngine::SCREEN_HEIGHT = (int)(GraphicsEngine::SCALE_Y * GraphicsEngine::LOGICAL_HEIGHT);
 //Frame rate related
 const int GraphicsEngine::SCREEN_FPS = 60;
 const int GraphicsEngine::MICROSECONDS_PER_FRAME = 1000000 / SCREEN_FPS;

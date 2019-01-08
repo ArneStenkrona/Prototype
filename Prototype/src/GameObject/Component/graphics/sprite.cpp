@@ -1,5 +1,6 @@
 #include "sprite.h"
-#include "System/graphics/textureManager.h"
+#include "System\graphics\textureManager.h"
+#include "System\graphics\graphicsEngine.h"
 #include "animator.h"
 
 Sprite::Sprite(GameObject * _object) : Component(_object),
@@ -34,6 +35,10 @@ void Sprite::renderSprite(int x, int y)
 
 void Sprite::renderSprite(int x, int y, double rotation, int pivotX, int pivotY)
 {
+    //Check if visible in viewport
+    if (x > GraphicsEngine::LOGICAL_WIDTH ||
+        y > GraphicsEngine::LOGICAL_HEIGHT ||
+        x + Tile::TILE_SIZE * widthFactor < 0 || y + Tile::TILE_SIZE * heightFactor < 0) return;
     if (tileIndex == -1)
         texture->render((int)(x + 0.5) + renderOffsetX, (int)(y + 0.5) + renderOffsetY);
     else

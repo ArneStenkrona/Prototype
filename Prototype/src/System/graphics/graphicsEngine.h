@@ -23,8 +23,13 @@ public:
     inline static LWindow* getActiveWindow() { return activeWindow; }
 
     //Screen dimension constants
+    //How much is pixel is scaled
     static const float SCALE_X;
     static const float SCALE_Y;
+    //Dimensions measured in in-game pixels, i.e. dimensions divided by scale
+    static const int LOGICAL_WIDTH;
+    static const int LOGICAL_HEIGHT;
+    //Dimensions measured in physical screen pixels.
     static const int SCREEN_WIDTH;
     static const int SCREEN_HEIGHT;
 
