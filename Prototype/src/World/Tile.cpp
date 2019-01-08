@@ -10,6 +10,22 @@ const size_t Tile::TILE_SIZE = 16;
 //This is assuming a tilesheet is 512x512 pixels
 const size_t Tile::TILES_PER_ROW = 512 / Tile::TILE_SIZE;
 const size_t Tile::TILES_PER_COLUMN = 512 / Tile::TILE_SIZE;
+const unsigned int Tile::tileToPixel[16] = { 0 * Tile::TILE_SIZE,
+                                             1 * Tile::TILE_SIZE,
+                                             2 * Tile::TILE_SIZE,
+                                             3 * Tile::TILE_SIZE,
+                                             4 * Tile::TILE_SIZE,
+                                             5 * Tile::TILE_SIZE,
+                                             6 * Tile::TILE_SIZE,
+                                             7 * Tile::TILE_SIZE,
+                                             8 * Tile::TILE_SIZE,
+                                             9 * Tile::TILE_SIZE,
+                                             10 * Tile::TILE_SIZE,
+                                             11 * Tile::TILE_SIZE,
+                                             12 * Tile::TILE_SIZE,
+                                             13 * Tile::TILE_SIZE,
+                                             14 * Tile::TILE_SIZE,
+                                             15 * Tile::TILE_SIZE };
 
 Tile::Tile(int _tileIndex, int _rotation, bool _flipH, bool _flipV, 
            std::optional<Polyshape> _polygon, int _objectIndex, std::vector<std::string> _objectparameters)

@@ -19,7 +19,7 @@ const int GraphicsEngine::LOGICAL_HEIGHT = 288;
 const int GraphicsEngine::SCREEN_WIDTH = (int)(GraphicsEngine::SCALE_X * GraphicsEngine::LOGICAL_WIDTH);
 const int GraphicsEngine::SCREEN_HEIGHT = (int)(GraphicsEngine::SCALE_Y * GraphicsEngine::LOGICAL_HEIGHT);
 //Frame rate related
-const int GraphicsEngine::SCREEN_FPS = 60;
+const int GraphicsEngine::SCREEN_FPS = 6000;
 const int GraphicsEngine::MICROSECONDS_PER_FRAME = 1000000 / SCREEN_FPS;
 //game window
 LWindow* GraphicsEngine::activeWindow = NULL;

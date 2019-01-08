@@ -17,6 +17,8 @@ public:
     static const size_t TILE_SIZE;
     static const size_t TILES_PER_ROW;
     static const size_t TILES_PER_COLUMN;
+    //Cash for converting tile dimension to pixel dimension
+    static const unsigned int tileToPixel[16];
 
     bool hasCollider() const;
     void setPolygon(std::optional<Polyshape> p) { polygon = p; };

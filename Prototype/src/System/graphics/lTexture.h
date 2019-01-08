@@ -37,18 +37,12 @@ public:
     //widthFactor and heightFactor determine how many tiles to take
     //mirrorH and mirrorV determines if the tile should be flipped horizontally or vertically
     //rotation, pivotX, and pivotY determines how the tile should be rotated
-    //scaleIndices determines if widthFactor and heightFactor should change indexing
+    //scaleIndices determines if widthFactor and heightFactor should change tile indexing
     void renderTile(int x, int y, int tileIndex, int widthFactor = 1, int heightFactor = 1, 
                     bool mirrorH = false, bool mirrorV = false, double rotation = 0, int pivotX = 0, int pivotY = 0,
                     Color color = COLOR_WHITE, bool scaleIndices = true) const;
 
-
-    void renderText(int x, int y, std::string text) const;
-    void renderText(int x, int y, std::string text, Color color) const;
-
-
-    //Renders the tile in the texture given by the tileQuad with roation and flip
-    void renderTileEx(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Rect *tileQuad = NULL);
+    void renderText(int x, int y, std::string text, Color color = COLOR_WHITE) const;
 
     //Renders texture with center at given point
     void renderCenter(int x, int y);

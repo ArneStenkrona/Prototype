@@ -131,7 +131,7 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
     SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
     SDL_SetTextureAlphaMod(mTexture, color.a);
 
-    SDL_Rect renderQuad = { x, y, (int)Tile::TILE_SIZE * widthFactor, (int)Tile::TILE_SIZE * heightFactor };
+    SDL_Rect renderQuad = { x, y, (int)Tile::tileToPixel[widthFactor], (int)Tile::tileToPixel[heightFactor] };
     //corrected index
     int ix = scaleIndices ? tileIndex * widthFactor : tileIndex;
     int iy = scaleIndices ? heightFactor : 1;
@@ -141,18 +141,22 @@ void LTexture::renderTile(int x, int y, int tileIndex, int widthFactor, int heig
                           (int)Tile::TILE_SIZE * heightFactor };
 
     SDL_Point pivot = { pivotX, pivotY };
-    
+
+  
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
     if (mirrorH && mirrorV)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation + 180, &pivot, SDL_FLIP_NONE);
+        rotation += 180;
     else if (mirrorH)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_HORIZONTAL);
+        flip = SDL_FLIP_HORIZONTAL;
     else if (mirrorV)
-        SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_VERTICAL);
-    else SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, SDL_FLIP_NONE);
+        flip = SDL_FLIP_VERTICAL;
+
+    SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &tileRect, &renderQuad, rotation, &pivot, flip);
 }
 
-void LTexture::renderText(int x, int y, std::string text) const
+void LTexture::renderText(int x, int y, std::string text, Color color) const
 {
+    SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
     int position = 0;
     for (char& c : text) {
         SDL_Rect renderQuad = { x + (4 * position), y, 4, mHeight };
@@ -160,29 +164,7 @@ void LTexture::renderText(int x, int y, std::string text) const
         SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, &charRect, &renderQuad, NULL, NULL, SDL_FLIP_NONE);
         position++;
     }
-}
-
-void LTexture::renderText(int x, int y, std::string text, Color color) const
-{
-    SDL_SetTextureColorMod(mTexture, color.r, color.g, color.b);
-    renderText(x, y, text);
     SDL_SetTextureColorMod(mTexture, 255, 255, 255);
-}
-
-void LTexture::renderTileEx(int x, int y, SDL_Rect * clip, double angle, SDL_Point * center, SDL_RendererFlip flip, SDL_Rect * tileQuad)
-{
-
-    //Entire texture
-    SDL_Rect renderQuad = { x,y,mWidth,mHeight };
-
-    //Set clip rendering dimensions
-    if (clip != NULL) {
-        renderQuad.w = tileQuad->w;
-        renderQuad.h = tileQuad->h;
-    }
-
-    //Render to screen
-    SDL_RenderCopyEx(GraphicsEngine::getActiveRenderer(), mTexture, tileQuad, &renderQuad, angle, center, flip);
 }
 
 void LTexture::renderCenter(int x, int y)
