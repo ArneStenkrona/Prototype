@@ -3,6 +3,8 @@
 #include "GameObject/gameObject.h"
 #include <list>
 #include "rayCastHit.h"
+#include <unordered_set>
+#include <set>
 #include <string>
 
 class QuadTree;

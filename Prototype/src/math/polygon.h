@@ -34,7 +34,7 @@ public:
     
     //gets a point such that a rectangle with dimensions _width*_height
     //centered at this point would surround the polygon
-    Point getEffectiveOrigin();
+    inline Point getEffectiveOrigin() const { return effectiveOrigin; }
 
     //Returns a new polygon rotated around pivot by angle
     Polyshape rotate(double angle, Point pivot);

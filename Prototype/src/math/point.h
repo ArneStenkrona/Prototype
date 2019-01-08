@@ -62,7 +62,6 @@ public:
 
 };
 
-
 //marked inline to prevent a multiple definition
 inline Point operator*(double d, const Point& p)
 {

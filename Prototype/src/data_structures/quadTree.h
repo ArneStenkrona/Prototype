@@ -3,6 +3,7 @@
 #include "../GameObject/Component/geometry/polygonCollider.h"
 #include <vector>
 #include <memory>
+#include <unordered_set>
 
 
 //A quadtree splits into 4 nodes each level. The purpose is to optimize collision detection by only

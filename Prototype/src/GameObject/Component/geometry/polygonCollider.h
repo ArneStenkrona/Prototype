@@ -1,10 +1,11 @@
 #pragma once
-#include "../component.h"
-#include "math/polygon.h"
+#include "..\component.h"
+#include "math\polygon.h"
 #include "velocity.h"
-#include "System/game/gameLogic.h"
+#include "System\game\gameLogic.h"
 #include <vector>
 #include "System\Physics\rayCastHit.h"
+#include <unordered_set>
 
 //Polygon collider uses a convex polygon for hit detection
 //This uses seperation axis method of collision testing
@@ -23,6 +24,7 @@ public:
     inline double getHeight() const { return polygon.height; }
     //getter for position
     inline Point getPosition() const { return position->position; }
+    inline Point getEffectiveOrigin() const { return position->position + polygon.getEffectiveOrigin(); }
 
     //getter for velocity
     inline Point getVelocity() const { return velocity->velocity; }
@@ -50,11 +52,11 @@ public:
     static bool checkCollision(PolygonCollider *a, PolygonCollider *b, Point& n, double &t);
     //Checks collision between nonstatic collider a and every collider in b
     //Collision is passed by reference and gives a collision-object with the collision data
-    static vector<Collision*> calculateCollision(PolygonCollider *a, set<PolygonCollider*> *b);
+    static vector<Collision*> calculateCollision(PolygonCollider *a, std::set<PolygonCollider*> *b);
 
     //Checks if raycast hits any of colliders
     //Returns a vector of rayCastHits sorted by distance from a
-    static vector<RayCastHit*> checkRayCast(Point a, Point b, set<PolygonCollider*> colliders, std::string message = "");
+    static vector<RayCastHit*> checkRayCast(Point a, Point b, std::set<PolygonCollider*> colliders, std::string message = "");
 
     void addToMask(unsigned int maskLayer);
     void removeFromMask(unsigned int maskLayer);

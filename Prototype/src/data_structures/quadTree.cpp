@@ -119,7 +119,7 @@ set<PolygonCollider*>* QuadTree::retrieve(set<PolygonCollider*> *returnColliders
     return returnColliders;
 }
 
-bool segmentIntersectRectangle(double a_rectangleMinX,
+inline bool segmentIntersectRectangle(double a_rectangleMinX,
     double a_rectangleMinY,
     double a_rectangleMaxX,
     double a_rectangleMaxY,
@@ -302,7 +302,7 @@ int QuadTree::getIndex(PolygonCollider * collider)
     double horizontalMidpoint = position.y + (bounds.y / 2);
 
     //Position of the box
-    Point colliderPos = collider->getPosition() + collider->getPolygon().getEffectiveOrigin();
+    Point colliderPos = collider->getEffectiveOrigin();
     //dimensions of the box
     Point colliderDimensions;
 

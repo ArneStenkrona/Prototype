@@ -103,11 +103,6 @@ Point Polyshape::center()
     return Point((leftMostX + rightMostX) / 2, (highestY + lowestY) / 2);
 }
 
-Point Polyshape::getEffectiveOrigin()
-{
-    return effectiveOrigin;
-}
-
 Polyshape Polyshape::rotate(double angle, Point pivot)
 {
     Polyshape pg = *this;

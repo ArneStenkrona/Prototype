@@ -96,11 +96,17 @@ void GameLogic::closeScene()
     currentScene = NULL;
 }
 
-
-
 void GameLogic::gameLoop() {
 
     gameWindow = GraphicsEngine::createGameWindow();
+    //Initalize input Manager
+    initializeInputManager();
+    //Initalize texture manager
+    TextureManager::initalizeTextureManager();
+    //Initialize sound manager
+    SoundManager::initalizeSoundManager();
+    //Set scene in game
+    setScene();
 
     //The frames per second timer
     LTimer fpsTimer;
@@ -108,14 +114,6 @@ void GameLogic::gameLoop() {
     LTimer capTimer;
     //Start counting frames per second
     fpsTimer.start();
-
-    //Initalize input Manager
-    initializeInputManager();
-    //Initalize texture manager
-    TextureManager::initalizeTextureManager();
-    SoundManager::initalizeSoundManager();
-
-    setScene();
 
 
     //While games is running
@@ -136,9 +134,11 @@ void GameLogic::gameLoop() {
             if (frameTicks > GraphicsEngine::MICROSECONDS_PER_FRAME + 1) {
                 float fps = 1000000.f / frameTicks;
                 printf(("FPS LOW: " + std::to_string(fps) + ". Expected: " + std::to_string(GraphicsEngine::SCREEN_FPS) + "\n").c_str());
-                //std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
+                std::cout << "FPS LOW: " << fps << ". Expected: " << GraphicsEngine::SCREEN_FPS << std::endl;
             }
+
         }
+
         currentFrame++;
 
         LWindow::updateAll();
