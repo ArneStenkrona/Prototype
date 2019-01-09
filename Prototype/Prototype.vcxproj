@@ -223,7 +223,7 @@
     <ClInclude Include="src\System\GUI\UIElement\UIGridTile.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTool.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UISelector.h" />
-    <ClInclude Include="src\System\GUI\UIElement\UIGridSelector.h" />
+    <ClInclude Include="src\System\GUI\UIElement\UIGridEditor.h" />
     <ClInclude Include="src\System\GUI\UIElement\UIPanel\UIComponent\UITextBox.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UITileSelector.h" />
     <ClInclude Include="src\System\GUI\UIElement\UISelect\UISelector\UIToolSelector.h" />
@@ -305,7 +305,7 @@
     <ClCompile Include="src\System\GUI\UIElement\UIGridTile.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelectable\UISelectableTool.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UISelector.cpp" />
-    <ClCompile Include="src\System\GUI\UIElement\UIGridSelector.cpp" />
+    <ClCompile Include="src\System\GUI\UIElement\UIGridEditor.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UIPanel\UIComponent\UITextBox.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UITileSelector.cpp" />
     <ClCompile Include="src\System\GUI\UIElement\UISelect\UISelector\UIToolSelector.cpp" />

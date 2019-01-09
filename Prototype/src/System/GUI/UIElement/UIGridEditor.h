@@ -10,12 +10,11 @@
 #include "UIPanel\UIPanel\UIInfoBox.h"
 
 class UIObjectPlacementListener;
-//Bad name for class, should be something like "UIEditor"
-//because of big responsibility and also because it doesn't inherit from UISelector
-class UIGridSelector : public UIElement {
+//Responsible for editing of the room grid
+class UIGridEditor : public UIElement {
 public:
-    UIGridSelector(Room* _room, int _posx, int _posy, int _layer);
-    ~UIGridSelector();
+    UIGridEditor(Room* _room, int _posx, int _posy, int _layer);
+    ~UIGridEditor();
 
     //Set room to _room. If null is provided, no room is set
     void setRoom(Room* _room);

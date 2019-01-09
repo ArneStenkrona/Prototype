@@ -44,7 +44,8 @@ public:
     UINewFilePromptListener(Editor* _editor)
         : UIMultiPromptListener("NEW ROOM", { "FILENAME", "ROOM WIDTH", "ROOM HEIGHT", 
                                               "LEFT PADDING", "RIGHT PADDNIG", 
-                                              "TOP PADDING", "BOTTOM PADDING" }), 
+                                              "TOP PADDING", "BOTTOM PADDING", 
+                                              "TILE MAP" }), 
           editor(_editor)
     {}
 
@@ -66,7 +67,8 @@ public:
         }
         if (b) {
             Room* room = new Room("Assets/Rooms/" + fileName, std::stoi(input[1]), std::stoi(input[2]),
-                                  std::stoi(input[3]), std::stoi(input[4]), std::stoi(input[5]), std::stoi(input[6]));
+                                  std::stoi(input[3]), std::stoi(input[4]), std::stoi(input[5]), std::stoi(input[6]),
+                                  std::stoi(input[7]));
             editor->setRoom(room);
         }
     }
@@ -90,7 +92,7 @@ private:
 };
 
 EditorWindow::EditorWindow(Editor* _editor, int _screen_width, int _screen_height, float _scale_x, float _scale_y, Room *_activeRoom): LWindow(_screen_width, _screen_height,
-    _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridSelector(UIGridSelector(_activeRoom, 0, 0, 2)),
+    _scale_x, _scale_y), activeRoom(_activeRoom), editor(_editor), gridEditor(UIGridEditor(_activeRoom, 0, 0, 2)),
     buttons{ UIButton(new UINewFilePromptListener(editor), 0, 0, 70, 20, 1, "NEW FILE") ,
              UIButton(new UIOpenFileListener(editor), 70, 0, 70, 20, 1, "OPEN FILE"),
              UIButton(new UISaveFileListener(editor), 70 + 70, 0, 40, 20, 1, "SAVE"),
@@ -112,5 +114,5 @@ void EditorWindow::update()
 void EditorWindow::setRoom(Room * room)
 {
     activeRoom = room;
-    gridSelector.setRoom(room);
+    gridEditor.setRoom(room);
 }

@@ -1,10 +1,10 @@
 #pragma once
 #include "UIElement.h"
 
-class UIGridSelector;
+class UIGridEditor;
 class UIGridTile : public UIElement {
 public:
-    UIGridTile(UIGridSelector* _selector, int _layer, 
+    UIGridTile(UIGridEditor* _selector, int _layer, 
                         unsigned int indX, unsigned int indY);
 
     bool selected;
@@ -28,5 +28,5 @@ private:
     void onSelect();
     void onDeselect();
 
-    UIGridSelector* selector;
+    UIGridEditor* selector;
 };

@@ -1,9 +1,9 @@
 #include "UIGridTile.h"
-#include "UIGridSelector.h"
+#include "UIGridEditor.h"
 #include "System\IO\inputManager.h"
 #include <iostream>
 
-UIGridTile::UIGridTile(UIGridSelector * _selector, int _layer, unsigned int _indX, unsigned int _indY)
+UIGridTile::UIGridTile(UIGridEditor * _selector, int _layer, unsigned int _indX, unsigned int _indY)
     : UIElement(_selector->positionX + indX * Tile::TILE_SIZE, _selector->positionY + indY * Tile::TILE_SIZE, 
                 Tile::TILE_SIZE, Tile::TILE_SIZE, _layer, true),
                 indX(_indX), indY(_indY), selector(_selector), padded(false)

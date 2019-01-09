@@ -1,4 +1,4 @@
-#include "UIGridSelector.h"
+#include "UIGridEditor.h"
 #include "System\graphics\graphicsEngine.h"
 #include "System\IO\inputManager.h"
 #include <iostream>
@@ -53,7 +53,7 @@ private:
     Room *room;
 };
 
-UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
+UIGridEditor::UIGridEditor(Room* _room, int _posx, int _posy, int _layer)
     :UIElement(_posx, _posy, (int)(GraphicsEngine::SCREEN_WIDTH / GraphicsEngine::SCALE_X),
         (int)(GraphicsEngine::SCREEN_HEIGHT / GraphicsEngine::SCALE_Y),
         _layer + 4, true),
@@ -84,11 +84,11 @@ UIGridSelector::UIGridSelector(Room* _room, int _posx, int _posy, int _layer)
 
 
 
-UIGridSelector::~UIGridSelector()
+UIGridEditor::~UIGridEditor()
 {
 }
 
-void UIGridSelector::render()
+void UIGridEditor::render()
 {
     renderRoom();
     if (isSelected())
@@ -96,7 +96,7 @@ void UIGridSelector::render()
 
 }
 
-void UIGridSelector::renderRoom()
+void UIGridEditor::renderRoom()
 {
     room->renderBackground(Point(-roomPosX, -roomPosY));
     for (unsigned int x = 0; x < room->tileMatrix.size(); x++) {
@@ -108,7 +108,7 @@ void UIGridSelector::renderRoom()
     }
 }
 
-void UIGridSelector::update()
+void UIGridEditor::update()
 {
 
     if (isSelected()) {
@@ -139,7 +139,7 @@ void UIGridSelector::update()
 
 }
 
-void UIGridSelector::setRoom(Room* _room)
+void UIGridEditor::setRoom(Room* _room)
 {
     for (unsigned int i = 0; i < columns; i++) {
         for (unsigned int j = 0; j < rows; j++) {
@@ -169,13 +169,13 @@ void UIGridSelector::setRoom(Room* _room)
     objectPlacementListener->setRoom(room);
 }
 
-void UIGridSelector::getActiveTileCoordinates(int & x, int & y)
+void UIGridEditor::getActiveTileCoordinates(int & x, int & y)
 {
     x = tilePosX;
     y = tilePosY;
 }
 
-void UIGridSelector::setTile(int x, int y)
+void UIGridEditor::setTile(int x, int y)
 {
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
@@ -196,7 +196,7 @@ void UIGridSelector::setTile(int x, int y)
     }
 }
 
-void UIGridSelector::setCollider(int x, int y)
+void UIGridEditor::setCollider(int x, int y)
 {
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
@@ -213,7 +213,7 @@ void UIGridSelector::setCollider(int x, int y)
     }
 }
 
-void UIGridSelector::setObject(int x, int y)
+void UIGridEditor::setObject(int x, int y)
 {
     switch (toolSelector.getSelectedIndex()) {
     case UIToolSelector::PLACE_TOOL:
@@ -238,7 +238,7 @@ void UIGridSelector::setObject(int x, int y)
     }
 }
 
-void UIGridSelector::setActiveTileCoordinates(int x, int y)
+void UIGridEditor::setActiveTileCoordinates(int x, int y)
 {
     tilePosX = x;
     tilePosY = y;

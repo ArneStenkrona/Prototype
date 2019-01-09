@@ -21,6 +21,7 @@ public:
     //Corresponds to mapPaths
     enum TILEMAPS {
         LAB_MAP,
+        DUNGEON_MAP,
         TOTAL_MAPS
     };
 

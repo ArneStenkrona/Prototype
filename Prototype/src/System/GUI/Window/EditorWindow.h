@@ -3,7 +3,7 @@
 #include <vector>
 #include "World\room.h"
 #include "System\GUI\UIElement\UISelect\UISelector\UITileSelector.h"
-#include "System\GUI\UIElement\UIGridSelector.h"
+#include "System\GUI\UIElement\UIGridEditor.h"
 #include "System\GUI\UIElement\UIPanel\UIComponent\UIButton.h"
 
 /*
@@ -33,5 +33,5 @@ private:
     };
     UIButton buttons[TOTAL_BUTTONS];
 
-    UIGridSelector gridSelector;
+    UIGridEditor gridEditor;
 };

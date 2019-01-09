@@ -1,8 +1,8 @@
 #include "UIInfoBox.h"
-#include "..\..\UIGridSelector.h"
+#include "..\..\UIGridEditor.h"
 #include "..\..\UISelect\UISelector\UISelector.h"
 
-UIInfoBox::UIInfoBox(UIGridSelector* _selector, int _positionX, int _positionY, int _width, int _height, int _layer, std::string _label)
+UIInfoBox::UIInfoBox(UIGridEditor* _selector, int _positionX, int _positionY, int _width, int _height, int _layer, std::string _label)
     :UIPanel(_positionX, _positionY, _width, _height, _layer), selector(_selector)
 {
 }
