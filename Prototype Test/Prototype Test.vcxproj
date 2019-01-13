@@ -77,15 +77,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)PrototypeDir)\Prototype\include;$(SolutionDir)PrototypeDir)\Prototype\include\TinySoundFont;$(SolutionDir)Prototype\src;$(SolutionDir)Prototype\include\SDL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ProtoType\lib\windows\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)PrototypeDir)\Prototype\include;$(SolutionDir)PrototypeDir)\Prototype\include\TinySoundFont;$(SolutionDir)Prototype\src;$(SolutionDir)Prototype\include\SDL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ProtoType\lib\windows\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\PrototypeDir)\Prototype\include;$(SolutionDir)\PrototypeDir)\Prototype\include\TinySoundFont;$(SolutionDir)\Prototype\src;$(SolutionDir)\Prototype\include\SDL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\ProtoType\lib\windows\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\PrototypeDir)\Prototype\include;$(SolutionDir)\PrototypeDir)\Prototype\include\TinySoundFont;$(SolutionDir)\Prototype\src;$(SolutionDir)\Prototype\include\SDL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\ProtoType\lib\windows\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -103,7 +111,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Prototype\Release;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_mixer.lib;Container.obj;Door.obj;EditorWindow.obj;Prototype.obj;Tile.obj;TileMap.obj;UIActionListener.obj;UIBorder.obj;UIButton.obj;UIButtonBase.obj;UIColliderSelector.obj;UIComponent.obj;UIElement.obj;UIEvent.obj;UIGridEditor.obj;UIGridTile.obj;UIInfoBox.obj;UIMovable.obj;UIMultiPrompt.obj;UIObjectSelector.obj;UIPanel.obj;UIPrompt.obj;UIRadioButton.obj;UISelectable.obj;UISelectableCollider.obj;UISelectableObject.obj;UISelectableTile.obj;UISelectableTool.obj;UISelector.obj;UITextBox.obj;UITileSelector.obj;UIToolSelector.obj;animationClip.obj;animator.obj;basicObjectFactory.obj;beam.obj;camera.obj;collision.obj;component.obj;debug_scene0.obj;editor.obj;gameLogic.obj;gameObject.obj;graphicsEngine.obj;inputManager.obj;lTexture.obj;lTimer.obj;lineRenderer.obj;lwindow.obj;material.obj;movement.obj;musicClip.obj;object.obj;objectPool.obj;parallaxBackground.obj;physicsEngine.obj;point.obj;polygon.obj;polygonCollider.obj;position.obj;prefabrication.obj;prefabrications.obj;quadTree.obj;rayCastHit.obj;renderer.obj;room.obj;rotation.obj;scene.obj;soundClip.obj;soundManager.obj;splash.obj;sprite.obj;spriteRenderer.obj;stringTools.obj;textureManager.obj;timeMacros.obj;velocity.obj;weapon.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -118,7 +127,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Prototype\Release;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_mixer.lib;Container.obj;Door.obj;EditorWindow.obj;Prototype.obj;Tile.obj;TileMap.obj;UIActionListener.obj;UIBorder.obj;UIButton.obj;UIButtonBase.obj;UIColliderSelector.obj;UIComponent.obj;UIElement.obj;UIEvent.obj;UIGridEditor.obj;UIGridTile.obj;UIInfoBox.obj;UIMovable.obj;UIMultiPrompt.obj;UIObjectSelector.obj;UIPanel.obj;UIPrompt.obj;UIRadioButton.obj;UISelectable.obj;UISelectableCollider.obj;UISelectableObject.obj;UISelectableTile.obj;UISelectableTool.obj;UISelector.obj;UITextBox.obj;UITileSelector.obj;UIToolSelector.obj;animationClip.obj;animator.obj;basicObjectFactory.obj;beam.obj;camera.obj;collision.obj;component.obj;debug_scene0.obj;editor.obj;gameLogic.obj;gameObject.obj;graphicsEngine.obj;inputManager.obj;lTexture.obj;lTimer.obj;lineRenderer.obj;lwindow.obj;material.obj;movement.obj;musicClip.obj;object.obj;objectPool.obj;parallaxBackground.obj;physicsEngine.obj;point.obj;polygon.obj;polygonCollider.obj;position.obj;prefabrication.obj;prefabrications.obj;quadTree.obj;rayCastHit.obj;renderer.obj;room.obj;rotation.obj;scene.obj;soundClip.obj;soundManager.obj;splash.obj;sprite.obj;spriteRenderer.obj;stringTools.obj;textureManager.obj;timeMacros.obj;velocity.obj;weapon.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -133,7 +143,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Prototype\Release;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_mixer.lib;Container.obj;Door.obj;EditorWindow.obj;Prototype.obj;Tile.obj;TileMap.obj;UIActionListener.obj;UIBorder.obj;UIButton.obj;UIButtonBase.obj;UIColliderSelector.obj;UIComponent.obj;UIElement.obj;UIEvent.obj;UIGridEditor.obj;UIGridTile.obj;UIInfoBox.obj;UIMovable.obj;UIMultiPrompt.obj;UIObjectSelector.obj;UIPanel.obj;UIPrompt.obj;UIRadioButton.obj;UISelectable.obj;UISelectableCollider.obj;UISelectableObject.obj;UISelectableTile.obj;UISelectableTool.obj;UISelector.obj;UITextBox.obj;UITileSelector.obj;UIToolSelector.obj;animationClip.obj;animator.obj;basicObjectFactory.obj;beam.obj;camera.obj;collision.obj;component.obj;debug_scene0.obj;editor.obj;gameLogic.obj;gameObject.obj;graphicsEngine.obj;inputManager.obj;lTexture.obj;lTimer.obj;lineRenderer.obj;lwindow.obj;material.obj;movement.obj;musicClip.obj;object.obj;objectPool.obj;parallaxBackground.obj;physicsEngine.obj;point.obj;polygon.obj;polygonCollider.obj;position.obj;prefabrication.obj;prefabrications.obj;quadTree.obj;rayCastHit.obj;renderer.obj;room.obj;rotation.obj;scene.obj;soundClip.obj;soundManager.obj;splash.obj;sprite.obj;spriteRenderer.obj;stringTools.obj;textureManager.obj;timeMacros.obj;velocity.obj;weapon.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,17 +163,14 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Prototype\Release;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_mixer.lib;Container.obj;Door.obj;EditorWindow.obj;Prototype.obj;Tile.obj;TileMap.obj;UIActionListener.obj;UIBorder.obj;UIButton.obj;UIButtonBase.obj;UIColliderSelector.obj;UIComponent.obj;UIElement.obj;UIEvent.obj;UIGridEditor.obj;UIGridTile.obj;UIInfoBox.obj;UIMovable.obj;UIMultiPrompt.obj;UIObjectSelector.obj;UIPanel.obj;UIPrompt.obj;UIRadioButton.obj;UISelectable.obj;UISelectableCollider.obj;UISelectableObject.obj;UISelectableTile.obj;UISelectableTool.obj;UISelector.obj;UITextBox.obj;UITileSelector.obj;UIToolSelector.obj;animationClip.obj;animator.obj;basicObjectFactory.obj;beam.obj;camera.obj;collision.obj;component.obj;debug_scene0.obj;editor.obj;gameLogic.obj;gameObject.obj;graphicsEngine.obj;inputManager.obj;lTexture.obj;lTimer.obj;lineRenderer.obj;lwindow.obj;material.obj;movement.obj;musicClip.obj;object.obj;objectPool.obj;parallaxBackground.obj;physicsEngine.obj;point.obj;polygon.obj;polygonCollider.obj;position.obj;prefabrication.obj;prefabrications.obj;quadTree.obj;rayCastHit.obj;renderer.obj;room.obj;rotation.obj;scene.obj;soundClip.obj;soundManager.obj;splash.obj;sprite.obj;spriteRenderer.obj;stringTools.obj;textureManager.obj;timeMacros.obj;velocity.obj;weapon.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prototype\Prototype.vcxproj">
       <Project>{2cd431f9-86cf-4501-aa9d-405f57522b5d}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Test math\point_test.cpp" />
-    <ClCompile Include="Test math\polygon_test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
