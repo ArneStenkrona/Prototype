@@ -61,4 +61,4 @@ As of yet, I, Arne Stenkrona, am sole contributor to the repository.
 
 ## Pictures
 ![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample1.PNG)
-![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prtExample2.PNG)
+![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
