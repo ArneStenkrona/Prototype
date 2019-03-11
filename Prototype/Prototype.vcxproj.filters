@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\main\Prototype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -494,9 +491,6 @@
     <ClCompile Include="src\System\GUI\UIElement\UIGridEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\..\..\..\Downloads\imgui-master\imgui-master\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\shaders\Basic.shader" />

@@ -159,7 +159,7 @@ void * GameObject::removeComponent()
 
     if (!std::is_base_of<Component, T>::value) {
         throw std::invalid_argument("Expected Component Type");
-        return 0;
+        //return 0;
     }
 
     Component *comp = NULL;
