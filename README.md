@@ -58,3 +58,7 @@ To run the tests, open the solution in *Visual Studio*
 ## Pictures
 ![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example1.png)
 ![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
+
+## Current State
+This project was developed as a learning experience, and as of now is put on hold. While it is not in a finished state, one
+can play around in the editor to build maps. The game is hardcoded to run the map in 'Assets/Rooms/TEST.room'.
