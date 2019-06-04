@@ -66,5 +66,5 @@ The project was developed in my spare time as a learning experience. Knowing wha
 ## What I've Learned
 * I've you don't start out using unit tests it will be a serious pain to add them.
 * Game engine development is a big undertaking. Reading a book or two prior to starting would've saved me time and given me a more performent and easily maintainable system.
-* While it's fun to implement things yourself, reinventing the wheel often only serves recreational purposes.
+* While it's fun to implement things yourself, reinventing the wheel is rarely practical.
 * The dangers of pushing directly to master is best left to hardcore adrenaline junkies.
