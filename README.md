@@ -60,5 +60,11 @@ To run the tests, open the solution in *Visual Studio*
 ![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
 
 ## Current State
-This project was developed as a learning experience, and as of now is put on hold. While it is not in a finished state, one
-can play around in the editor to build maps. The game is hardcoded to run the map in 'Assets/Rooms/TEST.room'.
+I began development on this engine during my first year as a computer science student.
+The project was developed in my spare time as a learning experience. Knowing what I do know I would have done many things differently. As of now I've put development on hold. While it is not in a finished state, you can still play around in the editor to build maps. The game is hardcoded to run the map in 'Assets/Rooms/TEST.room'.
+
+## What I've Learned
+* I've you don't start out using unit tests it will be a serious pain to add them.
+* Game engine development is a big undertaking. Reading a book or two prior to starting would've saved me time and given me a more performent and easily maintainable system.
+* While it's fun to implement things yourself, reinventing the wheel often only serves recreational purposes.
+* The dangers of pushing directly to master is best left to hardcore adrenaline junkies.
