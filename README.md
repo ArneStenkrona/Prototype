@@ -1,4 +1,5 @@
 ![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/prototypeLogo.PNG)
+![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example1.png)
 
 # Prototype
 
@@ -55,8 +56,6 @@ To run the tests, open the solution in *Visual Studio*
 
 * **Arne Stenkrona** 
 
-## Pictures
-![In-Game Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example1.png)
 ![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
 
 ## Current State
