@@ -56,11 +56,10 @@ To run the tests, open the solution in *Visual Studio*
 
 * **Arne Stenkrona** 
 
-![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
-
 ## Current State
 I began development on this engine during my first year as a computer science student.
 The project was developed in my spare time as a learning experience. Knowing what I do know I would have done many things differently. As of now I've put development on hold. While it is not in a finished state, you can still play around in the editor to build maps. The game is hardcoded to run the map in 'Assets/Rooms/TEST.room'.
+![Editor Example](https://raw.githubusercontent.com/ArneStenkrona/Prototype/master/Examples%20Images/example2.png)
 
 ## What I've Learned
 * If you don't start out using unit tests it will be a serious pain to add them.
